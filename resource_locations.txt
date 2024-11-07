@@ -1,0 +1,51 @@
+Resources:
+(dir)/
+	config/ {
+		fancymenu/
+		securitycraft-client.toml
+		betterf3.toml
+		ancient_aether-client.toml
+		presencefootsteps/userconfig.json
+		paxi/ (find a better way)
+		effective_fg-client.toml
+		### packmenu.cfg
+		### roughlyenoughitems/ (replace with JEI)
+		
+		immediatelyfast.json
+		forge-client.toml
+		ferritecore-mixin.toml
+		lithium.properties
+		c2me.toml
+		modernfix-mixins.properties
+		
+		improvedmobs/
+		incontrol/spawn.json
+		forgivingworld.json
+		#global-gamerules.toml
+		esm-config.toml
+		notreepunching.toml
+		toughasnails/temperature.toml
+	
+		the_bumblezone/
+		terrestria/biome.json
+		terrestria/
+		traverse/
+		biomeswevegone/
+		biomesoplenty/
+		geologicexpansion-common.toml
+		promenade/ {world_features.json animals.json}
+		
+		worldstripper/
+		betternether/generator.json
+		almostunified/
+		Mekanism/world.toml
+		immersiveengineering-common.toml
+		ProjectRed.cfg
+	},
+	defaultconfigs/ {
+		immersiveengineering-server.toml
+	}
+	kubejs/
+	mods/
+	#### packmenu/
+	patchouli_books/

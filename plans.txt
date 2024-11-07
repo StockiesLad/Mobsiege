@@ -1,0 +1,309 @@
+presentation {
+	Should name be "Siege"
+	Comp Shaders + Euphoria Patches + my own patches (PR to Euphoria Patches) (foliage + Reflective Surfaces + Liquids)
+	YOSBR for config files
+	Main Menu
+	Icon and Window Title
+	Default Options (narrator = 0, darkness = pitchBlack)
+	Default World Options (difficulty = Hard)
+}
+
+patchouli_topics {
+	performance & options (cull_less_leaves, sodium + extras, hardcore darkness, effective, JEI)
+	difficulty warning (describe epic seige, zombie awareness, farsighted mobs, sleeping overhaul, infernal mobs, nucleepers, etc)
+	dungeons (type of dungeons to explore and fight)
+	overworld start (making basic tools, charcoal, clay, firestarters, hardcore torches)
+	things to work for (orb_of_thermoregulation)
+	aether start (drift shale and mud to flint)
+	nether start (vines to sticks)
+	end start (vines to sticks,  black wart to flint)
+	edenring start
+	blitz and breeze spawns (aercloud ambushes)
+}
+
+acheivements {
+	Successfully get into spatial storage and leave without dying
+	Beat every planet
+	craft an orb of regulation
+	craft a defence turret
+	create electricity out of mechanical energy
+	fend off a slime swarm without taking damage
+	explore every biome in the overworld
+	explore every biome in the end
+	explore every biome in the nether
+	explore every biome in the aether
+	get to the aether without using a portal
+	get to the eden ring without using a portal
+	create an ME system
+	create an enderium machine
+	create charcoal
+	create a gun
+	wirelessly access an ME system
+	create a Nuclear Bomb
+	survive a Nuclear Explosion 1 block away
+	successfully transport materials using a ender storage
+	wirelessly transport power
+	kill every type of creeper
+	kill every type of enderman
+	beat the twilight forest
+	build a self-defending base
+	acheive a million bytes of storage in an ME system
+	acheive a billion byte of storage in an ME system
+	build a self sustaining machine
+	build a contraption using machines from every tech mod
+	capture a hydrogen jellyfish without it exploding
+	fall from the aether without dying
+	create a farm consisting of every type of tree
+	create a netherite chest
+	create a netherite furnace
+	create an extreme reactor
+	successfully start in the overworld/nether/end/aether/edenring from scratch without any transported materials
+	use clouds to transfer items
+	use a circuit board to simply a redstone contraption
+	create a pogostick
+	hurt a mob using a bee nest helmet
+	create every type of bee
+	catch a mob
+	produce electricity from mechanical energy
+	get a blitz and a blaze to fight each other
+	create a mob farm
+	use a gun to fight back against the blitz in the aether
+	acquire every type of aercloud
+	use aerclouds to make a create contraption more efficient
+	how to get beds
+}
+
+complex recipes {
+	guns from machines
+	turrets from machines
+	all machines using components and alloys from other mods
+	orb_of_thermoregulation from everything endgame
+	water canteens from machines
+	elytra from everything endgame
+	machines from create
+	nukes (+ alexscaves utilisation)
+	uncrafting table
+		aeternalis fuel uses coal/charcoal blocks
+		dark matter requires gravitite, sculk, netherite, thallasium & aeternalis fuel
+		philosopher's stone
+		transmutation table (make this extremely expensive)
+		emc collector (extremely expensive)
+		interdiction torch (somewhat expensive)
+	simple magnets
+	guardian beam turret
+	angel rings (expensive)
+	beds and comforts
+	construction wand
+}
+
+total {
+	unify all resources (in the works)
+	starting items (pending until mod selection is resolved)
+}
+
+systematic modifications {
+	materials (input/output)
+	crafting tables
+	furnaces
+	sticks
+	planks
+	vines to sticks
+	oil unification
+	material unification
+	liquid unification
+	worldgen unification
+	oregen unification
+	loot table unification
+	food
+}
+
+removed biomes {
+	traverse {
+		fir {
+			coniferous_forest
+			snowy_coniferous_forest
+		}
+	},
+	terrestria {
+		redwood {
+			lush_redwood_forest
+			windswept_redwood_forest
+			redwood_forest
+		}
+	},
+	biomeswevegone {
+		cypress {
+			cypress_swamplands
+		},
+		mahogany {
+			tropical_rainforest
+		},
+		fir {
+			coniferous_forest
+			snowy_coniferous_forest
+		}
+		prairie grass {
+			prairie
+		}
+	},
+	biomesoplenty {
+		redwood {
+			redwood_forest
+		}
+	}
+}
+
+custom settings {
+	resourcepacks=[],
+	narrator off
+	toasts off
+	hardcore darkness on
+}
+
+make plant fiber easily accessible (low priority)
+find better furnace components that falls in line with progression (low priority)
+maybe remove minecraft block variant duplicates (low priority)
+systematic (packwiz) modpack updating system (low priority)
+aether genesis + divinerpg + promenade  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
+
+
+fix bwg imbued enchant log texture
+unify tech mods (and cull redundant ones)
+gunpowder recipe fix
+unify all ores
+ash (carbonize + supplementary or the other one)
+incompat between immersive engineering and fancymenu (try packmenu maybe)
+change removal to include REI hiding
+
+
+magnetic caves and magnetite shit
+iron furnaces standard progression
+twigs and this rocks compat
+silents gems and better nether compat
+coal explosion + hardcore torches compat (tags)
+ad astra ore compat with almost unified
+remove duplicate ores
+fix not dying in space without suit
+recipe to split sulfur quartz
+refactor shitty tag system
+add better shaped recipe system to avoid making a billion functions
+test the insertion recipe
+migrate all important functions to global
+
+(allow for content management in curseforge to avoid datapack/resourcepack and shaderpack license infringements)
+
+# FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
+
+review modernfix config (low priority)
+space ore compat (mekanism and thermal)
+unhide alexs caves uranium
+fix recipe problem (silentgear)
+fix gravel ores output & uranium drops of basic ores
+fix this fucking ore drop system bc it aint fucking working
+promenade cancel duck spawn if config doesnt work
+find source of world loading crash
+test metallurgy
+fix world time not ticking
+use kubejs to set gamerules if global gamerules keeps breaking
+forge:ores/sulfur                        => cinderscapes:sulfur_ore, thermal:deepslate_sulfur_ore, thermal:sulfur_ore, thermal_and_space:glacio_sulfur_ore, thermal_and_space:mars_sulfur_ore, thermal_and_space:mercury_sulfur_ore, thermal_and_space:moon_sulfur_ore, thermal_and_space:venus_sulfur_ore
+forge:ores/zinc                          => beo:end_zinc_ore, bluepower:zinc_deepslate, bluepower:zinc_ore, bno:nether_zinc_ore, create:deepslate_zinc_ore, create:zinc_ore
+forge:ores/peridot                       => projectred_exploration:deepslate_peridot_ore, projectred_exploration:peridot_ore, silentgems:deepslate_peridot_ore, silentgems:peridot_end_ore, silentgems:peridot_nether_ore, silentgems:peridot_ore
+forge:ores/uranium                       => beo:end_uranium_ore, biggerreactors:deepslate_uranium_ore, biggerreactors:uranium_ore, bno:nether_uranium_ore, immersiveengineering:deepslate_ore_uranium, immersiveengineering:ore_uranium, mekanism:deepslate_uranium_ore, mekanism:uranium_ore, mekanismaaa:glacio_uranium_ore, mekanismaaa:mars_uranium_ore, mekanismaaa:mercury_uranium_ore, mekanismaaa:venus_uranium_ore
+forge:ores/tin                           => beo:end_tin_ore, bno:nether_tin_ore, mekanism:deepslate_tin_ore, mekanism:tin_ore, mekanismaaa:glacio_tin_ore, mekanismaaa:mars_tin_ore, mekanismaaa:moon_tin_ore, projectred_exploration:deepslate_tin_ore, projectred_exploration:tin_ore, thermal:deepslate_tin_ore, thermal:tin_ore, thermal_and_space:glacio_tin_ore, thermal_and_space:mars_tin_ore, thermal_and_space:mercury_tin_ore, thermal_and_space:moon_tin_ore, thermal_and_space:venus_tin_ore
+forge:ores/silver                        => beo:end_silver_ore, bluepower:silver_deepslate, bluepower:silver_ore, bno:nether_silver_ore, galosphere:deepslate_silver_ore, galosphere:silver_ore, immersiveengineering:deepslate_ore_silver, immersiveengineering:ore_silver, projectred_exploration:deepslate_silver_ore, projectred_exploration:silver_ore, silentgems:deepslate_silver_ore, silentgems:raw_silver, silentgems:silver_ore, thermal:deepslate_silver_ore, thermal:silver_ore, thermal_and_space:glacio_silver_ore, thermal_and_space:mars_silver_ore, thermal_and_space:mercury_silver_ore, thermal_and_space:moon_silver_ore, thermal_and_space:venus_silver_ore
+forge:ores/sapphire                      => bluepower:sapphire_deepslate, bluepower:sapphire_ore, projectred_exploration:deepslate_sapphire_ore, projectred_exploration:sapphire_ore, silentgems:deepslate_sapphire_ore, silentgems:sapphire_end_ore, silentgems:sapphire_nether_ore, silentgems:sapphire_ore, thermal:deepslate_sapphire_ore, thermal:sapphire_ore, thermal_and_space:glacio_sapphire_ore, thermal_and_space:mars_sapphire_ore, thermal_and_space:mercury_sapphire_ore, thermal_and_space:moon_sapphire_ore, thermal_and_space:venus_sapphire_ore
+forge:ores/ruby                          => bluepower:ruby_deepslate, bluepower:ruby_ore, projectred_exploration:deepslate_ruby_ore, projectred_exploration:ruby_ore, silentgems:deepslate_ruby_ore, silentgems:ruby_end_ore, silentgems:ruby_nether_ore, silentgems:ruby_ore, thermal:deepslate_ruby_ore, thermal:ruby_ore, thermal_and_space:glacio_ruby_ore, thermal_and_space:mars_ruby_ore, thermal_and_space:mercury_ruby_ore, thermal_and_space:moon_ruby_ore, thermal_and_space:venus_ruby_ore
+forge:ores/nickel                        => beo:end_nickel_ore, bno:nether_nickel_ore, immersiveengineering:deepslate_ore_nickel, immersiveengineering:ore_nickel, thermal:deepslate_nickel_ore, thermal:nickel_ore, thermal_and_space:glacio_nickel_ore, thermal_and_space:mars_nickel_ore, thermal_and_space:mercury_nickel_ore, thermal_and_space:moon_nickel_ore, thermal_and_space:venus_nickel_ore
+forge:ores/lead                          => beo:end_lead_ore, bno:nether_lead_ore, immersiveengineering:deepslate_ore_lead, immersiveengineering:ore_lead, mekanism:deepslate_lead_ore, mekanism:lead_ore, mekanismaaa:glacio_lead_ore, mekanismaaa:mercury_lead_ore, mekanismaaa:venus_lead_ore, thermal:deepslate_lead_ore, thermal:lead_ore, thermal_and_space:glacio_lead_ore, thermal_and_space:mars_lead_ore, thermal_and_space:mercury_lead_ore, thermal_and_space:moon_lead_ore, thermal_and_space:venus_lead_ore
+
+dornum and afterdark and deeperndarker test
+hide blockpos in f3
+provide better surface checking for mob siege events
+check for some sort of artifical lighting to stop mob sieges occuring in play built structures (seesky check)
+mob seige events {
+	slime swarm
+	bliztic barrage
+	splosive strike / creeper contention
+}
+balance breeze and blitz spawns in the aether
+test ballistix (removed)
+test more gems (removed)
+vics point blank vs timeless and classics zero (tacz removed)
+maybe remove oreganized
+remove waystones (replaced by custom portals)
+fix workbench and furnace crafting duplicates
+fix workbench and furnace recipe inputs
+do chest progression
+test litematica (and with shaders) (removed)
+spawn blitz in aether
+remove pylons (OP) 
+modify c2me config to require more memory
+promenade blue berry bushes fix
+blockswap replacement? (removed)
+remove what is stone && ddepths out of concern for typical MCCreator quality 
+fix duplicate lapis and redstone nether ores
+remove powah
+fix basic ores output
+see if JEI hiding is working (it is)
+fix rock duplicates
+what_is_stone:marble -> blockus:marble
+what_is_stone:scoria -> create:scoria
+what_is_stone:rhyolite -> light_rhyolite
+what_is_stone:schist -> dark schist
+what_is_stone:dacite -> grey dacite 
+geologic_expansion:limestone -> rocky limestone 
+create:limestone -> smooth limestone 
+quark:limestone -> hardened limestone 
+blockus:limestone -> warm limestone 
+alexscaves:limestone -> blockus:limestone 
+fix common tags (sand, dirt, etc) 
+remove alexscaves gunpowder from sulfur 
+blackstone furnace duplicate (quark + betternether) 
+fix vanilla furnace duplicate recipe 
+organise tag system (created) 
+fix blockus and quark charcoal block duplicate 
+fix stick recipes 
+test recipes using new compileObject 
+biomeswevegone:fir => dark fir 
+organise sound step system (one has been created, use it) 
+fix presence footsteps bugging out wtf (mossy stone, overgrown stone) 
+blue berry duplicate (between BWG and Promenade) 
+please for gods sake re organise the code base there is too much fukn mess now 
+add tags for both items and blocks (any mc or forge tags go in defaults) 
+fix overgrown stone bwg (overgrown everythang) 
+biomeswevegone:rainbow_eucalyptus => gloomy eucalyptus
+change biomeswevegone magic logs to old textures (bc better) 
+biomeswevegone:willow => dark willow 
+promenade:palm => tropical palm (done
+biomeswevegone:palm => dry palm 
+ancient_aether:sakura => aether sakura 
+biomeswevegone:orchard => Old Growth Orchard 
+biomesoplenty:pine -> dark pine 
+biomesoplenty:jacaranda => white jacaranda 
+biomeswevegone:sakura => red sakura 
+translate promenade maple to white maple
+terrestria:sakura => dark sakura 
+translate bwg maple to dark maple 
+fix fortune function in carbonize and alexscaves loot tables 
+modify alex's caves sulfur 
+betterx crafting table integration (using similar tactic for vines) 
+try combine vine registry (maybe use polymorph to circumvent tag overlap) 
+fix furnace, crafting table and dynamic log to wood recipes (fucking done)
+ensure recipe integrity before adding mods (WOOHOO I WAITED SO LONG) 
+check if there is possible lang files for kubejs (maybe via addJson on client) 
+rare nucleeper spawn 
+carbonize ash recipes 
+carbonize charcoal sounds for immersion 
+Carbonize compat 
+codify loot tables 
+remove duplicate recipes for things like gunpowder, betterend sulfur and such 
+make it difficult eternally -_- 
+stack edenring on top of aether 
+playerRespawnPercentage = 0 as a default value 
+check furnace recipe for aether and edenring 
+fix edenring start 
+fix nether start 
+fix better end sounds 
+fix betternether:nether_mycelium soundType 
+look into water changing opacity glitch 
+world chunks deadlock (was Epic Seige: Nightmare) 
