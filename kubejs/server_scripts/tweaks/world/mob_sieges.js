@@ -229,6 +229,11 @@ function insertStringInterlace(string, interlaces) {
 function createStringInterlaceComplex(object) {
     return {name: Object.getName(object), value: object}
 }
+
+function createStringInterlace(name, value) {
+    return {name: name, value: value}
+}
+
 function createStringInterlaceBasic(name) {
     return "${" + name + "}"
 }

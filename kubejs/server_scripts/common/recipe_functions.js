@@ -39,6 +39,76 @@ function recipeLoop(event, items) {
     }
 }
 
+/*  
+!!!DON'T ACCIDENTALLY DUPLICATE INDEXES! AN INDEX WILL ONLY CONSIDER THE FIRST KEY AND EVERY OTHER WILL BE IGNORED!!!
+    Examples:
+        CORRECT: insertionRecipe(event, 'minecraft:diamond', [createIngredientObject('minecraft:stick', [0, 4, 8]), createIngredientObject('minecraft:redstone', 1)])
+        INCORRECT: insertionRecipe(event, 'minecraft:emerald', [createIngredientObject('minecraft:stick', [0, 4, 8]), createIngredientObject('minecraft:redstone', 0)])
+    Index Order:
+        Left --> Right
+        Top --> Bottom
+    Index Map:
+        [index0, index1, index2]
+        [index3, index4, index5]
+        [index6, index7, index8]
+*/
+const alphaIndexes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+function insertionRecipe(event, result, ingredientObjects) {
+    ingredientObjects = global.ensureArray(ingredientObjects)
+    var keyMap = {}
+    var basePatternLayers = [
+        '012',
+        '345',
+        '678'
+    ]
+    
+    var mappedPatternLayers = []
+    for (var i = 0; i < 3; i++) {
+        var patternLayer = basePatternLayers[i]
+        global.iterateWithIndex(ingredientObjects, (ingredientObject, ingredientObjectIndex) => {
+            var ingredientObjectKey = alphaIndexes[ingredientObjectIndex]
+            global.ensureArray(ingredientObject.patternIndexes).forEach(patternCoordinates => {
+                if (patternLayer.includes(patternCoordinates)) {
+                    patternLayer = patternLayer.replace(patternCoordinates, ingredientObjectKey)
+                    if (!Object.getOwnPropertyNames(keyMap).includes(ingredientObjectKey))
+                        Object.defineProperty(keyMap, ingredientObjectKey, global.mutableValue(ingredientObject.ingredient))
+                }
+            })
+        })
+        patternLayer = patternLayer.replace(' ', '')
+        for (var num = 0; num < 10; num++)
+            patternLayer = patternLayer.replace(num, ' ')
+        mappedPatternLayers[i] = patternLayer
+    }
+
+
+    /*var processedPatternLayers = basePatternLayers
+    global.iterateWithIndex(global.ensureArray(ingredientObjects), (ingredientObject, ingredientIndex) => {
+        let ingredientAlphaIndex = alphaIndexes[ingredientIndex]
+        basePatternLayers.forEach(patternLayer => {
+            global.iterateWithIndex(global.ensureArray(ingredientObject.patternIndexes), (mappedPatternIndex, rawPatternIndex) => {
+                processedPatternLayers[rawPatternIndex] = processedPatternLayers[rawPatternIndex].replace(mappedPatternIndex, ingredientAlphaIndex)
+            })
+        })
+        Object.defineProperty(keyMap, ingredientAlphaIndex, global.mutableValue(ingredientObject.ingredient))
+    })
+
+    basePatternLayers = processedPatternLayers
+    global.iterateWithIndex(processedPatternLayers, (processedPatternLayer, index) => 
+        global.iterateWithIndex(alphaIndexes, (alpha, alphaIndex) => basePatternLayers[index] = basePatternLayers[index].replace(alphaIndex, ' '))
+    )*/
+    console.info(keyMap)
+    console.info(mappedPatternLayers)
+    return event.shaped(result, mappedPatternLayers, keyMap)
+}
+
+function createIngredientObject(ingredient, indexes) {
+    return {
+        ingredient: ingredient,
+        patternIndexes: global.ensureArray(indexes)
+    }
+}
+
 /*function tool_damaging_shapeless(event, result, ingredients) {
     event.custom({
         type: 'notreepunching:tool_damaging_shapeless',

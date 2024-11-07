@@ -45,6 +45,47 @@ function horizontal2x1Recipe(event, result, ingredient) {
     })
 }
 
+function smallTriangleABCRecipe(event, result, a0, a1, a2) {
+    event.shaped(result, [
+        'AC',
+        'B'
+    ], {
+        A: a0,
+        B: a1,
+        C: a2
+    })
+}
+
+function smallTriangleABBRecipe(event, result, top, bottom) {
+    smallTriangleABCRecipe(event, result, top, bottom, bottom)
+}
+
+function verticalABRecipe(event, result, top, bottom) {
+    event.shaped(result, [
+        'A',
+        'B'
+    ], {
+        A: top,
+        B: bottom
+    })
+}
+
+function verticalABCRecipe(event, result, top, mid, bottom) {
+    event.shaped(result, [
+        'A',
+        'B',
+        'C'
+    ], {
+        A: top,
+        B: mid,
+        C: bottom
+    })
+}
+
+function verticalABARecipe(event, result, inner, outter) {
+    return verticalABCRecipe(event, result, outter, inner, outter)
+}
+
 function functionsAsModifier(functions)  {
     return {functions: functions}
 }

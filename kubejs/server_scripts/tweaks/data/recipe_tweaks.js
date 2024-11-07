@@ -1,84 +1,36 @@
 ServerEvents.recipes(event => {
-    aetherRecipes(event)
-    alexscavesRecipes(event)
-    betterxRecipes(event)
-    biggerreactorsRecipes(event)
-    coreRecipes(event)
-    createRecipes(event)
-    expandedstorageRecipes(event)
     hardcoretorchesRecipes(event)
     notreepunchingRecipes(event)
     thermalRecipes(event)
+
+    /*insertionRecipe(event, 'minecraft:diamond', [createIngredientObject('minecraft:stick', [0, 4, 8]), createIngredientObject('minecraft:redstone', [1, 2, 3])])
+    insertionRecipe(event, 'minecraft:emerald', [createIngredientObject('minecraft:stick', [0, 4, 8]), createIngredientObject('minecraft:redstone', [0, 4])])
+    insertionRecipe(event, 'minecraft:emerald', [createIngredientObject('minecraft:stick', [0, 4, 8]), createIngredientObject('minecraft:redstone', [0, 4, 5])])*/
 })
 
-function aetherRecipes(event) {
-    global.TOOLS.forEach(tool => event.remove([{output: 'aether:skyroot_' + tool}, {output: 'aether:holystone_' + tool}]))
-    event.remove({id: 'deep_aether:skyroot_crafting_table'})
-    event.remove({id: 'ancient_aether:skyroot_crafting_table_from_ancient_aether_planks'})
-}
-
-function alexscavesRecipes(event) {
-    event.remove({id: 'alexscaves:gunpowder_from_sulfur'})
+function progressionRecipes(event) {
     event.replaceInput({id: 'alexscaves:nuclear_furnace_component'}, '#forge:raw_materials/uranium', '#forge:ingots/uranium')
     event.replaceInput({id: 'alexscaves:nuclear_siren'}, '#forge:raw_materials/uranium', '#forge:ingots/uranium')
     event.replaceInput({id: 'alexscaves:uranium_rod'}, '#forge:raw_materials/uranium', '#forge:ingots/uranium')
-}
-
-function betterxRecipes(event) {
-    event.remove({id: 'betterend:charcoal_block'})
-    replaceRecipeCmplx(event, {id: 'betterend:sulphur_gunpowder'}, result => vertical2x1Recipe(event, AlmostUnified.getPreferredItemForTag('forge:dusts/sulfur'), 'betterend:crystalline_sulphur'))
-    square2x2Recipe(event, 'minecraft:bone_block', 'edenring:balloon_mushroom_stem')
-    square2x2Recipe(event, 'minecraft:end_stone', 'betterend:endstone_dust')
-    alternate2x2Recipe(event, '2x betterend:charcoal_block', '#forge:storage_blocks/charcoal', 'minecraft:soul_sand')
-    alternate2x2Recipe(event, '2x betterend:neon_cactus', 'betternether:nether_cactus', 'betternether:neon_equisetum')
-}
-
-function biggerreactorsRecipes(event) {
-    event.remove({id: 'biggerreactors:smelting/uranium_chunk'})
-    event.remove({id: 'biggerreactors:blasting/uranium_chunk'})
-}
-
-function carbonizeRecipes(event) {
-    square2x2Recipe(event, 'carbonize:ash_block', 'carbonize:ash')
-    horizontal2x1Recipe(event, '3x carbonize:ash_layer', 'carbonize:ash_block')
-}
-
-function coreRecipes(event) {
-    event.remove({output: 'minecraft:charcoal', type: 'minecraft:smelting'})
-    event.shapeless('5x minecraft:bone', ['minecraft:bone_block', 'minecraft:bone_block'])
-    event.shapeless('minecraft:stick', '#minecraft:saplings')
     event.replaceInput({input: 'minecraft:crafting_table'}, 'minecraft:crafting_table', '#forge:workbench')
     event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', '#forge:furnaces')
-}
 
-function createRecipes(event) {
-    let lineRecipe = (result, inner, outter) => {
-        replaceRecipeSmpl(event, result, r => event.shaped(r, [
-            'A',
-            'B',
-            'A'
-        ], {
-            A: outter,
-            B: inner
-        }))
-    }
-    
-    lineRecipe('4x create:shaft', 'create:andesite_alloy', '#forge:ingots/titanium')
-    event.remove({id: 'create:crafting/materials/andesite_alloy_from_zinc'})
-    event.smelting('2x minecraft:redstone', 'createoreexcavation:raw_redstone').xp(0.7)
     replaceRecipeCmplx(event, {id: 'create:crafting/materials/andesite_alloy'}, r => event.shapeless('2x create:andesite_alloy', ['#forge:dusts/invar', 'andesite', '#forge:dusts/zinc', 'andesite']))
-}
+    replaceRecipeSmpl(event, '4x create:shaft', r => horizontalABARecipe(event, r, 'create:andesite_alloy', '#forge:ingots/titanium'))
 
-function expandedstorageRecipes(event) {
+    alternate2x2Recipe(event, '2x betterend:neon_cactus', 'betternether:nether_cactus', 'betternether:neon_equisetum')
+    horizontal2x1Recipe(event, '3x carbonize:ash_layer', 'carbonize:ash_block')
+    square2x2Recipe(event, 'carbonize:ash_block', 'carbonize:ash')
+    square2x2Recipe(event, 'minecraft:bone_block', 'edenring:balloon_mushroom_stem')
+    square2x2Recipe(event, 'minecraft:end_stone', 'betterend:endstone_dust')
     event.smelting('ae2:smooth_sky_stone_chest', 'ae2:sky_stone_chest')
-    let types = [
+    global.iterateWithIndex([
         {type: 'iron'},
         {type: 'gold'},
         {type: 'diamond', mat: 'gems'},
         {type: 'obsidian', mat: ''},
         {type:'netherite'}
-    ]
-    global.iterateWithIndex(types, (object, index) => {
+    ], (object, index) => {
         let chest = global.appendResourceLocation('expandedstorage', object.type + '_chest')
         event.remove({id: chest.replace(':', ':old_')})
         let inputChest = 'ae2:smooth_sky_stone_chest'
@@ -91,8 +43,31 @@ function expandedstorageRecipes(event) {
         if (object.type != 'iron')
             inputChest = global.appendResourceLocation('expandedstorage', types[index - 1].type + '_chest')
         replaceRecipeCmplx(event, {id: chest}, result => planetRecipe(event, chest, inputMat, inputChest))
-    })
+    }) 
 }
+
+function materialRecipes(event) {
+    global.TOOLS.forEach(tool => event.remove([{output: 'aether:skyroot_' + tool}, {output: 'aether:holystone_' + tool}]))
+    event.remove({id: 'alexscaves:gunpowder_from_sulfur'})
+    event.remove({id: 'ancient_aether:skyroot_crafting_table_from_ancient_aether_planks'})
+    event.remove({id: 'betterend:charcoal_block'})
+    event.remove({id: 'biggerreactors:smelting/uranium_chunk'})
+    event.remove({id: 'biggerreactors:blasting/uranium_chunk'})
+    event.remove({id: 'create:crafting/materials/andesite_alloy_from_zinc'})
+    event.remove({id: 'deep_aether:skyroot_crafting_table'})
+    event.remove({output: 'minecraft:charcoal', type: 'minecraft:smelting'})
+
+    replaceRecipeCmplx(event, {id: 'betterend:sulphur_gunpowder'}, result => vertical2x1Recipe(event, AlmostUnified.getPreferredItemForTag('forge:dusts/sulfur'), 'betterend:crystalline_sulphur'))
+    
+    alternate2x2Recipe(event, '2x betterend:charcoal_block', '#forge:storage_blocks/charcoal', 'minecraft:soul_sand')
+    event.shapeless('5x minecraft:bone', ['minecraft:bone_block', 'minecraft:bone_block'])
+    event.shapeless('minecraft:stick', '#minecraft:saplings')
+    event.smelting('2x minecraft:redstone', 'createoreexcavation:raw_redstone').xp(0.7)
+}
+
+
+
+
 
 function hardcoretorchesRecipes(event) {
     event.remove({id: 'hardcore_torches:lit_torch'})
@@ -101,22 +76,10 @@ function hardcoretorchesRecipes(event) {
     replaceRecipeSmpl(event, '2x minecraft:torch', result => event.shapeless(result, ['minecraft:glowstone_dust', '#minecraft:torches/temp', '#minecraft:torches/temp']))
 
     planetRecipe(event, '8x hardcore_torches:unlit_torch', 'hardcore_torches:burnt_torch', '#minecraft:coals')
-    replaceRecipeSmpl(event, '4x hardcore_torches:unlit_torch', result => event.shaped(result, [
-        'A',
-        'B'
-    ], {
-        A: '#minecraft:coals',
-        B: '#forge:rods/wooden'
-    }))
-    replaceRecipeSmpl(event, '4x minecraft:torch', result => event.shaped(result, [
-        'A',
-        'B',
-        'C'
-    ], {
-        A: 'minecraft:glowstone_dust',
-        B: '#minecraft:coals',
-        C: '#forge:rods/wooden'
-    }))
+    
+    replaceRecipeSmpl(event, '4x hardcore_torches:unlit_torch', result => verticalABRecipe(event, result, '#minecraft:coals', '#forge:rods/wooden'))
+    
+    replaceRecipeSmpl(event, '4x minecraft:torch', result => verticalABCRecipe(event, result, 'minecraft:glowstone_dust', '#minecraft:coals', '#forge:rods/wooden'))
     replaceRecipeSmpl(event, 'hardcore_torches:fire_starter', result => event.shaped(result, [
         'SW',
         'W '
