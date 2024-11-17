@@ -85,7 +85,7 @@ complex recipes {
 	uncrafting table
 		aeternalis fuel uses coal/charcoal blocks
 		dark matter requires gravitite, sculk, netherite, thallasium & aeternalis fuel
-		philosopher's stone
+		philosopher's stone (zivicio
 		transmutation table (make this extremely expensive)
 		emc collector (extremely expensive)
 		interdiction torch (somewhat expensive)
@@ -160,6 +160,13 @@ custom settings {
 	hardcore darkness on
 }
 
+exploration {
+    alex's mobs interaction
+    divineRPG
+    the abyss
+    betweenlands
+}
+
 make plant fiber easily accessible (low priority)
 find better furnace components that falls in line with progression (low priority)
 maybe remove minecraft block variant duplicates (low priority)
@@ -181,19 +188,39 @@ iron furnaces standard progression
 twigs and this rocks compat
 silents gems and better nether compat
 coal explosion + hardcore torches compat (tags)
-ad astra ore compat with almost unified
-remove duplicate ores
 fix not dying in space without suit
 recipe to split sulfur quartz
 refactor shitty tag system
 add better shaped recipe system to avoid making a billion functions
 test the insertion recipe
 migrate all important functions to global
+fix global recipe functions (they are broken for some reason)
+fix deadlock caused by rotatingSquare recipe
+fix crafting table duplicate recipe
+fix initial inventory open lag
+revert weird wart textures (jadens nether exp maybe?)
+ensure all wart is added to tag
+fix productive trees tag problems (maybe cucumber lib)
+fix furnace and crafting table recipes
+refactor loot tables and tags
+split early game progression
+maybe use unified call to save time
+make local functions null instead of not assigning to avoid weird errors
+lighting bug in voidscape (maybe oculus-flywheel compat)
+rapid fire blazes
+make blaze sometimes spawn with a lava monster
 
 (allow for content management in curseforge to avoid datapack/resourcepack and shaderpack license infringements)
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+
+remove mccreator {
+    unusual end
+    spelunkers charm
+}
+ad astra ore compat with almost unified
+remove duplicate ores
 review modernfix config (low priority)
 space ore compat (mekanism and thermal)
 unhide alexs caves uranium

@@ -7,7 +7,9 @@ Resources:
 		ancient_aether-client.toml
 		presencefootsteps/userconfig.json
 		paxi/ (find a better way)
-		effective_fg-client.toml
+		effective_fg-client.toml,
+        darkmodeeverywhere-client.toml
+        darkmodeeverywhereshaders.json
 		### packmenu.cfg
 		### roughlyenoughitems/ (replace with JEI)
 		
