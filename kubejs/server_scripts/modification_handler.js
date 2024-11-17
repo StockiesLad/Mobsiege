@@ -1,5 +1,6 @@
 const modpackId = global.modpackId
 const comfuncs = global.functions.common
+const commaths = global.functions.math
 
 ServerEvents.recipes(event => {
     comfuncs.invokeSignedCalls('recipes', {tag: global.functions.tag(null), recipes: global.functions.recipe(event)})

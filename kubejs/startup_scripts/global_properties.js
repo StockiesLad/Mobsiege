@@ -8,8 +8,9 @@ const comfuncs = getCommonFunctions()
 //Function groups that require params can be accessed with null but you have to be careful to not invoke any functions that require them.
 global.functions = {
     common: comfuncs,
-    
+    math: getMathFunctions(),
     sound: getSoundFunctions(),
+    
     tag: (event) => expand(event, getTagFunctions) ,
     lootTable: (event) => expand(event, getLootTableFunctions),
     recipe: (event) => expand(event, getRecipeFunctions)

@@ -21,8 +21,7 @@ function getCommonFunctions() {
 
     var ensureArraySuper = (possibleArray, child) => Array.isArray(child) ? possibleArray : [possibleArray]
 
-    var isEven = (number) => number % 2 == 0
-    var isOdd = (number) => !isEven(number)
+    
 
     var unifiedCall = (call, arrayInvokeParams) => {
         arrayInvokeParams.forEach(invokeParams => call(invokeParams))
@@ -90,9 +89,6 @@ function getCommonFunctions() {
        forEasy(array.length, i => call(array[i], i))
     }
 
-    var diff = (a, b) => {
-        return a > b ? a - b : b - a
-    }
 
     var merge = (arrays) => {
         var parent = []
@@ -158,13 +154,6 @@ function getCommonFunctions() {
         return handleProperties(functions, value => () => {})
     }
 
-    var rotate = (num, size) => {
-        var index = num
-        while (index >= size)
-            index = index - size
-        return index
-    }
-
     var hide = (items) => {
         incorp(global.hiddenItems, ensureArray(items))
     }
@@ -183,15 +172,22 @@ function getCommonFunctions() {
             return invoker({})
         }
     }
-    
+
+    var functionalIf = (condition, call, elseCall) => {
+        if (condition)
+             return call()
+        else if (elseCall != null)
+             return elseCall()
+   }
+
+   var functionalObject = (object) => object
+
     return {
         identifier: identifier,
         modpack: modpack,
         defaultNamespace: defaultNamespace,
         ensureArray: ensureArray,
         ensureArraySuper: ensureArraySuper,
-        isEven: isEven,
-        isOdd: isOdd,
         unifiedCall: unifiedCall,
         addSignedCalls: addSignedCalls,
         invokeSignedCalls: invokeSignedCalls,
@@ -202,7 +198,6 @@ function getCommonFunctions() {
         forEasy: forEasy,
         iterate: iterate,
         quickerate: quickerate,
-        diff: diff,
         merge: merge,
         incorpHandledValues: incorpHandledValues,
         incorp: incorp,
@@ -213,9 +208,10 @@ function getCommonFunctions() {
         incorpProperties: incorpProperties,
         handleProperties: handleProperties,
         dummify: dummify,
-        rotate: rotate,
         hide: hide,
         emptyFunc: emptyFunc,
-        invoker: invoker
+        invoker: invoker,
+        functionalIf: functionalIf,
+        functionalObject: functionalObject
     }
 }
