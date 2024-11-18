@@ -110,14 +110,15 @@
         return getHandle([getSoundTypeFunction(soundType), getSoundTagFunction(soundTag)], allEntries)
     }
     function getHandle(functions, allEntries) {
-        var basicHandle = comfuncs.handleProperties(functions, call => (params) => {
-            allEntries.forEach(entries => {
-                comfuncs.ensureArray(entries).forEach(entry => {
-                    params.entry = entry
-                    call(params)
-                })
-            })
-        })
+        var basicHandle = comfuncs.handleProperties(functions, func => 
+            (params) => 
+                allEntries.forEach(entries => 
+                    comfuncs.ensureArray(entries).forEach(entry => {
+                        params.entry = entry
+                        func(params)
+                    })
+            )
+        )
         basicHandle.invoke = comfuncs.invoker(basicHandle, false)
         return basicHandle
     }

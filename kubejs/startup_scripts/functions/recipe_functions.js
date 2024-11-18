@@ -130,7 +130,7 @@ function getRecipeFunctions(event) {
                          if (gaps.length == 1)
                               ingredientIndex = commaths.roll(width, height, size) * gaps[0]
                          else ingredientIndex = width * gaps[1] + commaths.rotate1D(height * gaps[0], ingredientObjects.length)
-                              ingredientObjects[commaths.rotate1D(ingredientIndex, ingredientObjects.length)] .push(width + height * size)
+                         ingredientObjects[commaths.rotate1D(ingredientIndex, ingredientObjects.length)] .push(width + height * size)
                     }))
                     return modify(result, ingredientObjects, size)
                } 
@@ -227,7 +227,7 @@ function ingredientFillBox (ingredientObject) {
      var fillDest = ingredientObject[2]
      if (Array.isArray(fillDest)) {
           if (fillDest.length == 2) {
-               fillDest == fillDest[0]
+               fillDest = fillDest[0]
                fillOrigin = fillDest[1]
           } else fillDest = fillDest[0]
      }
@@ -290,7 +290,7 @@ function originPattern (size) {
 
 function fillPattern (originPattern, ingredientObjects) {
      var {pattern, size} = originPattern
-     var pattern = []
+     var fillPattern = []
      var keys = {}
 
      comfuncs.forEasy(pattern.length, height => {
@@ -307,10 +307,10 @@ function fillPattern (originPattern, ingredientObjects) {
           newPatternLayer = newPatternLayer.replace(' ', '')
           comfuncs.forEasy(size * size, index => newPatternLayer = newPatternLayer.replace(`/${index}/`, ' '))     
           // <Merge> //          
-          pattern[i] = newPatternLayer
+          fillPattern[height] = newPatternLayer
      })
 
-     return {pattern: pattern, keys: keys}
+     return {pattern: fillPattern, keys: keys}
 }
 
 function insertion (ingredientObjects, size) {

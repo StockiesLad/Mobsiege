@@ -11,9 +11,9 @@ global.functions = {
     math: getMathFunctions(),
     sound: getSoundFunctions(),
     
-    tag: (event) => expand(event, getTagFunctions) ,
-    lootTable: (event) => expand(event, getLootTableFunctions),
-    recipe: (event) => expand(event, getRecipeFunctions)
+    tag: (event) => expand(event, getTagFunctions(event)) ,
+    lootTable: (event) => expand(event, getLootTableFunctions(event)),
+    recipe: (event) => expand(event, getRecipeFunctions(event))
 }
 
 

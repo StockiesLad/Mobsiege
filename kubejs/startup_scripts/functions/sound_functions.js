@@ -1,9 +1,9 @@
 function getSoundFunctions() {
-     var accessMap = (call) => {
-         global.soundMap.forEach(handle => call(handle))
+     var invoke = (funcName, cxt) => {
+        return global.soundMap.forEach(handle => handle.invoke(funcName)(cxt))
      }
 
      return {
-         accessMap: accessMap
+         invoke: invoke
      }
  }

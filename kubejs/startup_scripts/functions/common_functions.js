@@ -132,9 +132,9 @@ function getCommonFunctions() {
     var incorpHandledProperties = (parent, children, handle) => {
         ensureArray(children).forEach(child => {
             if (child != null) {
-                for (var key in children) {
+                for (var key in child) {
                     if (key != null)
-                        defineProperty(parent, key, handle(children[key]))
+                        defineProperty(parent, key, handle(child[key]))
                     else if (global.debug) console.info(`[Mobsiege@incorpHandledProperties]: Unable to define property: parent=${parent}, object=${child}, key=${key}, value=${oldValue}`)
                 }
             } else if (global.debug) console.info(`[Mobsiege@incorpHandledProperties]: Unable to access property: parent=${parent}, object=${child}`)

@@ -1,0 +1,604 @@
+{
+  "__comment": [
+    "Mobs will be able to equip items declared here",
+    "The first number is the weight while the second number is the quality",
+    "Weight is the weight of an item. Higher weight means that the item is more likely to get choosen",
+    "Quality is a modifier applied to the weight. The final weight used is weight + quality * current difficulty"
+  ],
+  "MAINHAND": {
+    "minecraft:bow": [
+      8529,
+      4.508568
+    ],
+    "minecraft:crossbow": [
+      8823,
+      3.826627
+    ],
+    "minecraft:diamond_axe": [
+      8292,
+      5.022479
+    ],
+    "minecraft:diamond_sword": [
+      8354,
+      4.889481
+    ],
+    "minecraft:enchanted_book": [
+      9497,
+      1.8573177
+    ],
+    "minecraft:golden_axe": [
+      10953,
+      0.014399999
+    ],
+    "minecraft:golden_sword": [
+      11016,
+      0.0081
+    ],
+    "minecraft:iron_axe": [
+      10520,
+      0.51635593
+    ],
+    "minecraft:iron_sword": [
+      10607,
+      0.049
+    ],
+    "minecraft:lingering_potion{Potion:\"minecraft:harming\"}": [
+      9597,
+      1.7269388
+    ],
+    "minecraft:netherite_axe": [
+      7456,
+      6.778693
+    ],
+    "minecraft:netherite_sword": [
+      7526,
+      6.632802
+    ],
+    "minecraft:snowball": [
+      10547,
+      0.46844563
+    ],
+    "minecraft:splash_potion{Potion:\"minecraft:harming\"}": [
+      9597,
+      1.7269388
+    ],
+    "minecraft:stone_axe": [
+      10723,
+      0.0374
+    ],
+    "minecraft:stone_sword": [
+      10831,
+      0.026599998
+    ],
+    "minecraft:tnt": [
+      9397,
+      1.9881918
+    ],
+    "minecraft:trident": [
+      8597,
+      4.357304
+    ],
+    "minecraft:wooden_axe": [
+      10907,
+      0.019
+    ],
+    "minecraft:wooden_sword": [
+      10970,
+      0.0127
+    ],
+    "silence_s_defense_tower:test_tool": [
+      10922,
+      0.0175
+    ],
+    "undead_revamp2:bonedagger": [
+      7670,
+      6.3323894
+    ],
+    "undead_revamp2:bostroxsword": [
+      8533,
+      4.499734
+    ],
+    "undead_revamp2:chainsword": [
+      20,
+      22.517443
+    ],
+    "undead_revamp2:toothmace": [
+      7745,
+      6.1757073
+    ],
+    "zombie_extreme:baseball_bat": [
+      10539,
+      0.4835412
+    ],
+    "zombie_extreme:bronze_axe": [
+      10917,
+      0.018
+    ],
+    "zombie_extreme:butcher_knife": [
+      10504,
+      0.54186976
+    ],
+    "zombie_extreme:buzz_killer": [
+      6723,
+      8.304887
+    ],
+    "zombie_extreme:cleaver": [
+      10698,
+      0.039899997
+    ],
+    "zombie_extreme:crowbar": [
+      10414,
+      0.670341
+    ],
+    "zombie_extreme:electric_katana": [
+      9078,
+      2.8587115
+    ],
+    "zombie_extreme:electro_machete": [
+      8048,
+      5.540094
+    ],
+    "zombie_extreme:fireaxe": [
+      10213,
+      0.93313384
+    ],
+    "zombie_extreme:fittings": [
+      10926,
+      0.017099999
+    ],
+    "zombie_extreme:frying_pan": [
+      10618,
+      0.0479
+    ],
+    "zombie_extreme:golf_club": [
+      10681,
+      0.041599996
+    ],
+    "zombie_extreme:katana": [
+      8505,
+      4.561431
+    ],
+    "zombie_extreme:kitchen_knife": [
+      10922,
+      0.0175
+    ],
+    "zombie_extreme:last_hope": [
+      7535,
+      6.6140394
+    ],
+    "zombie_extreme:m_9_knife": [
+      8661,
+      4.2123923
+    ],
+    "zombie_extreme:machete": [
+      9307,
+      2.1063945
+    ],
+    "zombie_extreme:military_machete": [
+      8607,
+      4.334844
+    ],
+    "zombie_extreme:modern_axe": [
+      9956,
+      1.2628816
+    ],
+    "zombie_extreme:modern_love": [
+      8799,
+      3.886309
+    ],
+    "zombie_extreme:pipe": [
+      10630,
+      0.0467
+    ],
+    "zombie_extreme:police_baton": [
+      10691,
+      0.040599998
+    ],
+    "zombie_extreme:steel_axe": [
+      9840,
+      1.4121808
+    ],
+    "zombie_extreme:steel_sledgehammer": [
+      7691,
+      6.2885356
+    ],
+    "zombie_extreme:stun_stick": [
+      10515,
+      0.5244919
+    ],
+    "zombie_extreme:titan_axe": [
+      8075,
+      5.4831543
+    ],
+    "zombie_extreme:wrench": [
+      10762,
+      0.033499997
+    ]
+  },
+  "OFFHAND": {
+    "minecraft:ender_pearl": [
+      675,
+      1.2102311
+    ],
+    "minecraft:flint_and_steel": [
+      647,
+      1.2461817
+    ],
+    "minecraft:lava_bucket": [
+      275,
+      1.7269388
+    ],
+    "minecraft:shield": [
+      353,
+      1.6255897
+    ]
+  },
+  "FEET": {
+    "create:copper_diving_boots": [
+      5273,
+      0.5113901
+    ],
+    "create:netherite_diving_boots": [
+      4212,
+      1.9030677
+    ],
+    "galosphere:sterling_boots": [
+      5142,
+      0.6999366
+    ],
+    "minecraft:chainmail_boots": [
+      5255,
+      0.540316
+    ],
+    "minecraft:diamond_boots": [
+      4339,
+      1.7373508
+    ],
+    "minecraft:golden_boots": [
+      5321,
+      0.4136078
+    ],
+    "minecraft:iron_boots": [
+      5007,
+      0.8764657
+    ],
+    "minecraft:leather_boots": [
+      5603,
+      0.0244
+    ],
+    "minecraft:netherite_boots": [
+      4212,
+      1.9030677
+    ],
+    "toughasnails:leaf_boots": [
+      5771,
+      0.0075999997
+    ],
+    "toughasnails:wool_boots": [
+      5771,
+      0.0075999997
+    ],
+    "undead_revamp2:bostroxset_boots": [
+      2461,
+      6.246758
+    ],
+    "undead_revamp2:primodialarmour_boots": [
+      3970,
+      2.2210226
+    ],
+    "zombie_extreme:camouflage_suit_forest_boots": [
+      5473,
+      0.0374
+    ],
+    "zombie_extreme:combat_armor_boots": [
+      4071,
+      2.087982
+    ],
+    "zombie_extreme:exo_suit_boots": [
+      19,
+      11.34403
+    ],
+    "zombie_extreme:hazmat_suit_boots": [
+      4622,
+      1.3709393
+    ],
+    "zombie_extreme:juggernaut_suit_boots": [
+      2087,
+      7.0265665
+    ],
+    "zombie_extreme:military_suit_boots": [
+      4107,
+      2.0406785
+    ],
+    "zombie_extreme:swat_suit_boots": [
+      4628,
+      1.3632114
+    ]
+  },
+  "LEGS": {
+    "galosphere:sterling_leggings": [
+      5142,
+      0.6999366
+    ],
+    "minecraft:chainmail_leggings": [
+      5255,
+      0.540316
+    ],
+    "minecraft:diamond_leggings": [
+      4339,
+      1.7373508
+    ],
+    "minecraft:golden_leggings": [
+      5321,
+      0.4136078
+    ],
+    "minecraft:iron_leggings": [
+      5007,
+      0.8764657
+    ],
+    "minecraft:leather_leggings": [
+      5603,
+      0.0244
+    ],
+    "minecraft:netherite_leggings": [
+      4212,
+      1.9030677
+    ],
+    "toughasnails:leaf_leggings": [
+      5771,
+      0.0075999997
+    ],
+    "toughasnails:wool_leggings": [
+      5771,
+      0.0075999997
+    ],
+    "zombie_extreme:camouflage_suit_forest_leggings": [
+      5473,
+      0.0374
+    ],
+    "zombie_extreme:combat_armor_leggings": [
+      4071,
+      2.087982
+    ],
+    "zombie_extreme:exo_suit_leggings": [
+      19,
+      11.34403
+    ],
+    "zombie_extreme:hazmat_suit_leggings": [
+      4622,
+      1.3709393
+    ],
+    "zombie_extreme:juggernaut_suit_leggings": [
+      2087,
+      7.0265665
+    ],
+    "zombie_extreme:military_suit_leggings": [
+      4107,
+      2.0406785
+    ],
+    "zombie_extreme:swat_suit_leggings": [
+      4628,
+      1.3632114
+    ]
+  },
+  "CHEST": {
+    "create:copper_backtank": [
+      5273,
+      0.5113901
+    ],
+    "create:netherite_backtank": [
+      4212,
+      1.9030677
+    ],
+    "galosphere:sterling_chestplate": [
+      5142,
+      0.6999366
+    ],
+    "krip_turrets:exoskeleton_engineer_chestplate": [
+      4902,
+      1.0114565
+    ],
+    "minecraft:chainmail_chestplate": [
+      5255,
+      0.540316
+    ],
+    "minecraft:diamond_chestplate": [
+      4339,
+      1.7373508
+    ],
+    "minecraft:golden_chestplate": [
+      5321,
+      0.4136078
+    ],
+    "minecraft:iron_chestplate": [
+      5007,
+      0.8764657
+    ],
+    "minecraft:leather_chestplate": [
+      5603,
+      0.0244
+    ],
+    "minecraft:netherite_chestplate": [
+      4212,
+      1.9030677
+    ],
+    "toughasnails:leaf_chestplate": [
+      5771,
+      0.0075999997
+    ],
+    "toughasnails:wool_chestplate": [
+      5771,
+      0.0075999997
+    ],
+    "undead_revamp2:bostroxset_chestplate": [
+      2461,
+      6.246758
+    ],
+    "undead_revamp2:primodialarmour_chestplate": [
+      3970,
+      2.2210226
+    ],
+    "zombie_extreme:camouflage_suit_forest_chestplate": [
+      5473,
+      0.0374
+    ],
+    "zombie_extreme:civilian_suit_chestplate": [
+      5166,
+      0.6676297
+    ],
+    "zombie_extreme:combat_armor_chestplate": [
+      4071,
+      2.087982
+    ],
+    "zombie_extreme:exo_suit_chestplate": [
+      19,
+      11.34403
+    ],
+    "zombie_extreme:hazmat_suit_chestplate": [
+      4622,
+      1.3709393
+    ],
+    "zombie_extreme:juggernaut_suit_chestplate": [
+      2087,
+      7.0265665
+    ],
+    "zombie_extreme:military_suit_chestplate": [
+      4107,
+      2.0406785
+    ],
+    "zombie_extreme:police_suit_chestplate": [
+      4874,
+      1.047363
+    ],
+    "zombie_extreme:swat_suit_chestplate": [
+      4628,
+      1.3632114
+    ]
+  },
+  "HEAD": {
+    "create:copper_diving_helmet": [
+      5273,
+      0.5113901
+    ],
+    "create:netherite_diving_helmet": [
+      4212,
+      1.9030677
+    ],
+    "galosphere:sterling_helmet": [
+      5142,
+      0.6999366
+    ],
+    "minecraft:chainmail_helmet": [
+      5255,
+      0.540316
+    ],
+    "minecraft:diamond_helmet": [
+      4339,
+      1.7373508
+    ],
+    "minecraft:golden_helmet": [
+      5321,
+      0.4136078
+    ],
+    "minecraft:iron_helmet": [
+      5007,
+      0.8764657
+    ],
+    "minecraft:leather_helmet": [
+      5603,
+      0.0244
+    ],
+    "minecraft:netherite_helmet": [
+      4212,
+      1.9030677
+    ],
+    "minecraft:turtle_helmet": [
+      4951,
+      0.948558
+    ],
+    "toughasnails:leaf_helmet": [
+      5771,
+      0.0075999997
+    ],
+    "toughasnails:wool_helmet": [
+      5771,
+      0.0075999997
+    ],
+    "undead_revamp2:bostroxset_helmet": [
+      2461,
+      6.246758
+    ],
+    "undead_revamp2:imbuemask_helmet": [
+      4839,
+      1.0922337
+    ],
+    "undead_revamp2:nullifymask_helmet": [
+      4839,
+      1.0922337
+    ],
+    "undead_revamp2:primodialarmour_helmet": [
+      3970,
+      2.2210226
+    ],
+    "undead_revamp2:shieldmask_helmet": [
+      4839,
+      1.0922337
+    ],
+    "undead_revamp2:witherchargemask_helmet": [
+      5258,
+      0.53562516
+    ],
+    "zombie_extreme:berret_helmet": [
+      5623,
+      0.0224
+    ],
+    "zombie_extreme:black_ops_glasses_helmet": [
+      4930,
+      0.9755281
+    ],
+    "zombie_extreme:camouflage_suit_forest_helmet": [
+      5473,
+      0.0374
+    ],
+    "zombie_extreme:civilian_suit_helmet": [
+      5166,
+      0.6676297
+    ],
+    "zombie_extreme:combat_armor_helmet": [
+      4071,
+      2.087982
+    ],
+    "zombie_extreme:exo_suit_helmet": [
+      19,
+      11.34403
+    ],
+    "zombie_extreme:gas_mask_helmet": [
+      5608,
+      0.023899999
+    ],
+    "zombie_extreme:hazmat_suit_helmet": [
+      4622,
+      1.3709393
+    ],
+    "zombie_extreme:juggernaut_suit_helmet": [
+      2087,
+      7.0265665
+    ],
+    "zombie_extreme:military_suit_helmet": [
+      4107,
+      2.0406785
+    ],
+    "zombie_extreme:night_vision_glasses_helmet": [
+      5523,
+      0.0324
+    ],
+    "zombie_extreme:police_suit_helmet": [
+      4874,
+      1.047363
+    ],
+    "zombie_extreme:swat_suit_helmet": [
+      4628,
+      1.3632114
+    ]
+  }
+}

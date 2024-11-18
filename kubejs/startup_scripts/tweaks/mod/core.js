@@ -48,7 +48,7 @@ StartupEvents.modifyCreativeTab('minecraft:tools_and_utilities', event => {
 })
 
 BlockEvents.modification(event => {
-    global.functions.sound.accessMap(handle => handle.invoke('setSoundType')({event: event}))
+    global.functions.sound.invoke('setSoundType', {event: event})
     event.modify('aether:cold_aercloud', block => block.properties.isValidSpawn((state, blockGetter, blockPos, spacePlacement, entityType) => true))
 })
 
