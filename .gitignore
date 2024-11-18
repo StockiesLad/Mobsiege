@@ -40,7 +40,6 @@
 !/config/hardcore_torches-common.toml
 #Worldgen
 !/config/the_bumblezone
-!/config/terrestria/biome.json
 !/config/terrestria
 !/config/traverse
 !/config/biomeswevegone

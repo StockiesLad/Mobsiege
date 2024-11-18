@@ -4,6 +4,9 @@ function getMathFunctions() {
      var square = (num) => num * num
 
      var diff = (num0, num1) => Math.abs(num0 - num1)
+     
+     var isOdd = (num) => num % 2 == 1
+     var isEven = (num) => num % 2 == 0
 
      var roll = (width, height, size) => width + height * size
 
@@ -32,7 +35,6 @@ function getMathFunctions() {
      var rotateClockwise = (point, size) => {
           var {width, height} = rotate2D(point, size)
           return roll(height, flip(width, size), size)
-
      }
    
      /*
@@ -42,7 +44,6 @@ function getMathFunctions() {
      var rotateAntiClockwise = (point, size) => {
           var {width, height} = rotate2D(point, size)
           return roll(flip(height, size), width, size)
-
      }
 
      var rotateFlip = (point, size) => {
@@ -56,26 +57,31 @@ function getMathFunctions() {
                if (rotation.size >= size && rotation.anchor == anchor)
                     matrix = rotation.matrix
           })
-          if (matrix.length == 0) {
+          if (matrix == null) {
                matrix = []
-               var rotate
-               switch (anchor) {
-                    default: rotate = drag
-                    case 0: rotate = rotateAntiClockwise
-                    case 1: rotate = rotateClockwise
-                    case 2: rotate = flip
-               }
-               comfuncs.forEasy(size * size, point => matrix.push(rotate(point)))
+               var rotate = drag
+               if (anchor == 1)
+                    rotate = rotateAntiClockwise
+               else if (anchor == 2)
+                    rotate = rotateClockwise
+               else if (anchor == 3)
+                    rotate = flip
+               comfuncs.forEasy(size * size, point => matrix[point] = rotate(point, size))
                rotationCache.push({size: size, anchor: anchor, matrix: matrix})
           }
-          return points.map(point => matrix[point])
+          console.info(matrix)
+          console.info(comfuncs.ensureArray(points).map(point => matrix[point]))
+          return comfuncs.ensureArray(points).map(point => matrix[point])
      }
 
      return {
           square: square,
           diff: diff,
+          isOdd: isOdd,
+          isEven: isEven,
           roll: roll,
           drag: drag,
+          flip: flip,
           rotate1D: rotate1D,
           rotate2D: rotate2D,
           rotateFlip: rotateFlip,

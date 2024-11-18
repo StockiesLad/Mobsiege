@@ -42,9 +42,10 @@ function getRecipeFunctions(event) {
           if (size == null)
                size = inferPatternSize(ingredientObjects)
           
-          var {pattern, keys} = insertion(processIngredients(size, ingredientObjects))
+          var {pattern, keys} = insertion(ingredientObjects, size)
           
           return {
+               dump: () => comfuncs.functionalObject({pattern: pattern, keys: keys}),
                vanilla: () => event.shaped(result, pattern, keys),
                toolDamaging: () => toolDamagingShaped(result, pattern, keys),
                mechanical: () => event.recipes.createMechanicalCrafting(result, pattern, keys)
@@ -60,56 +61,46 @@ function getRecipeFunctions(event) {
                get: () =>  comfuncs.functionalObject({result: result, ingredientObjects: ingredientObjects}),
                next: () => insert(result, ingredientObjects, size),
                rotate: (anchor) => {
-                    ingredientObjects.forEach(ingredientObject => ingredientObject[1] = ingredientObject[1].map(point => commaths.findRotation(point, size, anchor)))
+                    ingredientObjects.forEach(ingredientObject => {
+                         ingredientObject[1] = comfuncs.ensureArray(ingredientObject[1]).map(point => commaths.findRotation(point, size, anchor))
+                    })
                     return modify(result, ingredientObjects, size)
                },
                flip: (anchor) => {
                     var vertical = anchor == 2 || anchor == 3
                     var horizontal = anchor == 1 || anchor == 3
 
-                    comfuncs.forEasy(size, height => {
-                         var flipHeight = height
-                         if (vertical)
-                              height = size - height - 1
-                         comfuncs.forEasy(size, width => {
-                              var flipWidth = width
+                    ingredientObjects = comfuncs.ensureArray(ingredientObjects).map(ingredientObject => {
+                         ingredientObject[1] = comfuncs.ensureArray(ingredientObject[1]).map(ingredientIndex => {
+                              var {width, height} = commaths.rotate2D(ingredientIndex, size)
+                              if (vertical)
+                                   width = commaths.flip(width, size)
                               if (horizontal)
-                                   width = size - width - 1
-                              ingredientObjects.forEach(ingredientObject => {
-                                   var newIngredientIndexes = ingredientObject[1]
-                                   ingredientObject[1].forEach(ingredientIndex => {
-                                        if (ingredientIndex == width + height * size)
-                                             newIngredientIndexes.push(flipWidth + flipHeight * size)
-                                   })
-                                   ingredientObject[1] == newIngredientIndexes
-                              })
-                         })
+                                   height = commaths.flip(height, size)
+                              return commaths.roll(width, height, size)
+                         })                      
+                         return ingredientObject
                     })
+
                     return modify(result, ingredientObjects, size)
 
                },
                snake: (anchor) => {
-                    var vertical = anchor == 2 || anchor == 3
-                    var horizontal = anchor == 1 || anchor == 3
+                    var vertical = anchor == 1 || anchor == 3 
+                    var horizontal = anchor == 2 || anchor == 3
 
-                    comfuncs.forEasy(size, height => comfuncs.forEasy(size, width => {
-                         var snakeWidth = width
-                         var snakeHeight = height
+                    ingredientObjects = comfuncs.ensureArray(ingredientObjects).map(ingredientObject => {
+                         ingredientObject[1] = comfuncs.ensureArray(ingredientObject[1]).map(ingredientIndex => {
+                              var {width, height} = commaths.rotate2D(ingredientIndex, size)
+                              if (vertical && commaths.isOdd(height))
+                                   width = commaths.flip(width, size)
+                              if (horizontal && commaths.isOdd(width))
+                                   height = commaths.flip(height, size)
+                              return commaths.roll(width, height, size)
+                         })                      
+                         return ingredientObject
+                    })
 
-                         if (vertical && comfuncs.isOdd(height))
-                              width = size - width - 1
-                         if (horizontal && comfuncs.isOdd(width))
-                              height = size - height - 1
-                              
-                         ingredientObjects.forEach(ingredientObject => {
-                              var newIngredientIndexes = ingredientObject[1]
-                              ingredientObject[1].forEach(ingredientIndex => {
-                                   if (ingredientIndex == commaths.roll(width, height, size))
-                                        newIngredientIndexes.push(commaths.roll(snakeWidth, snakeHeight, size))
-                              })
-                              ingredientObject[1] == newIngredientIndexes
-                         })
-                    }))
                     return modify(result, ingredientObjects, size)
                }
           }
@@ -117,20 +108,34 @@ function getRecipeFunctions(event) {
      var generate = (result, ingredients) => {
           ingredients = comfuncs.ensureArray(ingredients)
           return {
+               plus: () => {
+                    var ingredientObjects = []
+                    var pat = [1, 3, 4, 5, 7]
+                    comfuncs.forEasy(pat.length, index => ingredientObjects.push([ingredients[commaths.rotate1D(index, ingredients.length)], index]))
+                    return modify(result, ingredientObjects, 3)
+               },
+               cross: () => {
+                    var ingredientObjects = []
+                    var pat = [0, 2, 4, 6, 8]
+                    comfuncs.forEasy(pat.length, index => ingredientObjects.push([ingredients[commaths.rotate1D(index, ingredients.length)], index]))
+                    return modify(result, ingredientObjects, 3)
+               },
                flatSquare: (size) => {
                     if (ingredients.length != 1)
                          console.error('[recipes.construct.flatSquare]: Only 1 ingredient is permitted')
                     return modify(result, [ingredients[0], [], size])
                },
                rollingSquare: (gaps, size) => {
+                    if (gaps == null || size == null)
+                         console.error('[recipes.generate.rollingSquare]: Invalid gaps and/or size!')
                     var ingredientObjects = []
                     comfuncs.quickerate(ingredients, (ingredient, index) => ingredientObjects[index] = [ingredient, []])
                     comfuncs.forEasy(size, height => comfuncs.forEasy(size, width => {
                          var ingredientIndex
                          if (gaps.length == 1)
                               ingredientIndex = commaths.roll(width, height, size) * gaps[0]
-                         else ingredientIndex = width * gaps[1] + commaths.rotate1D(height * gaps[0], ingredientObjects.length)
-                         ingredientObjects[commaths.rotate1D(ingredientIndex, ingredientObjects.length)] .push(width + height * size)
+                         else ingredientIndex = width * gaps[1] + commaths.rotate1D(height * gaps[0], ingredients.length)
+                         ingredientObjects[commaths.rotate1D(ingredientIndex, ingredients.length)][1].push(width + height * size)
                     }))
                     return modify(result, ingredientObjects, size)
                } 
@@ -238,18 +243,19 @@ function ingredientFillBox (ingredientObject) {
 function inferPatternSize (ingredientObjects) {
      var largest = -1
      
-     ingredientObjects.forEach(ingredientObject => {
+     comfuncs.ensureArraySuper(ingredientObjects, ingredientObjects[0]).forEach(ingredientObject => {
           ingredientObject[1] = comfuncs.ensureArray(ingredientObject[1])
-          ingredientObject[1].forEach(index => functionalIf(index > largest, () => largest = index))
+          ingredientObject[1].forEach(index => comfuncs.functionalIf(index > largest, () => largest = index))
           if (ingredientObject.length == 3) {
                var {fillDest} = ingredientFillBox(ingredientObject)
-               functionalIf(fillDest > largest, () => largest = fillDest)
+               if (fillDest > largest)
+                    largest = fillDest
           }
      })
+     if (largest < 0)
+          console.error('[recipe_functions.findSize]: Invalid indexes for ingredientObjects=' + ingredientObjects)
 
-     functionalIf(largest < 0, () => console.error('[recipe_functions.findSize]: Invalid indexes for ingredientObjects=' + ingredientObjects))
-
-     return commaths.square(Math.ceil(Math.sqrt(largest)))
+     return Math.ceil(Math.sqrt(largest + 1))
 
 }
 
@@ -280,7 +286,7 @@ function originPattern (size) {
 
      comfuncs.forEasy(size, height => {
           var patternLayer = ''
-          comfuncs.forEach(size, width => patternLayer = patternLayer + `/${width + height * size}/`)
+          comfuncs.forEasy(size, width => patternLayer = patternLayer + `$/${commaths.roll(width, height, size)}/`)
           originPattern.push(patternLayer.trim())
      })
 
@@ -297,15 +303,15 @@ function fillPattern (originPattern, ingredientObjects) {
           // <Create> //
           var newPatternLayer = pattern[height]
           // <Insert> //
-          comfuncs.quickerate(ingredientObjects, (ingredientObject, ingredientPosition) => ingredientObject[1].forEach(ingredientIndex => {
+          comfuncs.quickerate(comfuncs.ensureArraySuper(ingredientObjects, ingredientObjects[0]), (ingredientObject, ingredientPosition) => comfuncs.ensureArray(ingredientObject[1]).forEach(ingredientIndex => {
                var ingredientKey =  alphabet.charAt(ingredientPosition)
-               newPatternLayer = newPatternLayer.replace(ingredientIndex, ingredientKey)
+               newPatternLayer = newPatternLayer.replace(`$/${ingredientIndex}/`, ingredientKey)
                if (!Object.getOwnPropertyNames(keys).includes(ingredientKey))
                     comfuncs.defineProperty(keys, ingredientKey, ingredientObject[0])
           }))
           // <Clean> //
           newPatternLayer = newPatternLayer.replace(' ', '')
-          comfuncs.forEasy(size * size, index => newPatternLayer = newPatternLayer.replace(`/${index}/`, ' '))     
+          comfuncs.forEasy(size * size, index => newPatternLayer = newPatternLayer.replace(`$/${index}/`, ' '))     
           // <Merge> //          
           fillPattern[height] = newPatternLayer
      })
@@ -313,15 +319,16 @@ function fillPattern (originPattern, ingredientObjects) {
      return {pattern: fillPattern, keys: keys}
 }
 
-function insertion (ingredientObjects, size) {
+function insertion(ingredientObjects, size) {
+     ingredientObjects = comfuncs.ensureArraySuper(ingredientObjects, ingredientObjects[0])
+
      if (size == null)
           size = inferPatternSize(ingredientObjects)
-
-     ingredientObjects = comfuncs.ensureArraySuper(ingredientObjects, ingredientObjects[0])
+     
      var {pattern, keys} = fillPattern(originPattern(size), processIngredients(size, ingredientObjects))
 
      //Debug
-     if (global.debug && keys.keys().length == 0)
+     if (global.debug && Object.keys(keys).length == 0)
           console.error(
                '[recipes.insertion]: Failed to parse!' +
                '\n        ingredientObjects=' + ingredientObjects + 

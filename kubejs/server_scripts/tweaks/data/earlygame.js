@@ -9,11 +9,13 @@ function register(ids, calls) {
 // Covers Wood and Stone Age
 register('recipes', context => {
     var {tag, recipes} = context
+    
     recipes.generate('minecraft:dirt', ['minecraft:emerald', 'minecraft:apple', 'minecraft:diamond', 'minecraft:stone', 'minecraft:redstone'])
-        .rollingSquare([1])
-        .snake(1)
+        .rollingSquare([1], 3)
+        .rotate(1)
         .next()
         .vanilla()
+    //recipes.vanillaInsert('minecraft:coal', ['minecraft:stick', [1, 3, 4, 5, 7]], 3)
     //recipes.snakeTrailingSquare(3, 'minecraft:dirt', ['minecraft:emerald', 'minecraft:apple', 'minecraft:diamond', 'minecraft:stone', 'minecraft:redstone'])
     //recipes.rotatingSquare(3, 'minecraft:dirt', ['minecraft:emerald', 'minecraft:apple', 'minecraft:diamond', 'minecraft:stone', 'minecraft:redstone'])
 })

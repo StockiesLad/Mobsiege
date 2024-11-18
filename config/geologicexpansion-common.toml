@@ -8,7 +8,7 @@
 	#Determine if Overgrowth should generate
 	includeOvergrowth = true
 	#Determine if Ducks should spawn
-	includeDucks = true
+	includeDucks = false
 
 [entity_behavior]
 	#Entity behavior
