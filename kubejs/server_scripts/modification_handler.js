@@ -2,25 +2,37 @@ const modpackId = global.modpackId
 const comfuncs = global.functions.common
 const commaths = global.functions.math
 
-ServerEvents.recipes(event => {
-    comfuncs.invokeSignedCalls('recipes', {tag: global.functions.tag(null), recipes: global.functions.recipe(event)})
-})
-
 ServerEvents.tags('item', event => {
-    var functions = global.functions.tag(event)
-    comfuncs.invokeSignedCalls('itemTags', functions)
-    commonTags(event, functions)
+    var context = {
+        event: event,
+        funcs: getTagFunctions(event)
+    }
+    comfuncs.invokeSignedCalls('itemTags', context)
+    comfuncs.invokeSignedCalls('commonTags', context)
 })
 
 ServerEvents.tags('block', event => {
-    var functions = global.functions.tag(event)
-    comfuncs.invokeSignedCalls('blockTags', functions)
-    commonTags(functions)
+    var context = {
+        event: event,
+        funcs: getTagFunctions(event)
+    }
+    comfuncs.invokeSignedCalls('blockTagsTags', context)
+    comfuncs.invokeSignedCalls('commonTags', context)
 })
 
-function commonTags(functions) {
-    comfuncs.invokeSignedCalls('commonTags', functions)
-}
+ServerEvents.highPriorityData(event => {
+    comfuncs.invokeSignedCalls('lootTables', {
+        event: event,
+        funcs: comfuncs.incorpProperties(getLootTableFunctions(event), getTagFunctions(null))
+    })
+})
+
+ServerEvents.recipes(event => {
+    comfuncs.invokeSignedCalls('recipes', {
+        event: event,
+        funcs: comfuncs.incorpProperties(getRecipeFunctions(event), getTagFunctions(null))
+    })
+})
 
 function register(ids, calls) {
     comfuncs.addSignedCalls(ids, calls)

@@ -132,7 +132,7 @@ function getLootTableFunctions(event) {
     var blockEntry = (overrides, blocks) => {
         return {
             overrides: overrides,
-            blocks: global.ensureArray(blocks)
+            blocks: comfuncs.ensureArray(blocks)
         }
     }
     var simpleBlockEntry = (blocks) => blockEntry({}, blocks)

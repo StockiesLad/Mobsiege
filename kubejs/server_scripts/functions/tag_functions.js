@@ -4,7 +4,7 @@ function getTagFunctions(event) {
     }
 
     var def = (path) => {
-        of(comfuncs.defaultNamespace(path))
+        return of(comfuncs.def(path))
     }
 
     var replaceTag = (item, removedTag, addedTag) => {
@@ -26,21 +26,21 @@ function getTagFunctions(event) {
 
     var unifiedHandle = (arrayInvokeParams) => {
         comfuncs.unifiedCall(
-            invokeParams => handle(comfuncs.defaultNamespace(invokeParams[0]), invokeParams[1], invokeParams[2]), 
+            invokeParams => handle(comfuncs.def(invokeParams[0]), invokeParams[1], invokeParams[2]), 
             arrayInvokeParams
         )
     }
 
     var unifiedAdd = (arrayInvokeParams) => {
         comfuncs.unifiedCall(
-            invokeParams => event.add(comfuncs.defaultNamespace(invokeParams[0]), invokeParams[1]), 
+            invokeParams => event.add(comfuncs.def(invokeParams[0]), invokeParams[1]), 
             arrayInvokeParams
         )
     }
 
     var unifiedRemove = (arrayInvokeParams) => {
         comfuncs.unifiedCall(
-            invokeParams => event.remove(comfuncs.defaultNamespace(invokeParams[0]), invokeParams[1]), 
+            invokeParams => event.remove(comfuncs.def(invokeParams[0]), invokeParams[1]), 
             arrayInvokeParams
         )
     }
@@ -54,7 +54,7 @@ function getTagFunctions(event) {
 
     var unifiedReplaceItem = (arrayInvokeParams) => {
         comfuncs.unifiedCall(
-            invokeParams => replaceItem(comfuncs.defaultNamespace(invokeParams[0]), invokeParams[1], invokeParams[2]), 
+            invokeParams => replaceItem(comfuncs.def(invokeParams[0]), invokeParams[1], invokeParams[2]), 
             arrayInvokeParams
         )
     }

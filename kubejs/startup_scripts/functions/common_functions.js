@@ -3,16 +3,16 @@ function getCommonFunctions() {
         return mod + ':' + path
     }
 
-    var modpack = (path) => {
+    var packDef = (path) => {
         return identifier(global.modpackId, path)
     }
 
-    var defaultNamespace = (path) => {
+    var def = (path) => {
         if (!path.includes(':')) {
             if (path.includes('|')) 
-                return comfuncs.modpack(path.replace('|', ''))
+                return packDef(path.replace('|', ''))
             if (path.includes('%'))
-                return comfuncs.identifier('forge', path.replace('%', ''))
+                return identifier('forge', path.replace('%', ''))
         }
         return path
     }
@@ -20,8 +20,6 @@ function getCommonFunctions() {
     var ensureArray = (possibleArray) => Array.isArray(possibleArray) ? possibleArray : [possibleArray]
 
     var ensureArraySuper = (possibleArray, child) => Array.isArray(child) ? possibleArray : [possibleArray]
-
-    
 
     var unifiedCall = (call, arrayInvokeParams) => {
         arrayInvokeParams.forEach(invokeParams => call(invokeParams))
@@ -55,7 +53,7 @@ function getCommonFunctions() {
     }
 
     var interlaceString = (string, interlaces) => {
-        ensureArray(interlaces).forEach(interlace => string = string = string.replace('${' + interlace.name + '}', interlace.value))
+        ensureArray(interlaces).forEach(interlace => string = string.replace('${' + interlace.name + '}', interlace.value))
         return string
     }
 
@@ -71,9 +69,10 @@ function getCommonFunctions() {
 
     // default interlace is ${entry}
     var regexEach = (strings, interlaces, execute) => {
-        interlaces.forEach(strInterlace => {
-            regexAIO(strings, interlace('entry', strInterlace), execute)
-        })
+        ensureArray(interlaces).map(strings).forEach(interlace => interlace.forEach(str => execute(str)))
+        /*ensureArray(interlaces).forEach(str => {
+            regexAIO(strings, interlace('entry', str), execute)
+        })*/
     }
 
     var forEasy = (max, call) => {
@@ -88,7 +87,6 @@ function getCommonFunctions() {
     var quickerate = (array, call) => {
        forEasy(array.length, i => call(array[i], i))
     }
-
 
     var merge = (arrays) => {
         var parent = []
@@ -173,19 +171,37 @@ function getCommonFunctions() {
         }
     }
 
+    var expand = (event, struct) => {
+        struct = struct(event)
+        if (event != null) 
+            struct = comfuncs.incorpProperties(struct, event)
+        return struct
+    }
+
     var functionalIf = (condition, call, elseCall) => {
         if (condition)
-             return call()
+            return call()
         else if (elseCall != null)
-             return elseCall()
+            return elseCall()
+   }
+
+   var functionalTryCatch = (run, def, insure) => {
+        try {
+            return run()
+        }
+        catch (err) {
+            if (insure != null)
+                return insure()
+        }
+        return def
    }
 
    var functionalObject = (object) => object
 
     return {
         identifier: identifier,
-        modpack: modpack,
-        defaultNamespace: defaultNamespace,
+        packDef: packDef,
+        def: def,
         ensureArray: ensureArray,
         ensureArraySuper: ensureArraySuper,
         unifiedCall: unifiedCall,
@@ -211,7 +227,9 @@ function getCommonFunctions() {
         hide: hide,
         emptyFunc: emptyFunc,
         invoker: invoker,
+        expand: expand,
         functionalIf: functionalIf,
+        functionalTryCatch: functionalTryCatch,
         functionalObject: functionalObject
     }
 }

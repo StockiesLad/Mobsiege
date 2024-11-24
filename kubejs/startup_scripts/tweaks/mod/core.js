@@ -33,18 +33,18 @@ function coveredStone(step) {
 }
 
 StartupEvents.registry('item', event => {
-	event.create(comfuncs.modpack('orb_of_thermoregulation')).unstackable();
-});
+	event.create(comfuncs.packDef('orb_of_thermoregulation')).unstackable();
+    event.create(comfuncs.packDef('advanced_fire_brick'))
+})
 
-StartupEvents.modifyCreativeTab('minecraft:tools_and_utilities', event => {
-    comfuncs.regexEach(
-        ['minecraft:{name}_sword', 'minecraft:{name}_pickaxe', 'minecraft:{name}_axe', 'minecraft:{name}_shovel', 'minecraft:{name}_hoe'],
-        ['wooden', 'stone'], 
-        output => {
-            event.remove({output: output})
-            comfuncs.hide(output)
-        }
-    )
+StartupEvents.registry("block", (event) => {
+    event.create(comfuncs.packDef('advanced_fire_bricks'))
+    //.material("stone")
+    .soundType('STONE')
+    .hardness(0.5)
+    .resistance(0.2)
+    .requiresTool(true)
+    .tagBlock("mineable/pickaxe")
 })
 
 BlockEvents.modification(event => {

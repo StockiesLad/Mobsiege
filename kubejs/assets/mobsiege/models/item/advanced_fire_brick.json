@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "mobsiege:item/orb_of_thermoregulation"
+    "layer0": "mobsiege:item/advanced_fire_brick"
   }
 }

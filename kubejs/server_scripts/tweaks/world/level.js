@@ -1,5 +1,5 @@
 const tancc = 'toughasnails:climate_clemency'
-const regulator = comfuncs.modpack('orb_of_thermoregulation')
+const regulator = comfuncs.packDef('orb_of_thermoregulation')
 PlayerEvents.tick(event => {
     var player = event.player
     var playerName = player.getGameProfile().getName()

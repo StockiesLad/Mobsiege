@@ -10,17 +10,5 @@ const commaths = getMathFunctions()
 global.functions = {
     common: comfuncs,
     math: commaths,
-    sound: getSoundFunctions(),
-    
-    tag: (event) => expand(event, getTagFunctions) ,
-    lootTable: (event) => expand(event, getLootTableFunctions),
-    recipe: (event) => expand(event, getRecipeFunctions)
-}
-
-
-function expand(event, struct) {
-    struct = struct(event)
-    if (event != null) 
-        struct = comfuncs.incorpProperties(struct, event)
-    return struct
+    sound: getSoundFunctions()
 }

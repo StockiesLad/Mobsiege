@@ -32,3 +32,7 @@ JEIEvents.hideItems(event => {
     global.hiddenItems.forEach(element => event.hide(element))
 })
 
+REIEvents.hide('item', event => {
+    global.hiddenItems.forEach(element => event.hide(element))
+})
+
