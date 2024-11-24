@@ -11,7 +11,7 @@ register('recipes', context => {
     var {event, funcs} = context
     var {generate} = funcs
 
-    parseIngredientObjects(parseIngredientObjects(['minecraft:coal', 2]))
+    parseIngredients(parseIngredients(['minecraft:coal', 2]))
 
     funcs.removeAll([
         {output: 'minecraft:charcoal', type: 'minecraft:smelting'},
@@ -30,7 +30,7 @@ register('recipes', context => {
 
     event.replaceInput({input: 'minecraft:crafting_table'}, 'minecraft:crafting_table', '#forge:workbench')
     event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', '#forge:furnaces')
-    
+
     funcs.replaceOutputRecipe('minecraft:furnace', result => generate(result, ['#forge:stone', comfuncs.packDef('advanced_fire_bricks')]).rollingSquare(1, 3).override(['primalstage:kiln', 4]).next().vanilla())
     funcs.replaceOutputRecipe('4x hardcore_torches:unlit_torch', result => funcs.vanillaInsert(result,[['#minecraft:coals', 0], ['#forge:rods/wooden', 3]]))
     funcs.replaceOutputRecipe('hardcore_torches:fire_starter', result => funcs.vanillaInsert(result, [['#notreepunching:string', 0], ['#forge:rods/wooden', [1, 2]]]))
