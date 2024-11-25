@@ -71,48 +71,6 @@ function getLootTableFunctions(event) {
         }
     }
     
-    var fortuneLtFunction = (formula, parameters) => {
-        return {
-            function: "minecraft:apply_bonus",
-            enchantment: "minecraft:fortune",
-            formula: formula,
-            parameters: parameters
-        }
-    }
-    
-    var basicFortuneLtFunction = (bonusMultiplier) => {
-        return fortuneLtFunction('minecraft:uniform_bonus_count', {bonusMultiplier: bonusMultiplier})
-    }
-    var setCountFunction = (count, add) => {
-        return {
-            function: "minecraft:set_count",
-            count: count,
-            add: add
-        }
-    }
-    
-    var rangeCount = (min, max) => {
-        return {type: "minecraft:uniform", min: min, max: max}
-    }
-    
-    var constantCount = (value) => {
-        return {type: "minecraft:constant", value: value}
-    }
-    
-    var limitCountFunction = (min, max) => {
-        return {
-            function: "minecraft:limit_count",
-            limit: {
-                min: min,
-                max: max
-            }
-        }
-    }
-
-    var explosionDecay = () => {
-        return {functions: "minecraft:explosion_decay"}
-    }
-    
     var basicBlockLt = (event, identifier, entryChildren) => {
         return lootTable(
             event, 
@@ -167,11 +125,11 @@ function getLootTableFunctions(event) {
         })
     }
 
-    var createBasicLt = (dropMaterial, functions, blocks) => {
+    var createBasicLt = (dropMaterial, commonFunctions, dropEntries) => {
         return {
             dropMaterial: dropMaterial,
-            functions: functions,
-            blocks: blocks
+            functions: commonFunctions,
+            blocks: dropEntries
         }
     }
 
@@ -183,13 +141,15 @@ function getLootTableFunctions(event) {
         functionsAsModifier: functionsAsModifier,
         silkTouchLtCondition: silkTouchLtCondition,
         silkTouchLtEntryChild: silkTouchLtEntryChild,
-        fortuneLtFunction: fortuneLtFunction,
+        /*fortuneLtFunction: fortuneLtFunction,
         basicFortuneLtFunction: basicFortuneLtFunction,
+        binomialFortuneBonus: binomialFortuneBonus,
         setCountFunction: setCountFunction,
         rangeCount: rangeCount,
+        binomialCount: binomialCount,
         constantCount: constantCount,
         limitCountFunction: limitCountFunction,
-        explosionDecay: explosionDecay,
+        explosionDecay: explosionDecay,*/
         basicBlockLt: basicBlockLt,
         blockEntry: blockEntry,
         simpleBlockEntry: simpleBlockEntry,

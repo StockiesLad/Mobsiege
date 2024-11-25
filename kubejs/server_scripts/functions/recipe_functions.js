@@ -4,7 +4,7 @@ const alphabet = 'abcdefghijklmnopqrstuv'
 function getRecipeFunctions(event) {
      // <Definitions> //
      var toolDamagingShaped = (result, pattern, keys) => {
-          event.custom({
+          return event.custom({
                type: 'notreepunching:tool_damaging_shaped',
                recipe: {
                     type: 'minecraft:crafting_shaped',
@@ -15,13 +15,22 @@ function getRecipeFunctions(event) {
           })
      }
      var toolDamagingShapeless = (result, ingredients) => {
-          event.custom({
+          return event.custom({
                type: 'notreepunching:tool_damaging_shapeless',
                recipe: {
                     type: 'minecraft:crafting_shapeless',
                     ingredients: comfuncs.handleValues(ingredients, ingredient => Ingredient.of(ingredient)),
                     result: Item.of(result)
                }
+          })
+     }
+
+     var kilnSmelting = (result, ingredient) => {
+          return event.custom({
+               type: "primalstage:kiln",
+               input: ingredient,
+               cookingtime: 1200,
+               result: result
           })
      }
 
@@ -201,6 +210,7 @@ function getRecipeFunctions(event) {
           // <Definitions> //
           toolDamagingShaped: toolDamagingShaped,
           toolDamagingShapeless: toolDamagingShapeless,
+          kilnSmelting: kilnSmelting,
           // <Insertion> //
           insert: insert,
           modify: modify,

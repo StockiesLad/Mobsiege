@@ -1,6 +1,8 @@
 global.debug = true
 global.modpackId = 'mobsiege'
-global.hiddenItems = []
+global.hiddenItems = [
+    'primalstage:charcoal_log'
+]
 global.signedCalls = []
 
 const comfuncs = getCommonFunctions()

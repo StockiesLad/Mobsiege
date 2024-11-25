@@ -2,39 +2,63 @@ const ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegis
 const Shapes = Java.loadClass('net.minecraft.world.phys.shapes.Shapes')
 const Blocks = Java.loadClass('net.minecraft.world.level.block.Blocks')
 
-function register(ids, calls) {
-    comfuncs.addSignedCalls(ids, calls)
-}
+var kilnSmeltingMaterials = [
+    "aluminum",
+    "copper",
+    "elementium",
+    "gold",
+    "iron",
+    "lead",
+    "nickel",
+    "osmium",
+    "silver",
+    "tin",
+    "uranium",
+    "zinc"
+]
 
 // Covers Wood and Stone Age
 register('recipes', context => {
     var {event, funcs} = context
     var {generate} = funcs
 
-    parseIngredients(parseIngredients(['minecraft:coal', 2]))
-
     funcs.removeAll([
         {output: 'minecraft:charcoal', type: 'minecraft:smelting'},
         {id: 'ancient_aether:skyroot_crafting_table_from_ancient_aether_planks'},
         {id: 'deep_aether:skyroot_crafting_table'},
         {id: 'hardcore_torches:lit_torch'},
-        {id: 'hardcore_torches:light_torch_free_item'}
+        {id: 'hardcore_torches:light_torch_free_item'},
+        {id: 'quark:building/crafting/furnaces/blackstone_blast_furnace'},
+        {id: 'quark:building/crafting/furnaces/deepslate_blast_furnace'},
+        {id: 'aether_genesis:holystone_blast_furnace'}
     ])
     funcs.removeIO('hardcore_torches:smoldering_torch')
     funcs.removeAndHide('betternether:blackstone_furnace')
+    funcs.removeAndHide('primalstage:flint_pickaxe')
+    funcs.removeAndHide('primalstage:flint_shovel')
+    funcs.removeAndHide('primalstage:plant_fiber')
+    comfuncs.hide('primalstage:plant_twine')
     comfuncs.regexEach(
         entry => [`aether:${entry}_sword`, `aether:${entry}_pickaxe`, `aether:${entry}_axe`, `aether:${entry}_shovel`, `aether:${entry}_hoe`],
         ['skyroot', 'holystone'], 
         funcs.removeAndHide
     )
+    comfuncs.regexEach(
+        entry => [`minecraft:${entry}_sword`, `minecraft:${entry}_pickaxe`, `minecraft:${entry}_axe`, `minecraft:${entry}_shovel`, `minecraft:${entry}_hoe`],
+        ['wooden', 'stone'], 
+        funcs.removeAndHide
+    )
 
     event.replaceInput({input: 'minecraft:crafting_table'}, 'minecraft:crafting_table', '#forge:workbench')
     event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', '#forge:furnaces')
+    event.replaceInput({input: 'primalstage:plant_twine'}, 'primalstage:plant_twine', 'notreepunching:plant_string')
     funcs.replaceOutputRecipe('minecraft:furnace', result => generate(result, ['#forge:stone', comfuncs.packDef('advanced_fire_bricks')]).rollingSquare(1, 3).override(['primalstage:kiln', 4]).next().vanilla())
     funcs.replaceOutputRecipe('4x hardcore_torches:unlit_torch', result => funcs.vanillaInsert(result,[['#minecraft:coals', 0], ['#forge:rods/wooden', 3]]))
     funcs.replaceOutputRecipe('hardcore_torches:fire_starter', result => funcs.vanillaInsert(result, [['#notreepunching:string', 0], ['#forge:rods/wooden', [1, 2]]]))
     funcs.replaceOutputRecipe('2x minecraft:torch', result => event.shapeless(result, ['minecraft:glowstone_dust', '#minecraft:torches/temp', '#minecraft:torches/temp']))
     funcs.replaceOutputRecipe('4x minecraft:torch', result => funcs.vanillaInsert(result, [['minecraft:glowstone_dust', 0], ['#minecraft:coals', 3], ['#forge:rods/wooden', 6]]))
+    funcs.replaceOutputRecipe('primalstage:flint_hatchet', result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', [0, 1]], ['#forge:rods/wooden', 2], ['#forge:string', 3]]))
+    funcs.replaceOutputRecipe('notreepunching:flint_axe', result => funcs.vanillaInsert(result, [['#notreepunching:string', 0], ['#forge:rods/wooden', [3, 6]], ['notreepunching:flint_shard', [1, 4]]]))
     funcs.replace({input: '#notreepunching:h/saws', output: 'minecraft:stick'}, result => {
         funcs.toolDamagingShapeless('2x ' + result, ['#minecraft:saws', '#minecraft:planks'])
         funcs.toolDamagingShapeless('8x ' + result, ['#minecraft:saws', '#minecraft:logs'])
@@ -66,13 +90,13 @@ register('recipes', context => {
     })
     funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: funcs.def('|primitive_furnaces')}, (output, ingredients) => {
         generate(output, [ingredients[0], comfuncs.packDef('advanced_fire_bricks')]).rollingSquare(1, 3).override(['primalstage:kiln', 4]).next().vanilla()
-        /*if (output.equalsIgnoringCount(Item.of('minecraft:furnace'))) {
-            if (id == 'minecraft:furnace')
-                funcs.planet(output, 'minecraft:oxidized_copper', ingredients[0])
-        } else funcs.planet(output, 'minecraft:oxidized_copper', ingredients[0])*/
     })
 
-   
+    kilnSmeltingMaterials.forEach(material => {
+        var smelted = AlmostUnified.getPreferredItemForTag(`forge:storage_blocks/${material}`).getIdLocation().toString()
+        var raw = AlmostUnified.getPreferredItemForTag(`forge:storage_blocks/raw_${material}`).getIdLocation().toString()
+        funcs.kilnSmelting(smelted, raw)
+    })
     event.shapeless('minecraft:stick', '#minecraft:saplings')
     event.shapeless('minecraft:crafting_table', '#forge:workbench')
     event.shapeless('4x primalstage:sand_dust', '#forge:sand')
@@ -90,8 +114,6 @@ register('recipes', context => {
     funcs.vanillaInsert('2x aether:skyroot_stick', [[funcs.def('|aether_vines'), [0, 2]]])
     funcs.vanillaInsert('minecraft:campfire', [['#minecraft:torches/temp', [1, 3, 5]], 
         ['#minecraft:coals', 4], ['#minecraft:planks', [6, 7, 8]] ])
-    funcs.vanillaInsert('notreepunching:flint_axe', [['#notreepunching:string', 0], 
-        ['#forge:rods/wooden', [3, 6]], ['notreepunching:flint_shard', [1, 4]]])
     funcs.insertAll(insertion => insertion.vanilla(), [
         generate('minecraft:sand', 'primalstage:sand_dust').flatSquare(2),
         generate(comfuncs.packDef('advanced_fire_bricks'), comfuncs.packDef('advanced_fire_brick')).flatSquare(2),
@@ -108,12 +130,18 @@ register('recipes', context => {
 register('lootTables', context => {
     var {event, funcs} = context
 
-    funcs.replaceBasiclt(funcs.createBasicLt((materialTag, block) => 'minecraft:charcoal', funcs.explosionDecay(), [
-        funcs.blockEntry({functions: [funcs.setCountFunction(funcs.rangeCount(0, 1), false), funcs.basicFortuneLtFunction(1)]}, 'carbonize:charcoal_log'),
-        funcs.blockEntry({functions: [funcs.setCountFunction(funcs.rangeCount(1, 2), false), funcs.basicFortuneLtFunction(0.6)]}, 'carbonize:charcoal_planks'),
-        funcs.blockEntry({functions: funcs.setCountFunction(funcs.rangeCount(0, 1), false)}, 'carbonize:charcoal_stairs'),
-        funcs.blockEntry({functions: funcs.setCountFunction(funcs.rangeCount(0, 1), false)}, 'carbonize:charcoal_slab')
-    ]))
+    funcs.replaceBasiclt(
+        funcs.createBasicLt(
+            (materialTag, block) => 'minecraft:charcoal', 
+            funcExplosionDecay(), 
+            [
+                funcs.blockEntry({functions: [countSet(countUniform(4, 6), false), funcFortune(formulaUniformBonus(1))]}, 'carbonize:charcoal_log'),
+                funcs.blockEntry({functions: [countSet(countConstant(1), false), funcFortune(formulaBinomialBonus(1, 0.75))]}, 'carbonize:charcoal_planks'),
+                funcs.blockEntry({functions: [countSet(countBinomial(1, 0.75), false), funcFortune(formulaBinomialBonus(1, 0.56))]}, 'carbonize:charcoal_stairs'),
+                funcs.blockEntry({functions: [countSet(countBinomial(1, 0.5), false), funcFortune(formulaBinomialBonus(1, 0.28))]}, 'carbonize:charcoal_slab')
+            ]
+        )
+    )
 })
 
 register('itemTags', context => {
@@ -124,10 +152,14 @@ register('itemTags', context => {
     ])
     funcs.unifiedAdd([
         ['minecraft:torches/temp', ['hardcore_torches:unlit_torch', 'hardcore_torches:lit_torch']],
-        ['minecraft:axes', ['notreepunching:flint_axe', 'natprog:flint_hatchet']],
+        ['minecraft:axes', ['notreepunching:flint_axe', 'primalstage:flint_hatchet']],
+        ['notreepunching:weak_saws', '#minecraft:axes'],
         ['minecraft:saws', '#notreepunching:saws'],
         ['minecraft:trowels', 'notreepunching:clay_tool'],
-        ['notreepunching:knives', '#minecraft:axes']
+        ['%plates/copper', 'primalstage:copper_plate'],
+        ['%plates/iron', 'primalstage:iron_plate'],
+        ['%plates/diamond', 'primalstage:diamond_plate']
+        //['notreepunching:knives', '#minecraft:axes']
     ])
 })
 
@@ -147,22 +179,17 @@ register('blockTags', context => {
         ]]
     ])
 
-    event.add(
-        'carbonize:charcoal_pile_valid_wall', 
-        ForgeRegistries.BLOCKS.getEntries()
-            .filter(blockEntry => comfuncs.functionalTryCatch(() => {
-                let blockState = blockEntry.getValue().defaultBlockState()
-
-                let fabricFlammability = Blocks.FIRE.fabric_getVanillaEntry(blockState)
-                let forgeFlammability = blockState.isFlammable(null, null, null)
-
-                if (Shapes.block().equals(blockState.getCollisionShape(null, null, null)))
-                    if (!forgeFlammability && !(fabricFlammability.getSpreadChance() > 0 || fabricFlammability.getSpreadChance() > 0))
-                        return true
-            }, false))
-            .map(blockEntry => blockEntry.getKey().location().toString())
-    )
+    ForgeRegistries.BLOCKS.getEntries().forEach(blockEntry => {
+        try {
+            let blockState = blockEntry.getValue().defaultBlockState()
+            let fabricfbr = Blocks.FIRE.fabric_getVanillaEntry(blockState)
+            if (Shapes.block().equals(blockState.getCollisionShape(null, null, null)))
+                if (!blockState.isFlammable(null, null, null) && !(fabricfbr.getSpreadChance() > 0 || fabricfbr.getSpreadChance() > 0)) 
+                    event.add('carbonize:charcoal_pile_valid_wall', blockEntry.getKey().location().toString())
+        } catch (err) {}
+    })
 })
+
 /*
 ServerEvents.tags('block', event => {
     ForgeRegistries.BLOCKS.getEntries().forEach(blockEntry => {
@@ -302,6 +329,7 @@ register('commonTags', context => {
             'quark:blackstone_furnace',
         ]], 
         ['%ash', ['carbonize:ash', 'cinderscapes:ash_pile']],
+        ['%storage_blocks/raw_elementium', 'mythicbotany:raw_elementium_block'],
         ['|primitive_furnaces', [
             'minecraft:furnace',
             'betternether:basalt_furnace',

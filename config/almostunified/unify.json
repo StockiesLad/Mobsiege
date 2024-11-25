@@ -15,6 +15,7 @@
     "industrialforegoing",
     "enderio",
     "botania",
+    "mythicbotany",
     "biggerreactors",
     "bigreactors",
 	  "bluepower",
@@ -26,7 +27,8 @@
     "blockus",
     "railcraft",
     "bno",
-    "beo"
+    "beo",
+    "primalstage"
   ],
   "stoneStrata": [
     "stone",

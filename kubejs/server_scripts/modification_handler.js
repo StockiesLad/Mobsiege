@@ -16,7 +16,7 @@ ServerEvents.tags('block', event => {
         event: event,
         funcs: getTagFunctions(event)
     }
-    comfuncs.invokeSignedCalls('blockTagsTags', context)
+    comfuncs.invokeSignedCalls('blockTags', context)
     comfuncs.invokeSignedCalls('commonTags', context)
 })
 

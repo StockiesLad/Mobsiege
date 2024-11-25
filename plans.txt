@@ -178,43 +178,45 @@ fix bwg imbued enchant log texture
 unify tech mods (and cull redundant ones)
 gunpowder recipe fix
 unify all ores
-ash (carbonize + supplementary or the other one)
 incompat between immersive engineering and fancymenu (try packmenu maybe)
-change removal to include REI hiding
-
-
 magnetic caves and magnetite shit
-iron furnaces standard progression
 twigs and this rocks compat
 silents gems and better nether compat
 coal explosion + hardcore torches compat (tags)
 fix not dying in space without suit
 recipe to split sulfur quartz
-refactor shitty tag system
-add better shaped recipe system to avoid making a billion functions
-test the insertion recipe
-migrate all important functions to global
-fix global recipe functions (they are broken for some reason)
-fix deadlock caused by rotatingSquare recipe
-fix crafting table duplicate recipe
 fix initial inventory open lag
 revert weird wart textures (jadens nether exp maybe?)
 ensure all wart is added to tag
 fix productive trees tag problems (maybe cucumber lib)
-fix furnace and crafting table recipes
-refactor loot tables and tags
-split early game progression
-maybe use unified call to save time
-make local functions null instead of not assigning to avoid weird errors
 lighting bug in voidscape (maybe oculus-flywheel compat)
-rapid fire blazes
-make blaze sometimes spawn with a lava monster
+almostunified compat with immersive engineering @ productive bees
+
+multimod machine recipes {
+	pressing: create, thermal, immmersive engineering, ad_astra
+}
+
+add diamond plate recipes
 
 (allow for content management in curseforge to avoid datapack/resourcepack and shaderpack license infringements)
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
-
+maybe use unified call to save time
+ash (carbonize + supplementary or the other one)
+change removal to include REI hiding
+iron furnaces standard progression
+add better shaped recipe system to avoid making a billion functions
+test the insertion recipe
+fix crafting table duplicate recipe
+refactor loot tables and tags
+split early game progression
+fix furnace, blast furnace and crafting table recipes
+refactor shitty tag system
+migrate all important functions to global
+fix global recipe functions (they are broken for some reason)
+fix deadlock caused by rotatingSquare recipe
+make blaze sometimes spawn with a lava monster
 remove mccreator {
     unusual end
     spelunkers charm
