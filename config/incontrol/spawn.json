@@ -2,20 +2,21 @@
     {
         "mob": ["thermal:blitz", "trials:breeze"],
         "dimension": "aether:the_aether",
-	    "seesky": true,
-        "random": 0.3,
-        "result": "allow"
-    },
-    {
-        "mob": ["thermal:blitz", "trials:breeze"],
-        "dimension": "aether:the_aether",
-        "random": 0.1,
-        "result": "allow"
-    },
-    {
-        "mob": ["thermal:blitz", "trials:breeze"],
-        "dimension": "aether:the_aether",
         "block": "aether:cold_aercloud",
+        "result": "allow"
+    },
+    {
+        "mob": ["thermal:blitz", "trials:breeze"],
+        "dimension": "aether:the_aether",
+        "seesky": true,
+        "random": 0.2,
+        "result": "allow"
+    },
+    {
+        "mob": ["thermal:blitz", "trials:breeze"],
+        "dimension": "aether:the_aether",
+        "seesky": false,
+        "random": 0.05,
         "result": "allow"
     },
     {

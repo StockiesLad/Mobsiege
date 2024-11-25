@@ -35,6 +35,7 @@ function coveredStone(step) {
 StartupEvents.registry('item', event => {
 	event.create(comfuncs.packDef('orb_of_thermoregulation')).unstackable();
     event.create(comfuncs.packDef('advanced_fire_brick'))
+    event.create(comfuncs.packDef('advanced_clay_compound'))
 })
 
 StartupEvents.registry("block", (event) => {
@@ -123,7 +124,7 @@ EntityJSEvents.spawnPlacement(event => {
         var level = levelAccessor.level
         var blockId = level.getBlock(blockPos.below())
         if (level.dimension == 'aether:the_aether') {
-            return blockPos.getY() >= 100 && !(blockId == 'aether:golden_aercloud'|| blockId == 'aether_genesis:green_aercloud' || 
+            return blockPos.getY() >= 35 && !(blockId == 'aether:golden_aercloud'|| blockId == 'aether_genesis:green_aercloud' || 
                 blockId == 'aether_genesis:purple_aercloud' || blockId == 'aether_redux:blighted_aercloud', blockId == 'deep_aether:chromatic_aercloud')
         } else if (overworldArgs != null && level.dimension == 'minecraft:overworld') {
             return overworldArgs(entityType, levelAccessor, spawntype, blockPos, randomSource)

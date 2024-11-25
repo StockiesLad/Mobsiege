@@ -6,7 +6,7 @@ const Direction = Java.loadClass('net.minecraft.core.Direction')
 //Modification Variables
 const disable = false
 const testDirections = getScanningDirections()
-const chanceRandomBound = 50000
+const chanceRandomBound = 100000
 const spawnDistBase = 15 
 const spawnDistVariation = 10
 const spawnDistMax = spawnDistBase + spawnDistVariation
@@ -85,7 +85,7 @@ const MOB_SIEGES = [
 const announcements = [
     'A ${siegeGroup} is coming after ${playerName}!',
     '${playerName} is getting attacked by a ${siegeGroup}',
-    '${playerName}\'s life is being threatned by an incoming ${siegeGroup}',
+    '${playerName}\'s life is being threatened by an incoming ${siegeGroup}',
     'A wild ${siegeGroup} is storming ${playerName}',
     '${playerName} is being charged by an incoming ${siegeGroup}',
     '${playerName} is now at war with a ${siegeGroup}',
@@ -100,15 +100,17 @@ LevelEvents.tick(event => {
     let players = level.getPlayers()
     let difficulty = level.getDifficulty().getKey()
     let {random} = level
-    if (!disable && level.dimension == 'minecraft:overworld' && players.length > 0 && random.nextInt(chanceRandomBound) == 0 && difficulty != 'peaceful') {
+    if (!disable /*&& level.dimension == 'minecraft:overworld'*/ && players.length > 0 && random.nextInt(chanceRandomBound) == 0 && difficulty != 'peaceful') {
         let siegeGroup = MOB_SIEGES[random.nextInt(MOB_SIEGES.length)]
         let siegeMembers = siegeGroup.members
         let player = players[random.nextInt(players.length)]
         let playerPos = new BlockPos(player.getX(), player.getY(), player.getZ())
-        let isPlayerOnSurface = testUnderground(level, playerPos).length > 5
+        let playerChunkPos = level.getChunkAt(playerPos).getPos()
+        let isPlayerOnSurface = testUnderground(level, playerPos).length > 1
         let isPlayerCreative = player.isCreative()
         let siegeBlockPos = new BlockPos(player.getX() + varRandInt(random, spawnDistBase, spawnDistVariation), player.getY(), player.getZ() + varRandInt(random, spawnDistBase, spawnDistVariation))
-        let spawnDist = comfuncs.diff(siegeBlockPos.getY(), player.getY())
+        let isProtected = getArea(level).chunks.some(safeChunk => playerChunkPos.getRegionX() == safeChunk.getRegionX() && playerChunkPos.getRegionZ() == safeChunk.getRegionZ())
+        let spawnDist = commaths.diff(siegeBlockPos.getY(), player.getY())
         let mobCount = random.nextInt(mobCountVariation) + mobCountBase
 
         while(!level.canSeeSky(siegeBlockPos))
@@ -117,20 +119,21 @@ LevelEvents.tick(event => {
         while(level.getBlockState(siegeBlockPos.below()).isAir())
             siegeBlockPos = siegeBlockPos.below()
         
-        console.info('[MobSiege] Attempting to spawn a mob seige: {' +
+        console.info('[Mobsiege] Attempting to spawn a mob seige: {' +
             '\n    difficulty=' + difficulty + ', ' +
             '\n    forPlayer=' + player + ', ' +
+            '\n    playerChunkPos=' + playerChunkPos + ', ' +
             '\n    playerOnSurface=' + isPlayerOnSurface + ',' +
             '\n    playerCreative=' + isPlayerCreative + ', ' +
             '\n    atPosition=' + siegeBlockPos + ', ' +
             '\n    seigeGroup=' + siegeGroup.name +  ', ' +
+            '\n    isProtected=' + isProtected + ', ' +
             '\n    mobCount=' + mobCount
           + '\n}'
 
         )
-
-        if (spawnDist < spawnDistMax && isPlayerOnSurface && !isPlayerCreative) {
-            level.tell('[Server] ' + comfuncs.stringInterlace(getRandomElement(random, announcements), [
+        if (spawnDist < spawnDistMax && isPlayerOnSurface && !isProtected && !isPlayerCreative) {
+            level.tell('[Mobsiege] ' + comfuncs.interlaceString(getRandomElement(random, announcements), [
                 {name: 'playerName', value: player.getName().getString()}, 
                 {name: 'siegeGroup', value: siegeGroup.name}, 
                 {name: 'mobType', value: siegeGroup.type},
@@ -140,7 +143,37 @@ LevelEvents.tick(event => {
             for (let modX = 0; modX < square; modX++) {
                 for (let modZ = 0; modZ < square; modZ++) {
                     if (modX * modZ < mobCount) {
-                        let memberPos = findSurfacePosition(level, new BlockPos(siegeBlockPos.getX() + modX - square/2, siegeBlockPos.getY(), siegeBlockPos.getZ() + modZ - square/2))
+                        let variedPos = new BlockPos(siegeBlockPos.getX() + modX - square/2, siegeBlockPos.getY(), siegeBlockPos.getZ() + modZ - square/2)
+                        let memberPos = findSurfacePosition(level, variedPos)
+
+                        // Error Correction //
+                        if (commaths.diff(memberPos.getY(), siegeBlockPos.getY()) >= 10) {
+                            var corrected = false
+                            var directions = [
+                                Direction.NORTH,
+                                Direction.EAST,
+                                Direction.SOUTH,
+                                Direction.WEST
+                            ]
+                            for (var index = 0; index < directions.length; index++) {
+                                var direction = directions[index]
+                                var newMemberPos = variedPos
+                                for (var deviation = 0; deviation < square ; deviation++) {
+                                    newMemberPos = findSurfacePosition(level, newMemberPos.relative(direction))
+                                    if (commaths.diff(newMemberPos.getY(), siegeBlockPos.getY()) >= 10) {
+                                        corrected = true
+                                        memberPos = newMemberPos
+                                        break
+                                    }
+                                }
+                                if (corrected)
+                                    break
+                            }
+                            if (!corrected)
+                                memberPos = siegeBlockPos
+                        }
+                        // Error Correction //
+
                         let entity = level.createEntity(getRandomElement(random, siegeMembers))
                         entity.setPosition(memberPos.getX(), memberPos.getY(), memberPos.getZ())
                         entity.spawn()
@@ -150,6 +183,41 @@ LevelEvents.tick(event => {
         }
     }
 })
+
+const safeAreas = []
+
+BlockEvents.placed('projecte:interdiction_torch', event => {
+    var {level} = event
+    //if (!area.chunks.some(chunk => chunk.getRegionX() == safeChunk.getRegionX() && chunk.getRegionZ() == safeChunk.getRegionZ()))
+    getArea(level).chunks.push(level.getChunkAt(event.block.getPos()).getPos())
+})
+
+BlockEvents.broken('projecte:interdiction_torch', event => {
+    var {level} = event
+    var area = getArea(level)
+    var safeChunk = level.getChunkAt(event.block.getPos()).getPos()
+    var expired = false
+
+    area.chunks = area.chunks.filter(chunk => {
+        if (!(chunk.getRegionX() == safeChunk.getRegionX() && chunk.getRegionZ() == safeChunk.getRegionZ() && expired)) {
+            expired = true
+            return false
+        } else return true
+    })
+})
+
+function getArea(level) {
+    var area = null
+    safeAreas.forEach(safeArea => {
+        if (safeArea.dimension == level.dimension)
+            area = safeArea
+    })
+    if (area == null) {
+        area = {dimension: level.dimension, chunks: []}
+        safeAreas.push(area)
+    }
+    return area
+}
 
 function getScanningDirections() {
     let allDirections = []
@@ -189,7 +257,6 @@ function findSurfacePosition(level, blockPos) {
     return blockPos
 }
 
-
 function testUnderground(level, blockPos) {
     let exposedPositions = []
     testDirections.forEach(direction => {
@@ -204,7 +271,7 @@ function testDirection(level, originBlockPos, blockPos, direction, exposedPositi
             exposedPositions.push(blockPos)
         else {
             direction.forEach(axisMove => blockPos = blockPos.relative(axisMove))
-            if (!(comfuncs.diff(originBlockPos.getX(), blockPos.getX()) > surfaceSearchDist || comfuncs.diff(originBlockPos.getY(), blockPos.getY()) > surfaceSearchDist || comfuncs.diff(originBlockPos.getZ(), blockPos.getZ()) > surfaceSearchDist))
+            if (!(commaths.diff(originBlockPos.getX(), blockPos.getX()) > surfaceSearchDist || commaths.diff(originBlockPos.getY(), blockPos.getY()) > surfaceSearchDist || commaths.diff(originBlockPos.getZ(), blockPos.getZ()) > surfaceSearchDist))
                 testDirection(level, originBlockPos, blockPos, direction, exposedPositions)
         }
     }

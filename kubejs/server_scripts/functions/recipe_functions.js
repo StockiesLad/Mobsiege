@@ -131,7 +131,7 @@ function getRecipeFunctions(event) {
                     comfuncs.forEasy(size, height => comfuncs.forEasy(size, width => {
                          var ingredientIndex
                          if (gaps.length == 1)
-                              ingredientIndex = commaths.roll(width, height, size) * gaps[0]
+                              ingredientIndex = width + height * gaps[0]
                          else ingredientIndex = width * gaps[1] + commaths.rotate1D(height * gaps[0], ingredients.length)
                          ingredientObjects[commaths.rotate1D(ingredientIndex, ingredients.length)][1].push(width + height * size)
                     }))
@@ -297,8 +297,6 @@ function fillPattern(originPattern, ingredientObjects) {
      var {pattern, size} = originPattern
      var fillPattern = []
      var keys = {}
-
-     console.info(ingredientObjects)
 
      comfuncs.forEasy(pattern.length, height => {
           // <Create> //

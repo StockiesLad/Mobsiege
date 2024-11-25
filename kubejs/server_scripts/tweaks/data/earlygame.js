@@ -30,7 +30,6 @@ register('recipes', context => {
 
     event.replaceInput({input: 'minecraft:crafting_table'}, 'minecraft:crafting_table', '#forge:workbench')
     event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', '#forge:furnaces')
-
     funcs.replaceOutputRecipe('minecraft:furnace', result => generate(result, ['#forge:stone', comfuncs.packDef('advanced_fire_bricks')]).rollingSquare(1, 3).override(['primalstage:kiln', 4]).next().vanilla())
     funcs.replaceOutputRecipe('4x hardcore_torches:unlit_torch', result => funcs.vanillaInsert(result,[['#minecraft:coals', 0], ['#forge:rods/wooden', 3]]))
     funcs.replaceOutputRecipe('hardcore_torches:fire_starter', result => funcs.vanillaInsert(result, [['#notreepunching:string', 0], ['#forge:rods/wooden', [1, 2]]]))
@@ -73,8 +72,16 @@ register('recipes', context => {
         } else funcs.planet(output, 'minecraft:oxidized_copper', ingredients[0])*/
     })
 
+   
     event.shapeless('minecraft:stick', '#minecraft:saplings')
     event.shapeless('minecraft:crafting_table', '#forge:workbench')
+    event.shapeless('4x primalstage:sand_dust', '#forge:sand')
+    event.shapeless('minecraft:clay_ball', ['#forge:ash', 'minecraft:bone_meal'])
+    event.campfireCooking(comfuncs.packDef('advanced_fire_brick'), comfuncs.packDef('advanced_clay_compound'))
+    event.campfireCooking('primalstage:kiln_brick', 'primalstage:sandy_clay_compound')
+    event.smelting(comfuncs.packDef('advanced_fire_brick'), comfuncs.packDef('advanced_clay_compound')).xp(0.05)
+    event.smelting('primalstage:kiln_brick', 'primalstage:sandy_clay_compound').xp(0.05)
+    event.smelting('ae2:silicon', 'primalstage:sand_dust').xp(0.05)
     funcs.toolDamagingShapeless('2x notreepunching:plant_fiber', ['#minecraft:wart_blocks', '#notreepunching:knives'])    
     funcs.toolDamagingShapeless('notreepunching:clay_brick', ['minecraft:clay_ball', 'minecraft:clay_ball', '#minecraft:shovels'])
     funcs.toolDamagingShapeless('2x notreepunching:clay_brick', ['minecraft:clay', '#minecraft:shovels'])
@@ -86,7 +93,10 @@ register('recipes', context => {
     funcs.vanillaInsert('notreepunching:flint_axe', [['#notreepunching:string', 0], 
         ['#forge:rods/wooden', [3, 6]], ['notreepunching:flint_shard', [1, 4]]])
     funcs.insertAll(insertion => insertion.vanilla(), [
+        generate('minecraft:sand', 'primalstage:sand_dust').flatSquare(2),
         generate(comfuncs.packDef('advanced_fire_bricks'), comfuncs.packDef('advanced_fire_brick')).flatSquare(2),
+        generate(comfuncs.packDef('advanced_clay_compound'), ['thermal:constantan_dust', 'primalstage:sandy_clay_compound', 'thermal:invar_dust']).rollingSquare(1, 2),
+        generate('4x primalstage:sandy_clay_compound', ['#forge:sand', 'minecraft:clay']).rollingSquare(1, 2),
         generate('2x minecraft:clay', ['#forge:sand', '#mobsiege:jelly_blocks']).rollingSquare(1, 2),
         generate('2x minecraft:clay', ['#forge:sand', '#minecraft:wart_blocks']).rollingSquare(1, 2),
         generate('2x minecraft:clay', ['aether_redux:holysilt', '#mobsiege:mud']).rollingSquare(1, 2),
@@ -101,7 +111,7 @@ register('lootTables', context => {
     funcs.replaceBasiclt(funcs.createBasicLt((materialTag, block) => 'minecraft:charcoal', funcs.explosionDecay(), [
         funcs.blockEntry({functions: [funcs.setCountFunction(funcs.rangeCount(0, 1), false), funcs.basicFortuneLtFunction(1)]}, 'carbonize:charcoal_log'),
         funcs.blockEntry({functions: [funcs.setCountFunction(funcs.rangeCount(1, 2), false), funcs.basicFortuneLtFunction(0.6)]}, 'carbonize:charcoal_planks'),
-        funcs.blockEntry({functions: funcs.setCountFunction(funcs.constantCount(1), false)}, 'carbonize:charcoal_stairs'),
+        funcs.blockEntry({functions: funcs.setCountFunction(funcs.rangeCount(0, 1), false)}, 'carbonize:charcoal_stairs'),
         funcs.blockEntry({functions: funcs.setCountFunction(funcs.rangeCount(0, 1), false)}, 'carbonize:charcoal_slab')
     ]))
 })
@@ -291,6 +301,7 @@ register('commonTags', context => {
             'quark:deepslate_furnace',
             'quark:blackstone_furnace',
         ]], 
+        ['%ash', ['carbonize:ash', 'cinderscapes:ash_pile']],
         ['|primitive_furnaces', [
             'minecraft:furnace',
             'betternether:basalt_furnace',
