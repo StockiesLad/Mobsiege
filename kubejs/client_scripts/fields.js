@@ -1,0 +1,1 @@
+const comfuncs = global.functions.common()

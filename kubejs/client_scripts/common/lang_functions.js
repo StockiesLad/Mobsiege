@@ -54,7 +54,7 @@ function getStandardStoneCategory(modid, expType, newExpType, extraExps, extraCa
         ['chiseled_' + expType, 'chiseled_' + newExpType]
     ]
     if (extraExps != null)
-        comdef.incorp(exps, extraExps)
+        comfuncs.incorp(exps, extraExps)
     return getCategory(modid, stoneSet, exps)
 }
 

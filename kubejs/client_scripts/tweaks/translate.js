@@ -1,5 +1,3 @@
-const comfuncs = global.functions.common()
-
 ClientEvents.lang('en_us', event => {
     var rename = [
         ['hardcore_torches:fire_starter', 'Fire Starter (One time)'],
@@ -7,7 +5,11 @@ ClientEvents.lang('en_us', event => {
         ['betterend:charcoal_block', 'Charcoal Sand'],
         ['ae2:smooth_sky_stone_chest', 'Smooth Sky Stone Chest'],
         [/*'biome.*/'biomeswevegone.orchard', 'Old Growth Orchard'],
-        ['bluepower:tiles', 'Basalt & Beige Marble Tiles']
+        ['bluepower:tiles', 'Basalt & Beige Marble Tiles'],
+        ['alexscaves:radrock_uranium_ore', 'Radrock Dense Uranium Ore'],
+        ['alexscaves:uranium_shard', 'Raw Uranium Shard'],
+        ['alexscaves:uranium', 'Raw Uranium'],
+        ['alexscaves:block_of_uranium', 'Raw Uranium Block'],
     ]
 
     rename = concatSeries(rename, [

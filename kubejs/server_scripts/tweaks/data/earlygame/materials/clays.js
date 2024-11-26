@@ -20,10 +20,6 @@ recipes((event, funcs) => {
      event.blasting(comfuncs.packDef('advanced_fire_brick'), comfuncs.packDef('advanced_clay_compound')).xp(0.05)
 })
 
-commonTags((event, funcs) => {
-     event.add('forge:ash', ['carbonize:ash', 'cinderscapes:ash_pile'])
-})
-
 itemTags((event, funcs) => {
      funcs.unifiedAdd([
           ['wart_blocks', 'voidscape:thuder_wart'],

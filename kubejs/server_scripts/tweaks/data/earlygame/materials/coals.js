@@ -6,8 +6,11 @@ recipes((event, funcs) => {
     funcs.removeAll([
         {output: 'minecraft:charcoal', type: 'minecraft:smelting'},
         {output: 'minecraft:charcoal', type: 'minecraft:blasting'},
-        {id: 'utilitarian:utility/charcoal_from_campfire'}
+        {id: 'utilitarian:utility/charcoal_from_campfire'},
+        {id: 'betterend:charcoal_block'}
     ])
+
+    funcs.generate('2x betterend:charcoal_block', ['#forge:storage_blocks/charcoal', 'minecraft:soul_sand']).rollingSquare(1, 2).next().vanilla()
 })
 
 basicLootTables((event, funcs) => { 
@@ -23,6 +26,14 @@ basicLootTables((event, funcs) => {
             ]
         )
     )
+})
+itemTags((event, funcs) => {
+    event.remove('forge:storage_block/charcoal', 'betterend:charcoal_block')
+    event.add('forge:storage_blocks/charcoal', [
+        'carbonize:charcoal_block',
+        'quark:charcoal_block',
+        'blockus:charcoal_block',
+    ])
 })
 
 blockTags((event, funcs) => {
@@ -47,8 +58,3 @@ blockTags((event, funcs) => {
         } catch (err) {}
     })
 })
-
-commonTags((event, funcs) => {
-    event.add('carbonize:charcoal_block', 'forge:storage_blocks/charcoal')
-})
-

@@ -62,7 +62,7 @@ function commonTags(call) {
 }
 
 function basicLootTables(call) {
-    impl('basiclootTables', call)
+    impl('basicLootTables', call)
 }
 
 function complexLootTables(call) {

@@ -198,7 +198,9 @@ function getRecipeFunctions(event) {
      var removeAll = (flags) => {
           comfuncs.ensureArray(flags).forEach(flag => event.remove(flag))
      }
-     var planet = (result, innerInput, outterInput) => vanillaInsert(result, [[innerInput, 4], [outterInput, [], 8]])
+     var twoSquare = (result, ingredient) => generate(result, ingredient).flatSquare(2).next().vanilla()
+     var twoSquareAlt = (result, ingredient) => generate(result, ingredient).rollingSquare(1, 2).next().vanilla()
+     var planet = (result, innerInput, outterInput) => vanillaInsert(result, [[innerInput, 4], [outterInput, [], 8]], 3)
      var box = (result, input) => vanillaInsert(result, [input, [4, 8]])
      var stairs = (result, input) => vanillaInsert(result, [input, [0, 3, 4, 6, 7, 8]])
      var slab = (result, input) => vanillaInsert(result, [input, [0, 1, 2]], 3)
@@ -236,6 +238,8 @@ function getRecipeFunctions(event) {
           removeIO: removeIO,
           removeAndHide: removeAndHide,
           removeAll: removeAll,
+          twoSquare: twoSquare,
+          twoSquareAlt: twoSquareAlt,
           planet: planet,
           box: box,
           stairs: stairs,
@@ -277,7 +281,6 @@ function parseIngredients(ingredientInserts, size) {
                return parsedIngredientInsert
           })
      }
-
      return ingredientInserts
 }
 

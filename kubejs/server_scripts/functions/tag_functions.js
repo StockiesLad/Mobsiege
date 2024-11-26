@@ -12,8 +12,8 @@ function getTagFunctions(event) {
     }
 
     var replaceTag = (item, removedTag, addedTag) => {
-        event.remove(item, removedTag)
-        event.add(item, addedTag)
+        event.remove(removedTag, item)
+        event.add(addedTag, item)
     }
 
     var replaceItem = (tag, removeItem, addedItem) => {

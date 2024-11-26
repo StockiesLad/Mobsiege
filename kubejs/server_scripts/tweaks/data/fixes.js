@@ -17,3 +17,7 @@ itemTags((event, funcs) => {
           ['%storage_blocks/raw_elementium', 'mythicbotany:raw_elementium_block']
      ])
 })
+
+blockTags((event, funcs) => {
+     global.functions.sound.invoke('setSoundTag', {event: event})
+})
