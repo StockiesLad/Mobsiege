@@ -2,10 +2,10 @@
   "biomes": {
     "hemlock_rainforest": true,
     "oasis": true,
-    "lush_redwood_forest": false,
-    "windswept_redwood_forest": false,
+    "lush_redwood_forest": true,
+    "windswept_redwood_forest": true,
     "lush_desert": true,
-    "redwood_forest": false,
+    "redwood_forest": true,
     "dense_woodlands": true,
     "cypress_swamp": true,
     "snowy_hemlock_forest": true,

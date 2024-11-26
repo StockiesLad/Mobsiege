@@ -119,7 +119,7 @@ LevelEvents.tick(event => {
         while(level.getBlockState(siegeBlockPos.below()).isAir())
             siegeBlockPos = siegeBlockPos.below()
         
-        console.info('[Mobsiege] Attempting to spawn a mob seige: {' +
+        console.info('[Mobsiege] Preparing a mob seige: {' +
             '\n    difficulty=' + difficulty + ', ' +
             '\n    forPlayer=' + player + ', ' +
             '\n    playerChunkPos=' + playerChunkPos + ', ' +
@@ -180,7 +180,7 @@ LevelEvents.tick(event => {
                     } else break
                 }
             }    
-        }
+        } else if (isProtected) level.tell(`[Mobsiege] An interdiction torch protected ${player.getName().getString()} against a mob siege!`)
     }
 })
 

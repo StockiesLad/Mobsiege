@@ -25,6 +25,7 @@ ClientEvents.lang('en_us', event => {
         regexIn('promenade', ['maple', 'white_maple'], woodSet),
         regexIn('promenade', ['palm', 'tropical_palm'], woodSet),
         regexIn('terrestria', ['sakura', 'dark_sakura'], woodSet),
+        regexIn('terrestria', ['redwood', 'dark_redwood'], woodSet),
         getStandardStoneCategory('geologicexpansion', 'limestone', 'rocky_limestone'),
         getStandardStoneCategory('projectred_exploration', 'marble', 'grey_marble'),
         getStandardStoneCategory('bluepower', 'marble', 'beige_marble', [
