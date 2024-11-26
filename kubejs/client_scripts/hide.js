@@ -1,4 +1,4 @@
-global.functions.common.incorp(global.hiddenItems, [
+comfuncs.incorp(global.hiddenItems, [
     'natprog:stick_block_item',
     'geologicexpansion:duck_spawn_egg', 
     'geologicexpansion:duck_egg',

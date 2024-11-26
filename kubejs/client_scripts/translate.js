@@ -1,3 +1,5 @@
+const comfuncs = global.functions.common()
+
 ClientEvents.lang('en_us', event => {
     var rename = [
         ['hardcore_torches:fire_starter', 'Fire Starter (One time)'],

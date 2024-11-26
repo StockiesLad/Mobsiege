@@ -171,10 +171,10 @@ make plant fiber easily accessible (low priority)
 find better furnace components that falls in line with progression (low priority)
 maybe remove minecraft block variant duplicates (low priority)
 systematic (packwiz) modpack updating system (low priority)
-aether genesis + divinerpg + promenade  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
+aether genesis + divinerpg + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
 
 
-fix bwg imbued enchant log texture
+fix bwg imbued enchant log texture (bwg)
 unify tech mods (and cull redundant ones)
 gunpowder recipe fix
 unify all ores
@@ -190,6 +190,8 @@ revert weird wart textures (jadens nether exp maybe?)
 ensure all wart is added to tag
 fix productive trees tag problems (maybe cucumber lib)
 lighting bug in voidscape (maybe oculus-flywheel compat)
+split tweak categories into files in a folder (e.g.  earlgame.js => earlygame/[charcoal.js, kiln.js, etc])
+
 almostunified compat with immersive engineering @ productive bees
 
 multimod machine recipes {

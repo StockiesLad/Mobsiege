@@ -34,6 +34,11 @@ function getRecipeFunctions(event) {
           })
      }
 
+     var globalCrushing = (results, ingredient) => {
+          event.recipes.createCrushing(results, ingredient)
+          event.recipes.thermal.pulverizer(results, ingredient)
+     }
+
      // <Insertion> //
      /* 
           //  DON'T ACCIDENTALLY DUPLICATE INDEXES! AN INDEX WILL ONLY CONSIDER THE FIRST KEY AND EVERY OTHER WILL BE IGNORED!!!
@@ -194,7 +199,9 @@ function getRecipeFunctions(event) {
           comfuncs.ensureArray(flags).forEach(flag => event.remove(flag))
      }
      var planet = (result, innerInput, outterInput) => vanillaInsert(result, [[innerInput, 4], [outterInput, [], 8]])
-     var box = (result, input) => vanillaInsert(result, [input, 4, 8])
+     var box = (result, input) => vanillaInsert(result, [input, [4, 8]])
+     var stairs = (result, input) => vanillaInsert(result, [input, [0, 3, 4, 6, 7, 8]])
+     var slab = (result, input) => vanillaInsert(result, [input, [0, 1, 2]], 3)
      var circleLoop = (items, recipeCall) => {
           comfuncs.quickerate(items.length, i => {
                var nextI = i + 1
@@ -211,6 +218,7 @@ function getRecipeFunctions(event) {
           toolDamagingShaped: toolDamagingShaped,
           toolDamagingShapeless: toolDamagingShapeless,
           kilnSmelting: kilnSmelting,
+          globalCrushing: globalCrushing,
           // <Insertion> //
           insert: insert,
           modify: modify,
@@ -230,6 +238,8 @@ function getRecipeFunctions(event) {
           removeAll: removeAll,
           planet: planet,
           box: box,
+          stairs: stairs,
+          slab: slab,
           circleLoop: circleLoop,
           donutLoop: donutLoop
      }

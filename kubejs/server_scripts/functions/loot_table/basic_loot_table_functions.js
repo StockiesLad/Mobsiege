@@ -1,4 +1,4 @@
-function getLootTableFunctions(event) {
+function getBasicLootTableFunctions(event) {
     var lootTable = (event, identifier, type, pools) => {
         var splitId = identifier.split(':')
         var json = {type: type, pools:  comfuncs.ensureArray(pools)}

@@ -1,5 +1,5 @@
 const modpackId = global.modpackId
-const comfuncs = global.functions.common
+const comfuncs = global.functions.common()
 const commaths = global.functions.math
 
 ServerEvents.tags('item', event => {
@@ -21,9 +21,16 @@ ServerEvents.tags('block', event => {
 })
 
 ServerEvents.highPriorityData(event => {
-    comfuncs.invokeSignedCalls('lootTables', {
+    comfuncs.invokeSignedCalls('basicLootTables', {
         event: event,
-        funcs: comfuncs.incorpProperties(getLootTableFunctions(event), getTagFunctions(null))
+        funcs: comfuncs.incorpProperties(getBasicLootTableFunctions(event), getTagFunctions(null))
+    })
+})
+
+LootJS.modifiers(event => {
+    comfuncs.invokeSignedCalls('complexLootTables', {
+        event: event,
+        funcs: comfuncs.incorpProperties(getComplexLootTableFunctions(event), getTagFunctions(null))
     })
 })
 
@@ -36,6 +43,34 @@ ServerEvents.recipes(event => {
 
 function register(ids, calls) {
     comfuncs.addSignedCalls(ids, calls)
+}
+
+function impl(ids, call) {
+    register(ids, context => call(context.event, context.funcs))
+}
+
+function itemTags(call) {
+    impl('itemTags', call)
+}
+
+function blockTags(call) {
+    impl('blockTags', call)
+}
+
+function commonTags(call) {
+    impl('commonTags', call)
+}
+
+function basicLootTables(call) {
+    impl('basiclootTables', call)
+}
+
+function complexLootTables(call) {
+    impl('complexLootTables', call)
+}
+
+function recipes(call) {
+    impl('recipes', call)
 }
 
 /*

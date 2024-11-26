@@ -54,7 +54,7 @@ function getStandardStoneCategory(modid, expType, newExpType, extraExps, extraCa
         ['chiseled_' + expType, 'chiseled_' + newExpType]
     ]
     if (extraExps != null)
-        global.pushAll(exps, extraExps)
+        comdef.incorp(exps, extraExps)
     return getCategory(modid, stoneSet, exps)
 }
 
@@ -69,12 +69,12 @@ function regexIn (modid, exp, strings) {
 }
 
 function regexInwithParent(parent, modid, exp, strings) {
-    return global.compileArrayWithParent(parent, strings, string => [modid + ':' + string.replace('${}', exp[0]), firstCaseUpper(string.replace('${}', exp[1]))])
-    /*let newStrings = []
+    //return comdef.incorpHandledProperties(parent, strings, string => [modid + ':' + string.replace('${}', exp[0]), firstCaseUpper(string.replace('${}', exp[1]))])
+    let newStrings = []
     strings.forEach(string => {
         newStrings.push([modid + ':' + string.replace('${}', exp[0]), firstCaseUpper(string.replace('${}', exp[1]))])
     });
-    return newStrings*/
+    return newStrings
 }
 
 function firstCaseUpper(string) {

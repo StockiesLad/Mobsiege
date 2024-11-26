@@ -28,7 +28,8 @@
     "railcraft",
     "bno",
     "beo",
-    "primalstage"
+    "primalstage",
+    "bloodmagic"
   ],
   "stoneStrata": [
     "stone",
@@ -100,7 +101,9 @@
     "potassium_nitrate",
     "redstone",
     "rose_gold",
+    "rose_quartz",
     "ruby",
+    "saltpeter",
     "sapphire",
     "signalum",
     "silver",

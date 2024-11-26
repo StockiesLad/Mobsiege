@@ -1,4 +1,6 @@
 function getCommonFunctions() {
+    var storage = {signedCalls: []}
+
     var identifier = (mod, path) => {
         return mod + ':' + path
     }
@@ -28,17 +30,17 @@ function getCommonFunctions() {
     var addSignedCalls = (ids, calls) => {
         var callArray = ensureArray(calls)
         ensureArray(ids).forEach(id => {
-            if (!global.signedCalls.includes(id))
-                global.signedCalls.push({id: id, calls: callArray})
+            if (!storage.signedCalls.includes(id))
+                storage.signedCalls.push({id: id, calls: callArray})
             else {
-                global.signedCalls.get(id).calls = global.signedCalls.get(id).calls.concat(callArray)
+                storage.signedCalls.get(id).calls = storage.signedCalls.get(id).calls.concat(callArray)
             }
         })
         
     }
     
     var invokeSignedCalls = (ids, context) => {
-        global.signedCalls.forEach(signedCalls => {
+        storage.signedCalls.forEach(signedCalls => {
             ensureArray(ids).forEach(id => {
                 if (signedCalls.id == id) {
                     signedCalls.calls.forEach(call => {
@@ -199,6 +201,7 @@ function getCommonFunctions() {
    var functionalObject = (object) => object
 
     return {
+        storage: storage,
         identifier: identifier,
         packDef: packDef,
         def: def,
