@@ -87,12 +87,16 @@ var partialOrganicAether = [
 recipes((event, funcs) => {
      comfuncs.hide('primalstage:plant_twine')
 
-     event.remove({id: 'notreepunching:plant_fiber_from_leaves_with_knife'})
+     funcs.removeAll([
+          {input: 'minecraft:vine', output: 'notreepunching:plant_fiber'},
+          {id: 'notreepunching:plant_fiber_from_leaves_with_knife'}
+     ])
 
-     event.replaceInput({input: 'primalstage:plant_twine'}, 'primalstage:plant_twine', 'notreepunching:plant_string')
-     funcs.replace({input: 'minecraft:vine', output: 'notreepunching:plant_fiber'}, result => 
+     event.replaceInput({input: 'primalstage:plant_twine'}, 'primalstage:plant_twine', funcs.def('|primitive_string'))
+     //event.replaceInput({input: 'minecraft:string'}, 'minecraft:string', '#forge:string')
+     /*funcs.replace({input: 'minecraft:vine', output: 'notreepunching:plant_fiber'}, result => 
           funcs.toolDamagingShapeless('3x ' + result, [funcs.def('|vines'), '#notreepunching:knives'])
-     )
+     )*/
 
      funcs.generate('2x betterend:neon_cactus', ['betternether:nether_cactus', 'betternether:neon_equisetum']).rollingSquare(1, 2).next().vanilla()
      funcs.toolDamagingShapeless('2x notreepunching:plant_fiber', ['#minecraft:wart_blocks', '#notreepunching:knives'])
@@ -101,11 +105,16 @@ recipes((event, funcs) => {
      //funcs.vanillaInsert('2x minecraft:stick', [[funcs.def('|vines'), [0, 2]]])
      //funcs.vanillaInsert('2x aether:skyroot_stick', [[funcs.def('|aether_vines'), [0, 2]]])
 
+     event.campfireCooking('minecraft:string', 'notreepunching:plant_string')
 })
 
 itemTags((event, funcs) => {
-     event.remove('minecraft:nylium', ['edenring:eden_grass', 'edenring:eden_mycelium'])
+     funcs.unifiedRemove([
+          ['minecraft:nylium', ['edenring:eden_grass', 'edenring:eden_mycelium']],
+          ['notreepunching:h/string', 'notreepunching:plant_string']
+     ])
      funcs.unifiedAdd([
+          [comfuncs.packDef('primitive_string'), ['notreepunching:plant_string', '#forge:string']],
           [comfuncs.packDef('partial_organic'), partialOrganic.concat(partialOrganicAether)],
           [comfuncs.packDef('whole_organic'), wholeOrganic]
      ])

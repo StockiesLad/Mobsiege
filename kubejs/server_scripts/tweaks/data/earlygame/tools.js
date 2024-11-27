@@ -7,7 +7,9 @@ recipes((event, funcs) => {
           'primalstage:flint_pickaxe', 'primalstage:flint_shovel', 'primalstage:plant_fiber'
      ])
 
-     funcs.replaceOutputRecipe('primalstage:flint_hatchet', result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', [0, 1]], ['#forge:rods/wooden', 2], ['#forge:string', 3]]))
+     funcs.replaceOutputRecipe('hardcore_torches:fire_starter', result => funcs.vanillaInsert(result, [[funcs.def('|primitive_string'), 0], ['#forge:rods/wooden', [1, 2]]]))
+     funcs.replaceOutputRecipe('notreepunching:fire_starter', result => funcs.vanillaInsert(result, [[funcs.def('|primitive_string'), 0], ['hardcore_torches:fire_starter', [1, 2]], ['notreepunching:flint_shard', 3]]))
+     funcs.replaceOutputRecipe('primalstage:flint_hatchet', result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', [0, 1]], ['#forge:rods/wooden', 2], [funcs.def('|primitive_string'), 3]]))
      funcs.replaceOutputRecipe('notreepunching:flint_axe', result => funcs.vanillaInsert(result, [['#notreepunching:string', 0], ['#forge:rods/wooden', [3, 6]], ['notreepunching:flint_shard', [1, 4]]]))
 })
 
