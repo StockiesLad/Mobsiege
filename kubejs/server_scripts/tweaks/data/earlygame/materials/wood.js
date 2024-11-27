@@ -17,36 +17,6 @@ recipes((event, funcs) => {
           funcs.toolDamagingShapeless(Item.of(output).withCount(6), [funcs.def('|aether_logs'), '#minecraft:axes'])
           funcs.toolDamagingShapeless(Item.of(output).withCount(8), [funcs.def('|aether_logs'), '#minecraft:saws'])
      })
-
-     event.shapeless('minecraft:stick', '#minecraft:saplings')
-     funcs.vanillaInsert('2x minecraft:stick', [[funcs.def('|vines'), [0, 2]]])
-     funcs.vanillaInsert('2x aether:skyroot_stick', [[funcs.def('|aether_vines'), [0, 2]]])
-})
-
-itemTags((event, funcs) => {
-     funcs.unifiedAdd([
-          ['|aether_vines', [
-               'aether_redux:corrupted_vines',
-               'aether_redux:golden_vines',
-               'aether_redux:gilded_vines',
-               'deep_aether:yagroot_vine'
-          ]],
-          ['|vines', [
-          funcs.def('|aether_vines'),
-               'betterend:bulb_vine',
-               'betterend:jungle_vine',
-               'betterend:twisted_vine',
-               'betterend:dense_vine',
-               'betternether:neon_equisetum',
-               'betternether:blooming_vine',
-               'betternether:golden_vine',
-               'betternether:black_vine',
-               'edenring:eden_vine',
-               'minecraft:weeping_vines',
-               'minecraft:twisting_vines',
-               'minecraft:vine'
-          ]]
-     ])
 })
 
 blockTags((event, funcs) => {
@@ -95,3 +65,8 @@ commonTags((event, funcs) => {
            ]],
      ])
 })
+
+/*
+ServerEvents.tags('worldgen/biome', event => {
+     event.add('twigs:spawns_twig', '#')
+})*/

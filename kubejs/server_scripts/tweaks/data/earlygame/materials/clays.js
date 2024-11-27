@@ -22,7 +22,6 @@ recipes((event, funcs) => {
 
 itemTags((event, funcs) => {
      funcs.unifiedAdd([
-          ['wart_blocks', 'voidscape:thuder_wart'],
           ['|mud', ['minecraft:mud', 'deep_aether:aether_mud']],
           ['|jelly_blocks', [
               'aether_redux:jellyshroom_jelly_block', 

@@ -37,6 +37,7 @@ itemTags((event, funcs) => {
 })
 
 blockTags((event, funcs) => {
+    event.remove('minecraft:mineable/pickaxe', 'betterend:charcoal_block')
     funcs.unifiedAdd([
         ['carbonize:charcoal_block', ['minecraft:mineable/pickaxe']],
         ['minecraft:needs_stone_tool', [

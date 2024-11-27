@@ -20,6 +20,7 @@
 !/config/ancient_aether-client.toml
 !/config/presencefootsteps/userconfig.json
 !/config/paxi
+!/config/roughlyenoughitems
 !/config/effective_fg-client.toml
 !/config/darkmodeeverywhere-client.toml
 !/config/darkmodeeverywhereshaders.json
@@ -36,6 +37,7 @@
 !/config/forgivingworld.json
 !/config/esm-config.toml
 !/config/notreepunching.toml
+!/config/primalstage.json5
 !/config/toughasnails
 !/config/hardcore_torches-common.toml
 #Worldgen
