@@ -7,7 +7,6 @@ recipes((event, funcs) => {
      event.replaceInput({id: 'minecraft:gunpowder'}, 'minecraft:coal', '#forge:coal')
      event.replaceInput({id: 'betterend:sulphur_gunpowder'}, '#minecraft:coals', '#forge:coal')
      event.replaceInput({id: 'immersiveengineering:crafting/gunpowder_from_dusts'}, 'minecraft:charcoal', '#forge:coal')
-     funcs.replaceOutputRecipe('minecraft:tnt', result => funcs.generate(result, ['minecraft:gunpowder', 'primalstage:sandy_clay_compound']).rollingSquare(1, 3).next().vanilla())
 })
 
 complexLootTables((event, funcs) => {

@@ -2,6 +2,8 @@ const ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegis
 const Shapes = Java.loadClass('net.minecraft.world.phys.shapes.Shapes')
 const Blocks = Java.loadClass('net.minecraft.world.level.block.Blocks')
 
+var coalStorageBlocks
+
 recipes((event, funcs) => {
     funcs.removeAll([
         {output: 'minecraft:charcoal', type: 'minecraft:smelting'},
@@ -34,6 +36,8 @@ itemTags((event, funcs) => {
         'quark:charcoal_block',
         'blockus:charcoal_block',
     ])
+    coalStorageBlocks = event.get('minecraft:coals').getObjectIds().map(entry => funcs.preferredItem('forge:storage_blocks/' + entry.toString().split(':')[1]))
+    event.add(comfuncs.packDef('storage_blocks/coals'), coalStorageBlocks)
 })
 
 blockTags((event, funcs) => {

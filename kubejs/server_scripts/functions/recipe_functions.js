@@ -34,9 +34,15 @@ function getRecipeFunctions(event) {
           })
      }
 
-     var globalCrushing = (results, ingredient) => {
-          event.recipes.createCrushing(results, ingredient)
-          event.recipes.thermal.pulverizer(results, ingredient)
+     var globalCrushing = (results, ingredients) => {
+          event.recipes.createCrushing(results, ingredients)
+          event.recipes.thermal.pulverizer(results, ingredients)
+     }
+
+     var globalAlloySmelting = (results, ingredients) => {
+          event.recipes.enderio.alloy_smelting(results, ingredients)
+          event.recipes.thermal.smelter(results, ingredients)
+          event.recipes.create.mixing(results, ingredients).heated()
      }
 
      // <Insertion> //
@@ -57,6 +63,9 @@ function getRecipeFunctions(event) {
           ingredientObjects = parseIngredients(ingredientObjects, size)
           size = size != null  ? size : inferPatternSize(ingredientObjects)
           var {pattern, keys} = insertion(ingredientObjects, size)
+
+          if (result == null)
+               console.error(`Invalid insertion recipe! result=${result}, ingredientObjects=${JSON.stringify(ingredientObjects)}`)
 
           return {
                dump: () => comfuncs.functionalObject({result: result, pattern: pattern, keys: keys}),
@@ -146,7 +155,11 @@ function getRecipeFunctions(event) {
                          var ingredientIndex
                          if (gaps.length == 1)
                               ingredientIndex = width + height * gaps[0]
-                         else ingredientIndex = width * gaps[1] + commaths.rotate1D(height * gaps[0], ingredients.length)
+                         else if (gaps.length >= 2) {
+                              ingredientIndex = width * gaps[1] + commaths.rotate1D(height * gaps[0], ingredients.length)
+                              if (gaps.length == 3)
+                                   ingredientIndex = gaps[2](ingredientIndex, ingredients.length, size, width, height)
+                         }    
                          ingredientObjects[commaths.rotate1D(ingredientIndex, ingredients.length)][1].push(width + height * size)
                     }))
                     return modify(result, ingredientObjects, size)
@@ -201,6 +214,8 @@ function getRecipeFunctions(event) {
      var twoSquare = (result, ingredient) => generate(result, ingredient).flatSquare(2).next().vanilla()
      var twoSquareAlt = (result, ingredient) => generate(result, ingredient).rollingSquare(1, 2).next().vanilla()
      var planet = (result, innerInput, outterInput) => vanillaInsert(result, [[innerInput, 4], [outterInput, [], 8]], 3)
+     var planetAlt = (result, innerInput, outterInput0, outterInput1) => generate(result, [outterInput0, outterInput1]).rollingSquare(1, 3).override([innerInput, 4]).next().vanilla()
+     var planetOrbit = (result, ingredients) => insert(result, [[ingredients[0], [0, 8]], [ingredients[1], [1, 7]], [ingredients[2], [2, 6]], [ingredients[3], [3, 5]], [ingredients[4], 4]])
      var box = (result, input) => vanillaInsert(result, [input, [4, 8]])
      var stairs = (result, input) => vanillaInsert(result, [input, [0, 3, 4, 6, 7, 8]])
      var slab = (result, input) => vanillaInsert(result, [input, [0, 1, 2]], 3)
@@ -221,6 +236,7 @@ function getRecipeFunctions(event) {
           toolDamagingShapeless: toolDamagingShapeless,
           kilnSmelting: kilnSmelting,
           globalCrushing: globalCrushing,
+          globalAlloySmelting: globalAlloySmelting,
           // <Insertion> //
           insert: insert,
           modify: modify,
@@ -241,6 +257,8 @@ function getRecipeFunctions(event) {
           twoSquare: twoSquare,
           twoSquareAlt: twoSquareAlt,
           planet: planet,
+          planetAlt: planetAlt,
+          planetOrbit: planetOrbit,
           box: box,
           stairs: stairs,
           slab: slab,

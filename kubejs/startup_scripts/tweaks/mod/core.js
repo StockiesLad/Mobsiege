@@ -36,21 +36,55 @@ StartupEvents.registry('item', event => {
 	event.create(comfuncs.packDef('orb_of_thermoregulation')).unstackable();
     event.create(comfuncs.packDef('advanced_fire_brick'))
     event.create(comfuncs.packDef('advanced_clay_compound'))
+    event.create(comfuncs.packDef('gravitium_alloy'))
 })
 
 StartupEvents.registry("block", (event) => {
     event.create(comfuncs.packDef('advanced_fire_bricks'))
-    //.material("stone")
-    .soundType('STONE')
-    .hardness(0.5)
-    .resistance(0.2)
-    .requiresTool(true)
-    .tagBlock("mineable/pickaxe")
+        //.material("stone")
+        .soundType('STONE')
+        .hardness(0.5)
+        .resistance(0.2)
+        .requiresTool(true)
+        .tagBlock("mineable/pickaxe")
+    event.create(comfuncs.packDef('gravitium_alloy_block'))
+        .soundType('STONE')
+        .hardness(2)
+        .resistance(1)
+        .requiresTool(true)
+        .tagBlock("mineable/pickaxe")
+        .tagBlock('needs_iron_tool')
+
 })
 
 BlockEvents.modification(event => {
     global.functions.sound.invoke('setSoundType', {event: event})
     event.modify('aether:cold_aercloud', block => block.properties.isValidSpawn((state, blockGetter, blockPos, spacePlacement, entityType) => true))
+})
+
+ItemEvents.modification(event => {
+    var singleToBlockEfficiencyConst = 10/9
+
+    var coal = 1600
+    var coal_block = coal * 9 * singleToBlockEfficiencyConst
+
+    var alchemical_coal = Math.floor((coal + coal_block) * 4 * singleToBlockEfficiencyConst)
+    var alchemical_coal_block = Math.floor(alchemical_coal * 9 * singleToBlockEfficiencyConst)
+
+    var mobius_fuel = Math.floor((alchemical_coal + alchemical_coal_block) * 4 * singleToBlockEfficiencyConst)
+    var mobius_fuel_block = Math.floor(mobius_fuel * 9 * singleToBlockEfficiencyConst)
+
+    var aeternalis_fuel = Math.floor((mobius_fuel + mobius_fuel_block) * 4 * singleToBlockEfficiencyConst)
+    var aeternalis_fuel_block = Math.floor(aeternalis_fuel * 9 * singleToBlockEfficiencyConst)
+
+    comfuncs.iterate([
+        ['projecte:alchemical_coal', alchemical_coal],
+        ['projecte:alchemical_coal_block', alchemical_coal_block],
+        ['projecte:mobius_fuel', mobius_fuel],
+        ['projecte:mobius_fuel_block', mobius_fuel_block],
+        ['projecte:aeternalis_fuel', aeternalis_fuel],
+        ['projecte:aeternalis_fuel_block', aeternalis_fuel_block]
+    ], val => event.modify(val[0], item => item.burnTime = val[1]))
 })
 
 WorldgenEvents.remove(event => {

@@ -28,6 +28,8 @@ function getMathFunctions() {
 
      var rotate1D = (point, size) => rotate2D(point, size).width
 
+     var rotateSnake = (point, size) => comfuncs.functionalVar(commaths.rotate2D(point, size), r => commaths.isOdd(r.height) ? commaths.flip(point, size) : r.width)
+
      /*
           = origin + (size - 1 - width - height) * size - width + height
           = (size - 1 - width) * size + height
@@ -69,8 +71,6 @@ function getMathFunctions() {
                comfuncs.forEasy(size * size, point => matrix[point] = rotate(point, size))
                rotationCache.push({size: size, anchor: anchor, matrix: matrix})
           }
-          console.info(matrix)
-          console.info(comfuncs.ensureArray(points).map(point => matrix[point]))
           return comfuncs.ensureArray(points).map(point => matrix[point])
      }
 
@@ -84,6 +84,7 @@ function getMathFunctions() {
           flip: flip,
           rotate1D: rotate1D,
           rotate2D: rotate2D,
+          rotateSnake: rotateSnake,
           rotateFlip: rotateFlip,
           rotateClockwise: rotateClockwise,
           rotateAntiClockwise: rotateAntiClockwise,

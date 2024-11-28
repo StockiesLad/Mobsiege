@@ -71,30 +71,23 @@ acheivements {
 	acquire every type of aercloud
 	use aerclouds to make a create contraption more efficient
 	how to get beds
-	use an interdiction torch to prevent a mobsiege
+	use an interdiction torch to prevent a mobsiege (protected chunks)
 }
 
 complex recipes {
 	guns from machines
 	turrets from machines
-	all machines using components and alloys from other mods
-	orb_of_thermoregulation from everything endgame
 	water canteens from machines
 	elytra from everything endgame
-	machines from create
 	nukes (+ alexscaves utilisation)
 	uncrafting table
-		aeternalis fuel uses coal/charcoal blocks
-		dark matter requires gravitite, sculk, netherite, thallasium & aeternalis fuel
-		philosopher's stone (zivicio
-		transmutation table (make this extremely expensive)
-		emc collector (extremely expensive)
-		interdiction torch (somewhat expensive)
-	simple magnets
-	guardian beam turret
+	transmutation table (make this extremely expensive)
+	emc collector (extremely expensive)
 	angel rings (expensive)
-	beds and comforts
-	construction wand
+	beds and comforts (what do I do here????)
+	add fluid crafting for thermal like the good ol days
+	quarry recipe
+	lucky blocks
 }
 
 total {
@@ -122,24 +115,36 @@ exploration {
     betweenlands
 }
 
-make plant fiber easily accessible (low priority)
 aether genesis + divinerpg + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
 
-unify tech mods (and cull redundant ones)
-incompat between immersive engineering and fancymenu (try packmenu maybe)
-magnetic caves and magnetite shit
-twigs and this rocks compat
 coal explosion + hardcore torches compat (tags)
 fix not dying in space without suit
 fix initial inventory open lag
 fix productive trees tag problems (maybe cucumber lib)
-lighting bug in voidscape (maybe oculus-flywheel compat)
 almostunified compat with immersive engineering & productive bees
-
-(allow for content management in curseforge to avoid datapack/resourcepack and shaderpack license infringements)
+fix broken alexs mobs lang file
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+magnetic caves and magnetite usages
+unify tech mods (and cull redundant ones)
+incompat between immersive engineering and fancymenu (try packmenu maybe) (reported, just disable edit mode to fix)
+(allow for content management in curseforge to avoid datapack/resourcepack and shaderpack license infringements)
+recipes {
+	orb_of_thermoregulation
+	philosopher's stone (zivicio) master infusion crystal
+	interdiction torch (somewhat expensive)
+	aeternalis fuel uses coal/charcoal blocks
+	dark matter requires gravitite, sculk, netherite, thallasium & aeternalis fuel
+	unstable ingots
+	bedrockium
+	redstone alloy => red alloy, silicon, electrotine alloy
+	ae2 shit
+	construction wand
+	magnets
+}
+make plant fiber easily accessible (low priority)
+twigs and this rocks compat
 revert weird wart textures (jadens nether exp maybe?)
 ensure all wart is added to tag
 systematic modifications {

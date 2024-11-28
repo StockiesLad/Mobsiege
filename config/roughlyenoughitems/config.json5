@@ -461,8 +461,7 @@
 					"ad_astra:nasa_workbench",
 					"alexscaves:spelunkery_table",
 					"alexscaves:nuclear_furnace",
-					"hordes:infection_cures",
-					"org.antarcticgardens.newage.compat.rei.NewAgeReiPlugin$$Lambda$79160/0x000001f489755c30@460c56bf"
+					"hordes:infection_cures"
 				],
 				"hiddenCategories": []
 			}
@@ -472,8 +471,7 @@
 			"shouldFilterDisplays": true,
 			"filteringRules": [
 				"{id:\"roughlyenoughitems:manual\",rule:{}}",
-				"{id:\"roughlyenoughitems:basic\",rule:{}}",
-				"{id:\"roughlyenoughitems:hidden_from_recipe_viewers\",rule:{}}"
+				"{id:\"roughlyenoughitems:basic\",rule:{}}"
 			]
 		}
 	}

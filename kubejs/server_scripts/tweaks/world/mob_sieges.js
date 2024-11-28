@@ -105,6 +105,7 @@ LevelEvents.tick(event => {
         let siegeMembers = siegeGroup.members
         let player = players[random.nextInt(players.length)]
         let playerPos = new BlockPos(player.getX(), player.getY(), player.getZ())
+        let playerInSafeBiome = comfuncs.functionalVar(level.getBiome(player), biome => biome == 'minecraft:mushroom_fields')  
         let playerChunkPos = level.getChunkAt(playerPos).getPos()
         let isPlayerOnSurface = testUnderground(level, playerPos).length > 1
         let isPlayerCreative = player.isCreative()
@@ -132,7 +133,7 @@ LevelEvents.tick(event => {
           + '\n}'
 
         )
-        if (spawnDist < spawnDistMax && isPlayerOnSurface && !isProtected && !isPlayerCreative) {
+        if (spawnDist < spawnDistMax && isPlayerOnSurface && !(isProtected && playerInSafeBiome && isPlayerCreative)) {
             level.tell('[Mobsiege] ' + comfuncs.interlaceString(getRandomElement(random, announcements), [
                 {name: 'playerName', value: player.getName().getString()}, 
                 {name: 'siegeGroup', value: siegeGroup.name}, 

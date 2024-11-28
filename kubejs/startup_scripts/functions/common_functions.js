@@ -200,6 +200,8 @@ function getCommonFunctions() {
 
    var functionalObject = (object) => object
 
+   var functionalVar = (object, handle) => handle(object)
+
     return {
         storage: storage,
         identifier: identifier,
@@ -233,6 +235,7 @@ function getCommonFunctions() {
         expand: expand,
         functionalIf: functionalIf,
         functionalTryCatch: functionalTryCatch,
-        functionalObject: functionalObject
+        functionalObject: functionalObject,
+        functionalVar: functionalVar
     }
 }
