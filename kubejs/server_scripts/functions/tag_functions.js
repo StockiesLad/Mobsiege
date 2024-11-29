@@ -77,3 +77,13 @@ function getTagFunctions(event) {
         unifiedReplaceItem: unifiedReplaceItem
     }
 }
+
+function ofFluid(fluid, amount) {
+    var stack
+    if (fluid.includes('#'))
+        stack = {fluid_tag: fluid.replace('#', '')}
+    else stack = {fluid: fluid}
+    if (amount != null)
+        stack.amount = amount
+    return stack
+}

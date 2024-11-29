@@ -34,6 +34,33 @@ function getRecipeFunctions(event) {
           })
      }
 
+     var fluidMixing = (results, ingredients) => {
+          return event.custom({
+               type: "thermal_extra:fluid_mixer",
+               energy: 10000,
+               ingredients: comfuncs.ensureArray(ingredients),
+               result: comfuncs.ensureArray(results)
+          })
+     }
+
+     var componentAssembly = (results, ingredients) => {
+          return event.custom({
+               type: "thermal_extra:component_assembly",
+               energy: 25000,
+               ingredients: comfuncs.ensureArray(ingredients),
+               result: comfuncs.ensureArray(results)
+          })
+     }
+
+     var chilling = (results, ingredients) => {
+          return event.custom({
+               type: "thermal:chiller",
+               energy: 15000,
+               ingredients: comfuncs.ensureArray(ingredients),
+               result: comfuncs.ensureArray(results),
+          })
+     }
+
      var globalCrushing = (results, ingredients) => {
           event.recipes.createCrushing(results, ingredients)
           event.recipes.thermal.pulverizer(results, ingredients)
@@ -43,6 +70,14 @@ function getRecipeFunctions(event) {
           event.recipes.enderio.alloy_smelting(results, ingredients)
           event.recipes.thermal.smelter(results, ingredients)
           event.recipes.create.mixing(results, ingredients).heated()
+     }
+
+     var globalFluidMixing = (results, ingredients) => {
+          fluidMixing(results, ingredients)
+     }
+
+     var globalChilling = (results, ingredients) => {
+          chilling(results, ingredients)
      }
 
      // <Insertion> //
@@ -235,8 +270,13 @@ function getRecipeFunctions(event) {
           toolDamagingShaped: toolDamagingShaped,
           toolDamagingShapeless: toolDamagingShapeless,
           kilnSmelting: kilnSmelting,
+          fluidMixing: fluidMixing,
+          componentAssembly: componentAssembly,
+          chilling: chilling,
           globalCrushing: globalCrushing,
           globalAlloySmelting: globalAlloySmelting,
+          globalFluidMixing: globalFluidMixing,
+          globalChilling: globalChilling,
           // <Insertion> //
           insert: insert,
           modify: modify,

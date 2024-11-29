@@ -20,6 +20,13 @@ ServerEvents.tags('block', event => {
     comfuncs.invokeSignedCalls('commonTags', context)
 })
 
+ServerEvents.tags('fluid', event => {
+    comfuncs.invokeSignedCalls('fluidTags', {
+        event: event,
+        funcs: getTagFunctions(event)
+    })
+})
+
 ServerEvents.highPriorityData(event => {
     comfuncs.invokeSignedCalls('basicLootTables', {
         event: event,
@@ -55,6 +62,10 @@ function itemTags(call) {
 
 function blockTags(call) {
     impl('blockTags', call)
+}
+
+function fluidTags(call) {
+    impl('fluidTags', call)
 }
 
 function commonTags(call) {

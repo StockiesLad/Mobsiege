@@ -1,6 +1,3 @@
 recipes((event, funcs) => {
-     event.shapeless(
-          Item.of(AlmostUnified.getPreferredItemForTag('forge:dusts/rose_gold').getIdLocation(), 2), 
-          [AlmostUnified.getPreferredItemForTag('forge:dusts/copper'), AlmostUnified.getPreferredItemForTag('forge:dusts/gold')]
-     )
+     event.shapeless(Item.of(funcs.preferredItem('forge:dusts/rose_gold'), 3), [Item.of(funcs.preferredItem('forge:dusts/copper'), 2), funcs.preferredItem('forge:dusts/gold')])
 })
