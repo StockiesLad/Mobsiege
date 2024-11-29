@@ -35,7 +35,7 @@ isCreeperBreaching = true
 #Do entities bounce when they touch water? Default = true.
 isOceanSurfing = true
 #Allow Sleeping?
-allowSleep = false
+allowSleep = true
 #Allow Monster Infighting?
 allowMonsterInfighting = false
 #Allow Zombies and Piglins to light flammable things on fire?

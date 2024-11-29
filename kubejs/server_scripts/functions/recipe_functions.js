@@ -80,6 +80,11 @@ function getRecipeFunctions(event) {
           chilling(results, ingredients)
      }
 
+     var globalPressing = (results, ingredients) => {
+          event.recipes.create.pressing(results, ingredients)
+          event.recipes.thermal.press(results, ingredients)
+     }
+
      // <Insertion> //
      /* 
           //  DON'T ACCIDENTALLY DUPLICATE INDEXES! AN INDEX WILL ONLY CONSIDER THE FIRST KEY AND EVERY OTHER WILL BE IGNORED!!!
@@ -277,6 +282,7 @@ function getRecipeFunctions(event) {
           globalAlloySmelting: globalAlloySmelting,
           globalFluidMixing: globalFluidMixing,
           globalChilling: globalChilling,
+          globalPressing: globalPressing,
           // <Insertion> //
           insert: insert,
           modify: modify,

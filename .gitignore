@@ -31,6 +31,7 @@
 !/config/ferritecore-mixin.toml
 !/config/c2me.toml
 !/config/modernfix-mixins.properties
+!/config/fml.toml
 #Difficulty
 !/config/improvedmobs
 !/config/incontrol
@@ -40,6 +41,7 @@
 !/config/primalstage.json5
 !/config/toughasnails
 !/config/hardcore_torches-common.toml
+!/config/angrymobs-common.toml
 #Worldgen
 !/config/the_bumblezone
 !/config/traverse

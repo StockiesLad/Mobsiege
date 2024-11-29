@@ -1,6 +1,7 @@
 ClientEvents.lang('en_us', event => {
     var rename = [
-        ['hardcore_torches:fire_starter', 'Fire Starter (One time)'],
+        ['hardcore_torches:fire_starter', 'Single Use Fire Starter'],
+        ['notreepunching:fire_starter', 'Fire Bow'],
         ['betterend:crystalline_sulphur', 'Crystalline Sulphur'],
         ['betterend:charcoal_block', 'Charcoal Sand'],
         ['ae2:smooth_sky_stone_chest', 'Smooth Sky Stone Chest'],

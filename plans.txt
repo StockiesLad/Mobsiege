@@ -75,18 +75,12 @@ acheivements {
 }
 
 complex recipes {
-	guns from machines
-	turrets from machines
+	turrets (mekanism turrets are fine)
 	water canteens from machines
 	elytra from everything endgame
 	nukes (+ alexscaves utilisation)
-	uncrafting table
 	transmutation table (make this extremely expensive)
 	emc collector (extremely expensive)
-	angel rings (expensive)
-	beds and comforts (what do I do here????)
-	quarry recipe
-	lucky blocks
 }
 
 total {
@@ -123,15 +117,16 @@ fix initial inventory open lag
 fix productive trees tag problems (maybe cucumber lib)
 almostunified compat with immersive engineering & productive bees
 fix broken alexs mobs lang file
-duplication recipes
+duplication recipes (tome of alkahestry)
 mandatory hardcore darkness
 difficulty locking
 totem of undying replacement with recipe
 elytra replacement with recipe
-fix ridiculously slow data
+make sleeping stage (https://discord.com/channels/303440391124942858/1047320998199955458/threads/1140745855293460570)
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+fix ridiculously slow data
 holystone into ores
 magnetic caves and magnetite usages
 unify tech mods (and cull redundant ones)
@@ -150,6 +145,8 @@ recipes {
 	construction wand
 	magnets
 	add fluid crafting for thermal like the good ol days
+	guns from machines
+	uncrafting table
 }
 make plant fiber easily accessible (low priority)
 twigs and this rocks compat
