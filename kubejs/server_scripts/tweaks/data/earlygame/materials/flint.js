@@ -6,3 +6,4 @@ recipes((event, funcs) => {
           generate('2x minecraft:gravel', ['aether_redux:driftshale', '#mobsiege:mud']).rollingSquare(1, 2)
      ])
 })
+

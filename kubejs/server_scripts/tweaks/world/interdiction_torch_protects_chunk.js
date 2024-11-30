@@ -3,13 +3,13 @@ BlockEvents.placed('projecte:interdiction_torch', event => {
      var pos = event.block.getPos()
      //if (!area.chunks.some(chunk => chunk.getRegionX() == safeChunk.getRegionX() && chunk.getRegionZ() == safeChunk.getRegionZ()))
      var chunkPos = level.getChunkAt(pos).getPos()
-     getSafeAreas(level).regions.push({regionX: chunkPos.getRegionX(), regionZ: chunkPos.getRegionZ(), originX: pos.getX(), originY: pos.getY(), originZ: pos.getZ()})
-     uploadData(level.getServer())
+     getSafeRegions(level).regions.push({regionX: chunkPos.getRegionX(), regionZ: chunkPos.getRegionZ(), originX: pos.getX(), originY: pos.getY(), originZ: pos.getZ()})
+     uploadSafeRegionData(level.getServer())
 })
 
 BlockEvents.broken('projecte:interdiction_torch', event => {
      var {level} = event
-     var area = getSafeAreas(level)
+     var area = getSafeRegions(level)
      var chunk = level.getChunkAt(event.block.getPos()).getPos()
      var expired = false
 
@@ -19,37 +19,37 @@ BlockEvents.broken('projecte:interdiction_torch', event => {
                return false
           } else return true
      })
-     uploadData(level.getServer())
+     uploadSafeRegionData(level.getServer())
 
 })
 
-var safeAreas
+var safeRegions
 var dataName = 'safeRegions'
 
-function getSafeAreas(level) {
-     safeAreas = level.getServer().persistentData[dataName]
-     if (safeAreas == null)
-          safeAreas = []
+function getSafeRegions(level) {
+     safeRegions = level.getServer().persistentData[dataName]
+     if (safeRegions == null)
+          safeRegions = []
      var area = null
-     safeAreas.forEach(safeArea => {
+     safeRegions.forEach(safeArea => {
          if (safeArea.dimension == level.dimension.toString())
              area = safeArea
      })
      if (area == null) {
          area = {dimension: level.dimension.toString(), regions: []}
-         safeAreas.push(area)
+         safeRegions.push(area)
      }
      return area
 }
 
-function uploadData(server) {
-     server.persistentData[dataName] = safeAreas
+function uploadSafeRegionData(server) {
+     server.persistentData[dataName] = safeRegions
 }
 
 function isChunkSafe(level, chunkPos) {
-     var area = getSafeAreas(level)
+     var area = getSafeRegions(level)
      area.regions = area.regions.filter(region => level.getBlock(new BlockPos(region.originX, region.originY, region.originZ)).equals('projecte:interdiction_torch'))
-     uploadData(level.getServer())
+     uploadSafeRegionData(level.getServer())
      return area.regions.some(position => chunkPos.getRegionX() === position.regionX && chunkPos.getRegionZ() === position.regionZ)
 }
  

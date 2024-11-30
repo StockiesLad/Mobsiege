@@ -1,22 +1,6 @@
 presentation {
-	Comp Shaders + Euphoria Patches + my own patches (PR to Euphoria Patches) (foliage + Reflective Surfaces + Liquids)
-	YOSBR for config files
 	Main Menu
 	Icon and Window Title
-}
-
-patchouli_topics {
-	performance & options (cull_less_leaves, sodium + extras, hardcore darkness, effective, JEI)
-	difficulty warning (describe epic seige, zombie awareness, farsighted mobs, sleeping overhaul, infernal mobs, nucleepers, etc)
-	dungeons (type of dungeons to explore and fight)
-	overworld start (making basic tools, charcoal, clay, firestarters, hardcore torches)
-	things to work for (orb_of_thermoregulation)
-	aether start (drift shale and mud to flint)
-	nether start (vines to sticks)
-	end start (vines to sticks,  black wart to flint)
-	edenring start
-	blitz and breeze spawns (aercloud ambushes)
-	interdiction torch for mobsieges
 }
 
 acheivements {
@@ -74,7 +58,6 @@ acheivements {
 
 complex recipes {
 	turrets (mekanism turrets are fine)
-	bedrock tools
 }
 
 custom settings {
@@ -83,12 +66,15 @@ custom settings {
 
 aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
 
-starting items
-fix initial inventory open lag
 fix broken status effects on world reload
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+starting items
+patchouli {
+	overworld start (making basic tools, charcoal, clay, firestarters, hardcore torches)
+	interdiction torch for mobsieges
+}
 make sleeping stage (https://discord.com/channels/303440391124942858/1047320998199955458/threads/1140745855293460570) && https://discord.com/channels/303440391124942858/1047320998199955458/threads/1221818425681248286
 totem of undying replacement with recipe
 coal explosion + hardcore torches compat (tags)

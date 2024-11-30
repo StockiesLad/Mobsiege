@@ -1,0 +1,15 @@
+{
+     "name": "Interdiction Torch",
+     "icon": "minecraft:writable_book",
+     "category": "patchouli:advanced_progression",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "The Interdiction Torch is a very important device that is used to prevent mob interferences. One of the first to use the gravitium alloy. In spite of it being rather expensive, it is well worth it. The first function is the repulsion of all hostile mobs away from a designated distance like an invisible force field. It's second function is to protect whichever chunk its in against mobsieges. I.e mobsieges cannot occur in a chunk that is protected by an interdiction torch. Due to its nature, you can place it deep underground, sacrificing its force-field effect for the guaranteed mobsiege prevention."
+          },
+          {
+               "type": "patchouli:text",
+               "text": "The interdiction torch also has a third function, branching off of the last two. Due to it being such an effective mob repellant, it is able to overcome the vulnerability that prevents players from sleeping."
+          }
+     ]
+}

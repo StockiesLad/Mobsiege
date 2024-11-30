@@ -7,15 +7,15 @@ recipes((event, funcs) => {
      funcs.insertAll(insertion => insertion.vanilla(), [
           generate('4x primalstage:sandy_clay_compound', ['#forge:sand', 'minecraft:clay']).rollingSquare(1, 2),
           generate(comfuncs.packDef('advanced_fire_bricks'), comfuncs.packDef('advanced_fire_brick')).flatSquare(2),
-          generate(comfuncs.packDef('advanced_clay_compound'), ['thermal:constantan_dust', 'primalstage:sandy_clay_compound', 'thermal:invar_dust']).rollingSquare(1, 2),
-          generate('2x minecraft:clay', ['#forge:sand', '#mobsiege:jelly_blocks']).rollingSquare(1, 2),
-          generate('2x minecraft:clay', ['#forge:sand', '#minecraft:wart_blocks']).rollingSquare(1, 2),
-          generate('2x minecraft:clay', ['aether_redux:holysilt', '#mobsiege:mud']).rollingSquare(1, 2),
+          generate(comfuncs.packDef('advanced_clay_compound'), ['#forge:dusts/redstone', 'primalstage:sandy_clay_compound', '#forge:gems/lapis']).rollingSquare(1, 2),
+          generate('2x minecraft:clay', ['#forge:sand', funcs.def('|jelly_blocks')]).rollingSquare(1, 2),
+          generate('2x minecraft:clay', ['#forge:sand', funcs.def('|wart_blocks')]).rollingSquare(1, 2),
+          generate('2x minecraft:clay', ['aether_redux:holysilt', funcs.def('|mud')]).rollingSquare(1, 2),
      ])
-     event.campfireCooking('primalstage:kiln_brick', 'primalstage:sandy_clay_compound')
+     event.campfireCooking('primalstage:kiln_brick', 'primalstage:sandy_clay_compound').xp(0.05)
      event.smelting('primalstage:kiln_brick', 'primalstage:sandy_clay_compound').xp(0.05)
      event.blasting('primalstage:kiln_brick', 'primalstage:sandy_clay_compound').xp(0.05)
-     event.campfireCooking(comfuncs.packDef('advanced_fire_brick'), comfuncs.packDef('advanced_clay_compound'))
+     event.campfireCooking(comfuncs.packDef('advanced_fire_brick'), comfuncs.packDef('advanced_clay_compound')).xp(0.05)
      event.smelting(comfuncs.packDef('advanced_fire_brick'), comfuncs.packDef('advanced_clay_compound')).xp(0.05)
      event.blasting(comfuncs.packDef('advanced_fire_brick'), comfuncs.packDef('advanced_clay_compound')).xp(0.05)
 })

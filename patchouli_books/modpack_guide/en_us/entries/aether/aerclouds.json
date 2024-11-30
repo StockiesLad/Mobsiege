@@ -1,0 +1,16 @@
+{
+     "name": "Aerclouds",
+     "icon": "minecraft:writable_book",
+     "category": "patchouli:aether",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "There are many different types of aerclouds that do different things. Aerclouds can be used as a cheap and fast method for transferring entities."
+          },
+          {
+               "type": "patchouli:text",
+               "title": "Aercloud Functions",
+               "text": "Golden Aercloud => Down, Purple Aercloud => Horizontal (Place), Blue Aercloud => Up, Green Aercloud => Random (Variable)"
+          }
+     ]
+}

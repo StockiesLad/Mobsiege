@@ -37,7 +37,7 @@ itemTags((event, funcs) => {
         'quark:charcoal_block',
         'blockus:charcoal_block',
     ])
-    coalStorageBlocks = event.get('minecraft:coals').getObjectIds().map(entry => funcs.preferredItem('forge:storage_blocks/' + entry.toString().split(':')[1]))
+    coalStorageBlocks = event.get('forge:coal').getObjectIds().map(entry => funcs.preferredItem('forge:storage_blocks/' + entry.toString().split(':')[1]))
     event.add(comfuncs.packDef('storage_blocks/coals'), coalStorageBlocks)
 })
 

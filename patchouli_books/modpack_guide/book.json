@@ -1,0 +1,7 @@
+{
+    "name": "A Hostile World",
+    "landing_text": "If you haven't found out already, wood is not mineable by hand - one of many changes. Here, you will be guided on how to start and what to expect later on.",
+    "version": 1,
+    "creative_tab": "minecraft:tools_and_utilities",
+    "use_resource_pack": true
+}

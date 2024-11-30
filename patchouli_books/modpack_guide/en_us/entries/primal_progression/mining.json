@@ -1,0 +1,16 @@
+{
+     "name": "Primitive Mining",
+     "sortnum": 4,
+     "icon": "minecraft:writable_book",
+     "category": "patchouli:primal_progression",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "While most ores are not mineable, there are two exceptions: sulfur and niter ore. The availability of these two materials enables a different approach to mining. If you combine these two materials with charcoal, you get gunpowder. When combined with sandy clay, you get TNT. By exploding it near the ores, you can get the iron you've been waiting for this entire time... and more."
+          },
+          {
+               "type": "patchouli:text",
+               "text": "Since making a furnace requires a more advanced compound, you must first make a kiln to smelt your ores. In order to do so, you need to use the same sandy clay you used for TNT, but instead to smelt it into kiln bricks. A kiln smelts raw blocks as a whole only. So you'll need to acquire enough of the same resource to make one. With your raw block, right click it in the kiln, then sustain a fire directly below to kiln to smelt it. Once completed, sneak and right click to collect it."
+          }
+     ]
+}

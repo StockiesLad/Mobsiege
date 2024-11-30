@@ -13,7 +13,7 @@
 
 !/config
 /config/*
-#Visual
+#Tweaks
 !/config/fancymenu
 !/config/securitycraft-client.toml
 !/config/betterf3.toml

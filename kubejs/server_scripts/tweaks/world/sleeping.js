@@ -58,7 +58,7 @@ BlockEvents.rightClicked(event => {
     var level = event.getLevel()
     var block = event.getBlock()
     if (block.hasTag(comfuncs.packDef('sleeping_blocks')) && !isChunkSafe(level, level.getChunkAt(block.getPos()).getPos())) {
-        event.entity.tell('You cannot sleep as the current chunk is not protected by an interdiction torch!')
+        event.entity.tell('You are too vulnerable to sleep. Use an interdiction torch to protect yourself!')
         event.cancel()
     }
 })
