@@ -11,6 +11,10 @@ function getTagFunctions(event) {
         return AlmostUnified.getPreferredItemForTag(tag).getIdLocation().toString()
     }
 
+    var preferredItemOf = (tag) => {
+        return Item.of(preferredItem(tag))
+    }   
+
     var replaceTag = (item, removedTag, addedTag) => {
         event.remove(removedTag, item)
         event.add(addedTag, item)
@@ -67,6 +71,7 @@ function getTagFunctions(event) {
         of: of,
         def: def,
         preferredItem: preferredItem,
+        preferredItemOf: preferredItemOf,
         replaceTag: replaceTag,
         replaceItem: replaceItem,
         handle: handle,

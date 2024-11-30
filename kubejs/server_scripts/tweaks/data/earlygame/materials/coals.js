@@ -29,6 +29,7 @@ basicLootTables((event, funcs) => {
         )
     )
 })
+
 itemTags((event, funcs) => {
     event.remove('forge:storage_block/charcoal', 'betterend:charcoal_block')
     event.add('forge:storage_blocks/charcoal', [

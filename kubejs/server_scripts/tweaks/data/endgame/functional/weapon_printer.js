@@ -1,7 +1,7 @@
 recipes((event, funcs) => {
      funcs.replaceOutputRecipe('pointblank:printer', r => funcs.insert(r, [
           ['ae2:controller', 12], 
-          ['create:mechanical_arm', [11, 13]], 
+          ['immersiveengineering:conveyor_basic', [11, 13]], 
           ['mekanism:ultimate_compressing_factory', 7], 
           ['mekanism:precision_sawmill', 17], 
           ['projecte:dark_matter_block', [6, 8, 16, 18]], 

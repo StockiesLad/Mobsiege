@@ -27,9 +27,9 @@ var woodSet = (modid, type) => {
 
 comfuncs.hide([
      'primalstage:diamond_plate',
-     'primalstage:charcoal_log',
-     'biomeswevegone:tall_prairie_grass', 
-     'biomeswevegone:prairie_grass'
+     'primalstage:charcoal_log'
+     /*'biomeswevegone:tall_prairie_grass', 
+     'biomeswevegone:prairie_grass'*/
 ])
 
 comfuncs.hide(woodSet('traverse', 'fir'))
@@ -41,6 +41,20 @@ comfuncs.hide(woodSet('biomesoplenty', 'redwood'))
 recipes((event, funcs) => {
      event.remove({id: 'quark:tweaks/crafting/slab_to_block'})
 })
+/*
+ServerEvents.recipes(event => {
+     event.forEachRecipe({type: 'thermal:press'}, recipe => {
+          var ingredients = recipe.getOriginalRecipeIngredients()
+          var result = recipe.getOriginalRecipeResult()
+          console.info(recipe.getId())
+          console.info(ingredients)
+          console.info(ingredients.size())
+          console.info(result)
+          if (!event.containsRecipe({input: ingredients, output: result, type: 'create:pressing'}) && ingredients.size() == 1) {
+               event.recipes.create.pressing(result, ingredients[0])
+          }
+     })
+})*/
 
 itemTags((event, funcs) => {
      event.add('forge:storage_blocks/sulfur', 'cinderscapes:sulfur_block')

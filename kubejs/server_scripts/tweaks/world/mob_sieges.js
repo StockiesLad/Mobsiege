@@ -133,7 +133,7 @@ LevelEvents.tick(event => {
           + '\n}'
 
         )
-        if (spawnDist < spawnDistMax && isPlayerOnSurface && !(isProtected && playerInSafeBiome && isPlayerCreative)) {
+        if (spawnDist < spawnDistMax && isPlayerOnSurface && !isProtected && !playerInSafeBiome && !isPlayerCreative) {
             level.tell('[Mobsiege] ' + comfuncs.interlaceString(getRandomElement(random, announcements), [
                 {name: 'playerName', value: player.getName().getString()}, 
                 {name: 'siegeGroup', value: siegeGroup.name}, 
