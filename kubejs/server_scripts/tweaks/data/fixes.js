@@ -43,16 +43,35 @@ recipes((event, funcs) => {
 })
 /*
 ServerEvents.recipes(event => {
+     
      event.forEachRecipe({type: 'thermal:press'}, recipe => {
-          var ingredients = recipe.getOriginalRecipeIngredients()
-          var result = recipe.getOriginalRecipeResult()
-          console.info(recipe.getId())
+          var json  = recipe.json
+          var ingredients = json.get('ingredients')
+          var result = json.get('result')
+          var fail = false
+          console.info(json)
           console.info(ingredients)
-          console.info(ingredients.size())
+          console.info(typeof(ingredients))
+          if (ingredients instanceof Array)
+               ingredients = [ingredients]
+          console.info(ingredients)
           console.info(result)
-          if (!event.containsRecipe({input: ingredients, output: result, type: 'create:pressing'}) && ingredients.size() == 1) {
-               event.recipes.create.pressing(result, ingredients[0])
-          }
+          ingredients.forEach(i => {
+               if (i.has('fluid'))
+                    fail = true
+
+          })
+
+          result.forEach(r => {
+               if (r.has('fluid'))
+                    fail = true
+          })
+          if (!fail)
+               if (!event.containsRecipe({input: ingredients, output: result, type: 'create:pressing'}))
+                    if ((ingredients.length == 1 || (ingredients.length == 2 && comfuncs.functionalVar(ingredients[1]['item'], i => i != null && Item.of(i).getTags().contains('thermal:crafting/dies'))) && result.length == 1)) {
+                         console.info(`PASSED: ${recipe.getId()}`)
+                         event.recipes.create.pressing(result[0], ingredients[0])
+               }
      })
 })*/
 

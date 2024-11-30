@@ -42,6 +42,9 @@
 !/config/toughasnails
 !/config/hardcore_torches-common.toml
 !/config/angrymobs-common.toml
+!/config/difficultylock.json5
+!/config/coalexplosion-common.toml
+!/config/quark-common.toml
 #Worldgen
 !/config/the_bumblezone
 !/config/traverse

@@ -3,6 +3,7 @@ itemTags((event, funcs) => {
 })
 
 commonTags((event, funcs) => {
+     //event.add('forge:storage_blocks/sulfur', 'cinderscapes:sulfur_block')
      event.add('forge:storage_blocks/sulfur', [
           'cinderscapes:sulfur_block', 
           'alexscaves:sulfur'

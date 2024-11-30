@@ -115,6 +115,10 @@ WorldgenEvents.remove(event => {
             'silentgems:ruby_end_ore',
             'silentgems:ruby_nether_ore',
             'silentgems:ruby_ore',
+            'embers:deepslate_lead_ore', 
+            'embers:lead_ore',
+            'embers:deepslate_silver_ore', 
+            'embers:silver_ore',
 
             //Removed in config
             'immersiveengineering:deepslate_ore_uranium', 

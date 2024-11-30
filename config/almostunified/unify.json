@@ -35,8 +35,9 @@
   ],
   "stoneStrata": [
     "stone",
-    "nether",
-    "end",
+    "gravel",
+    "netherrack",
+    "endstone",
     "deepslate",
     "granite",
     "diorite",

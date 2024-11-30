@@ -3,8 +3,6 @@ presentation {
 	YOSBR for config files
 	Main Menu
 	Icon and Window Title
-	Default Options (narrator = 0, darkness = pitchBlack)
-	Default World Options (difficulty = Hard)
 }
 
 patchouli_topics {
@@ -76,49 +74,27 @@ acheivements {
 
 complex recipes {
 	turrets (mekanism turrets are fine)
-	elytra from everything endgame
-}
-
-
-systematic modifications {
-	oil unification
-	liquid unification
-	loot table unification
-	food
+	bedrock tools
 }
 
 custom settings {
 	resourcepacks=[],
-	narrator off
-	toasts off
-	hardcore darkness on
-}
-
-exploration {
-    alex's mobs interaction
-    divineRPG
-    the abyss
-    betweenlands
 }
 
 aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
 
-fix broken status effects on reload
 starting items
-coal explosion + hardcore torches compat (tags)
-fix not dying in space without suit
 fix initial inventory open lag
-fix productive trees tag problems (maybe cucumber lib)
-almostunified compat with immersive engineering & productive bees
-fix broken alexs mobs lang file
-mandatory hardcore darkness
-difficulty locking
-totem of undying replacement with recipe
-elytra replacement with recipe
-make sleeping stage (https://discord.com/channels/303440391124942858/1047320998199955458/threads/1140745855293460570) && https://discord.com/channels/303440391124942858/1047320998199955458/threads/1221818425681248286
+fix broken status effects on world reload
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+make sleeping stage (https://discord.com/channels/303440391124942858/1047320998199955458/threads/1140745855293460570) && https://discord.com/channels/303440391124942858/1047320998199955458/threads/1221818425681248286
+totem of undying replacement with recipe
+coal explosion + hardcore torches compat (tags)
+difficulty locking
+mandatory hardcore darkness
+almostunified compat with immersive engineering & productive bees
 duplication recipes (tome of alkahestry) (gravilite)
 fix ridiculously slow data
 holystone into ores
@@ -144,7 +120,8 @@ recipes {
 	water canteens
 	transmutation table (make this extremely expensive)
 	emc collector (extremely expensive)
-	nukes (+ alexscaves utilisation)
+	nukes (+ alexscaves utilisation),
+	elytra
 }
 make plant fiber easily accessible (low priority)
 twigs and this rocks compat

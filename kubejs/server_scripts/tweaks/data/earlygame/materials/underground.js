@@ -68,7 +68,7 @@ complexLootTables((event, funcs) => {
 })
 
 blockTags((event, funcs) => {
-     event.add('forge:ores', [
+     /*event.add('forge:ores', [
           'gravelores:coal_gravel_ore',
           'gravelores:iron_gravel_ore',
           'gravelores:redstone_gravel_ore',
@@ -87,10 +87,34 @@ blockTags((event, funcs) => {
           'gravelores:silver_gravel_ore',
           'gravelores:aluminum_gravel_ore',
           'gravelores:cobalt_gravel_ore'
-     ])
+     ])*/
      event.add('minecraft:needs_iron_tool', event.get('forge:ores').getObjectIds().filter(ore => {
           ore = ore.toString()
           return !(ore.includes('sulfur') || ore.includes('niter'))
      }))
-     event.add('forge:storage_blocks/sulfur', 'cinderscapes:sulfur_block')
+})
+
+commonTags((event, funcs) => {
+     comfuncs.iterate([
+          'gravelores:emerald_gravel_ore',
+          'gravelores:coal_gravel_ore',
+          'gravelores:redstone_gravel_ore',
+          'gravelores:silver_gravel_ore',
+          'gravelores:aluminum_gravel_ore',
+          'gravelores:copper_gravel_ore',
+          'gravelores:cobalt_gravel_ore',
+          'gravelores:iron_gravel_ore',
+          'gravelores:osmium_gravel_ore',
+          'gravelores:quartz_gravel_ore',
+          'gravelores:nickel_gravel_ore',
+          'gravelores:zinc_gravel_ore',
+          'gravelores:coal_gravel_ore',
+          'gravelores:uranium_gravel_ore',
+          'gravelores:lead_gravel_ore',
+          'gravelores:diamond_gravel_ore',
+          'gravelores:tin_gravel_ore',
+          'gravelores:lapis_gravel_ore',
+          'gravelores:gold_gravel_ore'
+     ], ore => event.add('forge:ores/' + ore.split(':')[1].replace('_gravel_ore', ''), ore))
+     event.add('forge:ores/oil', ['thermal_and_space:oil_mars_sand', 'thermal_and_space:oil_moon_sand', 'thermal_and_space:oil_venus_sand', 'thermal:oil_sand', 'thermal:oil_red_sand'])
 })

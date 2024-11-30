@@ -18,7 +18,7 @@ const surfaceSearchDist = 20
 const MOB_SIEGES = [
     {
         name: 'Bliztic Barrage',
-        type: 'blazes',
+        type: 'blaze',
         members: [
             'minecraft:blaze',
             'thermal:basalz',
@@ -79,6 +79,60 @@ const MOB_SIEGES = [
             'minecraft:creeper'
         ]
     },
+    {
+        name: 'Skeletal Slaughter',
+        type: 'skeleton',
+        members: [
+            'betternether:jungle_skeleton',
+            'minecraft:skeleton',
+            'minecraft:skeleton_horse',
+            'minecraft:wither_skeleton',
+            'promenade:sunken_skeleton',
+            'mekanismadditions:baby_skeleton',
+            'mekanismadditions:baby_wither_skeleton'
+        ]
+    },
+    {
+        name: 'Undead Uprising',
+        type: 'zombie',
+        members: [
+            'minecraft:zombie_villager',
+            'minecraft:zombie',
+            'undead_revamp2:theheavy',
+            'undead_revamp2:thespitter',
+            'undead_revamp2:bomber',
+            'undead_revamp2:thebidy',
+            'undead_revamp2:clogger',
+            'undead_revamp2:therod',
+            'undead_revamp2:deadclogger',
+            'undead_revamp2:thepregnant',
+            'undead_revamp2:thelurker',
+            'undead_revamp2:thehorrors',
+            'undead_revamp2:thehorrors',
+            'undead_revamp2:thehorrors',
+            'undead_revamp2:thehorrorsdecoys',
+            'undead_revamp2:thesmoker',
+            'undead_revamp2:theskeeper',
+            'undead_revamp2:theimmortal',
+            'undead_revamp2:thebeartamer',
+            'undead_revamp2:thewolf',
+            'undead_revamp2:slaveman',
+            'undead_revamp2:theswarmer',
+            'undead_revamp2:invisiclogger',
+            'undead_revamp2:invisiimmortal',
+            'undead_revamp2:invisiblebidy',
+            'undead_revamp2:neocrorines',
+            'undead_revamp2:thedungeon',
+            'undead_revamp2:thegliter',
+            'undead_revamp2:thespectre',
+            'undead_revamp2:the_moonflower',
+            'undead_revamp2:theordure',
+            'undead_revamp2:sucker',
+            'undead_revamp2:thehunter',
+            'undead_revamp2:thesomnolence',
+            'undead_revamp2:bigsucker'
+        ]
+    }
 ]
 
 //Announcements for server chat
@@ -110,7 +164,7 @@ LevelEvents.tick(event => {
         let isPlayerOnSurface = testUnderground(level, playerPos).length > 1
         let isPlayerCreative = player.isCreative()
         let siegeBlockPos = new BlockPos(player.getX() + varRandInt(random, spawnDistBase, spawnDistVariation), player.getY(), player.getZ() + varRandInt(random, spawnDistBase, spawnDistVariation))
-        let isProtected = getArea(level).chunks.some(safeChunk => playerChunkPos.getRegionX() == safeChunk.getRegionX() && playerChunkPos.getRegionZ() == safeChunk.getRegionZ())
+        let isProtected = isChunkSafe(level, playerChunkPos)
         let spawnDist = commaths.diff(siegeBlockPos.getY(), player.getY())
         let mobCount = random.nextInt(mobCountVariation) + mobCountBase
 
@@ -184,41 +238,6 @@ LevelEvents.tick(event => {
         } else if (isProtected) level.tell(`[Mobsiege] An interdiction torch protected ${player.getName().getString()} against a mob siege!`)
     }
 })
-
-const safeAreas = []
-
-BlockEvents.placed('projecte:interdiction_torch', event => {
-    var {level} = event
-    //if (!area.chunks.some(chunk => chunk.getRegionX() == safeChunk.getRegionX() && chunk.getRegionZ() == safeChunk.getRegionZ()))
-    getArea(level).chunks.push(level.getChunkAt(event.block.getPos()).getPos())
-})
-
-BlockEvents.broken('projecte:interdiction_torch', event => {
-    var {level} = event
-    var area = getArea(level)
-    var safeChunk = level.getChunkAt(event.block.getPos()).getPos()
-    var expired = false
-
-    area.chunks = area.chunks.filter(chunk => {
-        if (!(chunk.getRegionX() == safeChunk.getRegionX() && chunk.getRegionZ() == safeChunk.getRegionZ() && expired)) {
-            expired = true
-            return false
-        } else return true
-    })
-})
-
-function getArea(level) {
-    var area = null
-    safeAreas.forEach(safeArea => {
-        if (safeArea.dimension == level.dimension)
-            area = safeArea
-    })
-    if (area == null) {
-        area = {dimension: level.dimension, chunks: []}
-        safeAreas.push(area)
-    }
-    return area
-}
 
 function getScanningDirections() {
     let allDirections = []
