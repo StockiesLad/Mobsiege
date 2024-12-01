@@ -1,1 +1,9 @@
-[]
+[
+     {
+          "name": "grace_period",
+          "conditions": {
+              "maxdaycount": 0,
+              "mintime": 15000
+          }
+        }
+]

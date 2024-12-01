@@ -10,15 +10,15 @@
         },
         {
             "type": "patchouli:text",
-            "text": "If you use EMI to look at the hatchet recipe, you can see that plant string and flint shards are needed, which you don't have. With your newly gathered flint, right click it on any stone surface to knack it. After a couple times you should have flint shards. As for your plant fiber, put 3 of them in your 2x2 crafting grid to create plant string."
+            "text": "Use EMI to make yourself a flint knife so that you can harvest plant fiber from leaves. You will get 2x plant fiber per leaf block. It will also make breaking grass yield more sticks & plant fiber so that you don't have to break nearly as much."
         },
         {
             "type": "patchouli:text",
-            "text": "Now you should have your first tool. You can now mine wood. To get the rest of your tools, use your flint hatchet to work your logs into planks, and planks into a crafting table. As you may have noticed, saws are generally more effecient for this purpose, so try to get one first chance you get! This concept also applies for clay bricks later on."
+            "text": "Looking at the hatchet recipe, you can see that plant string and flint shards are needed, which you don't have. With flint, right click on any stone surface to knack it. After a couple times you should have flint shards. As for your plant fiber, put 3 of them in your 2x2 crafting grid to create plant string."
         },
         {
-             "type": "patchouli:empty",
-             "draw_filler": false
+            "type": "patchouli:text",
+            "text": "Now you should have your first tool. You can now mine wood. To get the rest of your tools, use your flint hatchet to work your logs into planks, and planks into a crafting table. Use a campfire to smelt plant string into As you may have noticed, saws are generally more effecient for this purpose, so try to get one first chance you get! This concept also applies for clay bricks later on."
         }
     ]
  }

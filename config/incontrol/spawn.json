@@ -1,5 +1,13 @@
 [
     {
+        "phase": "grace_period",
+        "mincount": {
+            "amount": 5,
+            "hostile": true
+        },
+        "result": "deny"
+    },
+    {
         "mob": ["thermal:blitz", "trials:breeze"],
         "dimension": "aether:the_aether",
         "block": "aether:cold_aercloud",

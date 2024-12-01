@@ -60,16 +60,16 @@ complex recipes {
 	turrets (mekanism turrets are fine)
 }
 
-custom settings {
-	resourcepacks=[],
-}
 
 aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
 
-fix broken status effects on world reload
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+custom settings {
+	resourcepacks,
+}
+fix broken status effects on world reload (vanilla)
 starting items
 patchouli {
 	overworld start (making basic tools, charcoal, clay, firestarters, hardcore torches)

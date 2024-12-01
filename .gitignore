@@ -25,6 +25,8 @@
 !/config/darkmodeeverywhere-client.toml
 !/config/darkmodeeverywhereshaders.json
 !/config.worldstripper
+!/config/defaultoptions
+!/config/pamhc2crops.toml
 #Performance
 !/config/immediatelyfast.json
 !/config/forge-client.toml

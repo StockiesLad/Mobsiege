@@ -6,7 +6,7 @@ const Direction = Java.loadClass('net.minecraft.core.Direction')
 //Modification Variables
 const disable = false
 const testDirections = getScanningDirections()
-const chanceRandomBound = 100000
+const chanceRandomBound = 10000
 const spawnDistBase = 15 
 const spawnDistVariation = 10
 const spawnDistMax = spawnDistBase + spawnDistVariation
