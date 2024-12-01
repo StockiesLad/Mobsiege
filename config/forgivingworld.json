@@ -37,21 +37,11 @@
       "slowfallticks": 400
     },
     {
-      "from": "minecraft:the_end",
-      "to": "minecraft:overworld",
-      "teleporttype": {
-        "teleporttype": "AIR",
-        "teleport_to_y": 300
-      },
-      "belowy": 0,
-      "slowfallticks": 400
-    },
-    {
       "from": "minecraft:the_nether",
-      "to": "minecraft:the_nether",
+      "to": "minecraft:the_end",
       "teleporttype": {
         "teleporttype": "CAVE",
-        "teleport_to_y": 4
+        "teleport_to_y": 280
       },
       "belowy": 0
     },
@@ -68,10 +58,10 @@
     },
     {
       "from": "minecraft:overworld",
-      "to": "minecraft:overworld",
+      "to": "aether:the_aether",
       "teleporttype": {
         "teleporttype": "AIR",
-        "teleport_to_y": 360
+        "teleport_to_y": 16
       },
       "abovey": 364
     }

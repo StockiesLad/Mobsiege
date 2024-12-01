@@ -1,9 +1,11 @@
 [
     {
         "phase": "grace_period",
-        "mincount": {
-            "amount": 5,
-            "hostile": true
+        "when": "onjoin",
+        "hostile": true,
+        "mincount": { 
+            "amount": 5, 
+            "hostile": true 
         },
         "result": "deny"
     },

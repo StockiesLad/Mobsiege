@@ -27,6 +27,7 @@
 !/config.worldstripper
 !/config/defaultoptions
 !/config/pamhc2crops.toml
+!/config/itlt-client.toml
 #Performance
 !/config/immediatelyfast.json
 !/config/forge-client.toml
