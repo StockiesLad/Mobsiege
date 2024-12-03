@@ -1,6 +1,6 @@
 presentation {
 	Main Menu
-	Icon and Window Title
+	Icon
 }
 
 acheivements {
@@ -63,9 +63,37 @@ complex recipes {
 
 aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
 
+Primalcore 2 {
+	Make chance of getting fiber and sticks far lower
+	Implement more complex claying (like potteries)
+	Utilise Grill for food, 
+	make campfire require bricks and grill (maybe stone)
+	More explicit tiers (stone, brick, kiln, firebrick)
+	More advanced charcoal production (use chopped logs in charcoal interaction recipe)
+	Farmers delight integration 
+	more expensive saw
+	different way to make a crafting table
+}
+
+migrate knives
+(later on) add recipe chaining (funcs return output)
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+Primalcore 2 {
+	Slats (decorativeblocks:lattices) out of wood to combat scarcity
+	Make wood less efficient in general
+	Make wood harder to get
+	Make Flint Tools much weaker
+	Make Flint Tools unreliable (break randomly)
+	Harder knife
+	Plant fiber -> plant twine -> Primitive String
+	4 gravel to one flint
+}
+
+presentation {
+	Window Title
+}
 custom settings {
 	resourcepacks,
 }

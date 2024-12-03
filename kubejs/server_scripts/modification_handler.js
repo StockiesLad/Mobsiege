@@ -1,5 +1,5 @@
 const modpackId = global.modpackId
-const comfuncs = global.functions.common()
+const comfuncs = global.functions.common({})
 const commaths = global.functions.math
 
 ServerEvents.tags('item', event => {

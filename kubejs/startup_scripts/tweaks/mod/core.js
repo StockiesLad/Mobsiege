@@ -85,6 +85,16 @@ ItemEvents.modification(event => {
         ['projecte:aeternalis_fuel', aeternalis_fuel],
         ['projecte:aeternalis_fuel_block', aeternalis_fuel_block]
     ], val => event.modify(val[0], item => item.burnTime = val[1]))
+
+    comfuncs.iterate([
+        ['notreepunching:flint_knife', 10],
+        ['primalstage:flint_hatchet', 15],
+        ['notreepunching:flint_shovel', 25],
+        ['notreepunching:flint_hoe', 25],
+        ['notreepunching:flint_pickaxe', 25],
+        ['notreepunching:flint_axe', 25],
+        ['primalstage:flint_mallet', 25]
+    ], vals =>  event.modify(vals[0], item => item.maxDamage = vals[1]))
 })
 
 WorldgenEvents.remove(event => {
@@ -162,8 +172,7 @@ EntityJSEvents.spawnPlacement(event => {
         var level = levelAccessor.level
         var blockId = level.getBlock(blockPos.below())
         if (level.dimension == 'aether:the_aether') {
-            return blockPos.getY() >= 35 && !(blockId == 'aether:golden_aercloud'|| blockId == 'aether_genesis:green_aercloud' || 
-                blockId == 'aether_genesis:purple_aercloud' || blockId == 'aether_redux:blighted_aercloud', blockId == 'deep_aether:chromatic_aercloud')
+            return blockPos.getY() >= 35 && blockId == 'aether:cold_aercloud'
         } else if (overworldArgs != null && level.dimension == 'minecraft:overworld') {
             return overworldArgs(entityType, levelAccessor, spawntype, blockPos, randomSource)
         } else return false
@@ -172,4 +181,3 @@ EntityJSEvents.spawnPlacement(event => {
     handle(TrialsMobs.BREEZE.get(), (entityType, levelAccessor, spawntype, blockPos, randomSource) => Monster.checkMonsterSpawnRules(entityType, levelAccessor, spawntype, blockPos, randomSource))
     handle(TCoreEntities.BLITZ.get(), (entityType, levelAccessor, spawntype, blockPos, randomSource) => Blitz.canSpawn(entityType, levelAccessor, spawntype, blockPos, randomSource))
 })
-  

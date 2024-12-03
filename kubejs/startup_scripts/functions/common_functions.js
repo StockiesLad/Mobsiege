@@ -1,5 +1,7 @@
-function getCommonFunctions() {
-    var storage = {signedCalls: []}
+function getCommonFunctions(storage) {
+    if (storage == null)
+        storage = global.storage
+    else storage.signedCalls = []
 
     var identifier = (mod, path) => {
         return mod + ':' + path

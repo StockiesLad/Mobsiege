@@ -7,12 +7,12 @@ const Direction = Java.loadClass('net.minecraft.core.Direction')
 const disable = false
 const testDirections = getScanningDirections()
 const chanceRandomBound = 10000
-const spawnDistBase = 15 
+const spawnDistBase = 5 
 const spawnDistVariation = 10
 const spawnDistMax = spawnDistBase + spawnDistVariation
 const mobCountBase = 15
 const mobCountVariation = 10
-const surfaceSearchDist = 20
+const surfaceSearchDist = 10
 
 //Mob Siege Types
 const MOB_SIEGES = [

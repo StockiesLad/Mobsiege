@@ -1,4 +1,5 @@
 recipes((event, funcs) => {
+    
      funcs.replace({input: '#notreepunching:h/saws', output: 'minecraft:stick'}, result => {
           funcs.toolDamagingShapeless('2x ' + result, ['#minecraft:saws', '#minecraft:planks'])
           funcs.toolDamagingShapeless('8x ' + result, ['#minecraft:saws', '#minecraft:logs'])
@@ -8,8 +9,8 @@ recipes((event, funcs) => {
           funcs.toolDamagingShapeless('6x ' + result, ['#minecraft:axes', '#minecraft:logs'])
      })
      funcs.replaceTagRecipes({type: 'minecraft:crafting_shapeless', input: ['#minecraft:logs', '#minecraft:axes'], output: '#minecraft:planks'}, (output, ingredients) => {
-          funcs.toolDamagingShapeless(Item.of(output).withCount(3), [ingredients[0], '#minecraft:axes'])
-          funcs.toolDamagingShapeless(Item.of(output).withCount(4), [ingredients[0], '#minecraft:saws'])
+          funcs.toolDamagingShapeless(Item.of(output).withCount(1), [ingredients[0], '#minecraft:axes'])
+          funcs.toolDamagingShapeless(Item.of(output).withCount(2), [ingredients[0], '#minecraft:saws'])
      })
      funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', input: '#aether:skyroot_repairing', output: 'aether:skyroot_stick'}, (output, ingredients) => {
           funcs.toolDamagingShapeless(Item.of(output).withCount(1), [ingredients[0], '#minecraft:axes'])
@@ -17,6 +18,21 @@ recipes((event, funcs) => {
           funcs.toolDamagingShapeless(Item.of(output).withCount(6), [funcs.def('|aether_logs'), '#minecraft:axes'])
           funcs.toolDamagingShapeless(Item.of(output).withCount(8), [funcs.def('|aether_logs'), '#minecraft:saws'])
      })
+     funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: '#minecraft:wooden_slabs'}, (output, ingredients) => {
+          if (!Item.of(ingredients[0]).hasTag('minecraft:logs')) {
+               funcs.toolDamagingShapeless(Item.of(output).withCount(1), [ingredients[0], '#minecraft:axes'])
+               funcs.toolDamagingShapeless(Item.of(output).withCount(2), [ingredients[0], '#minecraft:saws'])
+          }
+     })
+     funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: '#minecraft:wooden_stairs'}, (output, ingredients) => {
+          if (!Item.of(ingredients[0]).hasTag('minecraft:logs')) {
+               funcs.toolDamagingShapeless(Item.of(output).withCount(1), [Item.of(ingredients[0]).withCount(2), '#minecraft:axes'])
+               funcs.toolDamagingShapeless(Item.of(output).withCount(2), [Item.of(ingredients[0]).withCount(2), '#minecraft:saws'])
+          }
+     })
+
+     funcs.replaceOutputRecipe('2x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#minecraft:axes']))
+     funcs.replaceOutputRecipe('3x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#minecraft:saws']))
 })
 
 blockTags((event, funcs) => {

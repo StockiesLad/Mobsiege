@@ -97,8 +97,6 @@ var partialOrganicAether = [
 ]
 
 recipes((event, funcs) => {
-     comfuncs.hide('primalstage:plant_twine')
-
      funcs.removeAll([
           {input: 'minecraft:vine', output: 'notreepunching:plant_fiber'},
           {id: 'notreepunching:plant_fiber_from_leaves_with_knife'}
@@ -109,11 +107,13 @@ recipes((event, funcs) => {
      /*funcs.replace({input: 'minecraft:vine', output: 'notreepunching:plant_fiber'}, result => 
           funcs.toolDamagingShapeless('3x ' + result, [funcs.def('|vines'), '#notreepunching:knives'])
      )*/
+     funcs.replaceOutputRecipe('notreepunching:plant_string', r => event.shapeless(r, Item.of('primalstage:plant_twine').withCount(4)))
+     event.shapeless('primalstage:plant_twine', Item.of('notreepunching:plant_fiber').withCount(2))
 
      funcs.generate('2x betterend:neon_cactus', ['betternether:nether_cactus', 'betternether:neon_equisetum']).rollingSquare(1, 2).next().vanilla()
      funcs.toolDamagingShapeless('2x notreepunching:plant_fiber', ['#minecraft:wart_blocks', '#notreepunching:knives'])
-     funcs.toolDamagingShapeless('notreepunching:plant_fiber', ['#forge:plant', '#notreepunching:knives'])
-     funcs.toolDamagingShapeless('minecraft:stick', ['#forge:plant', '#forge:plant', '#notreepunching:knives'])
+     //funcs.toolDamagingShapeless('notreepunching:plant_fiber', ['#forge:plant', '#notreepunching:knives'])
+     //funcs.toolDamagingShapeless('minecraft:stick', ['#forge:plant', '#forge:plant', '#notreepunching:knives'])
      //funcs.vanillaInsert('2x minecraft:stick', [[funcs.def('|vines'), [0, 2]]])
      //funcs.vanillaInsert('2x aether:skyroot_stick', [[funcs.def('|aether_vines'), [0, 2]]])
 
@@ -167,7 +167,7 @@ complexLootTables((event, funcs) => {
      funcs.removeBlockDrop('primalstage:plant_fiber', 'minecraft:grass')
      funcs.removeBlockDrop('notreepunching:plant_fiber', ['minecraft:grass', 'minecraft:tall_grass'])
 
-     wholeOrganic.forEach(block =>  event.addBlockLootModifier(block).customCondition(conditionMatchTool('notreepunching:knives')).addLoot('notreepunching:plant_fiber'))
+     wholeOrganic.forEach(block =>  event.addBlockLootModifier(block).customCondition(conditionMatchTool('forge:tools/knives')).addLoot('notreepunching:plant_fiber'))
      addOrganicDrops(event, partialOrganic, 'minecraft:stick')
      addOrganicDrops(event, partialOrganicAether, 'aether:skyroot_stick')
 
@@ -180,9 +180,9 @@ function addOrganicDrops(event, blocks, stick)  {
                LootEntry.of(block).when(c => c.customCondition(conditionSilkTouch())),
                LootEntry.of(block).when(c => c.customCondition(conditionMatchTool('forge:shears'))),
                LootEntry.of(stick).when(c => c.randomChance(0.05)),
-               LootEntry.of(stick).when(c => c.randomChance(0.25).customCondition(conditionMatchTool('notreepunching:knives'))),
+               LootEntry.of(stick).when(c => c.randomChance(0.25).customCondition(conditionMatchTool('forge:tools/knives'))),
                LootEntry.of('notreepunching:plant_fiber').when(c => c.randomChance(0.1)),
-               LootEntry.of('notreepunching:plant_fiber').when(c => c.randomChance(0.5).customCondition(conditionMatchTool('notreepunching:knives'))),
+               LootEntry.of('notreepunching:plant_fiber').when(c => c.randomChance(0.5).customCondition(conditionMatchTool('forge:tools/knives'))),
           )
      )
 }

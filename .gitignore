@@ -48,6 +48,8 @@
 !/config/difficultylock.json5
 !/config/coalexplosion-common.toml
 !/config/quark-common.toml
+!/config/treechop-common.toml
+!/config/treechop-client.toml
 #Worldgen
 !/config/the_bumblezone
 !/config/traverse

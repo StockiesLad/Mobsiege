@@ -8,5 +8,5 @@
 	#A list of extra configured items that can cause coal to explode
 	configuredIgniters = []
 	#A list of extra configured blocks that igniters can cause to explode
-	configuredBlocks = ["#forge:ores/oil"]
+	configuredBlocks = ["thermal_and_space:oil_mars_sand", "thermal_and_space:oil_moon_sand", "thermal_and_space:oil_venus_sand", "thermal:oil_sand", "thermal:oil_red_sand"]
 

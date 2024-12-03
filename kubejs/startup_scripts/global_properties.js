@@ -1,7 +1,9 @@
 global.debug = true
 global.modpackId = 'mobsiege'
 global.hiddenItems = []
-//global.signedCalls = []
+global.storage = {
+    signedCalls: []
+}
 
 const commaths = getMathFunctions()
 const comfuncs = getCommonFunctions()
