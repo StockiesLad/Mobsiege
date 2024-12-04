@@ -1,7 +1,8 @@
 function getCommonFunctions(storage) {
     if (storage == null)
         storage = global.storage
-    else storage.signedCalls = []
+    if (storage['signedCalls'] == null)
+        storage.signedCalls = []
 
     var identifier = (mod, path) => {
         return mod + ':' + path
@@ -204,6 +205,12 @@ function getCommonFunctions(storage) {
 
    var functionalVar = (object, handle) => handle(object)
 
+   var notNull = (object, insuredValue) => {
+        if (object == null)
+            object = insuredValue
+        return object
+   }
+
     return {
         storage: storage,
         identifier: identifier,
@@ -238,6 +245,7 @@ function getCommonFunctions(storage) {
         functionalIf: functionalIf,
         functionalTryCatch: functionalTryCatch,
         functionalObject: functionalObject,
-        functionalVar: functionalVar
+        functionalVar: functionalVar,
+        notNull: notNull
     }
 }

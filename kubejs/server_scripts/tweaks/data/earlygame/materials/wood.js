@@ -33,6 +33,7 @@ recipes((event, funcs) => {
 
      funcs.replaceOutputRecipe('2x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#minecraft:axes']))
      funcs.replaceOutputRecipe('3x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#minecraft:saws']))
+
 })
 
 blockTags((event, funcs) => {

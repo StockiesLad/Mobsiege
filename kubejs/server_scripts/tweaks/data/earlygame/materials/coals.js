@@ -13,6 +13,7 @@ recipes((event, funcs) => {
     ])
 
     funcs.generate('2x betterend:charcoal_block', ['#forge:storage_blocks/charcoal', 'minecraft:soul_sand']).rollingSquare(1, 2).next().vanilla()
+    funcs.charring(custom.charred_log_stack, comfuncs.packDef('log_stacks'))
 })
 
 basicLootTables((event, funcs) => { 
@@ -43,6 +44,10 @@ itemTags((event, funcs) => {
 
 blockTags((event, funcs) => {
     event.remove('minecraft:mineable/pickaxe', 'betterend:charcoal_block')
+    event.add(comfuncs.packDef('log_stacks'), custom.log_stack)
+    event.add(comfuncs.packDef('charred_log_stacks'), custom.charred_log_stack)
+    event.add('carbonize:charcoal_pile_valid_fuel',  funcs.def('|log_stacks'))
+
     funcs.unifiedAdd([
         ['carbonize:charcoal_block', ['minecraft:mineable/pickaxe']],
         ['minecraft:needs_stone_tool', [
@@ -54,13 +59,18 @@ blockTags((event, funcs) => {
         ]]
     ])
 
+    var logStacks = [custom.log_stack, custom.charred_log_stack]
+    var parsedBlocks = []
     ForgeRegistries.BLOCKS.getEntries().forEach(blockEntry => {
         try {
             let blockState = blockEntry.getValue().defaultBlockState()
             let fabricfbr = Blocks.FIRE.fabric_getVanillaEntry(blockState)
             if (Shapes.block().equals(blockState.getCollisionShape(null, null, null)))
-                if (!blockState.isFlammable(null, null, null) && !(fabricfbr.getSpreadChance() > 0 || fabricfbr.getSpreadChance() > 0)) 
-                    event.add('carbonize:charcoal_pile_valid_wall', blockEntry.getKey().location().toString())
+                if (!blockState.isFlammable(null, null, null) && !(fabricfbr.getBurnChance() > 0)){
+                    parsedBlocks.push(blockEntry.getKey().location().toString())
+                }
         } catch (err) {}
     })
+
+    event.add('carbonize:charcoal_pile_valid_wall', parsedBlocks.filter(block => !logStacks.some(stack => stack == block)))
 })

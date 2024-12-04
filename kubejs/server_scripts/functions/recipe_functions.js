@@ -34,6 +34,35 @@ function getRecipeFunctions(event) {
           })
      }
 
+     var charring = (result, ingredient) => {
+          return event.custom({
+               type: "carbonize:burn",
+               input: ingredient,
+               output: result
+
+          })
+     }
+
+     var drying = (result, ingredient, cookingTime) => {
+          cookingTime = comfuncs.notNull(cookingTime, 600)
+          return event.custom({
+               type: "primalstage:drying",
+               input: ingredient,
+               cookingtime: cookingTime,
+               result: result
+          })
+     }
+
+     var grilling = (result, ingredient, cookingTime) => {
+          cookingTime = comfuncs.notNull(cookingTime, 600)
+          return event.custom({
+               type: "primalstage:grill",
+               input: ingredient,
+               cookingtime: cookingTime,
+               result: result
+             })
+     }
+
      var fluidMixing = (results, ingredients) => {
           return event.custom({
                type: "thermal_extra:fluid_mixer",
@@ -275,6 +304,9 @@ function getRecipeFunctions(event) {
           toolDamagingShaped: toolDamagingShaped,
           toolDamagingShapeless: toolDamagingShapeless,
           kilnSmelting: kilnSmelting,
+          charring: charring,
+          drying: drying,
+          grilling: grilling,
           fluidMixing: fluidMixing,
           componentAssembly: componentAssembly,
           chilling: chilling,

@@ -1,6 +1,9 @@
+const Containers = Java.loadClass('net.minecraft.world.Containers')
+
 const modpackId = global.modpackId
 const comfuncs = global.functions.common({})
 const commaths = global.functions.math
+const custom = global.customImpl
 
 ServerEvents.tags('item', event => {
     var context = {

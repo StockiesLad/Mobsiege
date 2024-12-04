@@ -11,6 +11,10 @@ ClientEvents.lang('en_us', event => {
         ['alexscaves:uranium_shard', 'Raw Uranium Shard'],
         ['alexscaves:uranium', 'Raw Uranium'],
         ['alexscaves:block_of_uranium', 'Raw Uranium Block'],
+        ['primalstage:sandy_clay_compound', 'Mortar Compound'],
+        ['notreepunching:clay_brick', 'Wet Clay Brick'],
+        ['primalstage:dark_oak_drying_rack', 'Drying Rack'],
+        ['primalstage:dark_oak_logs', 'Split Log']
     ]
 
     rename = concatSeries(rename, [

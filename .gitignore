@@ -35,6 +35,7 @@
 !/config/c2me.toml
 !/config/modernfix-mixins.properties
 !/config/fml.toml
+!/config/logbegone.toml
 #Difficulty
 !/config/improvedmobs
 !/config/incontrol

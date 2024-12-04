@@ -72,7 +72,20 @@ Primalcore 2 {
 	More advanced charcoal production (use chopped logs in charcoal interaction recipe)
 	Farmers delight integration 
 	more expensive saw
-	different way to make a crafting table
+	Use primalstage drying rack for bricks
+	Check no tree punching pebbles
+	Flaking flint gives one shard, not 2
+	Flaking flint shards gives flint pebbles
+	Make unlit torches require plant string
+	Cobblestone drops pebbles
+	Craft cobblestone into pebbles
+	Way to get bow early on (wool blocks + knife = feathers)
+	Leather processing
+	Wood pins
+	Utilise salt for drying
+	Bark to resin and use for tanned hide for leather
+	Sandy clay and water for mortar to build back cobblestones
+	Document direct water drinking
 }
 
 migrate knives
@@ -89,6 +102,8 @@ Primalcore 2 {
 	Harder knife
 	Plant fiber -> plant twine -> Primitive String
 	4 gravel to one flint
+	different way to make a crafting table
+	Use lattices for crafting table
 }
 
 presentation {

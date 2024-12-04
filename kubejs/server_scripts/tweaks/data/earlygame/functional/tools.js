@@ -19,6 +19,7 @@ recipes((event, funcs) => {
 itemTags((event, funcs) => {
      funcs.unifiedAdd([
           ['minecraft:axes', ['notreepunching:flint_axe', 'primalstage:flint_hatchet']],
+          ['minecraft:shovels', 'notreepunching:flint_shovel'],
           ['notreepunching:weak_saws', '#minecraft:axes'],
           ['minecraft:saws', '#notreepunching:saws'],
           ['minecraft:trowels', 'notreepunching:clay_tool'],

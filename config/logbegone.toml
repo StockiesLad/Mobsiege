@@ -1,0 +1,5 @@
+
+[logbegone]
+	phrases = []
+	regex = ["Mob is looking at:"]
+

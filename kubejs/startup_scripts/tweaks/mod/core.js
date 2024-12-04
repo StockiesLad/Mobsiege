@@ -32,30 +32,90 @@ function coveredStone(step) {
     );
 }
 
+var custom = global.customImpl
+
 StartupEvents.registry('item', event => {
-	event.create(comfuncs.packDef('orb_of_thermoregulation')).unstackable();
-    event.create(comfuncs.packDef('advanced_fire_brick'))
-    event.create(comfuncs.packDef('advanced_clay_compound'))
-    event.create(comfuncs.packDef('gravitium_alloy'))
+	event.create(custom.thermoregulator).unstackable()
+    event.create(custom.gravitium)
+
+    event.create(custom.low_grade_charcoal)
+        .burnTime(800)
+    event.create(custom.high_grade_charcoal)
+        .burnTime(2400)
+
+    event.create(custom.dry_clay_brick) 
+
+    event.create(custom.wet_mortar_brick)
+    event.create(custom.dry_mortar_brick)
+
+    event.create(custom.cement_compound)
+    event.create(custom.wet_cement_brick)
+    event.create(custom.dry_cement_brick)
+    event.create(custom.fire_brick)
 })
 
 StartupEvents.registry("block", (event) => {
-    event.create(comfuncs.packDef('advanced_fire_bricks'))
-        //.material("stone")
-        .soundType('STONE')
-        .hardness(0.5)
-        .resistance(0.2)
+    event.create(custom.gravitium_block)
+        .soundType('METAL')
+        .hardness(5)
+        .resistance(6)
         .requiresTool(true)
         .tagBlock("mineable/pickaxe")
-    event.create(comfuncs.packDef('gravitium_alloy_block'))
+        .tagBlock('needs_diamond_tool')
+
+     event.create(custom.log_stack)
+        .soundType('WOOD')
+        .hardness(2.0)
+        .resistance(2.0)
+        .requiresTool(true)
+        .noDrops()
+        .fullBlock(false)
+        .notSolid()
+        .opaque(false)
+        .renderType('cutout')
+        .tagBlock("mineable/pickaxe")
+        .tagBlock('needs_stone_tool')
+    event.create(custom.charred_log_stack)
+        .soundType('SOUL_SAND')
+        .hardness(2.0)
+        .resistance(2.0)
+        .requiresTool(true)
+        .noDrops()
+        .fullBlock(false)
+        .notSolid()
+        .opaque(false)
+        .renderType('cutout')
+        .tagBlock("mineable/pickaxe")
+        .tagBlock('needs_stone_tool')
+
+    event.create(custom.packed_mortar)
+        .soundType('GRAVEL')
+        .hardness(0.6)
+        .resistance(0.6)
+        .requiresTool(true)
+        .tagBlock("mineable/shovel")
+        .tagBlock('needs_stone_tool')
+
+    event.create(custom.packed_cement)
+        .soundType('GRAVEL')
+        .hardness(0.6)
+        .resistance(0.6)
+        .requiresTool(true)
+        .tagBlock("mineable/shovel")
+        .tagBlock('needs_stone_tool')
+    event.create(custom.fire_brick_block)
         .soundType('STONE')
         .hardness(2)
-        .resistance(1)
+        .resistance(2)
         .requiresTool(true)
         .tagBlock("mineable/pickaxe")
-        .tagBlock('needs_iron_tool')
+        .tagBlock('needs_stone_tool')
 
+    HackedHelper.fabricTagFlammability(comfuncs.packDef('log_stacks'), 5, 5)
+    HackedHelper.fabricTagFlammability(comfuncs.packDef('charred_log_stacks'), 15, 30)
 })
+
+const HackedHelper = Java.loadClass('com.stockieslad.custom_hacks.HackedHelper')
 
 BlockEvents.modification(event => {
     global.functions.sound.invoke('setSoundType', {event: event})
