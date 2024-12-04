@@ -18,6 +18,10 @@ global.customImpl = addModpackId({
     gravitium: 'gravitium_alloy',
     gravitium_block: 'gravitium_alloy_block',
 
+    pointed_flint: 'pointed_flint',
+
+    campfire_rock: 'campfire_rock',
+
     log_stack: 'log_stack',
     charred_log_stack: 'charred_log_stack',
 

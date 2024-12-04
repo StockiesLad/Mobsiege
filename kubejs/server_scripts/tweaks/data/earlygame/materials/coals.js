@@ -14,8 +14,12 @@ recipes((event, funcs) => {
 
     funcs.generate('2x betterend:charcoal_block', ['#forge:storage_blocks/charcoal', 'minecraft:soul_sand']).rollingSquare(1, 2).next().vanilla()
     funcs.charring(custom.charred_log_stack, comfuncs.packDef('log_stacks'))
-})
 
+    event.shapeless('minecraft:charcoal', Item.of(custom.low_grade_charcoal, 4))
+    event.shapeless(Item.of('minecraft:charcoal', 4),custom.high_grade_charcoal)
+    event.shapeless(custom.high_grade_charcoal,  Item.of('minecraft:charcoal', 4))
+})
+/*
 basicLootTables((event, funcs) => { 
     funcs.replaceBasiclt(
         funcs.createBasicLt(
@@ -29,6 +33,36 @@ basicLootTables((event, funcs) => {
             ]
         )
     )
+})*/
+
+LootJS.modifiers(event => {
+    var charcoalEntry = (type, multiplier) => {
+        var formula
+        if (multiplier > 1)
+            formula = formulaUniformBonus(multiplier)
+        else formula = formulaBinomialBonus(1, multiplier)
+
+
+
+        return LootEntry.of(type)
+            .customFunction(countSet(countUniform(Math.floor(4 * multiplier), Math.ceil(10 * multiplier)), false))
+            .customFunction(funcFortune(formula))
+    }
+
+    var charcoal = (block, lowQualityMultiplier, midQualityMultiplier, highQualityMultiplier) => {
+        event.addBlockLootModifier(block).removeLoot(block).removeLoot('minecraft:charcoal')
+        .addSequenceLoot(
+            charcoalEntry(custom.low_grade_charcoal, lowQualityMultiplier),
+            charcoalEntry('minecraft:charcoal', midQualityMultiplier),
+            charcoalEntry(custom.high_grade_charcoal, highQualityMultiplier)
+        )
+    }
+
+    charcoal(custom.charred_log_stack, 0.5, 0.75, 0.2)
+    charcoal('carbonize:charcoal_log', 0.5, 0.5, 0.1)
+    charcoal('carbonize:charcoal_planks', 0.5, 0.25, 0.05)
+    charcoal('carbonize:charcoal_stairs', 0.5, 0.1, 0.03)
+    charcoal('carbonize:charcoal_slab', 0.3, 0.1, 0.02)
 })
 
 itemTags((event, funcs) => {

@@ -9,13 +9,27 @@ recipes((event, funcs) => {
      
      event.shapeless('minecraft:clay_ball', ['#forge:ash', 'minecraft:bone_meal'])
      funcs.insertAll(insertion => insertion.vanilla(), [
-          generate('4x primalstage:sandy_clay_compound', ['#forge:sand', 'minecraft:clay']).rollingSquare(1, 2),
-          generate(custom.fire_brick_block, custom.fire_brick).flatSquare(2),
-          generate(custom.cement_compound, ['#forge:dusts/redstone', 'primalstage:sandy_clay_compound', '#forge:gems/lapis']).rollingSquare(1, 2),
           generate('2x minecraft:clay', ['#forge:sand', funcs.def('|jelly_blocks')]).rollingSquare(1, 2),
           generate('2x minecraft:clay', ['#forge:sand', funcs.def('|wart_blocks')]).rollingSquare(1, 2),
           generate('2x minecraft:clay', ['aether_redux:holysilt', funcs.def('|mud')]).rollingSquare(1, 2),
+          generate('4x primalstage:sandy_clay_compound', ['#forge:sand', 'minecraft:clay']).rollingSquare(1, 2),
+          generate(custom.campfire_rock, [custom.dry_clay_brick, '#notreepunching:loose_rocks']).rollingSquare(1, 2),
+          generate(custom.packed_mortar, 'primalstage:sandy_clay_compound').flatSquare(2),
+          generate(custom.packed_cement, custom.cement_compound).flatSquare(2),
+          generate(custom.fire_brick_block, custom.fire_brick).flatSquare(2),
+          generate(custom.cement_compound, ['#forge:raw_materials/nickel', 'primalstage:sandy_clay_compound', '#forge:raw_material/iron']).rollingSquare(1, 2),
+          
      ])
+     
+     funcs.drying(custom.dry_clay_brick, 'notreepunching:clay_brick')
+     funcs.drying(custom.dry_mortar_brick, custom.wet_mortar_brick)
+     funcs.drying(custom.dry_cement_brick, custom.wet_cement_brick)
+
+     funcs.globalSmelting('minecraft:brick', custom.dry_clay_brick, 0.05)
+     funcs.globalSmelting('primalstage:kiln_brick', custom.dry_mortar_brick, 0.05)
+     funcs.globalSmelting(custom.fire_brick, custom.dry_cement_brick, 0.05)
+
+     
      /*event.campfireCooking('primalstage:kiln_brick', 'primalstage:sandy_clay_compound').xp(0.05)
      event.smelting('primalstage:kiln_brick', 'primalstage:sandy_clay_compound').xp(0.05)
      event.blasting('primalstage:kiln_brick', 'primalstage:sandy_clay_compound').xp(0.05)

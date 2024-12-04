@@ -1,4 +1,20 @@
 recipes((event, funcs) => {
+     comfuncs.iterate([
+          'oak',
+          'dark_oak',
+          'birch',
+          'jungle',
+          'acacia',
+          'mangrove',
+          'crimson',
+          'warped'
+     ], type => comfuncs.iterate([
+          `primalstage:${type}_hedge`,
+          `primalstage:${type}_lattice`,
+          `primalstage:${type}_logs`,
+          `primalstage:${type}_drying_rack`,
+          `primalstage:${type}_shelf`
+     ], funcs.removeAndHide))
     
      funcs.replace({input: '#notreepunching:h/saws', output: 'minecraft:stick'}, result => {
           funcs.toolDamagingShapeless('2x ' + result, ['#minecraft:saws', '#minecraft:planks'])
@@ -31,6 +47,9 @@ recipes((event, funcs) => {
           }
      })
 
+     funcs.planet(custom.log_stack, 'primalstage:sandy_clay_compound', 'primalstage:spruce_logs')
+     funcs.replaceOutputRecipe('primalstage:spruce_lattice', r => event.shapeless(r, Item.of('decorative_blocks:lattice').withCount(2))) 
+     funcs.replaceOutputRecipe('primalstage:spruce_hedge', r => event.shapeless(r, ['decorative_blocks:lattice', 'primalstage:spruce_logs']))
      funcs.replaceOutputRecipe('2x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#minecraft:axes']))
      funcs.replaceOutputRecipe('3x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#minecraft:saws']))
 
@@ -87,3 +106,19 @@ commonTags((event, funcs) => {
 ServerEvents.tags('worldgen/biome', event => {
      event.add('twigs:spawns_twig', '#')
 })*/
+
+BlockEvents.rightClicked(event => {
+     var item = event.getItem()
+     var block = event.block
+     if (item.hasTag('forge:tools/mallets') && block.hasTag('minecraft:logs')) {
+          var level = event.getLevel()
+          var random = level.getRandom()
+          var pos = block.getPos()
+          item.hurtAndBreak(1, event.getEntity(), (entity) => level.broadcastEntityEvent(entity, event.getHand().name() == 'MAIN_HAND' ? 47 : 48))
+
+          if (random.nextInt(5) == 0) {
+               level.destroyBlock(pos, false)
+               Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('primalstage:spruce_logs').withCount(2 + random.nextInt(2)));
+          } else level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.bamboo.hit", "blocks", 0.25, 0.5)
+     }
+})

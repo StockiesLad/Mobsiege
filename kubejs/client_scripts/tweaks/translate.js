@@ -13,8 +13,13 @@ ClientEvents.lang('en_us', event => {
         ['alexscaves:block_of_uranium', 'Raw Uranium Block'],
         ['primalstage:sandy_clay_compound', 'Mortar Compound'],
         ['notreepunching:clay_brick', 'Wet Clay Brick'],
-        ['primalstage:dark_oak_drying_rack', 'Drying Rack'],
-        ['primalstage:dark_oak_logs', 'Split Log']
+        ['primalstage:spruce_hedge', 'Hedge'],
+        ['primalstage:spruce_lattice', 'Lattice'],
+        ['primalstage:spruce_logs', 'Split Log'],
+        ['primalstage:spruce_drying_rack', 'Drying Rack'],
+        ['primalstage:spruce_shelf', 'Shelf'],
+        ['minecraft:charcoal', 'Mid Grade Charcoal'],
+        ['primalstage:stone_pebble', 'Large Stone Pebble']
     ]
 
     rename = concatSeries(rename, [

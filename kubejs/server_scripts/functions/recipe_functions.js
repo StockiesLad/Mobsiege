@@ -95,6 +95,12 @@ function getRecipeFunctions(event) {
           event.recipes.thermal.pulverizer(results, ingredients)
      }
 
+     var globalSmelting = (result, ingredient, xp) => {
+          event.campfireCooking(result, ingredient).xp(xp)
+          event.smelting(result, ingredient).xp(xp)
+          event.blasting(result, ingredient).xp(xp)
+     }
+
      var globalAlloySmelting = (results, ingredients) => {
           event.recipes.enderio.alloy_smelting(results, ingredients)
           event.recipes.thermal.smelter(results, ingredients)
@@ -113,6 +119,7 @@ function getRecipeFunctions(event) {
           event.recipes.create.pressing(results, ingredients)
           event.recipes.thermal.press(results, ingredients)
      }
+
 
      // <Insertion> //
      /* 
@@ -288,12 +295,11 @@ function getRecipeFunctions(event) {
      var box = (result, input) => vanillaInsert(result, [input, [4, 8]])
      var stairs = (result, input) => vanillaInsert(result, [input, [0, 3, 4, 6, 7, 8]])
      var slab = (result, input) => vanillaInsert(result, [input, [0, 1, 2]], 3)
-     var circleLoop = (items, recipeCall) => {
+     var circleLoop = (items) => {
           comfuncs.quickerate(items.length, i => {
                var nextI = i + 1
                if (nextI >= items.length)
                     nextI = 0
-               recipeCall(items[i], items[nextI])
                event.shapeless(items[i], items[nextI])
           })
      }
@@ -311,6 +317,7 @@ function getRecipeFunctions(event) {
           componentAssembly: componentAssembly,
           chilling: chilling,
           globalCrushing: globalCrushing,
+          globalSmelting: globalSmelting,
           globalAlloySmelting: globalAlloySmelting,
           globalFluidMixing: globalFluidMixing,
           globalChilling: globalChilling,
