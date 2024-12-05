@@ -96,9 +96,14 @@ function getRecipeFunctions(event) {
      }
 
      var globalSmelting = (result, ingredient, xp) => {
-          event.campfireCooking(result, ingredient).xp(xp)
           event.smelting(result, ingredient).xp(xp)
           event.blasting(result, ingredient).xp(xp)
+     }
+
+     var globalPrimitiveCooking = (result, ingredient) => {
+          event.campfireCooking(result, ingredient)
+          grilling(result, ingredient)
+          globalSmelting(result, ingredient)
      }
 
      var globalAlloySmelting = (results, ingredients) => {
@@ -318,6 +323,7 @@ function getRecipeFunctions(event) {
           chilling: chilling,
           globalCrushing: globalCrushing,
           globalSmelting: globalSmelting,
+          globalPrimitiveCooking: globalPrimitiveCooking,
           globalAlloySmelting: globalAlloySmelting,
           globalFluidMixing: globalFluidMixing,
           globalChilling: globalChilling,

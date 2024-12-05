@@ -188,12 +188,12 @@ LevelEvents.tick(event => {
 
         )
         if (spawnDist < spawnDistMax && isPlayerOnSurface && !isProtected && !playerInSafeBiome && !isPlayerCreative) {
-            level.tell(Text.of('[Mobsiege] ' + comfuncs.interlaceString(getRandomElement(random, announcements), [
+            level.tell(Text.darkRed('[Mobsiege] ' + comfuncs.interlaceString(getRandomElement(random, announcements), [
                 {name: 'playerName', value: player.getName().getString()}, 
                 {name: 'siegeGroup', value: siegeGroup.name}, 
                 {name: 'mobType', value: siegeGroup.type},
                 {name: 'mobCount', value: mobCount}
-            ])).darkRed())
+            ])))
             let square = Math.ceil(Math.sqrt(mobCount))
             for (let modX = 0; modX < square; modX++) {
                 for (let modZ = 0; modZ < square; modZ++) {

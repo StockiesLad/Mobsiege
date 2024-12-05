@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "mobsiege:item/wet_cement_brick"
-  }
-}

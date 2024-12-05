@@ -19,7 +19,8 @@ ClientEvents.lang('en_us', event => {
         ['primalstage:spruce_drying_rack', 'Drying Rack'],
         ['primalstage:spruce_shelf', 'Shelf'],
         ['minecraft:charcoal', 'Mid Grade Charcoal'],
-        ['primalstage:stone_pebble', 'Large Stone Pebble']
+        ['primalstage:stone_pebble', 'Large Stone Pebble'],
+        ['primalstage:salt_block', 'Dense Salt Block']
     ]
 
     rename = concatSeries(rename, [

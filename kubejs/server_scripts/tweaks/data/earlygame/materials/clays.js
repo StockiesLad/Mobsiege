@@ -30,6 +30,7 @@ recipes((event, funcs) => {
      funcs.globalSmelting('minecraft:brick', custom.dry_clay_brick, 0.1)
      funcs.globalSmelting('primalstage:kiln_brick', custom.dry_mortar_brick, 0.2)
      funcs.kilnSmelting(custom.fire_brick, custom.dry_cement_brick)
+     event.smelting(custom.fire_brick, custom.dry_cement_brick).xp(0.3)
      event.blasting(custom.fire_brick, custom.dry_cement_brick).xp(0.3)
      
      /*event.campfireCooking('primalstage:kiln_brick', 'primalstage:sandy_clay_compound').xp(0.05)
@@ -43,15 +44,29 @@ recipes((event, funcs) => {
 itemTags((event, funcs) => {
      funcs.unifiedAdd([
           ['forge:mortar', ['primalstage:sandy_clay_compound', 'twigs:silt_ball']],
-          ['forge:storage_blocks/mortar', [custom.packed_mortar, 'twigs:silt', 'aether_redux:holysilt']],
           ['|mud', ['minecraft:mud', 'deep_aether:aether_mud']],
           ['|jelly_blocks', [
               'aether_redux:jellyshroom_jelly_block', 
               'betterend:jellyshroom_cap_purple', 
               'betterend:umbrella_tree_membrane', 
               'edenring:volvox_block'
+          ]],
+          ['supplementaries:throwable_bricks', [
+               'notreepunching:clay_brick',
+               'mobsiege:dry_clay_brick',
+               'mobsiege:wet_mortar_brick',
+               'mobsiege:dry_mortar_brick',
+               'primalstage:kiln_brick',
+               'mobsiege:wet_cement_brick',
+               'mobsiege:dry_cement_brick',
+               'mobsiege:fire_brick',
           ]]
      ])
+})
+
+commonTags((event, funcs) => {
+     event.add('forge:storage_blocks/mortar', [custom.packed_mortar, 'twigs:silt', 'aether_redux:holysilt'])
+
 })
 
 LootJS.modifiers(event => {
@@ -92,10 +107,10 @@ function addBrickDrop(block, brick) {
 function addTagBrickDrop(tag, brick) {
      BlockEvents.rightClicked(event => {
           var item = event.getItem()
-          if (event.block.hasTag(tag) &&item.hasTag('minecraft:shovels')) {
+          var block = event.block
+          if (block.hasTag(tag) && item.hasTag('minecraft:shovels')) {
                var level = event.getLevel()
                var random = level.getRandom()
-               var block = event.block
                var pos = block.getPos()
                item.hurtAndBreak(1, event.getEntity(), (entity) => level.broadcastEntityEvent(entity, event.getHand().name() == 'MAIN_HAND' ? 47 : 48))
                if (random.nextInt(5) == 0) {
