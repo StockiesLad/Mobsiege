@@ -25,11 +25,11 @@ function getRecipeFunctions(event) {
           })
      }
 
-     var kilnSmelting = (result, ingredient) => {
+     var kilnSmelting = (result, ingredient, cookingTime) => {
           return event.custom({
                type: "primalstage:kiln",
                input: ingredient,
-               cookingtime: 1200,
+               cookingtime: comfuncs.notNull(cookingTime, 1200),
                result: result
           })
      }
@@ -44,21 +44,38 @@ function getRecipeFunctions(event) {
      }
 
      var drying = (result, ingredient, cookingTime) => {
-          cookingTime = comfuncs.notNull(cookingTime, 600)
           return event.custom({
                type: "primalstage:drying",
                input: ingredient,
-               cookingtime: cookingTime,
+               cookingtime: comfuncs.notNull(cookingTime, 600),
                result: result
           })
      }
 
+     var basinDrying = (result, ingredient, cookingTime) => {
+          cookingTime = comfuncs.notNull(cookingTime, 100)
+          return event.custom({
+               type: "integrateddynamics:drying_basin",
+               item: ingredient,
+               duration: cookingTime,
+               result: Item.of(result)
+             })
+     }
+
+     var endothermicDehydration = (result, ingredient) => {
+          return event.custom({
+               type: "thermal_extra:endothermic_dehydrator",
+               energy: 4000,
+               ingredients: [Ingredient.of(ingredient)],
+               result: [Item.of(result)]
+          })
+     }
+
      var grilling = (result, ingredient, cookingTime) => {
-          cookingTime = comfuncs.notNull(cookingTime, 600)
           return event.custom({
                type: "primalstage:grill",
                input: ingredient,
-               cookingtime: cookingTime,
+               cookingtime: comfuncs.notNull(cookingTime, 600),
                result: result
              })
      }
@@ -90,20 +107,40 @@ function getRecipeFunctions(event) {
           })
      }
 
+     var globalPrimitiveDrying = (result, ingredient) => {
+          drying(result, ingredient)
+          basinDrying(result, ingredient)
+          endothermicDehydration(result, ingredient)
+     }
+
+     var globalDrying = (result, ingredient) => {
+          //drying(result, ingredient)
+          basinDrying(result, ingredient)
+          endothermicDehydration(result, ingredient)
+     }
+
+
      var globalCrushing = (results, ingredients) => {
           event.recipes.createCrushing(results, ingredients)
           event.recipes.thermal.pulverizer(results, ingredients)
      }
 
      var globalSmelting = (result, ingredient, xp) => {
+          xp = comfuncs.notNull(xp, 0)
           event.smelting(result, ingredient).xp(xp)
           event.blasting(result, ingredient).xp(xp)
      }
 
-     var globalPrimitiveCooking = (result, ingredient) => {
-          event.campfireCooking(result, ingredient)
+     var globalCooking = (result, ingredient, xp) => {
+          xp = comfuncs.notNull(xp, 0)
+          event.campfireCooking(result, ingredient).xp(xp)
+          globalSmelting(result, ingredient, xp)
+     }
+
+     var globalPrimitiveCooking = (result, ingredient, xp) => {
+          xp = comfuncs.notNull(xp, 0)
           grilling(result, ingredient)
-          globalSmelting(result, ingredient)
+          globalCooking(result, ingredient)
      }
 
      var globalAlloySmelting = (results, ingredients) => {
@@ -121,6 +158,7 @@ function getRecipeFunctions(event) {
      }
 
      var globalPressing = (results, ingredients) => {
+          event.recipes.immersiveengineering.metal_press(results, ingredients, 'immersiveengineering:mold_plate')
           event.recipes.create.pressing(results, ingredients)
           event.recipes.thermal.press(results, ingredients)
      }
@@ -317,12 +355,17 @@ function getRecipeFunctions(event) {
           kilnSmelting: kilnSmelting,
           charring: charring,
           drying: drying,
+          basinDrying: basinDrying,
+          endothermicDehydration: endothermicDehydration,
           grilling: grilling,
           fluidMixing: fluidMixing,
           componentAssembly: componentAssembly,
           chilling: chilling,
+          globalPrimitiveDrying: globalPrimitiveDrying,
+          globalDrying: globalDrying,
           globalCrushing: globalCrushing,
           globalSmelting: globalSmelting,
+          globalCooking: globalCooking,
           globalPrimitiveCooking: globalPrimitiveCooking,
           globalAlloySmelting: globalAlloySmelting,
           globalFluidMixing: globalFluidMixing,

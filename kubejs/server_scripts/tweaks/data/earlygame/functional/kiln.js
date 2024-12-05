@@ -10,6 +10,11 @@ recipes((event, funcs) => {
           "uranium",
           "zinc"
       ]*/
+     funcs.replaceOutputRecipe('primalstage:kiln', r => funcs.vanillaInsert(r, [
+          ['primalstage:kiln_bricks', [6, 3, 1, 5, 8]],
+          [custom.high_grade_charcoal, 7],
+          ['minecraft:campfire', 4]
+     ]))
 
      comfuncs.unifiedCall(material => {
           var smelted = AlmostUnified.getPreferredItemForTag(`forge:storage_blocks/${material}`).getIdLocation().toString()

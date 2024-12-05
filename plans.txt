@@ -64,14 +64,7 @@ complex recipes {
 
 aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
 
-Primalcore 2 {
-	Utilise Grill for food, 
-	make campfire require bricks and grill (maybe stone)
-	
-	Leather drop document/compat
-	Document direct water drinking
-}
-
+Document primitive states (flint tools, stone grill, brick campfire, mortar kiln, cement furnace)
 (later on) add recipe chaining (funcs return output)
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
@@ -96,8 +89,12 @@ Primalcore 2 {
 	Farmers delight integration 
 	Make chance of getting fiber and sticks far lower
 	Way to get bow early on (wool blocks + knife = feathers)
-	More explicit tiers (stone, brick, kiln, firebrick)
+	More explicit tiers (flint, stone, brick, mortar, cement)
 	add campfire rock
+	Utilise Grill for food, 
+	add machine compat for brick making
+	make campfire require bricks and grill (maybe stone)
+
 }
 
 presentation {
