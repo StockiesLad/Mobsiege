@@ -6,14 +6,17 @@ recipes((event, funcs) => {
           'aether:holystone_sword', 'aether:holystone_pickaxe', 'aether:holystone_axe', 'aether:holystone_shovel', 'aether:holystone_hoe',
           'minecraft:wooden_sword', 'minecraft:wooden_pickaxe', 'minecraft:wooden_axe', 'minecraft:wooden_shovel', 'minecraft:wooden_hoe',
           'minecraft:stone_sword', 'minecraft:stone_pickaxe', 'minecraft:stone_axe', 'minecraft:stone_shovel', 'minecraft:stone_hoe',
-          'primalstage:flint_pickaxe', 'primalstage:flint_shovel', 'primalstage:plant_fiber'
+          'primalstage:flint_pickaxe', 'primalstage:flint_shovel', 'primalstage:plant_fiber', 'farmersdelight:flint_knife',
+          'notreepunching:iron_knife', 'notreepunching:gold_knife', 'notreepunching:gold_knife', 'notreepunching:diamond_knife',
+          'notreepunching:netherite_knife'
      ])
-
+     event.replaceInput({output: 'notreepunching:flint_shovel'}, 'notreepunching:flint_shard', custom.pointed_flint)
      funcs.replaceOutputRecipe('hardcore_torches:fire_starter', result => funcs.vanillaInsert(result, [[funcs.def('|primitive_string'), 0], ['#forge:rods/wooden', [1, 2]]]))
      funcs.replaceOutputRecipe('notreepunching:fire_starter', result => funcs.vanillaInsert(result, [[funcs.def('|primitive_string'), 0], ['hardcore_torches:fire_starter', [1, 2]], ['notreepunching:flint_shard', 3]]))
-     funcs.replaceOutputRecipe('notreepunching:flint_knife', result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', 1], ['#forge:rods/wooden', 2], [funcs.def('|primitive_string'), 0]]))
-     funcs.replaceOutputRecipe('primalstage:flint_hatchet', result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', [0, 1]], ['#forge:rods/wooden', 2], [funcs.def('|primitive_string'), 3]]))
-     funcs.replaceOutputRecipe('notreepunching:flint_axe', result => funcs.vanillaInsert(result, [['#notreepunching:string', 0], ['#forge:rods/wooden', [3, 6]], ['notreepunching:flint_shard', [1, 4]]]))
+     funcs.replaceOutputRecipe('notreepunching:flint_knife', result => funcs.vanillaInsert(result, [[custom.pointed_flint, 1], ['#forge:rods/wooden', 2], [funcs.def('|primitive_string'), 0]]))
+     funcs.replaceOutputRecipe('primalstage:flint_hatchet', result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', 0], [custom.pointed_flint, 1], ['#forge:rods/wooden', 2], [funcs.def('|primitive_string'), 3]]))
+     funcs.replaceOutputRecipe('notreepunching:flint_axe', result => funcs.vanillaInsert(result, [['#notreepunching:string', 0], ['#forge:rods/wooden', [3, 6]], [custom.pointed_flint, [2]], ['notreepunching:flint_shard', [1, 4]]]))
+     funcs.replaceOutputRecipe('notreepunching:flint_pickaxe', r => funcs.vanillaInsert(r, [['notreepunching:flint_shard', [0, 2]], ['#forge:string', 1], [custom.pointed_flint, [3, 5]], ['#forge:rods/wooden', [4, 7]]]))
 })
 
 itemTags((event, funcs) => {
@@ -22,6 +25,7 @@ itemTags((event, funcs) => {
           ['minecraft:shovels', 'notreepunching:flint_shovel'],
           ['notreepunching:weak_saws', '#minecraft:axes'],
           ['minecraft:saws', '#notreepunching:saws'],
+          ['forge:tools/saws', '#notreepunching:saws'],
           ['minecraft:trowels', 'notreepunching:clay_tool'],
           ['|breaks_randomly', [
                'primalstage:flint_hatchet',
@@ -32,6 +36,7 @@ itemTags((event, funcs) => {
                'notreepunching:flint_pickaxe',
                'notreepunching:flint_axe'
           ]],
+          ['notreepunching:knives', '#forge:tools/knives'],
           ['forge:tools/knives', '#notreepunching:knives'],
           ['forge:tools/hammers', '#primalstage:mallets']
           //['notreepunching:knives', '#minecraft:axes']

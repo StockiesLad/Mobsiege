@@ -13,8 +13,9 @@ recipes((event, funcs) => {
     ])
 
     funcs.generate('2x betterend:charcoal_block', ['#forge:storage_blocks/charcoal', 'minecraft:soul_sand']).rollingSquare(1, 2).next().vanilla()
-    funcs.charring(custom.charred_log_stack, comfuncs.packDef('log_stacks'))
+    funcs.charring(custom.charcoal_stack, comfuncs.packDef('log_stacks'))
 
+    event.shapeless(custom.low_grade_charcoal, Item.of(custom.poor_grade_charcoal, 4))
     event.shapeless('minecraft:charcoal', Item.of(custom.low_grade_charcoal, 4))
     event.shapeless(Item.of('minecraft:charcoal', 4),custom.high_grade_charcoal)
     event.shapeless(custom.high_grade_charcoal,  Item.of('minecraft:charcoal', 4))
@@ -35,34 +36,31 @@ basicLootTables((event, funcs) => {
     )
 })*/
 
-LootJS.modifiers(event => {
-    var charcoalEntry = (type, multiplier) => {
-        var formula
-        if (multiplier > 1)
-            formula = formulaUniformBonus(multiplier)
-        else formula = formulaBinomialBonus(1, multiplier)
+complexLootTables((event, funcs) => {
+    var charcoalEntry = (type, multiplier) => LootEntry.of(type)
+            .when(c => c.randomChance(multiplier))
+            .customFunction(countSet(countUniform(1, 2), false))
+            .customFunction(funcFortune(formulaBinomialBonus(1, multiplier)))
 
-
-
-        return LootEntry.of(type)
-            .customFunction(countSet(countUniform(Math.floor(4 * multiplier), Math.ceil(10 * multiplier)), false))
-            .customFunction(funcFortune(formula))
+    var charcoal = (block, quality) => {
+        event.addBlockLootModifier(block)
+            .removeLoot(block)
+            .removeLoot('minecraft:charcoal')
+            .addAlternativesLoot(
+                LootEntry.of(block).when(c => c.customCondition(conditionSilkTouch())),
+                charcoalEntry('projecte:alchemical_coal', Math.pow(quality, 4)),
+                charcoalEntry(custom.high_grade_charcoal, Math.pow(quality, 3)),
+                charcoalEntry('minecraft:charcoal', Math.pow(quality, 2)),
+                charcoalEntry(custom.low_grade_charcoal, quality),
+                charcoalEntry(custom.poor_grade_charcoal, 1)
+            )
     }
 
-    var charcoal = (block, lowQualityMultiplier, midQualityMultiplier, highQualityMultiplier) => {
-        event.addBlockLootModifier(block).removeLoot(block).removeLoot('minecraft:charcoal')
-        .addSequenceLoot(
-            charcoalEntry(custom.low_grade_charcoal, lowQualityMultiplier),
-            charcoalEntry('minecraft:charcoal', midQualityMultiplier),
-            charcoalEntry(custom.high_grade_charcoal, highQualityMultiplier)
-        )
-    }
-
-    charcoal(custom.charred_log_stack, 0.5, 0.75, 0.2)
-    charcoal('carbonize:charcoal_log', 0.5, 0.5, 0.1)
-    charcoal('carbonize:charcoal_planks', 0.5, 0.25, 0.05)
-    charcoal('carbonize:charcoal_stairs', 0.5, 0.1, 0.03)
-    charcoal('carbonize:charcoal_slab', 0.3, 0.1, 0.02)
+    charcoal(custom.charcoal_stack, 0.6)
+    charcoal('carbonize:charcoal_log', 0.4)
+    charcoal('carbonize:charcoal_planks', 0.1)
+    charcoal('carbonize:charcoal_stairs', 0.05)
+    charcoal('carbonize:charcoal_slab', 0.025)
 })
 
 itemTags((event, funcs) => {
@@ -79,7 +77,7 @@ itemTags((event, funcs) => {
 blockTags((event, funcs) => {
     event.remove('minecraft:mineable/pickaxe', 'betterend:charcoal_block')
     event.add(comfuncs.packDef('log_stacks'), custom.log_stack)
-    event.add(comfuncs.packDef('charred_log_stacks'), custom.charred_log_stack)
+    event.add(comfuncs.packDef('charcoal_stacks'), custom.charcoal_stack)
     event.add('carbonize:charcoal_pile_valid_fuel',  funcs.def('|log_stacks'))
 
     funcs.unifiedAdd([

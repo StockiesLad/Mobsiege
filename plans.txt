@@ -54,6 +54,7 @@ acheivements {
 	use aerclouds to make a create contraption more efficient
 	how to get beds
 	use an interdiction torch to prevent a mobsiege (protected chunks)
+	get a piece of alchemical coal by mining raw charcoal blocks
 }
 
 complex recipes {
@@ -64,28 +65,18 @@ complex recipes {
 aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
 
 Primalcore 2 {
-	Make chance of getting fiber and sticks far lower
 	Utilise Grill for food, 
 	make campfire require bricks and grill (maybe stone)
-	More explicit tiers (stone, brick, kiln, firebrick)
-	Farmers delight integration 
-	more expensive saw
-	Use primalstage drying rack for bricks
-	Check no tree punching pebbles
-	Flaking flint gives one shard, not 2
-	Flaking flint shards gives flint pebbles
-	Way to get bow early on (wool blocks + knife = feathers)
-	Leather processing
-	Wood pins
-	Bark to resin and use for tanned hide for leather
+	
+	Leather drop document/compat
 	Document direct water drinking
 }
 
-migrate knives
 (later on) add recipe chaining (funcs return output)
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+migrate knives
 Primalcore 2 {
 	Slats (decorativeblocks:lattices) out of wood to combat scarcity
 	Make wood less efficient in general
@@ -95,11 +86,18 @@ Primalcore 2 {
 	Harder knife
 	Plant fiber -> plant twine -> Primitive String
 	4 gravel to one flint
+	Flaking flint shards gives flint pebbles
 	different way to make a crafting table
 	Use lattices for crafting table
 	Implement more complex claying
 	More advanced charcoal production (use chopped logs in charcoal interaction recipe)
-
+	Use primalstage drying rack for bricks
+	Check no tree punching pebbles
+	Farmers delight integration 
+	Make chance of getting fiber and sticks far lower
+	Way to get bow early on (wool blocks + knife = feathers)
+	More explicit tiers (stone, brick, kiln, firebrick)
+	add campfire rock
 }
 
 presentation {

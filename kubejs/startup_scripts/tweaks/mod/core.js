@@ -40,8 +40,11 @@ StartupEvents.registry('item', event => {
 
     event.create(custom.pointed_flint)
 
-    event.create(custom.low_grade_charcoal)
+    event.create(custom.poor_grade_charcoal)
         .burnTime(400)
+        .tag('forge:coal/poor_grade')
+    event.create(custom.low_grade_charcoal)
+        .burnTime(800)
         .tag('forge:coal/low_grade')
     event.create(custom.high_grade_charcoal)
         .burnTime(3200)
@@ -86,7 +89,7 @@ StartupEvents.registry("block", (event) => {
         .renderType('cutout')
         .tagBlock("mineable/axe")
         .tagBlock('needs_stone_tool')
-    event.create(custom.charred_log_stack)
+    event.create(custom.charcoal_stack)
         .soundType('SAND')
         .hardness(2.0)
         .resistance(2.0)
@@ -123,7 +126,7 @@ StartupEvents.registry("block", (event) => {
         .tagBlock('needs_stone_tool')
 
     HackedHelper.fabricTagFlammability(comfuncs.packDef('log_stacks'), 5, 5)
-    HackedHelper.fabricTagFlammability(comfuncs.packDef('charred_log_stacks'), 15, 30)
+    HackedHelper.fabricTagFlammability(comfuncs.packDef('charcoal_stacks'), 15, 30)
 })
 
 const HackedHelper = Java.loadClass('com.stockieslad.custom_hacks.HackedHelper')
@@ -158,13 +161,13 @@ ItemEvents.modification(event => {
     ], val => event.modify(val[0], item => item.burnTime = val[1]))
 
     comfuncs.iterate([
-        ['notreepunching:flint_knife', 10],
-        ['primalstage:flint_hatchet', 15],
-        ['notreepunching:flint_shovel', 25],
-        ['notreepunching:flint_hoe', 25],
-        ['notreepunching:flint_pickaxe', 25],
-        ['notreepunching:flint_axe', 25],
-        ['primalstage:flint_mallet', 25]
+        ['notreepunching:flint_knife', 20],
+        ['primalstage:flint_hatchet', 30],
+        ['notreepunching:flint_shovel', 50],
+        ['notreepunching:flint_hoe', 50],
+        ['notreepunching:flint_pickaxe', 50],
+        ['notreepunching:flint_axe', 50],
+        ['primalstage:flint_mallet', 50]
     ], vals =>  event.modify(vals[0], item => item.maxDamage = vals[1]))
 })
 

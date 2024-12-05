@@ -11,9 +11,9 @@ recipes((event, funcs) => {
      event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', '#forge:furnaces')
      event.replaceInput({output: 'minecraft:blast_furnace'}, 'primalstage:diamond_plate', funcs.preferredItem('forge:plates/iron'))
      //funcs.replaceOutputRecipe('minecraft:furnace', result => generate(result, ['#forge:stone', comfuncs.packDef('advanced_fire_bricks')]).rollingSquare(1, 3).override(['primalstage:kiln', 4]).next().vanilla())
-     funcs.replaceOutputRecipe('minecraft:furnace', result => funcs.planetAlt(result, 'primalstage:kiln', '#forge:stone', comfuncs.packDef('advanced_fire_bricks')))
+     funcs.replaceOutputRecipe('minecraft:furnace', result => funcs.planetAlt(result, 'primalstage:kiln', '#forge:stone', custom.fire_brick_block))
      funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: funcs.def('|primitive_furnaces')}, (output, ingredients) => {
-          generate(output, [ingredients[0], comfuncs.packDef('advanced_fire_bricks')]).rollingSquare(1, 3).override(['primalstage:kiln', 4]).next().vanilla()
+          generate(output, [ingredients[0], custom.fire_brick_block]).rollingSquare(1, 3).override(['primalstage:kiln', 4]).next().vanilla()
       })
 })
 

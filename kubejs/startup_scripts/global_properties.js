@@ -23,8 +23,9 @@ global.customImpl = addModpackId({
     campfire_rock: 'campfire_rock',
 
     log_stack: 'log_stack',
-    charred_log_stack: 'charred_log_stack',
+    charcoal_stack: 'charcoal_stack',
 
+    poor_grade_charcoal: "poor_grade_charcoal",
     low_grade_charcoal: "low_grade_charcoal",
     high_grade_charcoal: "high_grade_charcoal",
 

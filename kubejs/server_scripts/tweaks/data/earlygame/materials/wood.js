@@ -15,7 +15,10 @@ recipes((event, funcs) => {
           `primalstage:${type}_drying_rack`,
           `primalstage:${type}_shelf`
      ], funcs.removeAndHide))
-    
+
+     funcs.removeAndHide('primalstage:cutting_log')
+     
+     event.replaceInput({input: 'minecraft:spruce_planks', output: 'primalstage:spruce_drying_rack'}, 'minecraft:spruce_planks', 'decorative_blocks:lattice')
      funcs.replace({input: '#notreepunching:h/saws', output: 'minecraft:stick'}, result => {
           funcs.toolDamagingShapeless('2x ' + result, ['#minecraft:saws', '#minecraft:planks'])
           funcs.toolDamagingShapeless('8x ' + result, ['#minecraft:saws', '#minecraft:logs'])
@@ -102,6 +105,15 @@ commonTags((event, funcs) => {
      ])
 })
 
+complexLootTables((event, funcs) => {
+     event.addBlockLootModifier(custom.log_stack)
+         .removeLoot(custom.log_stack)
+         .addAlternativesLoot(
+             LootEntry.of(custom.log_stack).when(c => c.customCondition(conditionSilkTouch())),
+             LootEntry.of('primalstage:spruce_logs', 8)
+         )
+})
+
 /*
 ServerEvents.tags('worldgen/biome', event => {
      event.add('twigs:spawns_twig', '#')
@@ -110,7 +122,7 @@ ServerEvents.tags('worldgen/biome', event => {
 BlockEvents.rightClicked(event => {
      var item = event.getItem()
      var block = event.block
-     if (item.hasTag('forge:tools/mallets') && block.hasTag('minecraft:logs')) {
+     if (item.hasTag('forge:tools/hammers') && block.hasTag('minecraft:logs')) {
           var level = event.getLevel()
           var random = level.getRandom()
           var pos = block.getPos()
