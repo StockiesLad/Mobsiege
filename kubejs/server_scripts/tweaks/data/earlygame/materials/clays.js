@@ -1,6 +1,8 @@
 recipes((event, funcs) => {
      var generate = funcs.generate
      funcs.removeAll([
+          {output: 'minecraft:brick', type: 'minecraft:campfire_cooking'},
+          {output: 'minecraft:brick', type: 'enderio:alloy_smelting'},
           {output: 'notreepunching:clay_brick'},
           {input: 'notreepunching:clay_brick'}
      ])

@@ -6,12 +6,13 @@ var coalStorageBlocks
 
 recipes((event, funcs) => {
     funcs.removeAll([
+        {output: 'minecraft:charcoal', type: 'minecraft:campfire_cooking'},
         {output: 'minecraft:charcoal', type: 'minecraft:smelting'},
         {output: 'minecraft:charcoal', type: 'minecraft:blasting'},
-        {id: 'utilitarian:utility/charcoal_from_campfire'},
         {id: 'betterend:charcoal_block'}
     ])
-
+    funcs.globalPrimitiveCooking(Item.of(custom.poor_grade_charcoal, 2), '#minecraft:planks', 0.1)
+    funcs.globalPrimitiveCooking(Item.of(custom.low_grade_charcoal, 2), '#minecraft:logs', 0.2)
     funcs.generate('2x betterend:charcoal_block', ['#forge:storage_blocks/charcoal', 'minecraft:soul_sand']).rollingSquare(1, 2).next().vanilla()
     funcs.charring(custom.charcoal_stack, comfuncs.packDef('log_stacks'))
 
