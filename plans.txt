@@ -64,6 +64,11 @@ complex recipes {
 
 aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
 
+Add generic bark support https://github.com/nanokulonq/PrimalStage/blob/master/src/main/java/com/nanokulon/primalstage/mixin/UseOnBlockMixin.java#L31
+looks like we're going to have to mixin.
+
+coal liquefaction
+
 Document primitive states (flint tools, stone grill, brick campfire, mortar kiln, cement furnace)
 (later on) add recipe chaining (funcs return output)
 

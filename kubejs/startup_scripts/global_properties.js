@@ -27,6 +27,7 @@ global.customImpl = addModpackId({
 
     poor_grade_charcoal: "poor_grade_charcoal",
     low_grade_charcoal: "low_grade_charcoal",
+    good_grade_charcoal: "good_grade_charcoal",
     high_grade_charcoal: "high_grade_charcoal",
 
     dry_clay_brick: 'dry_clay_brick',

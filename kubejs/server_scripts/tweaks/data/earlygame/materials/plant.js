@@ -167,7 +167,14 @@ complexLootTables((event, funcs) => {
      funcs.removeBlockDrop('primalstage:plant_fiber', 'minecraft:grass')
      funcs.removeBlockDrop('notreepunching:plant_fiber', ['minecraft:grass', 'minecraft:tall_grass'])
 
-     wholeOrganic.forEach(block =>  event.addBlockLootModifier(block).customCondition(conditionMatchTool('forge:tools/knives')).addLoot('notreepunching:plant_fiber'))
+     wholeOrganic.forEach(block =>  event.addBlockLootModifier(block).removeLoot('notreepunching:plant_fiber')
+     .addAlternativesLoot(
+          LootEntry.of('notreepunching:plant_fiber').when(c => c.randomChance(0.5))
+          .customFunction(countSet(countUniform(1, 2), false)),
+          LootEntry.of('notreepunching:plant_fiber').when(c => c.customCondition(conditionMatchTool('forge:tools/knives')))
+               .customFunction(countSet(countUniform(1, 3), false))
+               .customFunction(funcFortune(formulaUniformBonus(1)))
+     ))
      addOrganicDrops(event, partialOrganic, 'minecraft:stick')
      addOrganicDrops(event, partialOrganicAether, 'aether:skyroot_stick')
 

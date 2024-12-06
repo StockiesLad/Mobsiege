@@ -51,6 +51,8 @@
 !/config/quark-common.toml
 !/config/treechop-common.toml
 !/config/treechop-client.toml
+!/config/mutantmonsters-common.toml
+!/config/lava_monster-common.toml
 #Worldgen
 !/config/the_bumblezone
 !/config/traverse

@@ -18,7 +18,7 @@ ClientEvents.lang('en_us', event => {
         ['primalstage:spruce_logs', 'Split Log'],
         ['primalstage:spruce_drying_rack', 'Drying Rack'],
         ['primalstage:spruce_shelf', 'Shelf'],
-        ['minecraft:charcoal', 'Mid Grade Charcoal'],
+        ['minecraft:charcoal', 'Medium Grade Charcoal'],
         ['primalstage:stone_pebble', 'Large Stone Pebble'],
         ['primalstage:salt_block', 'Dense Salt Block']
     ]

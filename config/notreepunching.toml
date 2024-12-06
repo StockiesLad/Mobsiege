@@ -34,15 +34,15 @@
 
     # The chance to consume a piece of flint when knapping
     # Range: [0.0, 1.0]
-    flintKnappingConsumeChance = 0.2
+    flintKnappingConsumeChance = 0.5
 
     # The chance to produce flint shards if a piece of flint has been consumed while knapping
     # Range: [0.0, 1.0]
-    flintKnappingSuccessChance = 0.4
+    flintKnappingSuccessChance = 0.75
 
     # The chance for a fire starter to start fires
     # Range: [0.0, 1.0]
-    fireStarterFireStartChance = 0.3
+    fireStarterFireStartChance = 0.5
 
     # If the fire starter can be used to make a campfire (with one '#notreepunching:fire_starter_logs' and three '#notreepunching:fire_starter_kindling'
     fireStarterCanMakeCampfire = true

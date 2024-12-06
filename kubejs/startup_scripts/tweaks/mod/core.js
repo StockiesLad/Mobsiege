@@ -46,8 +46,11 @@ StartupEvents.registry('item', event => {
     event.create(custom.low_grade_charcoal)
         .burnTime(800)
         .tag('forge:coal/low_grade')
-    event.create(custom.high_grade_charcoal)
+        event.create(custom.good_grade_charcoal)
         .burnTime(3200)
+        .tag('forge:coal/good_grade')
+    event.create(custom.high_grade_charcoal)
+        .burnTime(6400)
         .tag('forge:coal/high_grade')
 
     event.create(custom.dry_clay_brick) 

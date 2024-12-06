@@ -247,18 +247,8 @@ function getRecipeFunctions(event) {
      var generate = (result, ingredients) => {
           ingredients = comfuncs.ensureArray(ingredients)
           return {
-               plus: () => {
-                    var ingredientObjects = []
-                    var pat = [1, 3, 4, 5, 7]
-                    comfuncs.forEasy(pat.length, index => ingredientObjects.push([ingredients[commaths.rotate1D(index, ingredients.length)], index]))
-                    return modify(result, ingredientObjects, 3)
-               },
-               cross: () => {
-                    var ingredientObjects = []
-                    var pat = [0, 2, 4, 6, 8]
-                    comfuncs.forEasy(pat.length, index => ingredientObjects.push([ingredients[commaths.rotate1D(index, ingredients.length)], index]))
-                    return modify(result, ingredientObjects, 3)
-               },
+               plus: () => modify(result, [ingredients[0], [1, 3, 4, 5, 7]], 3),
+               cross: () => modify(result, [ingredients[0], [0, 2, 4, 6, 8]], 3),
                flatSquare: (size) => {
                     if (ingredients.length != 1)
                          console.error('[recipes.construct.flatSquare]: Only 1 ingredient is permitted')

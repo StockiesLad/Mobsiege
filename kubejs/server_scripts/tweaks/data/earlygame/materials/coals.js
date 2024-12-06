@@ -17,8 +17,8 @@ recipes((event, funcs) => {
 
     event.shapeless(custom.low_grade_charcoal, Item.of(custom.poor_grade_charcoal, 4))
     event.shapeless('minecraft:charcoal', Item.of(custom.low_grade_charcoal, 4))
-    event.shapeless(Item.of('minecraft:charcoal', 4),custom.high_grade_charcoal)
-    event.shapeless(custom.high_grade_charcoal,  Item.of('minecraft:charcoal', 4))
+    event.shapeless(custom.good_grade_charcoal, Item.of('minecraft:charcoal', 4))
+    event.shapeless(custom.high_grade_charcoal, Item.of(custom.good_grade_charcoal, 4))
 })
 /*
 basicLootTables((event, funcs) => { 
@@ -37,30 +37,30 @@ basicLootTables((event, funcs) => {
 })*/
 
 complexLootTables((event, funcs) => {
-    var charcoalEntry = (type, multiplier) => LootEntry.of(type)
-            .when(c => c.randomChance(multiplier))
-            .customFunction(countSet(countUniform(1, 2), false))
-            .customFunction(funcFortune(formulaBinomialBonus(1, multiplier)))
+    var charcoalEntry = (type, multiplier, amount) => LootEntry.of(type)
+            .when(c => c.randomChance(multiplier).customCondition(conditionInverted(conditionSilkTouch())))
+            .customFunction(countSet(countUniform(amount * multiplier, amount), false))
+            .customFunction(funcFortune(formulaBinomialBonus(Math.ceil(amount * multiplier), multiplier)))
 
-    var charcoal = (block, quality) => {
+    var charcoal = (block, quality, volume) => {
         event.addBlockLootModifier(block)
-            .removeLoot(block)
-            .removeLoot('minecraft:charcoal')
-            .addAlternativesLoot(
+            .removeLoot(Ingredient.all)
+            .addLoot(
                 LootEntry.of(block).when(c => c.customCondition(conditionSilkTouch())),
-                charcoalEntry('projecte:alchemical_coal', Math.pow(quality, 4)),
-                charcoalEntry(custom.high_grade_charcoal, Math.pow(quality, 3)),
-                charcoalEntry('minecraft:charcoal', Math.pow(quality, 2)),
-                charcoalEntry(custom.low_grade_charcoal, quality),
-                charcoalEntry(custom.poor_grade_charcoal, 1)
+                charcoalEntry('projecte:alchemical_coal', Math.pow(quality, 5), volume / 5),
+                charcoalEntry(custom.high_grade_charcoal, Math.pow(quality, 4), volume / 4),
+                charcoalEntry(custom.good_grade_charcoal, Math.pow(quality, 3), volume / 3),
+                charcoalEntry('minecraft:charcoal', Math.pow(quality, 2), volume / 2),
+                charcoalEntry(custom.low_grade_charcoal, quality, volume),
+                charcoalEntry(custom.poor_grade_charcoal, 1, 5)
             )
     }
 
-    charcoal(custom.charcoal_stack, 0.6)
-    charcoal('carbonize:charcoal_log', 0.4)
-    charcoal('carbonize:charcoal_planks', 0.1)
-    charcoal('carbonize:charcoal_stairs', 0.05)
-    charcoal('carbonize:charcoal_slab', 0.025)
+    charcoal(custom.charcoal_stack, 0.5, 5)
+    charcoal('carbonize:charcoal_log', 0.4, 3)
+    charcoal('carbonize:charcoal_planks', 0.3, 2)
+    charcoal('carbonize:charcoal_stairs', 0.2, 1)
+    charcoal('carbonize:charcoal_slab', 0.1, 1)
 })
 
 itemTags((event, funcs) => {
