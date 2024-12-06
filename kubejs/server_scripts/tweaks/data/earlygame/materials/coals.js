@@ -11,8 +11,8 @@ recipes((event, funcs) => {
         {output: 'minecraft:charcoal', type: 'minecraft:blasting'},
         {id: 'betterend:charcoal_block'}
     ])
-    funcs.globalPrimitiveCooking(Item.of(custom.poor_grade_charcoal, 2), '#minecraft:planks', 0.1)
-    funcs.globalPrimitiveCooking(Item.of(custom.low_grade_charcoal, 2), '#minecraft:logs', 0.2)
+    funcs.globalCooking(Item.of(custom.poor_grade_charcoal, 2), '#minecraft:planks', 0.1)
+    funcs.globalCooking(Item.of(custom.low_grade_charcoal, 2), '#minecraft:logs', 0.2)
     funcs.generate('2x betterend:charcoal_block', ['#forge:storage_blocks/charcoal', 'minecraft:soul_sand']).rollingSquare(1, 2).next().vanilla()
     funcs.charring(custom.charcoal_stack, comfuncs.packDef('log_stacks'))
 
@@ -21,26 +21,11 @@ recipes((event, funcs) => {
     event.shapeless(custom.good_grade_charcoal, Item.of('minecraft:charcoal', 4))
     event.shapeless(custom.high_grade_charcoal, Item.of(custom.good_grade_charcoal, 4))
 })
-/*
-basicLootTables((event, funcs) => { 
-    funcs.replaceBasiclt(
-        funcs.createBasicLt(
-            (materialTag, block) => 'minecraft:charcoal', 
-            funcExplosionDecay(), 
-            [
-                funcs.blockEntry({functions: [countSet(countUniform(4, 6), false), funcFortune(formulaUniformBonus(1))]}, 'carbonize:charcoal_log'),
-                funcs.blockEntry({functions: [countSet(countConstant(1), false), funcFortune(formulaBinomialBonus(1, 0.75))]}, 'carbonize:charcoal_planks'),
-                funcs.blockEntry({functions: [countSet(countBinomial(1, 0.75), false), funcFortune(formulaBinomialBonus(1, 0.56))]}, 'carbonize:charcoal_stairs'),
-                funcs.blockEntry({functions: [countSet(countBinomial(1, 0.5), false), funcFortune(formulaBinomialBonus(1, 0.28))]}, 'carbonize:charcoal_slab')
-            ]
-        )
-    )
-})*/
 
 complexLootTables((event, funcs) => {
     var charcoalEntry = (type, multiplier, amount) => LootEntry.of(type)
             .when(c => c.randomChance(multiplier).customCondition(conditionInverted(conditionSilkTouch())))
-            .customFunction(countSet(countUniform(amount * multiplier, amount), false))
+            .customFunction(countSet(countUniform(0, amount), false))
             .customFunction(funcFortune(formulaBinomialBonus(Math.ceil(amount * multiplier), multiplier)))
 
     var charcoal = (block, quality, volume) => {
@@ -53,7 +38,8 @@ complexLootTables((event, funcs) => {
                 charcoalEntry(custom.good_grade_charcoal, Math.pow(quality, 3), volume / 3),
                 charcoalEntry('minecraft:charcoal', Math.pow(quality, 2), volume / 2),
                 charcoalEntry(custom.low_grade_charcoal, quality, volume),
-                charcoalEntry(custom.poor_grade_charcoal, 1, 5)
+                charcoalEntry(custom.poor_grade_charcoal, 1, 3),
+                charcoalEntry('supplementaries:ash', 1 - quality, Math.max(0, 3 - volume))
             )
     }
 

@@ -1,3 +1,6 @@
+const HashMap = Java.loadClass('java.util.HashMap')
+const PrimalStageItems = Java.loadClass('com.nanokulon.primalstage.init.ModItems')
+
 recipes((event, funcs) => {
      comfuncs.iterate([
           'oak',
@@ -10,6 +13,7 @@ recipes((event, funcs) => {
           'warped'
      ], type => comfuncs.iterate([
           `primalstage:${type}_hedge`,
+          `primalstage:${type}_bark`,
           `primalstage:${type}_lattice`,
           `primalstage:${type}_logs`,
           `primalstage:${type}_drying_rack`,
@@ -65,6 +69,7 @@ blockTags((event, funcs) => {
 
 commonTags((event, funcs) => {
      funcs.unifiedAdd([
+          ['forge:stripped_logs', '#forge:logs/stripped'],
           ['|aether_logs', [
                'aether:golden_oak_log', 
                'aether:stripped_skyroot_log', 
@@ -101,8 +106,14 @@ commonTags((event, funcs) => {
                funcs.def('|aether_logs'),
                'minecraft:bamboo_block',
                'minecraft:stripped_bamboo_block'
-           ]],
+          ]],
      ])
+     event.add('forge:stripped_logs', event.get('minecraft:logs').getObjectIds().toArray().filter(log => log.toString().includes('stripped')))
+     event.add(comfuncs.packDef('raw_logs'), event.get('minecraft:logs').getObjectIds().toArray().filter(log => !log.toString().includes('stripped')))
+})
+
+ServerEvents.tags('block', event => {
+     
 })
 
 complexLootTables((event, funcs) => {
@@ -118,19 +129,21 @@ complexLootTables((event, funcs) => {
 ServerEvents.tags('worldgen/biome', event => {
      event.add('twigs:spawns_twig', '#')
 })*/
+PrimalStageItems.REGISTERED_BARKS = new HashMap()
+//PrimalStageItems.REGISTERED_BARKS.put(comfuncs.packLocation('raw_logs'), PrimalStageItems.SPRUCE_BARK)
 
 BlockEvents.rightClicked(event => {
      var item = event.getItem()
      var block = event.block
-     if (item.hasTag('forge:tools/hammers') && block.hasTag('minecraft:logs')) {
-          var level = event.getLevel()
-          var random = level.getRandom()
-          var pos = block.getPos()
+     var level = event.getLevel()
+     var random = level.getRandom()
+     var pos = block.getPos()
+     if (item.hasTag('forge:tools/hammers') && block.hasTag('forge:stripped_logs')) {
           item.hurtAndBreak(1, event.getEntity(), (entity) => level.broadcastEntityEvent(entity, event.getHand().name() == 'MAIN_HAND' ? 47 : 48))
-
           if (random.nextInt(5) == 0) {
                level.destroyBlock(pos, false)
-               Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('primalstage:spruce_logs').withCount(2 + random.nextInt(2)));
+               Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('primalstage:spruce_logs').withCount(2 + random.nextInt(3)))
           } else level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.bamboo.hit", "blocks", 0.25, 0.5)
-     }
+     } else if (item.hasTag('forge:tools/axes') && block.hasTag(comfuncs.packDef('raw_logs')))
+          Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('primalstage:spruce_bark').withCount(1 + random.nextInt(2)))
 })

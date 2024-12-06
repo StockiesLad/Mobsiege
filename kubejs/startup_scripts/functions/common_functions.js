@@ -1,3 +1,5 @@
+const ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
+
 function getCommonFunctions(storage) {
     if (storage == null)
         storage = global.storage
@@ -211,6 +213,16 @@ function getCommonFunctions(storage) {
         return object
    }
 
+   var resourceLocation = (namespace, path) => {
+        if (path == null) {
+            namespace = namespace.split(':', '')
+            return new ResourceLocation(namespace[0], namespace[1])
+        } return new ResourceLocation(namespace, path)
+
+    }
+
+    var packLocation = (path) => resourceLocation(global.modpackId, path)
+
     return {
         storage: storage,
         identifier: identifier,
@@ -246,6 +258,8 @@ function getCommonFunctions(storage) {
         functionalTryCatch: functionalTryCatch,
         functionalObject: functionalObject,
         functionalVar: functionalVar,
-        notNull: notNull
+        notNull: notNull,
+        resourceLocation: resourceLocation,
+        packLocation: packLocation
     }
 }
