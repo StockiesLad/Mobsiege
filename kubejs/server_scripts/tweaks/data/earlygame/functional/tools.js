@@ -14,7 +14,7 @@ recipes((event, funcs) => {
      funcs.replaceOutputRecipe('hardcore_torches:fire_starter', result => funcs.vanillaInsert(result, [[funcs.def('|primitive_string'), 0], ['#forge:rods/wooden', [1, 2]]]))
      funcs.replaceOutputRecipe('notreepunching:fire_starter', result => funcs.vanillaInsert(result, [[funcs.def('|primitive_string'), 0], ['hardcore_torches:fire_starter', [1, 2]], ['notreepunching:flint_shard', 3]]))
      funcs.replaceOutputRecipe('notreepunching:flint_knife', result => funcs.vanillaInsert(result, [[custom.pointed_flint, 1], ['#forge:rods/wooden', 2], [funcs.def('|primitive_string'), 0]]))
-     funcs.replaceOutputRecipe('primalstage:flint_hatchet', result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', 0], [custom.pointed_flint, 1], ['#forge:rods/wooden', 2], [funcs.def('|primitive_string'), 3]]))
+     funcs.replaceOutputRecipe('primalstage:flint_hatchet', result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', 1], [custom.pointed_flint, 0], ['#forge:rods/wooden', 3], [funcs.def('|primitive_string'), 2]]))
      funcs.replaceOutputRecipe('notreepunching:flint_axe', result => funcs.vanillaInsert(result, [['#notreepunching:string', 0], ['#forge:rods/wooden', [3, 6]], [custom.pointed_flint, [2]], ['notreepunching:flint_shard', [1, 4]]]))
      funcs.replaceOutputRecipe('notreepunching:flint_pickaxe', r => funcs.vanillaInsert(r, [['notreepunching:flint_shard', [0, 2]], ['#forge:string', 1], [custom.pointed_flint, [3, 5]], ['#forge:rods/wooden', [4, 7]]]))
 })
@@ -38,7 +38,17 @@ itemTags((event, funcs) => {
           ]],
           ['notreepunching:knives', '#forge:tools/knives'],
           ['forge:tools/knives', '#notreepunching:knives'],
-          ['forge:tools/hammers', '#primalstage:mallets']
+          ['forge:tools/hammers', [
+               '#primalstage:mallets',
+               'thermal_extra:signalum_hammer',
+               'thermal_extra:lumium_hammer',
+               'thermal_extra:enderium_hammer',
+               'thermal_extra:soul_infused_hammer',
+               'thermal_extra:shellite_hammer',
+               'thermal_extra:twinite_hammer',
+               'thermal_extra:dragonsteel_hammer',
+               'thermal_extra:abyssal_hammer'
+          ]]
           //['notreepunching:knives', '#minecraft:axes']
       ])
 })

@@ -116,7 +116,7 @@ function addTagBrickDrop(tag, brick) {
                var random = level.getRandom()
                var pos = block.getPos()
                item.hurtAndBreak(1, event.getEntity(), (entity) => level.broadcastEntityEvent(entity, event.getHand().name() == 'MAIN_HAND' ? 47 : 48))
-               if (random.nextInt(5) == 0) {
+               if (random.nextInt(4) == 0) {
                     level.destroyBlock(pos, false)
                     Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of(brick).withCount(4 + random.nextInt(4)));
                } else level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.gravel.hit", "blocks", 0.25, 0.5)

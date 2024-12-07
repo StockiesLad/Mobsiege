@@ -30,7 +30,7 @@ ServerEvents.tags('fluid', event => {
     })
 })
 
-ServerEvents.highPriorityData(event => {
+ServerEvents.lowPriorityData(event => {
     comfuncs.invokeSignedCalls('basicLootTables', {
         event: event,
         funcs: comfuncs.incorpProperties(getBasicLootTableFunctions(event), getTagFunctions(null))

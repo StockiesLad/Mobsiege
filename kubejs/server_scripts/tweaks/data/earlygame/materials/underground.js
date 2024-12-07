@@ -68,26 +68,6 @@ complexLootTables((event, funcs) => {
 })
 
 blockTags((event, funcs) => {
-     /*event.add('forge:ores', [
-          'gravelores:coal_gravel_ore',
-          'gravelores:iron_gravel_ore',
-          'gravelores:redstone_gravel_ore',
-          'gravelores:lapis_gravel_ore',
-          'gravelores:gold_gravel_ore',
-          'gravelores:emerald_gravel_ore',
-          'gravelores:diamond_gravel_ore',
-          'gravelores:quartz_gravel_ore',
-          'gravelores:zinc_gravel_ore',
-          'gravelores:nickel_gravel_ore',
-          'gravelores:osmium_gravel_ore',
-          'gravelores:tin_gravel_ore',
-          'gravelores:lead_gravel_ore',
-          'gravelores:copper_gravel_ore',
-          'gravelores:uranium_gravel_ore',
-          'gravelores:silver_gravel_ore',
-          'gravelores:aluminum_gravel_ore',
-          'gravelores:cobalt_gravel_ore'
-     ])*/
      event.add('minecraft:needs_iron_tool', event.get('forge:ores').getObjectIds().filter(ore => {
           ore = ore.toString()
           return !(ore.includes('sulfur') || ore.includes('niter'))

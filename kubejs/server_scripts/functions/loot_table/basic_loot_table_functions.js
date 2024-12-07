@@ -163,3 +163,92 @@ function getBasicLootTableFunctions(event) {
         createBasicLt: createBasicLt
     }
 }
+
+function ofOverride(overrides) {
+    return {conditions: [], functions: [], overrides: overrides}
+}
+
+function ofConditions(conditions, overrides) {
+    return {conditions: comfuncs.ensureArray(conditions), functions: [],  overrides: overrides}
+}
+
+function ofFunctions(functions, overrides) {
+    return {conditions: [], functions: comfuncs.ensureArray(functions), overrides: overrides}
+}
+
+function ofFuncConds(conditions, functions, overrides) {
+    return {conditions: comfuncs.ensureArray(conditions), functions: comfuncs.ensureArray(functions),  overrides: overrides}
+}
+
+function ofChild(item, modifiers) {
+    var json = {
+        type: "minecraft:item",
+        name: item
+    }
+
+    if (modifiers != null) {
+        json.conditions = modifiers.conditions
+        json.functions = modifiers.functions
+        if (modifiers['overrides'] != null)
+            modifiers.overrides(json)
+    }
+
+    return json
+}
+
+function groupPool(children) {
+    return {
+        rolls: 1,
+        type: "minecraft:group",
+        children: comfuncs.ensureArray(children)
+   }
+}
+
+function alternativesPool(entries, modifiers) {
+    var json = {
+        rolls: 1,
+        type: "minecraft:alternatives",
+        entries: comfuncs.ensureArray(entries)
+    }
+
+    if (modifiers != null) {
+        json.conditions = modifiers.conditions
+        json.functions = modifiers.functions
+    }
+
+    return json
+}
+
+function childAlternativesPool(children, modifiers) {
+    var json = {
+        type: "minecraft:alternatives",
+        children: comfuncs.ensureArray(children)
+    }
+
+    if (modifiers != null) {
+        json.conditions = modifiers.conditions
+        json.functions = modifiers.functions
+    }
+
+    return json
+}
+
+function nonSilkTouchPool(entries, rolls, bonus_rolls) {
+    return {
+        conditions: comfuncs.ensureArray(conditionInverted(conditionSilkTouch())),
+        rolls: comfuncs.notNull(rolls, 1),
+        bonus_rolls: comfuncs.notNull(bonus_rolls, 0),
+        entries: comfuncs.ensureArray(entries)
+   }
+}
+
+function silkTouchPool(item) {
+    return {
+        rolls: 1,
+        entries: [{
+             type: 'minecraft:item',
+             name: item,
+             conditions: comfuncs.ensureArray(conditionSilkTouch())
+        }]
+   }
+}

@@ -22,13 +22,11 @@ LootJS.modifiers(event => {
                LootEntry.of('primalstage:primitive_grill').when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
                LootEntry.of('minecraft:charcoal').customFunction(countSet(countUniform(1, 2), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
                LootEntry.of('minecraft:stick').customFunction(countSet(countUniform(1, 3), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch())))
-
           )
      event.addBlockLootModifier('minecraft:soul_campfire').removeLoot('minecraft:soul_soil')
           .addSequenceLoot(
                LootEntry.of('primalstage:primitive_grill').when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
                LootEntry.of('minecraft:soul_sand').customFunction(countSet(countUniform(1, 2), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
                LootEntry.of('minecraft:stick').customFunction(countSet(countUniform(1, 3), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch())))
-
           )
 })

@@ -12,6 +12,45 @@ recipes((event, funcs) => {
           generate('2x minecraft:gravel', ['aether_redux:driftshale', '#mobsiege:mud']).rollingSquare(1, 2)
      ])
 })
+/*
+complexLootTables((event, funcs) => [
+     event.addBlockLootModifier('minecraft:gravel')
+          .removeLoot(Ingredient.all)
+          .customCondition(survivesExplosion())
+          .addAlternativesLoot(
+               LootEntry.of(block).when(c => c.customCondition(conditionSilkTouch())),
+               LootEntry.of('minecraft:flint').when(c => c.customCondition(conditionTableBonus([
+                    0.1,
+                    0.14285715,
+                    0.25,
+                    1.0
+               ], "minecraft:fortune"))).customFunction(countSet(countUniform(0, 2), false)),
+               LootEntry.of('twigs:pebble').withChance(0.1).customFunction(countSet(countUniform(0, 2), false)),
+               LootEntry.of('minecraft:gravel')
+     )
+])*/
+
+basicLootTables((event, funcs) => {
+     funcs.raw('block', 'minecraft:gravel', {
+          pools: [
+               alternativesPool([
+                    ofChild('minecraft:gravel', ofConditions(conditionSilkTouch())),
+                    childAlternativesPool([
+                         ofChild('minecraft:flint', ofFuncConds(
+                              conditionTableBonus([0.1, 0.14285715, 0.25,1.0], "minecraft:fortune"), 
+                              countSet(countUniform(1, 2), false)
+                         )),
+                         ofChild('twigs:pebble', ofFuncConds(
+                              conditionRandomChance(0.1), 
+                              countSet(countUniform(0, 2), false)
+                         )),
+                         ofChild('minecraft:gravel')
+                    ])
+               ], ofConditions(survivesExplosion()))
+          ]
+     })
+          
+})
 
 BlockEvents.rightClicked(event => {
      var stack = event.getItem()
@@ -32,6 +71,24 @@ BlockEvents.rightClicked(event => {
                player.setItemInHand(hand, stack);
           }
           level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), NTPSounds.KNAPPING.get(), "blocks", 0.25, 0.5)
+     }
+})
+
+BlockEvents.rightClicked(event => {
+     var item = event.getItem()
+     var block = event.block
+     if (item.hasTag('forge:tools/hammers') && block.hasTag('forge:gravel')) {
+          var level = event.getLevel()
+          var random = level.getRandom()
+          var pos = block.getPos()
+          item.hurtAndBreak(1, event.getEntity(), (entity) => level.broadcastEntityEvent(entity, event.getHand().name() == 'MAIN_HAND' ? 47 : 48))
+
+          if (random.nextInt(4) == 0) {
+               level.destroyBlock(pos, false)
+               Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('twigs:pebble').withCount(2 + random.nextInt(2)))
+               if (random.nextInt(2) == 0)
+                    Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('minecraft:flint').withCount(1 + random.nextInt(2)))
+          } else level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.gravel.hit", "blocks", 0.25, 0.5)
      }
 })
 

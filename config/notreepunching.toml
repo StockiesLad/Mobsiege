@@ -42,7 +42,7 @@
 
     # The chance for a fire starter to start fires
     # Range: [0.0, 1.0]
-    fireStarterFireStartChance = 0.5
+    fireStarterFireStartChance = 0.75
 
     # If the fire starter can be used to make a campfire (with one '#notreepunching:fire_starter_logs' and three '#notreepunching:fire_starter_kindling'
     fireStarterCanMakeCampfire = true

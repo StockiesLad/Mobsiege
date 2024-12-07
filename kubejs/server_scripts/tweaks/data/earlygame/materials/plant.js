@@ -1,5 +1,6 @@
 var wholeOrganic
-var partialOrganic = [
+var partialOrganic = []
+var customPartialOrganic = [
 	'alexscaves:licoroot_sprout',
 	'biomemakeover:mycelium_roots',
 	'biomesoplenty:high_grass',
@@ -47,6 +48,7 @@ var partialOrganic = [
 	'edenring:eden_vine',
 	'edenring:mycotic_grass',
 	'galosphere:lichen_roots',
+	'geologicexpansion:overgrowth',
 	'minecraft:big_dripleaf',
 	'minecraft:big_dripleaf_stem',
 	'minecraft:fern',
@@ -155,9 +157,7 @@ recipes((event, funcs) => {
 itemTags((event, funcs) => {
      //partialOrganic.push('#minecraft:saplings')
      //partialOrganic.push('#minecraft:flowers')
-     partialOrganic.push('#supplementaries:flower_box_plantable')
-     partialOrganic.push('#createaddition:plants')
-     partialOrganic.push('#forge:plant')
+
 
      funcs.unifiedRemove([
           ['minecraft:nylium', ['edenring:eden_grass', 'edenring:eden_mycelium']],
@@ -166,21 +166,21 @@ itemTags((event, funcs) => {
 
      funcs.unifiedAdd([
           [comfuncs.packDef('primitive_string'), ['notreepunching:plant_string', '#forge:string']],
-          [comfuncs.packDef('partial_organic'), partialOrganic.concat(partialOrganicAether)],
-          [comfuncs.packDef('whole_organic'), ['#minecraft:leaves', '#minecraft:wart_blocks']]
+          [comfuncs.packDef('partial_organic_aether'), partialOrganicAether],
+		[comfuncs.packDef('partial_organic'), customPartialOrganic.concat(['#supplementaries:flower_box_plantable', '#createaddition:plants', '#forge:plant'])],
+          [comfuncs.packDef('whole_organic'), '#minecraft:leaves']
      ])
 
      wholeOrganic = event.get(comfuncs.packDef('whole_organic')).getObjectIds()
      partialOrganic = event.get(comfuncs.packDef('partial_organic')).getObjectIds()
-
 })
 
 blockTags((event, funcs) => {
+	var partialOrganicUnified = partialOrganic.concat(partialOrganicAether).concat(['minecraft:dead_bush'])
      funcs.unifiedAdd([
           ['twilightforest:portal/decoration', 'cinderscapes:umbral_fungus'],
-          ['notreepunching:always_breaks', 'minecraft:dead_bush'],
-          ['notreepunching:always_breaks', partialOrganic.concat(partialOrganicAether)],
-          ['notreepunching:always_drops', partialOrganic.concat(partialOrganicAether)],
+          ['notreepunching:always_breaks', partialOrganicUnified],
+          ['notreepunching:always_drops', partialOrganicUnified],
           ['minecraft:mineable/hoe', 'betterend:glowing_pillar_luminophor'],
           ['minecraft:mineable/shovel', 'betterend:charcoal_block']
      ])
@@ -221,6 +221,9 @@ complexLootTables((event, funcs) => {
      addOrganicDrops(event, partialOrganic, 'minecraft:stick')
      addOrganicDrops(event, partialOrganicAether, 'aether:skyroot_stick')
 
+	wholeOrganic = null
+	partialOrganic = null
+	partialOrganicAether = null
 })
 
 function addOrganicDrops(event, blocks, stick)  {
@@ -229,10 +232,10 @@ function addOrganicDrops(event, blocks, stick)  {
           .addAlternativesLoot(
                LootEntry.of(block).when(c => c.customCondition(conditionSilkTouch())),
                LootEntry.of(block).when(c => c.customCondition(conditionMatchTool('forge:shears'))),
-               LootEntry.of(stick).when(c => c.randomChance(0.05)),
-               LootEntry.of(stick).when(c => c.randomChance(0.4).customCondition(conditionMatchTool('forge:tools/knives'))),
-               LootEntry.of('notreepunching:plant_fiber').when(c => c.randomChance(0.1)),
-               LootEntry.of('notreepunching:plant_fiber').when(c => c.randomChance(0.8).customCondition(conditionMatchTool('forge:tools/knives'))),
+               LootEntry.of(stick).when(c => c.randomChance(0.125)),
+               LootEntry.of(stick).when(c => c.randomChance(0.5).customCondition(conditionMatchTool('forge:tools/knives'))),
+               LootEntry.of('notreepunching:plant_fiber').when(c => c.randomChance(0.25)),
+               LootEntry.of('notreepunching:plant_fiber').when(c => c.customCondition(conditionMatchTool('forge:tools/knives'))),
           )
      )
 }

@@ -167,6 +167,8 @@ PlayerEvents.tick(event => {
     let random = level.getRandom()
     if (random.nextInt(chanceRandomBound) != 0) return
 
+    if (level.day < 1 && level.isDay()) return
+
     let siegeGroup = MOB_SIEGES[random.nextInt(MOB_SIEGES.length)]
     let siegeMembers = siegeGroup.members
     let playerPos = new BlockPos(player.getX(), player.getY(), player.getZ())

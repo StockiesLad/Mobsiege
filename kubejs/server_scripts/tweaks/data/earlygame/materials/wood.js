@@ -141,7 +141,7 @@ BlockEvents.rightClicked(event => {
      var pos = block.getPos()
      if (item.hasTag('forge:tools/hammers') && block.hasTag('forge:stripped_logs')) {
           item.hurtAndBreak(1, event.getEntity(), (entity) => level.broadcastEntityEvent(entity, event.getHand().name() == 'MAIN_HAND' ? 47 : 48))
-          if (random.nextInt(5) == 0) {
+          if (random.nextInt(4) == 0) {
                level.destroyBlock(pos, false)
                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('primalstage:spruce_logs').withCount(2 + random.nextInt(3)))
           } else level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.bamboo.hit", "blocks", 0.25, 0.5)
