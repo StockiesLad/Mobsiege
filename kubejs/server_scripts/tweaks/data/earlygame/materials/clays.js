@@ -10,7 +10,7 @@ recipes((event, funcs) => {
      event.replaceInput({output: 'primalstage:dark_oak_drying_rack'}, 'dark_oak_planks', '#minecraft:planks')
      
      event.shapeless('minecraft:clay_ball', ['#forge:ash', 'minecraft:bone_meal'])
-     event.shapeless('minecraft:clay_ball', ['#forge:ash', 'notreepunching:plant_fiber'])
+     //event.shapeless('minecraft:clay_ball', ['#forge:ash', 'notreepunching:plant_fiber'])
      event.shapeless('minecraft:clay_ball', ['#forge:salt', '#forge:dirt'])
      funcs.insertAll(insertion => insertion.vanilla(), [
           generate('2x minecraft:clay', ['#forge:sand', funcs.def('|jelly_blocks')]).rollingSquare(1, 2),

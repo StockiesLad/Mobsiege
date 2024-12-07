@@ -39,8 +39,31 @@ comfuncs.hide(woodSet('biomeswevegone', 'mahogany'))
 comfuncs.hide(woodSet('biomesoplenty', 'redwood'))
 
 recipes((event, funcs) => {
-     event.remove({id: 'quark:tweaks/crafting/slab_to_block'})
+     comfuncs.iterate([
+          {id: 'quark:tweaks/crafting/slab_to_block'},
+          {id: 'create_confectionery:chocolate_recipe_6'},
+          {id: 'create_confectionery:white_chocolate_recipe_6'},
+          {id: 'create_confectionery:ruby_chocolate_recipe_6'},
+          {id: 'create_confectionery:black_chocolate_recipe_6'}
+     ], (o) => event.remove(o))
+
+     comfuncs.iterate([
+          'aetherdelight:quickroot_crate',
+          'aetherdelight:chromaberry_crate',
+          'aetherdelight:luxbuds_salad'
+     ], o => funcs.removeAndHide(o))
+
+     funcs.replaceOutputRecipe('aetherdelight:strange_root_salad', r => event.shapeless(r, ['aether_redux:zanberry', 'aether_redux:lightroot_clump', 'minecraft:bowl']))
+     funcs.replaceOutputRecipe('aetherdelight:oat_cookie', r => event.shapeless(r, ['aether:swet_ball', Item.of('aether_redux:wynd_oats', 2)]))
+     funcs.replaceOutputRecipe('aetherdelight:aether_grass_bale', r => funcs.generate(r, 'aether_redux:short_aether_grass').flatSquare(3).next().vanilla())
+     funcs.replaceOutputRecipe('otbwgdelight:puffball_sandwich', r => event.shapeless(r, ['biomeswevegone:cooked_white_puffball_cap', Item.of('minecraft:bread', 2)]))
+
 })
+
+ServerEvents.recipes(event => {
+     
+})
+
 /*
 ServerEvents.recipes(event => {
      

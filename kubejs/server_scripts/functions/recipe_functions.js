@@ -107,6 +107,15 @@ function getRecipeFunctions(event) {
           })
      }
 
+     var advancedFluidRefining = (results, ingredients) => {
+          return event.custom({
+               type: "thermal_extra:advanced_refinery",
+               energy: 4000,
+               ingredients: comfuncs.ensureArray(ingredients),
+               result: comfuncs.ensureArray(results),
+          })
+     }
+
      var globalPrimitiveDrying = (result, ingredient) => {
           drying(result, ingredient)
           basinDrying(result, ingredient)
@@ -161,6 +170,12 @@ function getRecipeFunctions(event) {
           event.recipes.immersiveengineering.metal_press(results, ingredients, 'immersiveengineering:mold_plate')
           event.recipes.create.pressing(results, ingredients)
           event.recipes.thermal.press(results, ingredients)
+     }
+
+     var globalLiquefaction = (resultFluid, resultItem, ingredient) => {
+          resultItem = comfuncs.notNull(resultItem, 'minecraft:air')
+          event.recipes.thermal.pyrolyzer([resultFluid, resultItem], ingredient)
+          event.recipes.immersiveengineering.coke_oven(resultItem, ingredient).creosote(resultFluid.amount)
      }
 
 
@@ -351,6 +366,7 @@ function getRecipeFunctions(event) {
           fluidMixing: fluidMixing,
           componentAssembly: componentAssembly,
           chilling: chilling,
+          advancedFluidRefining: advancedFluidRefining,
           globalPrimitiveDrying: globalPrimitiveDrying,
           globalDrying: globalDrying,
           globalCrushing: globalCrushing,
@@ -361,6 +377,7 @@ function getRecipeFunctions(event) {
           globalFluidMixing: globalFluidMixing,
           globalChilling: globalChilling,
           globalPressing: globalPressing,
+          globalLiquefaction: globalLiquefaction,
           // <Insertion> //
           insert: insert,
           modify: modify,

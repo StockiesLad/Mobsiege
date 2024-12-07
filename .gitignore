@@ -28,6 +28,8 @@
 !/config/defaultoptions
 !/config/pamhc2crops.toml
 !/config/itlt-client.toml
+!/config/lmft.json
+!/config/emi.css
 #Performance
 !/config/immediatelyfast.json
 !/config/forge-client.toml

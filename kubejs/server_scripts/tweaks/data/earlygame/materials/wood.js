@@ -70,6 +70,7 @@ blockTags((event, funcs) => {
 commonTags((event, funcs) => {
      funcs.unifiedAdd([
           ['forge:stripped_logs', '#forge:logs/stripped'],
+          ['|stacks', [comfuncs.packDef('charcoal_stacks'), comfuncs.packDef('log_stacks')]],
           ['|aether_logs', [
                'aether:golden_oak_log', 
                'aether:stripped_skyroot_log', 

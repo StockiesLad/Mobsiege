@@ -2,9 +2,12 @@
 const BlockPos = Java.loadClass('net.minecraft.core.BlockPos')
 const SpawnType = Java.loadClass('net.minecraft.world.entity.SpawnPlacements$Type')
 const Direction = Java.loadClass('net.minecraft.core.Direction')
+const ServerPlayer = Java.loadClass('net.minecraft.server.level.ServerPlayer')
+const ForgeFakePlayer = Java.loadClass('net.minecraftforge.common.util.FakePlayer')
+const FabricFakePlayer = Java.loadClass('net.fabricmc.fabric.api.entity.FakePlayer')
 
 //Modification Variables
-const disable = false
+const disabled = false
 const testDirections = getScanningDirections()
 const chanceRandomBound = 10000
 const spawnDistBase = 5 
@@ -18,7 +21,7 @@ const surfaceSearchDist = 10
 const MOB_SIEGES = [
     {
         name: 'Bliztic Barrage',
-        type: 'blaze',
+        type: 'Blaze',
         members: [
             'minecraft:blaze',
             'thermal:basalz',
@@ -29,7 +32,7 @@ const MOB_SIEGES = [
     },
     {
         name: 'Slime Swarm',
-        type: 'slime',
+        type: 'Slime',
         members: [
             'minecraft:slime',
             'terrarianslimes:spiked_ice_slime',
@@ -57,7 +60,7 @@ const MOB_SIEGES = [
     },
     {
         name: '\'Splosive Strike',
-        type: 'creeper',
+        type: 'Creeper',
         members: [
             'ad_astra:sulfur_creeper',
             'creeperoverhaul:jungle_creeper',
@@ -81,7 +84,7 @@ const MOB_SIEGES = [
     },
     {
         name: 'Skeletal Slaughter',
-        type: 'skeleton',
+        type: 'Skeleton',
         members: [
             'betternether:jungle_skeleton',
             'minecraft:skeleton',
@@ -94,7 +97,7 @@ const MOB_SIEGES = [
     },
     {
         name: 'Undead Uprising',
-        type: 'zombie',
+        type: 'Zombie',
         members: [
             'minecraft:zombie_villager',
             'minecraft:zombie',
@@ -138,105 +141,115 @@ const MOB_SIEGES = [
 //Announcements for server chat
 const announcements = [
     'A ${siegeGroup} is coming after ${playerName}!',
-    '${playerName} is getting attacked by a ${siegeGroup}',
+    '${playerName} is getting attacked by ${sgArticle} ${siegeGroup}',
     '${playerName}\'s life is being threatened by an incoming ${siegeGroup}',
     'A wild ${siegeGroup} is storming ${playerName}',
     '${playerName} is being charged by an incoming ${siegeGroup}',
-    '${playerName} is now at war with a ${siegeGroup}',
+    '${playerName} is now at war with ${sgArticle} ${siegeGroup}',
     'A pack of angry ${mobType}s are trying to kill ${playerName}',
     'A cluster of ${mobCount} ${mobType}s have united to destroy ${playerName}',
     'The entire ${mobType} species have put their differences aside to annihilate ${playerName}'
 ]
 
 //////IMPLEMENTATION//////IMPLEMENTATION//////IMPLEMENTATION//////IMPLEMENTATION//////IMPLEMENTATION//////IMPLEMENTATION//////IMPLEMENTATION//////IMPLEMENTATION//////IMPLEMENTATION//////
-LevelEvents.tick(event => {
+PlayerEvents.tick(event => {
+    if (disabled) return
+
+    if (!event.getEntity() instanceof ServerPlayer) return
+
+    let player = event.getPlayer()
+    if (player instanceof ForgeFakePlayer || player instanceof FabricFakePlayer) return
+
     let level = event.getLevel()
-    let players = level.getPlayers()
     let difficulty = level.getDifficulty().getKey()
-    let {random} = level
-    if (!disable /*&& level.dimension == 'minecraft:overworld'*/ && players.length > 0 && random.nextInt(chanceRandomBound) == 0 && difficulty != 'peaceful') {
-        let siegeGroup = MOB_SIEGES[random.nextInt(MOB_SIEGES.length)]
-        let siegeMembers = siegeGroup.members
-        let player = players[random.nextInt(players.length)]
-        let playerPos = new BlockPos(player.getX(), player.getY(), player.getZ())
-        let playerInSafeBiome = comfuncs.functionalVar(level.getBiome(player), biome => biome == 'minecraft:mushroom_fields')  
-        let playerChunkPos = level.getChunkAt(playerPos).getPos()
-        let isPlayerOnSurface = testUnderground(level, playerPos).length > 1
-        let isPlayerCreative = player.isCreative()
-        let siegeBlockPos = new BlockPos(player.getX() + varRandInt(random, spawnDistBase, spawnDistVariation), player.getY(), player.getZ() + varRandInt(random, spawnDistBase, spawnDistVariation))
-        let isProtected = isChunkSafe(level, playerChunkPos)
-        let spawnDist = commaths.diff(siegeBlockPos.getY(), player.getY())
-        let mobCount = random.nextInt(mobCountVariation) + mobCountBase
+    if (difficulty == 'peaceful') return
 
-        while(!level.canSeeSky(siegeBlockPos))
-            siegeBlockPos = siegeBlockPos.above()
+    let random = level.getRandom()
+    if (random.nextInt(chanceRandomBound) != 0) return
 
-        while(level.getBlockState(siegeBlockPos.below()).isAir())
-            siegeBlockPos = siegeBlockPos.below()
-        
-        console.info('[Mobsiege] Preparing a mob seige: {' +
-            '\n    difficulty=' + difficulty + ', ' +
-            '\n    forPlayer=' + player + ', ' +
-            '\n    playerChunkPos=' + playerChunkPos + ', ' +
-            '\n    playerOnSurface=' + isPlayerOnSurface + ',' +
-            '\n    playerCreative=' + isPlayerCreative + ', ' +
-            '\n    atPosition=' + siegeBlockPos + ', ' +
-            '\n    seigeGroup=' + siegeGroup.name +  ', ' +
-            '\n    isProtected=' + isProtected + ', ' +
-            '\n    mobCount=' + mobCount
-          + '\n}'
+    let siegeGroup = MOB_SIEGES[random.nextInt(MOB_SIEGES.length)]
+    let siegeMembers = siegeGroup.members
+    let playerPos = new BlockPos(player.getX(), player.getY(), player.getZ())
+    let playerInSafeBiome = comfuncs.functionalVar(level.getBiome(player), biome => biome == 'minecraft:mushroom_fields')  
+    let playerChunkPos = level.getChunkAt(playerPos).getPos()
+    let isPlayerOnSurface = testUnderground(level, playerPos).length > 1
+    let isPlayerCreative = player.isCreative()
+    let siegeBlockPos = new BlockPos(player.getX() + varRandInt(random, spawnDistBase, spawnDistVariation), player.getY(), player.getZ() + varRandInt(random, spawnDistBase, spawnDistVariation))
+    let isProtected = isChunkSafe(level, playerChunkPos)
+    let spawnDist = commaths.diff(siegeBlockPos.getY(), player.getY())
+    let mobCount = random.nextInt(mobCountVariation) + mobCountBase
 
-        )
-        if (spawnDist < spawnDistMax && isPlayerOnSurface && !isProtected && !playerInSafeBiome && !isPlayerCreative) {
-            level.tell(Text.darkRed('[Mobsiege] ' + comfuncs.interlaceString(getRandomElement(random, announcements), [
-                {name: 'playerName', value: player.getName().getString()}, 
-                {name: 'siegeGroup', value: siegeGroup.name}, 
-                {name: 'mobType', value: siegeGroup.type},
-                {name: 'mobCount', value: mobCount}
-            ])))
-            let square = Math.ceil(Math.sqrt(mobCount))
-            for (let modX = 0; modX < square; modX++) {
-                for (let modZ = 0; modZ < square; modZ++) {
-                    if (modX * modZ < mobCount) {
-                        let variedPos = new BlockPos(siegeBlockPos.getX() + modX - square/2, siegeBlockPos.getY(), siegeBlockPos.getZ() + modZ - square/2)
-                        let memberPos = findSurfacePosition(level, variedPos)
+    while(!level.canSeeSky(siegeBlockPos))
+        siegeBlockPos = siegeBlockPos.above()
 
-                        // Error Correction //
-                        if (commaths.diff(memberPos.getY(), siegeBlockPos.getY()) >= 10) {
-                            var corrected = false
-                            var directions = [
-                                Direction.NORTH,
-                                Direction.EAST,
-                                Direction.SOUTH,
-                                Direction.WEST
-                            ]
-                            for (var index = 0; index < directions.length; index++) {
-                                var direction = directions[index]
-                                var newMemberPos = variedPos
-                                for (var deviation = 0; deviation < square ; deviation++) {
-                                    newMemberPos = findSurfacePosition(level, newMemberPos.relative(direction))
-                                    if (commaths.diff(newMemberPos.getY(), siegeBlockPos.getY()) >= 10) {
-                                        corrected = true
-                                        memberPos = newMemberPos
-                                        break
-                                    }
-                                }
-                                if (corrected)
+    while(level.getBlockState(siegeBlockPos.below()).isAir())
+        siegeBlockPos = siegeBlockPos.below()
+    
+    console.info('[Mobsiege] Attempting a mob seige: {' +
+        '\n    difficulty=' + difficulty + ', ' +
+        '\n    forPlayer=' + player + ', ' +
+        '\n    playerChunkPos=' + playerChunkPos + ', ' +
+        '\n    playerOnSurface=' + isPlayerOnSurface + ',' +
+        '\n    playerCreative=' + isPlayerCreative + ', ' +
+        '\n    atPosition=' + siegeBlockPos + ', ' +
+        '\n    seigeGroup=' + siegeGroup.name +  ', ' +
+        '\n    isProtected=' + isProtected + ', ' +
+        '\n    mobCount=' + mobCount
+        + '\n}'
+
+    )
+    if (spawnDist < spawnDistMax && isPlayerOnSurface && !isProtected && !playerInSafeBiome && !isPlayerCreative) {
+        level.tell(Text.darkRed('[Mobsiege] ' + comfuncs.interlaceString(getRandomElement(random, announcements), [
+            {name: 'playerName', value: player.getName().getString()}, 
+            {name: 'siegeGroup', value: siegeGroup.name},
+            {name: 'sgArticle', value: siegeGroup.name.charAt(0) == 'U' ? 'an' : 'a'}, 
+            {name: 'SgArticle', value: siegeGroup.name.charAt(0) == 'U' ? 'An' : 'A'}, 
+            {name: 'mobType', value: siegeGroup.type.toLowerCase()},
+            {name: 'mobType', value: siegeGroup.type},
+            {name: 'mobCount', value: mobCount}
+        ])))
+        let square = Math.ceil(Math.sqrt(mobCount))
+        for (let modX = 0; modX < square; modX++) {
+            for (let modZ = 0; modZ < square; modZ++) {
+                if (modX * modZ < mobCount) {
+                    let variedPos = new BlockPos(siegeBlockPos.getX() + modX - square/2, siegeBlockPos.getY(), siegeBlockPos.getZ() + modZ - square/2)
+                    let memberPos = findSurfacePosition(level, variedPos)
+
+                    // Error Correction //
+                    if (commaths.diff(memberPos.getY(), siegeBlockPos.getY()) >= 10) {
+                        var corrected = false
+                        var directions = [
+                            Direction.NORTH,
+                            Direction.EAST,
+                            Direction.SOUTH,
+                            Direction.WEST
+                        ]
+                        for (var index = 0; index < directions.length; index++) {
+                            var direction = directions[index]
+                            var newMemberPos = variedPos
+                            for (var deviation = 0; deviation < square ; deviation++) {
+                                newMemberPos = findSurfacePosition(level, newMemberPos.relative(direction))
+                                if (commaths.diff(newMemberPos.getY(), siegeBlockPos.getY()) >= 10) {
+                                    corrected = true
+                                    memberPos = newMemberPos
                                     break
+                                }
                             }
-                            if (!corrected)
-                                memberPos = siegeBlockPos
+                            if (corrected)
+                                break
                         }
-                        // Error Correction //
+                        if (!corrected)
+                            memberPos = siegeBlockPos
+                    }
+                    // Error Correction //
 
-                        let entity = level.createEntity(getRandomElement(random, siegeMembers))
-                        entity.setPosition(memberPos.getX(), memberPos.getY(), memberPos.getZ())
-                        entity.spawn()
-                    } else break
-                }
-            }    
-        } else if (isProtected) level.tell(`[Mobsiege] An interdiction torch protected ${player.getName().getString()} against a mob siege!`)
-    }
+                    let entity = level.createEntity(getRandomElement(random, siegeMembers))
+                    entity.setPosition(memberPos.getX(), memberPos.getY(), memberPos.getZ())
+                    entity.spawn()
+                } else break
+            }
+        }    
+    } else if (isProtected) level.tell(`[Mobsiege] An interdiction torch protected ${player.getName().getString()} against a mob siege!`)
 })
 
 function getScanningDirections() {

@@ -1,4 +1,9 @@
 function getBasicLootTableFunctions(event) {
+    var raw = (type, id, json) => {
+        var splitId = id.split(':')
+        event.addJson(splitId[0] + ':loot_tables/' + type + 's/' + splitId[1] + '.json', json)
+    }
+
     var lootTable = (event, identifier, type, pools) => {
         var splitId = identifier.split(':')
         var json = {type: type, pools:  comfuncs.ensureArray(pools)}
@@ -134,6 +139,7 @@ function getBasicLootTableFunctions(event) {
     }
 
     return {
+        raw: raw,
         lootTable: lootTable,
         ltPools: ltPools,
         ltEntries: ltEntries,

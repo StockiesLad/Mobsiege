@@ -22,31 +22,52 @@ recipes((event, funcs) => {
     event.shapeless(custom.high_grade_charcoal, Item.of(custom.good_grade_charcoal, 4))
 })
 
-complexLootTables((event, funcs) => {
-    var charcoalEntry = (type, multiplier, amount) => LootEntry.of(type)
-            .when(c => c.randomChance(multiplier).customCondition(conditionInverted(conditionSilkTouch())))
-            .customFunction(countSet(countUniform(0, amount), false))
-            .customFunction(funcFortune(formulaBinomialBonus(Math.ceil(amount * multiplier), multiplier)))
-
+basicLootTables((event, funcs) => {
+    function item(item, weight) {
+        return {
+            type: "minecraft:item",
+            name: item,
+            weight: weight * 10000
+        }
+    }
     var charcoal = (block, quality, volume) => {
-        event.addBlockLootModifier(block)
-            .removeLoot(Ingredient.all)
-            .addLoot(
-                LootEntry.of(block).when(c => c.customCondition(conditionSilkTouch())),
-                charcoalEntry('projecte:alchemical_coal', Math.pow(quality, 5), volume / 5),
-                charcoalEntry(custom.high_grade_charcoal, Math.pow(quality, 4), volume / 4),
-                charcoalEntry(custom.good_grade_charcoal, Math.pow(quality, 3), volume / 3),
-                charcoalEntry('minecraft:charcoal', Math.pow(quality, 2), volume / 2),
-                charcoalEntry(custom.low_grade_charcoal, quality, volume),
-                charcoalEntry(custom.poor_grade_charcoal, 1, 3),
-                charcoalEntry('supplementaries:ash', 1 - quality, Math.max(0, 3 - volume))
-            )
+        quality = quality
+
+        funcs.raw('block', block, {
+            pools: [
+                {
+                    conditions: comfuncs.ensureArray(conditionInverted(conditionSilkTouch())),
+                    functions: comfuncs.ensureArray(funcFortune(formulaUniformBonus(1))),
+                    rolls: volume,
+                    entries: [{
+                        type: "minecraft:group",
+                        children: [
+                            item('projecte:alchemical_coal', Math.pow(quality, 8)),
+                            item(custom.high_grade_charcoal, Math.pow(quality, 4)),
+                            item(custom.good_grade_charcoal, Math.pow(quality, 2)),
+                            item('minecraft:charcoal', quality),
+                            item(custom.low_grade_charcoal, 1 - quality),
+                            item(custom.poor_grade_charcoal, Math.pow(1 - quality, 2)),
+                            item('supplementaries:ash', Math.pow(1 - quality, 4))
+                        ]
+                    }]
+                },
+                {
+                    rolls: 1,
+                    entries: [{
+                        type: "minecraft:item",
+                        name: block,
+                        conditions: comfuncs.ensureArray(conditionSilkTouch())
+                    }]
+                }
+            ]
+        }) 
     }
 
-    charcoal(custom.charcoal_stack, 0.5, 5)
-    charcoal('carbonize:charcoal_log', 0.4, 3)
-    charcoal('carbonize:charcoal_planks', 0.3, 2)
-    charcoal('carbonize:charcoal_stairs', 0.2, 1)
+    charcoal(custom.charcoal_stack, 0.5, 8)
+    charcoal('carbonize:charcoal_log', 0.3, 6)
+    charcoal('carbonize:charcoal_planks', 0.2, 3)
+    charcoal('carbonize:charcoal_stairs', 0.1, 2)
     charcoal('carbonize:charcoal_slab', 0.1, 1)
 })
 
