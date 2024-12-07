@@ -66,6 +66,7 @@ aether genesis  + promenade + primalstage  + integrated dynamics + thermal expan
 
 
 
+
 fix recipes and tags (this is last)
 
 Document primitive states (flint tools, stone grill, brick campfire, mortar kiln, cement furnace)
@@ -73,6 +74,9 @@ Document primitive states (flint tools, stone grill, brick campfire, mortar kiln
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+fix vines not breaking
+fix lilypads not being in partial organic
+fix pointed flint direction
 charcoal liquefaction
 Add generic bark support https://github.com/nanokulonq/PrimalStage/blob/master/src/main/java/com/nanokulon/primalstage/mixin/UseOnBlockMixin.java#L31
 migrate knives

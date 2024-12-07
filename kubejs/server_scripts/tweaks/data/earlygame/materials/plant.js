@@ -1,82 +1,112 @@
 var wholeOrganic
 var partialOrganic = [
-     'alexscaves:licoroot_sprout', 
-     'biomemakeover:mycelium_roots', 
-     'biomesoplenty:high_grass', 
-     'biomesoplenty:high_grass_plant', 
-     'biomesoplenty:dune_grass',  
-     'biomesoplenty:desert_grass', 
-     'biomesoplenty:red_maple_leaf_pile', 
-     'biomesoplenty:orange_maple_leaf_pile', 
-     'biomesoplenty:yellow_maple_leaf_pile', 
-     'biomesoplenty:sprout',
-     'biomeswevegone:tall_beach_grass', 
-     'biomeswevegone:beach_grass',
-     'biomeswevegone:tall_prairie_grass', 
-     'biomeswevegone:prairie_grass',
-     'biomeswevegone:leaf_pile', 
-     'biomeswevegone:skyris_vine',
-     'biomesoplenty:willow_vine',
-     'betterend:bulb_vine',
-     'betterend:jungle_vine',
-     'betterend:twisted_vine',
-     'betterend:dense_vine',
-     'betternether:neon_equisetum',
-     'betternether:blooming_vine',
-     'betternether:golden_vine',
-     'betternether:black_vine',
-     //'blue_skies:lucentroot',
-     'cinderscapes:twilight_fescues',
-     'cinderscapes:photofern', 
-     'cinderscapes:tall_photofern',  
-     'cinderscapes:twilight_tendrils',
-     'deeperdarker:sculk_tendrils', 
-     'deeperdarker:sculk_vines', 
-     'edenring:tall_mycotic_grass', 
-     'edenring:golden_grass', 
-     'edenring:copper_grass', 
-     'edenring:iron_grass', 
-     'edenring:gold_grass', 
-     'edenring:tall_copper_grass', 
-     'edenring:tall_iron_grass', 
-     'edenring:tall_gold_grass',
-     'edenring:eden_vine',
-     'edenring:mycotic_grass', 
-     'galosphere:lichen_roots', 
-     'minecraft:fern', 
-     'minecraft:grass',
-     'minecraft:tall_grass',
-     'minecraft:large_fern', 
-     'minecraft:seagrass',
-     'minecraft:crimson_roots', 
-     'minecraft:warped_roots',
-     'minecraft:sculk_vein',
-     'minecraft:glow_lichen', 
-     'minecraft:weeping_vines',
-     'minecraft:twisting_vines',
-     'minecraft:vine',
-     'promenade:dark_amaranth_roots',
-     'promenade:oak_leaf_pile', 
-     'promenade:spruce_leaf_pile', 
-     'promenade:birch_leaf_pile', 
-     'promenade:jungle_leaf_pile', 
-     'promenade:acacia_leaf_pile', 
-     'promenade:dark_oak_leaf_pile', 
-     'promenade:mangrove_leaf_pile', 
-     'promenade:azalea_leaf_pile', 
-     'promenade:flowering_azalea_leaf_pile', 
-     'promenade:sap_maple_leaf_pile', 
-     'promenade:vermilion_maple_leaf_pile', 
-     'promenade:fulvous_maple_leaf_pile', 
-     'promenade:mikado_maple_leaf_pile', 
-     'promenade:palm_leaf_pile', 
-     'terrestria:sakura_leaf_pile', 
-     'twigs:petrified_lichen',
-     'upgrade_aquatic:river_leaf_pile',
-     'upgrade_aquatic:beachgrass', 
-     'upgrade_aquatic:tall_beachgrass',
-     'quark:glow_lichen_growth', 
-     'yungscavebiomes:prickly_vines'
+	'alexscaves:licoroot_sprout',
+	'biomemakeover:mycelium_roots',
+	'biomesoplenty:high_grass',
+	'biomesoplenty:high_grass_plant',
+	'biomesoplenty:dune_grass',
+	'biomesoplenty:desert_grass',
+	'biomesoplenty:red_maple_leaf_pile',
+	'biomesoplenty:orange_maple_leaf_pile',
+	'biomesoplenty:yellow_maple_leaf_pile',
+	'biomesoplenty:sprout',
+	'biomemakeover:reeds',
+	'biomeswevegone:tall_beach_grass',
+	'biomeswevegone:beach_grass',
+	'biomeswevegone:tall_prairie_grass',
+	'biomeswevegone:prairie_grass',
+	'biomeswevegone:leaf_pile',
+	'biomeswevegone:skyris_vine',
+	'biomesoplenty:willow_vine',
+	'betterend:bulb_vine',
+	'betterend:jungle_vine',
+	'betterend:twisted_vine',
+	'betterend:dense_vine',
+	'betternether:neon_equisetum',
+	'betternether:blooming_vine',
+	'betternether:golden_vine',
+	'betternether:black_vine',
+	//'blue_skies:lucentroot',
+	'cinderscapes:twilight_fescues',
+	'cinderscapes:tall_photofern',
+	'cinderscapes:twilight_tendrils',
+	'cinderscapes:ghastly_ectoplasm',
+	'cinderscapes:luminous_pod',
+	'cinderscapes:photofern',
+	'cinderscapes:twilight_fescues',
+	'deeperdarker:sculk_tendrils',
+	'deeperdarker:sculk_vines',
+	'edenring:tall_mycotic_grass',
+	'edenring:golden_grass',
+	'edenring:copper_grass',
+	'edenring:iron_grass',
+	'edenring:gold_grass',
+	'edenring:tall_copper_grass',
+	'edenring:tall_iron_grass',
+	'edenring:tall_gold_grass',
+	'edenring:eden_vine',
+	'edenring:mycotic_grass',
+	'galosphere:lichen_roots',
+	'minecraft:big_dripleaf',
+	'minecraft:big_dripleaf_stem',
+	'minecraft:fern',
+	'minecraft:grass',
+	'minecraft:tall_grass',
+	'minecraft:large_fern',
+	'minecraft:seagrass',
+	'minecraft:tall_seagrass',
+	'minecraft:crimson_roots',
+	'minecraft:warped_roots',
+	'minecraft:sculk_vein',
+	'minecraft:glow_lichen',
+	'minecraft:weeping_vines',
+	'minecraft:twisting_vines',
+	'minecraft:vine',
+	'promenade:dark_amaranth_fungus',
+	'promenade:dark_amaranth_roots',
+	'promenade:oak_leaf_pile',
+	'promenade:spruce_leaf_pile',
+	'promenade:birch_leaf_pile',
+	'promenade:jungle_leaf_pile',
+	'promenade:acacia_leaf_pile',
+	'promenade:dark_oak_leaf_pile',
+	'promenade:mangrove_leaf_pile',
+	'promenade:azalea_leaf_pile',
+	'promenade:flowering_azalea_leaf_pile',
+	'promenade:sap_maple_leaf_pile',
+	'promenade:vermilion_maple_leaf_pile',
+	'promenade:fulvous_maple_leaf_pile',
+	'promenade:mikado_maple_leaf_pile',
+	'promenade:palm_leaf_pile',
+	'terrestria:sakura_leaf_pile',
+	'twigs:petrified_lichen',
+	'upgrade_aquatic:river_leaf_pile',
+	'upgrade_aquatic:beachgrass',
+	'upgrade_aquatic:tall_beachgrass',
+	'quark:glow_lichen_growth',
+	'yungscavebiomes:prickly_vines',
+	'biomemakeover:water_lily',
+	'biomemakeover:small_lily_pad',
+	'deeperdarker:lily_flower',
+	'deeperdarker:ice_lily',
+	'twilightforest:huge_lily_pad',
+	'twilightforest:huge_water_lily',
+	'biomeswevegone:flowering_tiny_lily_pads',
+	'biomeswevegone:tiny_lily_pads',
+	'biomeswevegone:incan_lily',
+	'biomesoplenty:waterlily',
+	'biomesoplenty:huge_lily_pad',
+	'biomesoplenty:wilted_lily',
+	'botania:floating_thermalily',
+	'botania:thermalily',
+	'yungscavebiomes:frost_lily',
+	'betterend:end_lily_seed',
+	'betterend:end_lily_leaf_dried',
+	'betterend:end_lily_leaf',
+	'betternether:soul_lily_sapling',
+	'minecraft:lily_pad',
+	'promenade:lily_of_the_valley_pile',
+	'minecraft:lily_of_the_valley',
 ]
 
 var partialOrganicAether = [
@@ -107,7 +137,7 @@ recipes((event, funcs) => {
      /*funcs.replace({input: 'minecraft:vine', output: 'notreepunching:plant_fiber'}, result => 
           funcs.toolDamagingShapeless('3x ' + result, [funcs.def('|vines'), '#notreepunching:knives'])
      )*/
-     funcs.replaceOutputRecipe('notreepunching:plant_string', r => event.shapeless(r, Item.of('primalstage:plant_twine').withCount(4)))
+     funcs.replaceOutputRecipe('notreepunching:plant_string', r => event.shapeless(r, Item.of('primalstage:plant_twine').withCount(3)))
      event.shapeless('primalstage:plant_twine', Item.of('notreepunching:plant_fiber').withCount(2))
      event.shapeless('minecraft:bone_meal', ['minecraft:rotten_flesh', '#forge:ash'])
 
@@ -123,21 +153,32 @@ recipes((event, funcs) => {
 })
 
 itemTags((event, funcs) => {
+     //partialOrganic.push('#minecraft:saplings')
+     //partialOrganic.push('#minecraft:flowers')
+     partialOrganic.push('#supplementaries:flower_box_plantable')
+     partialOrganic.push('#createaddition:plants')
+     partialOrganic.push('#forge:plant')
+
      funcs.unifiedRemove([
           ['minecraft:nylium', ['edenring:eden_grass', 'edenring:eden_mycelium']],
           ['notreepunching:h/string', 'notreepunching:plant_string']
      ])
+
      funcs.unifiedAdd([
           [comfuncs.packDef('primitive_string'), ['notreepunching:plant_string', '#forge:string']],
           [comfuncs.packDef('partial_organic'), partialOrganic.concat(partialOrganicAether)],
-          [comfuncs.packDef('whole_organic'), wholeOrganic]
+          [comfuncs.packDef('whole_organic'), ['#minecraft:leaves', '#minecraft:wart_blocks']]
      ])
 
-     wholeOrganic = event.get('minecraft:leaves').getObjectIds()
+     wholeOrganic = event.get(comfuncs.packDef('whole_organic')).getObjectIds()
+     partialOrganic = event.get(comfuncs.packDef('partial_organic')).getObjectIds()
+
 })
 
 blockTags((event, funcs) => {
      funcs.unifiedAdd([
+          ['twilightforest:portal/decoration', 'cinderscapes:umbral_fungus'],
+          ['notreepunching:always_breaks', 'minecraft:dead_bush'],
           ['notreepunching:always_breaks', partialOrganic.concat(partialOrganicAether)],
           ['notreepunching:always_drops', partialOrganic.concat(partialOrganicAether)],
           ['minecraft:mineable/hoe', 'betterend:glowing_pillar_luminophor'],
@@ -174,7 +215,7 @@ complexLootTables((event, funcs) => {
           LootEntry.of('notreepunching:plant_fiber').when(c => c.randomChance(0.5))
           .customFunction(countSet(countUniform(1, 2), false)),
           LootEntry.of('notreepunching:plant_fiber').when(c => c.customCondition(conditionMatchTool('forge:tools/knives')))
-               .customFunction(countSet(countUniform(1, 3), false))
+               .customFunction(countSet(countUniform(1, 4), false))
                .customFunction(funcFortune(formulaUniformBonus(1)))
      ))
      addOrganicDrops(event, partialOrganic, 'minecraft:stick')
@@ -189,9 +230,9 @@ function addOrganicDrops(event, blocks, stick)  {
                LootEntry.of(block).when(c => c.customCondition(conditionSilkTouch())),
                LootEntry.of(block).when(c => c.customCondition(conditionMatchTool('forge:shears'))),
                LootEntry.of(stick).when(c => c.randomChance(0.05)),
-               LootEntry.of(stick).when(c => c.randomChance(0.25).customCondition(conditionMatchTool('forge:tools/knives'))),
+               LootEntry.of(stick).when(c => c.randomChance(0.4).customCondition(conditionMatchTool('forge:tools/knives'))),
                LootEntry.of('notreepunching:plant_fiber').when(c => c.randomChance(0.1)),
-               LootEntry.of('notreepunching:plant_fiber').when(c => c.randomChance(0.5).customCondition(conditionMatchTool('forge:tools/knives'))),
+               LootEntry.of('notreepunching:plant_fiber').when(c => c.randomChance(0.8).customCondition(conditionMatchTool('forge:tools/knives'))),
           )
      )
 }

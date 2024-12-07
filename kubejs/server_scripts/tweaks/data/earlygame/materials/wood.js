@@ -54,7 +54,7 @@ recipes((event, funcs) => {
           }
      })
 
-     funcs.planet(custom.log_stack, 'primalstage:sandy_clay_compound', 'primalstage:spruce_logs')
+     funcs.planet(custom.log_stack, funcs.def('|primitive_string'), 'primalstage:spruce_logs')
      funcs.replaceOutputRecipe('primalstage:spruce_lattice', r => event.shapeless(r, Item.of('decorative_blocks:lattice').withCount(2))) 
      funcs.replaceOutputRecipe('primalstage:spruce_hedge', r => event.shapeless(r, ['decorative_blocks:lattice', 'primalstage:spruce_logs']))
      funcs.replaceOutputRecipe('2x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#minecraft:axes']))

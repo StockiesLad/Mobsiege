@@ -6,7 +6,7 @@ recipes((event, funcs) => {
 
      event.replaceInput({input: 'minecraft:crafting_table'}, 'minecraft:crafting_table', '#forge:workbench')
      funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: '#forge:workbench'}, (output, ingredients) => {
-          funcs.vanillaInsert(output, [['decorative_blocks:lattice', [0, 1]], [ingredients[0], 2], ['#minecraft:axes', 3]])
+          funcs.toolDamagingInsert(output, [['decorative_blocks:lattice', [0, 1]], [ingredients[0], 2], ['#minecraft:axes', 3]])
           //funcs.toolDamagingShapeless(output, [ingredients[0], ingredients[0], '#minecraft:axes'])
           //funcs.toolDamagingShapeless(output, [ingredients[0], '#minecraft:saws'])
      })

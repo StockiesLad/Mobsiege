@@ -25,6 +25,7 @@ BlockEvents.rightClicked(event => {
           var hand = event.getHand()
           if (random.nextFloat() < NTPConfig.INSTANCE.flintKnappingConsumeChance.getAsFloat()) {
                if (random.nextFloat() < NTPConfig.INSTANCE.flintKnappingSuccessChance.getAsFloat()) {
+                    pos = pos.relative(event.getFacing())
                     Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of(custom.pointed_flint).withCount(1));
                 }
                stack.shrink(1);

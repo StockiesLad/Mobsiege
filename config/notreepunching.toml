@@ -15,7 +15,7 @@
 [blockHarvesting]
 
     # If blocks are mineable without the correct tool.
-    doBlocksMineWithoutCorrectTool = false
+    doBlocksMineWithoutCorrectTool = true
 
     # If blocks drop their items without the correct tool.
     doBlocksDropWithoutCorrectTool = false
@@ -27,18 +27,18 @@
     doInstantBreakBlocksMineWithoutCorrectTool = true
 
     # If blocks such as tall grass which break instantly consume durability when broken with a knife (only affects No Tree Punching knives)
-    doInstantBreakBlocksDamageKnives = true
+    doInstantBreakBlocksDamageKnives = false
 
 
 [balance]
 
     # The chance to consume a piece of flint when knapping
     # Range: [0.0, 1.0]
-    flintKnappingConsumeChance = 0.5
+    flintKnappingConsumeChance = 0.75
 
     # The chance to produce flint shards if a piece of flint has been consumed while knapping
     # Range: [0.0, 1.0]
-    flintKnappingSuccessChance = 0.75
+    flintKnappingSuccessChance = 0.5
 
     # The chance for a fire starter to start fires
     # Range: [0.0, 1.0]
