@@ -21,7 +21,8 @@ ClientEvents.lang('en_us', event => {
         ['minecraft:charcoal', 'Medium Grade Charcoal'],
         ['primalstage:stone_pebble', 'Large Stone Pebble'],
         ['primalstage:salt_block', 'Dense Salt Block'],
-        ['primalstage:spruce_bark', "Bark"]
+        ['primalstage:spruce_bark', "Bark"],
+        ['biomesoplenty:bramble', 'Organic Bramble']
     ]
 
     rename = concatSeries(rename, [

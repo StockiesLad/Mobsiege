@@ -5,7 +5,7 @@
      "pages": [
           {
                "type": "patchouli:text",
-               "text": "Grue waits until you are in the dark, where it can get to you. Bring some lighting to protect yourself from him. Keep in mind there is toggleable dynamic lighting if you want it."
+               "text": "Grue waits until you are in the dark, where it can get to you. Bring some lighting to protect yourself from him."
           }
      ]
 }

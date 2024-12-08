@@ -41,7 +41,9 @@ global.customImpl = addModpackId({
     wet_cement_brick: 'wet_cement_brick',
     dry_cement_brick: 'dry_cement_brick',
     fire_brick: 'fire_brick',
-    fire_brick_block: 'fire_bricks'
+    fire_brick_block: 'fire_bricks',
+
+    corpstone: 'corpstone'
 
 })
 

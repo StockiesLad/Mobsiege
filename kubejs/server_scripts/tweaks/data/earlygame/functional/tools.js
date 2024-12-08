@@ -36,7 +36,7 @@ itemTags((event, funcs) => {
                'notreepunching:flint_pickaxe',
                'notreepunching:flint_axe'
           ]],
-          ['notreepunching:knives', '#forge:tools/knives'],
+          //['notreepunching:knives', '#forge:tools/knives'],
           ['forge:tools/knives', '#notreepunching:knives'],
           ['forge:tools/hammers', [
                '#primalstage:mallets',

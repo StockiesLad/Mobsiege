@@ -30,6 +30,7 @@
 !/config/itlt-client.toml
 !/config/lmft.json
 !/config/emi.css
+!/config/ambientsounds-client.json
 #Performance
 !/config/immediatelyfast.json
 !/config/forge-client.toml

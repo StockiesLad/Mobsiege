@@ -128,6 +128,14 @@ StartupEvents.registry("block", (event) => {
         .tagBlock("mineable/pickaxe")
         .tagBlock('needs_stone_tool')
 
+    event.create(custom.corpstone)
+        .soundType('NETHERRACK')
+        .hardness(0.4)
+        .resistance(0.4)
+        .requiresTool(true)
+        .tagBlock("mineable/pickaxe")
+        .tagBlock('needs_stone_tool')
+
     HackedHelper.fabricTagFlammability(comfuncs.packDef('log_stacks'), 5, 5)
     HackedHelper.fabricTagFlammability(comfuncs.packDef('charcoal_stacks'), 15, 30)
 })
@@ -155,6 +163,8 @@ ItemEvents.modification(event => {
     var aeternalis_fuel_block = Math.floor(aeternalis_fuel * 9 * singleToBlockEfficiencyConst)
 
     comfuncs.iterate([
+        ['minecraft:blaze_powder', 1200],
+        ['minecraft:blaze_rod', 1600],
         ['projecte:alchemical_coal', alchemical_coal],
         ['projecte:alchemical_coal_block', alchemical_coal_block],
         ['projecte:mobius_fuel', mobius_fuel],
