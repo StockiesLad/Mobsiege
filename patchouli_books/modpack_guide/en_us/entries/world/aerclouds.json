@@ -1,0 +1,16 @@
+{
+     "name": "Aerclouds",
+     "icon": "aether:blue_aercloud",
+     "category": "patchouli:world",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "The aether is home to a unique type of block, called aerclouds. There are many different types of them that do different things. Because of that, they can actually be used for basic entity transfer and might be key to speeding things up."
+          },
+          {
+               "type": "patchouli:text",
+               "title": "Aercloud Functions",
+               "text": "Golden Aercloud => Down, Purple Aercloud => Horizontal (Facing Direction), Blue Aercloud => Up, Green Aercloud => Random"
+          }
+     ]
+}

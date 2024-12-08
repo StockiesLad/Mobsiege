@@ -54,6 +54,8 @@ recipes((event, funcs) => {
           }
      })
 
+     funcs.twoSquare('minecraft:oak_planks', '#forge:rods/wooden')
+     event.shapeless('minecraft:stick', Item.of('primalstage:spruce_bark').withCount(2))
      funcs.planet(custom.log_stack, funcs.def('|primitive_string'), 'primalstage:spruce_logs')
      funcs.replaceOutputRecipe('primalstage:spruce_lattice', r => event.shapeless(r, Item.of('decorative_blocks:lattice').withCount(2))) 
      funcs.replaceOutputRecipe('primalstage:spruce_hedge', r => event.shapeless(r, ['decorative_blocks:lattice', 'primalstage:spruce_logs']))

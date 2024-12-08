@@ -1,0 +1,11 @@
+{
+     "name": "Mobsieges",
+     "icon": "minecraft:creeper_head",
+     "category": "patchouli:world",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "Here's to the very theme of this modpack, the mobsiege event. When you are out in the open, there is a small chance of an ambush of 15 - 25 mobs by type. They spawn fairly close and could very easily kill you. They will not spawn when you're in chunks protected by an interdiction torch."
+          }
+     ]
+}

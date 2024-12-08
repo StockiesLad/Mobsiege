@@ -5,13 +5,21 @@ recipes((event, funcs) => {
           {id: 'hardcore_torches:light_torch_free_item'}
      ])
 
-     funcs.replaceOutputRecipe('hardcore_torches:unlit_torch', result => funcs.vanillaInsert(result,[['#minecraft:coals', 0], ['#forge:rods/wooden', 2]]))
      funcs.replaceOutputRecipe('hardcore_torches:fire_starter', result => funcs.vanillaInsert(result, [['#notreepunching:string', 0], ['#forge:rods/wooden', [1, 2]]]))
+
      funcs.replaceOutputRecipe('2x minecraft:torch', result => event.shapeless(result, ['minecraft:blaze_powder', '#minecraft:torches/temp', '#minecraft:torches/temp']))
      funcs.replaceOutputRecipe('4x minecraft:torch', result => funcs.vanillaInsert(result, [['minecraft:blaze_powder', 0], ['#minecraft:coals', 3], ['#forge:rods/wooden', 6]]))
-     funcs.replace({input: 'minecraft:stick', output: '8x hardcore_torches:unlit_torch'}, r => funcs.toolDamagingShapeless(r, ['#forge:coal/high_grade', 'primalstage:spruce_logs', '#minecraft:saws'])) 
-     event.shapeless('2x hardcore_torches:unlit_torch', ['#forge:coal', Item.of('hardcore_torches:burnt_torch').withCount(2)])
-     event.shapeless('8x hardcore_torches:unlit_torch', ['#forge:coal/high_grade', Item.of('hardcore_torches:burnt_torch').withCount(8)])
+
+     funcs.replace({input: 'minecraft:stick', output: '8x hardcore_torches:unlit_torch'}, r => funcs.toolDamagingShapeless(r, [custom.high_grade_charcoal, 'primalstage:spruce_logs', '#minecraft:saws'])) 
+     funcs.toolDamagingShapeless('4x hardcore_torches:unlit_torch', [custom.good_grade_charcoal, 'primalstage:spruce_logs', '#minecraft:saws'])
+     funcs.replaceOutputRecipe('2x hardcore_torches:unlit_torch', result => funcs.vanillaInsert(result,[['#minecraft:coals', 0], ['#forge:rods/wooden', 2]]))
+     funcs.toolDamagingShapeless('hardcore_torches:unlit_torch', [custom.low_grade_charcoal, 'primalstage:spruce_logs', '#minecraft:saws'])
+
+     event.shapeless('hardcore_torches:unlit_torch', [custom.poor_grade_charcoal, 'hardcore_torches:burnt_torch'])
+     event.shapeless('2x hardcore_torches:unlit_torch', [custom.low_grade_charcoal, Item.of('hardcore_torches:burnt_torch').withCount(2)])
+     event.shapeless('4x hardcore_torches:unlit_torch', ['#forge:coal', Item.of('hardcore_torches:burnt_torch').withCount(4)])
+     event.shapeless('6x hardcore_torches:unlit_torch', [custom.good_grade_charcoal, Item.of('hardcore_torches:burnt_torch').withCount(6)])
+     event.shapeless('8x hardcore_torches:unlit_torch', [custom.high_grade_charcoal, Item.of('hardcore_torches:burnt_torch').withCount(8)])
 })
 
 itemTags((event, funcs) => {
@@ -39,7 +47,8 @@ blockTags((event, funcs) => {
           'hardcore_torches:lit_lantern', 
           'minecraft:torch', 
           'hardcore_torches:lit_torch', 
-          'hardcore_torches:smoldering_torch'
+          'hardcore_torches:smoldering_torch',
+          'cinderscapes:pyracinth'
      ]
 
      event.add('minecraft:wall_post_override', ['hardcore_torches:smoldering_torch', 'hardcore_torches:lit_torch'])

@@ -1,0 +1,33 @@
+{
+     "name": "Mortar Age",
+     "sortnum": 4,
+     "icon": "primalstage:kiln_brick",
+     "category": "patchouli:primal_age",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "This entire time, ores have not even been touched yet. This is because most of them are unmineable by flint pickaxes. On top of this, there still isn't even a way to process it into refined ingots. Luckily, there are two mineable ores: Sulfur and Niter. When these two minerals are combined with any sort of coal (charcoal or regular coal), it makes gunpowder."
+          },
+          {
+               "type": "patchouli:text",
+               "text": "Mortar is the key ingredient here. It is a prime ingredient in two things: Kiln Bricks and TNT. Mortar functions similarly to clay in it's brick-making process, but different in that it requires the campfire, not a grill. With these bricks, a kiln can now be made, which smelts BLOCKS of raw materials not chunks."
+          },
+          {
+               "type": "patchouli:text",
+               "text": "TNT can be created by mixing gunpowder and mortar, which you can use to blast mine from safety (kind of). You have to set it off manually, so ensure there is a getaway to safety. These raw ore clumps can be picked up and smelted in your kiln. While a kiln functions similarly to grills in how it's lit, it takes far longer to smelt your raw materials."
+          },
+          {
+               "type": "patchouli:text",
+               "text": "One of your first metals to smelt will need to be copper, as you can make a water purifier with it. This enables you to purify your water into something that properly quenches your thirst. The following link in the next page describes the requisite materials to power your purification."
+          },
+          {
+               "type": "patchouli:link",
+               "url": "https://github.com/Glitchfiend/ToughAsNails/wiki/Water-Purifier",
+               "link_text": "Water Purifier Wiki"
+          },
+          {
+               "type": "patchouli:empty",
+               "draw_filler": false
+          }
+     ]
+}

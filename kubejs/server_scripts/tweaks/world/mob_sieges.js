@@ -9,7 +9,7 @@ const FabricFakePlayer = Java.loadClass('net.fabricmc.fabric.api.entity.FakePlay
 //Modification Variables
 const disabled = false
 const testDirections = getScanningDirections()
-const chanceRandomBound = 10000
+const chanceRandomBound = 25000
 const spawnDistBase = 5 
 const spawnDistVariation = 10
 const spawnDistMax = spawnDistBase + spawnDistVariation
@@ -167,7 +167,7 @@ PlayerEvents.tick(event => {
     let random = level.getRandom()
     if (random.nextInt(chanceRandomBound) != 0) return
 
-    if (level.day < 1 && level.isDay()) return
+    if (level.day < 1 && level.getDayTime() < 15000) return
 
     let siegeGroup = MOB_SIEGES[random.nextInt(MOB_SIEGES.length)]
     let siegeMembers = siegeGroup.members

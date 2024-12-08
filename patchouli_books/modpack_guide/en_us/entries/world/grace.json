@@ -1,0 +1,11 @@
+{
+     "name": "Grace Period",
+     "icon": "minecraft:clock",
+     "category": "patchouli:world",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "There is a small window of peace that you get during daytime of your first day. This is the time you have to get yourself set up underground."
+          }
+     ]
+}

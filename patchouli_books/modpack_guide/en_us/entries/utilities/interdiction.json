@@ -1,7 +1,7 @@
 {
      "name": "Interdiction Torch",
-     "icon": "minecraft:writable_book",
-     "category": "patchouli:advanced_progression",
+     "icon": "projecte:interdiction_torch",
+     "category": "patchouli:utilities",
      "pages": [
           {
                "type": "patchouli:text",

@@ -1,0 +1,6 @@
+{
+     "name": "World",
+     "sortnum": 1,
+     "description": "A description about things such as mobs, ore generation, etc.",
+     "icon": "minecraft:stone"
+ }

@@ -1,7 +1,7 @@
 {
      "name": "Aether Stone",
-     "icon": "minecraft:writable_book",
-     "category": "patchouli:aether",
+     "icon": "aether:holystone",
+     "category": "patchouli:world",
      "pages": [
           {
                "type": "patchouli:text",
@@ -10,7 +10,7 @@
           {
                "type": "patchouli:spotlight",
                "title": "Crushable Stones",
-               "text": "These are the aether stoens that can be crushed to yield aether ore drops.",
+               "text": "These are the aether stones that can be crushed to yield aether ore drops.",
                "item": {
                     "tag": "mobsiege:holystone"
                }

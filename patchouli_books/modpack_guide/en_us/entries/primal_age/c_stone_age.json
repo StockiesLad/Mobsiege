@@ -1,0 +1,24 @@
+{
+     "name": "Stone Age",
+     "sortnum": 2,
+     "icon": "twigs:pebble",
+     "category": "patchouli:primal_age",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "As your day is ending, you're going to want to dig very deep into the ground as that's the only way you'll survive. And the way you'll do that is to finally get yourself a pickaxe. Start off by using your pebbles to create 6 cobblestone and 2 large pebbles. If you don't have enough, mine more gravel. Otherwise, create a grill in a crafting table."
+          },
+          {
+               "type": "patchouli:text",
+               "text": "A grill has 4 locations for items like a campfire. Right-click your plant string into it in advance. Now, light a fire underneath your grill using a fire bow. You might need to re-light the fire a couple of times. Cooking progress is stored, so there is no need to worry about restarting every time. After a couple seconds, your processed string should be finished."
+          },
+          {
+               "type": "patchouli:text",
+               "text": "Success! You are now able to craft a pickaxe. Since you will want to dig deep, make 2. While you're at it, you can create your other flint-based tools to expedite your resource gathering later on. Be sure to make a hammer too because right-clicking gravel and sand with it yields better drops."
+          },
+          {
+               "type": "patchouli:empty",
+               "draw_filler": false
+          }
+     ]
+}

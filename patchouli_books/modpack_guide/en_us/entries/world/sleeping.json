@@ -1,0 +1,11 @@
+{
+     "name": "Sleeping",
+     "icon": "minecraft:red_bed",
+     "category": "patchouli:world",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "Sleeping is disabled by default. You need to protect your given chunk with an interdiction torch in order to sleep properly. After all, how could you sleep knowing that you could die the very second your body touches the bed?"
+          }
+     ]
+}
