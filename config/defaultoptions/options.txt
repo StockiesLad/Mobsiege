@@ -13,7 +13,7 @@ invertYMouse:false
 realmsNotifications:true
 reducedDebugInfo:false
 showSubtitles:true
-directionalAudio:false
+directionalAudio:true
 touchscreen:false
 fullscreen:false
 bobView:true
@@ -31,8 +31,8 @@ glintStrength:0.75
 damageTiltStrength:1.0
 highContrast:false
 gamma:0.5
-renderDistance:8
-simulationDistance:12
+renderDistance:12
+simulationDistance:8
 entityDistanceScaling:1.0
 guiScale:5
 particles:0
@@ -41,9 +41,9 @@ graphicsMode:1
 ao:false
 prioritizeChunkUpdates:0
 biomeBlendRadius:2
-renderClouds:"true"
-resourcePacks:["pointblank_resources","vanilla","mod_resources","TZP_1.20.1_2.7.zip","fabric","hordes-config","file/Exchange_Extended_v2.0.zip","file/TZP Mutant 1.20.1-1.3.zip","file/TZP_1.20.1_2.7.zip","Moonlight Mods Dynamic Assets","visualoverhaul:rounddiscs"]
-incompatibleResourcePacks:["hordes-config","file/Exchange_Extended_v2.0.zip","visualoverhaul:rounddiscs"]
+renderClouds:"false"
+resourcePacks:["vanilla","pointblank_resources","mod_resources","Moonlight Mods Dynamic Assets","TZP_1.20.1_2.7.zip","builtin/aether_tooltips","builtin/emissivity_model_override","builtin/overrides/deep_aether_emissivity","builtin/overrides/golden_swet_ball/DAGoldenSwetBallFixClient","builtin/resource/overrides_pack","fabric","hordes-config","visualoverhaul:rounddiscs","presencefootsteps:default_sound_pack","file/TZP_1.20.1_2.7.zip","file/TZP Mutant 1.20.1-1.3.zip","file/Exchange_Extended_v2.0.zip","file/C4Music_v4.0.zip","file/FreshAnimations_v1.9.2.zip","builtin/ancient_aether_texture_tweaks","builtin/compatibility/aether_emissivity","builtin/compatibility/deep_aether_assets","cullleaves:smartleaves"]
+incompatibleResourcePacks:["hordes-config","visualoverhaul:rounddiscs","file/Exchange_Extended_v2.0.zip","file/C4Music_v4.0.zip"]
 lastServer:
 lang:en_us
 soundDevice:""
@@ -68,7 +68,7 @@ useNativeTransport:true
 mainHand:"right"
 attackIndicator:1
 narrator:0
-tutorialStep:movement
+tutorialStep:none
 mouseWheelSensitivity:1.0
 rawMouseInput:true
 glDebugVerbosity:1
