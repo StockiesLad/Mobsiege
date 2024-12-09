@@ -53,7 +53,8 @@ blockTags((event, funcs) => {
           'cinderscapes:scorched_tendrils', 
           'cinderscapes:pyracinth', 
           'cinderscapes:scorched_shrub',
-          'cinderscapes:scorched_hyphae'
+          'cinderscapes:scorched_hyphae',
+          'ancient_aether:sun_lantern'
      ]
 
      event.add('minecraft:wall_post_override', ['hardcore_torches:smoldering_torch', 'hardcore_torches:lit_torch'])

@@ -55,12 +55,12 @@ complexLootTables((event, funcs) => {
                     ),
                     LootEntry.ofJson(childAlternativesPool([
                          ofChild('minecraft:bone_meal', ofFuncConds(
-                              conditionTableBonus([0.1, 0.14285715, 0.25,1.0], "minecraft:fortune"), 
-                              countSet(countUniform(1, 2), false)
+                              conditionTableBonus([0.125, 0.25, 0.5, 1.0], "minecraft:fortune"), 
+                              countSet(countUniform(0, 2), false)
                          )),
                          ofChild(funcs.preferredItem('forge:dusts/salt'), ofFuncConds(
-                              conditionRandomChance(0.1), 
-                              countSet(countUniform(0, 2), false)
+                              conditionRandomChance(0.33), 
+                              countSet(countUniform(1, 3), false)
                          )),
                          ofChild(block)
                     ]))

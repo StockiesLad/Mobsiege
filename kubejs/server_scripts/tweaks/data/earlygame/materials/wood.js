@@ -29,7 +29,7 @@ recipes((event, funcs) => {
      })
      funcs.replace({input: '#notreepunching:weak_saws', output: 'minecraft:stick'}, result => {
           funcs.toolDamagingShapeless(result, ['#minecraft:axes', '#minecraft:planks'])
-          funcs.toolDamagingShapeless('6x ' + result, ['#minecraft:axes', '#minecraft:logs'])
+          funcs.toolDamagingShapeless('3x ' + result, ['#minecraft:axes', '#minecraft:logs'])
      })
      funcs.replaceTagRecipes({type: 'minecraft:crafting_shapeless', input: ['#minecraft:logs', '#minecraft:axes'], output: '#minecraft:planks'}, (output, ingredients) => {
           funcs.toolDamagingShapeless(Item.of(output).withCount(1), [ingredients[0], '#minecraft:axes'])

@@ -46,7 +46,7 @@ recipes((event, funcs) => {
 
 itemTags((event, funcs) => {
      funcs.unifiedAdd([
-          ['forge:mortar', ['primalstage:sandy_clay_compound', 'twigs:silt_ball']],
+          ['forge:mortar', ['primalstage:sandy_clay_compound']],
           ['|mud', ['minecraft:mud', 'deep_aether:aether_mud']],
           ['|jelly_blocks', [
               'aether_redux:jellyshroom_jelly_block', 
@@ -68,7 +68,7 @@ itemTags((event, funcs) => {
 })
 
 commonTags((event, funcs) => {
-     event.add('forge:storage_blocks/mortar', [custom.packed_mortar, 'twigs:silt', 'aether_redux:holysilt'])
+     event.add('forge:storage_blocks/mortar', [custom.packed_mortar])
 
 })
 
