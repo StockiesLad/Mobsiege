@@ -18,6 +18,10 @@ EntityEvents.spawned('minecraft:creeper', event => {
         blaze.spawn()
     }
 })
+
+EntityEvents.spawned('geologicexpansion:duck', event => {
+    event.cancel()
+})
    
  EntityJSEvents.biomeSpawns(event => {
      event.addSpawn('thermal:blitz', ['#aether:is_aether'], 10, 1, 3);

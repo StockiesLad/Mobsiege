@@ -1,0 +1,6 @@
+{
+     "type": "forge:add_features", 
+     "biomes": "biomesoplenty:visceral_heap",
+     "features": "betternether:patch_eye_vine",
+     "step": "vegetal_decoration"
+   }

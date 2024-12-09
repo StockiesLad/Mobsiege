@@ -1,8 +1,21 @@
-
 {
   "variants": {
-    "": {
-      "model": "mobsiege:block/log_stack"
-    }
+    "": [
+      {
+        "model": "mobsiege:block/log_stack"
+      },
+      {
+        "model": "mobsiege:block/log_stack",
+        "y": 90
+      },
+      {
+        "model": "mobsiege:block/log_stack",
+        "y": 180
+      },
+      {
+        "model": "mobsiege:block/log_stack",
+        "y": 270
+      }
+    ]
   }
 }

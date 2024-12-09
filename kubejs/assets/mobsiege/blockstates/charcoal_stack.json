@@ -1,8 +1,21 @@
-
 {
   "variants": {
-    "": {
-      "model": "mobsiege:block/charcoal_stack"
-    }
+    "": [
+      {
+        "model": "mobsiege:block/charcoal_stack"
+      },
+      {
+        "model": "mobsiege:block/charcoal_stack",
+        "y": 90
+      },
+      {
+        "model": "mobsiege:block/charcoal_stack",
+        "y": 180
+      },
+      {
+        "model": "mobsiege:block/charcoal_stack",
+        "y": 270
+      }
+    ]
   }
 }

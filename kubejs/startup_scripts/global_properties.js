@@ -43,7 +43,8 @@ global.customImpl = addModpackId({
     fire_brick: 'fire_brick',
     fire_brick_block: 'fire_bricks',
 
-    corpstone: 'corpstone'
+    corpstone: 'corpstone',
+    decapitated_debris: 'decapitated_debris'
 
 })
 

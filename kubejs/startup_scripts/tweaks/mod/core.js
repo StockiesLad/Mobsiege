@@ -136,6 +136,14 @@ StartupEvents.registry("block", (event) => {
         .tagBlock("mineable/pickaxe")
         .tagBlock('needs_stone_tool')
 
+    event.create(custom.decapitated_debris)
+        .soundType('SCULK')
+        .hardness(0.5)
+        .resistance(0.5)
+        .requiresTool(true)
+        .box(1, 0, 1, 15, 12, 15)
+        .tagBlock("mineable/axe")
+        
     HackedHelper.fabricTagFlammability(comfuncs.packDef('log_stacks'), 5, 5)
     HackedHelper.fabricTagFlammability(comfuncs.packDef('charcoal_stacks'), 15, 30)
 })
