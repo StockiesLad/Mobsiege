@@ -1,0 +1,6 @@
+{
+     "type": "forge:add_features", 
+     "biomes": ["biomesoplenty:field", "biomesoplenty:forested_field"],
+     "features": "minecraft:huge_red_mushroom",
+     "step": "vegetal_decoration"
+   }
