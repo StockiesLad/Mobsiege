@@ -9,12 +9,23 @@ recipes((event, funcs) => {
      event.replaceInput({id: 'immersiveengineering:crafting/gunpowder_from_dusts'}, 'minecraft:charcoal', '#forge:coal')
 })
 
+basicLootTables((event, funcs) => {
+     funcs.replaceBasiclt(funcs.createBasicLt(
+          () => funcs.preferredItem('forge:gems/sulfur'), 
+          [funcFortune(formulaUniformBonus(1)), funcExplosionDecay()], 
+          [
+              funcs.blockEntry({functions: countSet(countUniform(3, 4), false)}, 'alexscaves:sulfur_cluster'),
+              funcs.blockEntry({functions: countSet(countUniform(2, 3), false)}, 'alexscaves:sulfur_bud_large'),
+              funcs.blockEntry({functions: countSet(countUniform(1, 2), false)}, 'alexscaves:sulfur_bud_medium'),
+              funcs.blockEntry({functions: countSet(countUniform(0, 1), false)}, 'alexscaves:sulfur_bud_small'),
+              funcs.blockEntry({functions: countSet(countUniform(0, 1), false)}, 'betterend:sulphur_crystal')
+          ]
+     ))
+})
+
 complexLootTables((event, funcs) => {
      var tag = (mat) => `#gravelores:ore_drops/${mat}`
      funcs.replaceBlockDrops([
-          ['betterend:crystalline_sulphur', funcs.preferredItem('forge:gems/sulfur'), [
-               'betterend:sulphur_crystal'
-          ]],
           [tag('aluminum'), funcs.preferredItem('forge:raw_materials/aluminum'), [
                'gravelores:aluminum_gravel_ore', 
                'bno:nether_aluminum_ore', 
@@ -68,10 +79,7 @@ complexLootTables((event, funcs) => {
 })
 
 blockTags((event, funcs) => {
-     event.add('minecraft:needs_iron_tool', event.get('forge:ores').getObjectIds().filter(ore => {
-          ore = ore.toString()
-          return !(ore.includes('sulfur') || ore.includes('niter'))
-     }))
+     event.add('minecraft:needs_iron_tool', '#forge:ores')
 })
 
 commonTags((event, funcs) => {

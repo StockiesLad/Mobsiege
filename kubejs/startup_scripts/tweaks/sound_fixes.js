@@ -47,7 +47,19 @@
             'bulb_vine',
             'umbrella_tree_cluster'
         ], 'betterend')),
-        getSoundTypeHandle('SAND', entries('betterend:charcoal_block')),
+        getSoundTypeHandle('SAND', [
+            entries('betterend:charcoal_block'),
+            entries([
+                'stack',
+                'log',
+                'planks',
+                'fence',
+                'fence_gate',
+                'stairs',
+                'slab',
+                'charring_wood'
+            ], 'carbonize')
+        ]),
         getSoundTypeHandle('WEEPING_VINES', entries([
             'helix_tree_sapling',
             'glowing_pillar_roots',

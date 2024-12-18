@@ -1,28 +1,28 @@
 const woodSet = [
-        '${}_sapling',
-        'potted_${}_sapling',
-        '${}_leaves',
-        '${}_leaf_pile',
-        '${}_hanging_leaves',
-        '${}_planks',
-        '${}_slab',
-        '${}_stairs',
-        '${}_log',
-        'stripped_${}_log',
-        '${}_wood',
-        'stripped_${}_wood',
-        '${}_door',
-        '${}_bookshelf',
-        '${}_crafting_table',
-        '${}_sign',
-        '${}_hanging_sign',
-        '${}_pressure_plate',
-        '${}_trapdoor',
-        '${}_button',
-        '${}_fence_gate',
-        '${}_fence',
-        '${}_boat',
-        '${}_chest_boat'
+    '${}_sapling',
+    'potted_${}_sapling',
+    '${}_leaves',
+    '${}_leaf_pile',
+    '${}_hanging_leaves',
+    '${}_planks',
+    '${}_slab',
+    '${}_stairs',
+    '${}_log',
+    'stripped_${}_log',
+    '${}_wood',
+    'stripped_${}_wood',
+    '${}_door',
+    '${}_bookshelf',
+    '${}_crafting_table',
+    '${}_sign',
+    '${}_hanging_sign',
+    '${}_pressure_plate',
+    '${}_trapdoor',
+    '${}_button',
+    '${}_fence_gate',
+    '${}_fence',
+    '${}_boat',
+    '${}_chest_boat'
 ]
 
 const stoneSet = [ 
@@ -42,7 +42,7 @@ const stoneSet = [
     '${}s_pressure_plate'
 ]
 
-function getStandardStoneCategory(modid, expType, newExpType, extraExps, extraCalls) {
+function getStandardStoneCategory(modid, expType, newExpType, extraExps) {
     let exps = [
         [expType, newExpType], 
         [expType + '_brick', newExpType + '_brick'],
@@ -70,11 +70,10 @@ function regexIn (modid, exp, strings) {
 
 function regexInwithParent(parent, modid, exp, strings) {
     //return comdef.incorpHandledProperties(parent, strings, string => [modid + ':' + string.replace('${}', exp[0]), firstCaseUpper(string.replace('${}', exp[1]))])
-    let newStrings = []
     strings.forEach(string => {
-        newStrings.push([modid + ':' + string.replace('${}', exp[0]), firstCaseUpper(string.replace('${}', exp[1]))])
+        parent.push([modid + ':' + string.replace('${}', exp[0]), firstCaseUpper(string.replace('${}', exp[1]))])
     });
-    return newStrings
+    return parent
 }
 
 function firstCaseUpper(string) {

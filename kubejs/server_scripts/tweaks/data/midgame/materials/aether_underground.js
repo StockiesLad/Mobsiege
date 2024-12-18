@@ -1,6 +1,7 @@
 const holystone = ['aether:icestone', 'aether:holystone', 'aether_redux:gilded_holystone', 'aether_redux:blightmoss_holystone', 'aether:mossy_holystone', 'aether_genesis:blood_moss_holystone']
 
 recipes((event, funcs) => {
+     // one too many entries, also look at ancient aether 
      funcs.twoSquareAlt('2x aether:icestone', ['minecraft:packed_ice', 'minecraft:glowstone'])
      event.recipes.create.crushing([
           Item.of('twigs:pebble').withCount(2),

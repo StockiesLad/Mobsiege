@@ -23,6 +23,7 @@ recipes((event, funcs) => {
      funcs.removeAndHide('primalstage:cutting_log')
      
      event.replaceInput({input: 'minecraft:spruce_planks', output: 'primalstage:spruce_drying_rack'}, 'minecraft:spruce_planks', 'decorative_blocks:lattice')
+     funcs.replaceOutputRecipe('carbonize:wood_stack', r => funcs.planet(r, funcs.def('|primitive_string'), 'primalstage:spruce_logs'))
      funcs.replace({input: '#notreepunching:h/saws', output: 'minecraft:stick'}, result => {
           funcs.toolDamagingShapeless('2x ' + result, ['#minecraft:saws', '#minecraft:planks'])
           funcs.toolDamagingShapeless('8x ' + result, ['#minecraft:saws', '#minecraft:logs'])
@@ -56,7 +57,6 @@ recipes((event, funcs) => {
 
      funcs.twoSquare('minecraft:oak_planks', '#forge:rods/wooden')
      event.shapeless('minecraft:stick', Item.of('primalstage:spruce_bark').withCount(2))
-     funcs.planet(custom.log_stack, funcs.def('|primitive_string'), 'primalstage:spruce_logs')
      funcs.replaceOutputRecipe('primalstage:spruce_lattice', r => event.shapeless(r, Item.of('decorative_blocks:lattice').withCount(2))) 
      funcs.replaceOutputRecipe('primalstage:spruce_hedge', r => event.shapeless(r, ['decorative_blocks:lattice', 'primalstage:spruce_logs']))
      funcs.replaceOutputRecipe('2x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#minecraft:axes']))
@@ -72,7 +72,6 @@ blockTags((event, funcs) => {
 commonTags((event, funcs) => {
      funcs.unifiedAdd([
           ['forge:stripped_logs', '#forge:logs/stripped'],
-          ['|stacks', [comfuncs.packDef('charcoal_stacks'), comfuncs.packDef('log_stacks')]],
           ['|aether_logs', [
                'aether:golden_oak_log', 
                'aether:stripped_skyroot_log', 
@@ -120,10 +119,10 @@ ServerEvents.tags('block', event => {
 })
 
 complexLootTables((event, funcs) => {
-     event.addBlockLootModifier(custom.log_stack)
-         .removeLoot(custom.log_stack)
+     event.addBlockLootModifier('carbonize:wood_stack')
+         .removeLoot(Ingredient.all)
          .addAlternativesLoot(
-             LootEntry.of(custom.log_stack).when(c => c.customCondition(conditionSilkTouch())),
+             LootEntry.of('carbonize:wood_stack').when(c => c.customCondition(conditionSilkTouch())),
              LootEntry.of('primalstage:spruce_logs', 8)
          )
 })

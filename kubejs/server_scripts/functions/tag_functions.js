@@ -92,3 +92,11 @@ function ofFluid(fluid, amount) {
         stack.amount = amount
     return stack
 }
+
+function preferred(tag) {
+    return AlmostUnified.getPreferredItemForTag(tag).getIdLocation().toString()
+}
+
+function preferredI(tag) {
+    return Item.of(preferred(tag))
+}

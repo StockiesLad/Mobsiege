@@ -14,7 +14,6 @@ recipes((event, funcs) => {
     funcs.globalCooking(Item.of(custom.poor_grade_charcoal, 2), '#minecraft:planks', 0.1)
     funcs.globalCooking(Item.of(custom.low_grade_charcoal, 2), '#minecraft:logs', 0.2)
     funcs.generate('2x betterend:charcoal_block', ['#forge:storage_blocks/charcoal', 'minecraft:soul_sand']).rollingSquare(1, 2).next().vanilla()
-    funcs.charring(custom.charcoal_stack, comfuncs.packDef('log_stacks'))
 
     event.shapeless(custom.low_grade_charcoal, Item.of(custom.poor_grade_charcoal, 4))
     event.shapeless('minecraft:charcoal', Item.of(custom.low_grade_charcoal, 4))
@@ -64,9 +63,11 @@ basicLootTables((event, funcs) => {
         }) 
     }
 
-    charcoal(custom.charcoal_stack, 0.5, 8)
+    charcoal('carbonize:charcoal_stack', 0.5, 8)
     charcoal('carbonize:charcoal_log', 0.3, 6)
     charcoal('carbonize:charcoal_planks', 0.2, 3)
+    charcoal('carbonize:charcoal_fence', 0.2, 3)
+    charcoal('carbonize:charcoal_fence_gate', 0.2, 3)
     charcoal('carbonize:charcoal_stairs', 0.1, 2)
     charcoal('carbonize:charcoal_slab', 0.1, 1)
 })
@@ -85,10 +86,6 @@ itemTags((event, funcs) => {
 
 blockTags((event, funcs) => {
     event.remove('minecraft:mineable/pickaxe', 'betterend:charcoal_block')
-    event.add(comfuncs.packDef('log_stacks'), custom.log_stack)
-    event.add(comfuncs.packDef('charcoal_stacks'), custom.charcoal_stack)
-    event.add('carbonize:charcoal_pile_valid_fuel',  funcs.def('|log_stacks'))
-
     funcs.unifiedAdd([
         ['carbonize:charcoal_block', ['minecraft:mineable/pickaxe']],
         ['minecraft:needs_stone_tool', [
@@ -100,7 +97,6 @@ blockTags((event, funcs) => {
         ]]
     ])
 
-    var logStacks = [custom.log_stack, custom.charred_log_stack]
     var parsedBlocks = []
     ForgeRegistries.BLOCKS.getEntries().forEach(blockEntry => {
         try {
@@ -113,5 +109,5 @@ blockTags((event, funcs) => {
         } catch (err) {}
     })
 
-    event.add('carbonize:charcoal_pile_valid_wall', parsedBlocks.filter(block => !logStacks.some(stack => stack == block)))
+    event.add('carbonize:charcoal_pile_valid_wall', parsedBlocks)
 })

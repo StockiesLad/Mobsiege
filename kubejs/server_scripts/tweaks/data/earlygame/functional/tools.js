@@ -6,6 +6,7 @@ recipes((event, funcs) => {
           'aether:holystone_sword', 'aether:holystone_pickaxe', 'aether:holystone_axe', 'aether:holystone_shovel', 'aether:holystone_hoe',
           'minecraft:wooden_sword', 'minecraft:wooden_pickaxe', 'minecraft:wooden_axe', 'minecraft:wooden_shovel', 'minecraft:wooden_hoe',
           'minecraft:stone_sword', 'minecraft:stone_pickaxe', 'minecraft:stone_axe', 'minecraft:stone_shovel', 'minecraft:stone_hoe',
+          'mekanismtools:stone_paxel', 'immersivegeology:ig_toolkit_2', 'projectred_exploration:stone_sickle',
           'primalstage:flint_pickaxe', 'primalstage:flint_shovel', 'primalstage:plant_fiber', 'farmersdelight:flint_knife',
           'notreepunching:iron_knife', 'notreepunching:gold_knife', 'notreepunching:gold_knife', 'notreepunching:diamond_knife',
           'notreepunching:netherite_knife'
@@ -14,8 +15,10 @@ recipes((event, funcs) => {
      funcs.replaceOutputRecipe('hardcore_torches:fire_starter', result => funcs.vanillaInsert(result, [[funcs.def('|primitive_string'), 0], ['#forge:rods/wooden', [1, 2]]]))
      funcs.replaceOutputRecipe('notreepunching:fire_starter', result => funcs.vanillaInsert(result, [[funcs.def('|primitive_string'), 0], ['hardcore_torches:fire_starter', [1, 2]], ['notreepunching:flint_shard', 3]]))
      funcs.replaceOutputRecipe('notreepunching:flint_knife', result => funcs.vanillaInsert(result, [[custom.pointed_flint, 1], ['#forge:rods/wooden', 2], [funcs.def('|primitive_string'), 0]]))
+     funcs.replaceOutputRecipe(custom.flint_sword, result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', [1, 3, 5, 7]], ['#forge:rods/wooden', 6], ['#forge:string', 4], [custom.pointed_flint, 2]]))
+
      funcs.replaceOutputRecipe('primalstage:flint_hatchet', result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', 1], [custom.pointed_flint, 0], ['#forge:rods/wooden', 3], [funcs.def('|primitive_string'), 2]]))
-     funcs.replaceOutputRecipe('notreepunching:flint_axe', result => funcs.vanillaInsert(result, [['#notreepunching:string', 0], ['#forge:rods/wooden', [3, 6]], [custom.pointed_flint, [2]], ['notreepunching:flint_shard', [1, 4]]]))
+     funcs.replaceOutputRecipe('notreepunching:flint_axe', result => funcs.vanillaInsert(result, [['#forge:string', 0], ['#forge:rods/wooden', [3, 6]], [custom.pointed_flint, [2]], ['notreepunching:flint_shard', [1, 4]]]))
      funcs.replaceOutputRecipe('notreepunching:flint_pickaxe', r => funcs.vanillaInsert(r, [['notreepunching:flint_shard', [0, 2]], ['#forge:string', 1], [custom.pointed_flint, [3, 5]], ['#forge:rods/wooden', [4, 7]]]))
 })
 
@@ -30,6 +33,7 @@ itemTags((event, funcs) => {
           ['|breaks_randomly', [
                'primalstage:flint_hatchet',
                'primalstage:flint_mallet',
+               custom.flint_sword,
                'notreepunching:flint_knife',
                'notreepunching:flint_shovel',
                'notreepunching:flint_hoe',
@@ -51,6 +55,18 @@ itemTags((event, funcs) => {
           ]]
           //['notreepunching:knives', '#minecraft:axes']
       ])
+})
+
+const HackedHelper = Java.loadClass('com.stockieslad.custom_hacks.HackedHelper')
+
+EntityEvents.hurt(event => {
+     var sourceEntity = event.getSource().getActual()
+     if (sourceEntity != null) {
+          var itemStack = sourceEntity.getItem()
+          if (itemStack != null && itemStack.hasTag(comfuncs.packDef('breaks_randomly')) && random.nextInt(5) == 0)
+               return HackedHelper.damageItem(itemStack, 1, sourceEntity)
+     }
+     
 })
 
 CustomHacks.hook = (item, itemStack, damage, random) => {

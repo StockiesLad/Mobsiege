@@ -46,9 +46,9 @@ ClientEvents.lang('en_us', event => {
             ['marble_brick_small', 'small_beige_marble_bricks'],
             ['marble_paver', 'beige_marble_paver']
         ]),
-        /*getStandardStoneCategory('what_is_stone', 'dacite', 'grey_dacite'),
+        getStandardStoneCategory('what_is_stone', 'dacite', 'grey_dacite'),
         getStandardStoneCategory('what_is_stone', 'schist', 'dark_schist'),
-        getStandardStoneCategory('what_is_stone', 'rhyolite', 'light_rhyolite'),*/
+        getStandardStoneCategory('what_is_stone', 'rhyolite', 'light_rhyolite'),
         getStandardStoneCategory('alexscaves', 'limestone', 'old_beige_limestone', [
             ['limestone_chiseled', 'chiseled_old_beige_limestone'],
             ['smooth_limestone', 'smooth_old_beige_limestone'],
@@ -68,7 +68,8 @@ ClientEvents.lang('en_us', event => {
             ['chiseled_limestone_brick', 'chiseled_hardened_limestone_brick']
         ]),
 
-    ])  
+    ])
+    
 
     var add = [
         ['notreepunching.items', 'No Tree Punching'],

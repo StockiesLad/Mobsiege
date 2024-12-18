@@ -4,5 +4,5 @@ recipes((event, funcs) => {
 })
 
 commonTags((event, funcs) => {
-     event.add('forge:ash', ['carbonize:ash', 'cinderscapes:ash_pile'])
+     event.add('forge:ash', ['carbonize:ash', 'cinderscapes:ash_pile', 'supplementaries:ash'])
 })

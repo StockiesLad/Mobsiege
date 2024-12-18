@@ -19,11 +19,9 @@ global.customImpl = addModpackId({
     gravitium_block: 'gravitium_alloy_block',
 
     pointed_flint: 'pointed_flint',
+    flint_sword: 'flint_sword',
 
     campfire_rock: 'campfire_rock',
-
-    log_stack: 'log_stack',
-    charcoal_stack: 'charcoal_stack',
 
     poor_grade_charcoal: "poor_grade_charcoal",
     low_grade_charcoal: "low_grade_charcoal",

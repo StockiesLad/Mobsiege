@@ -34,13 +34,15 @@ function getRecipeFunctions(event) {
           })
      }
 
-     var charring = (result, ingredient) => {
-          return event.custom({
+     var charring = (result, ingredient, medium) => {
+          var json = {
                type: "carbonize:burn",
                input: ingredient,
                output: result
-
-          })
+          }
+          if (medium != null)
+               json.medium = medium
+          return event.custom(json)
      }
 
      var drying = (result, ingredient, cookingTime) => {

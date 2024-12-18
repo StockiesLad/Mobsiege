@@ -13,8 +13,17 @@ itemTags((event, funcs) => {
     event.add('minecraft:stone_crafting_materials', [
         'blockus:limestone', 
         'blockus:marble', 
-        'blockus:bluestone', 
+        'blockus:bluestone',
+        'blockus:rough_basalt', 
         'blockus:viridite',
+        'create:limestone',
+        'create:asurine',
+        'create:ochrum',
+        'create:crimsite',
+        'alexscaves:limestone',
+        'create:scorchia',
+        'create:scoria',
+        'create:veridium',
         'geologicexpansion:white_prismatic_stone',
         'geologicexpansion:orange_prismatic_stone',
         'geologicexpansion:magenta_prismatic_stone',
@@ -31,6 +40,9 @@ itemTags((event, funcs) => {
         'geologicexpansion:green_prismatic_stone',
         'geologicexpansion:red_prismatic_stone',
         'geologicexpansion:black_prismatic_stone',
+        'geologicexpansion:limestone',
+        'minecraft:basalt',
+        'minecraft:smooth_basalt',
         'twigs:schist',
         'twigs:rhyolite',
         'twigs:bloodstone',
@@ -38,7 +50,6 @@ itemTags((event, funcs) => {
     ])
     event.add('notreepunching:loose_rocks', 'twigs:pebble')
     stones = event.get('minecraft:stone_crafting_materials').getObjectIds().toArray()
-    console.info(stones)
  })
 
 blockTags((event, funcs) => {
@@ -48,6 +59,7 @@ blockTags((event, funcs) => {
         '#minecraft:dirt'
     ])
     event.add(comfuncs.packDef('stone'), stones.concat(['#forge:stone', funcs.def('|holystone')]))
+    event.add(comfuncs.packDef('limestone'), ['create:limestone', 'quark:limestone', 'geologicexpansion:limestone', 'alexscaves:limestone'])
  })
 
  BlockEvents.rightClicked(event => {
@@ -58,10 +70,13 @@ blockTags((event, funcs) => {
          var random = level.getRandom()
          var pos = block.getPos()
          item.hurtAndBreak(1, event.getEntity(), (entity) => level.broadcastEntityEvent(entity, event.getHand().name() == 'MAIN_HAND' ? 47 : 48))
-
          if (random.nextInt(5) == 0) {
-              level.destroyBlock(pos, false)
-              Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('twigs:pebble').withCount(4 + random.nextInt(4)));
+            level.destroyBlock(pos, false)
+            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('twigs:pebble').withCount(2 + random.nextInt(3)))
+            if (block.hasTag(comfuncs.packDef('limestone')) && random.nextInt(4) == 0)
+              Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of(AlmostUnified.getPreferredItemForTag('forge:gems/sulfur').getIdLocation().toString()).withCount(1 + random.nextInt(2)))
+
+                
          } else level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.stone.break", "blocks", 0.25, 0.5)
     }
 })
