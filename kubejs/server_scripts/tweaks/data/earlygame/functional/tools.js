@@ -1,4 +1,4 @@
-const CustomHacks = Java.loadClass("com.stockieslad.custom_hacks.CustomHacks")
+const CustomHacks = Java.loadClass("com.stockieslad.mobsiege.CustomHacks")
 
 recipes((event, funcs) => {
      comfuncs.unifiedCall(funcs.removeAndHide, [
@@ -57,7 +57,7 @@ itemTags((event, funcs) => {
       ])
 })
 
-const HackedHelper = Java.loadClass('com.stockieslad.custom_hacks.HackedHelper')
+const HackedHelper = Java.loadClass('com.stockieslad.mobsiege.HackedHelper')
 
 EntityEvents.hurt(event => {
      var sourceEntity = event.getSource().getActual()

@@ -65,8 +65,9 @@ recipes((event, funcs) => {
 })
 
 blockTags((event, funcs) => {
+     event.add(comfuncs.packDef('carbonize/extra_flammability'), ['#forge:chests/wooden', '#forge:workbench'])
      event.add('minecraft:needs_stone_tool', '#minecraft:logs')
-     event.add('minecraft:planks', '#aether:planks_crafting')
+     event.add('minecraft:planks', ['#aether:planks_crafting', '#c:planks_that_burn'])
 })
 
 commonTags((event, funcs) => {

@@ -96,18 +96,4 @@ blockTags((event, funcs) => {
             'carbonize:charcoal_slab', 
         ]]
     ])
-
-    var parsedBlocks = []
-    ForgeRegistries.BLOCKS.getEntries().forEach(blockEntry => {
-        try {
-            let blockState = blockEntry.getValue().defaultBlockState()
-            let fabricfbr = Blocks.FIRE.fabric_getVanillaEntry(blockState)
-            if (Shapes.block().equals(blockState.getCollisionShape(null, null, null)))
-                if (!blockState.isFlammable(null, null, null) && !(fabricfbr.getBurnChance() > 0)){
-                    parsedBlocks.push(blockEntry.getKey().location().toString())
-                }
-        } catch (err) {}
-    })
-
-    event.add('carbonize:charcoal_pile_valid_wall', parsedBlocks)
 })

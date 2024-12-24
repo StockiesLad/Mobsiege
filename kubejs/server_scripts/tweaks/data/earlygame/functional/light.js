@@ -34,12 +34,17 @@ itemTags((event, funcs) => {
 blockTags((event, funcs) => {
      var cooling = [
           'blockus:soul_lantern_block', 
-          'minecraft:soul_lantern', 
+          'decorative_blocks:soul_brazier', 
+          'decorative_blocks:soul_chandelier',
           'hardcore_torches:lit_soul_lantern', 
-          'minecraft:soul_torch'
+          'minecraft:soul_lantern', 
+          'minecraft:soul_torch',
+          'supplementaries:sconce_soul',
+          'twigs:soul_lamp'
      ]
      var heating = [
           'ancient_aether:sun_lantern',
+          'botania:fire_rod',
           'blockus:blaze_lantern', 
           'blockus:lantern_block', 
           'blockus:amethyst_lantern_block',
@@ -51,11 +56,13 @@ blockTags((event, funcs) => {
           'cinderscapes:scorched_shrub',
           'cinderscapes:scorched_hyphae',
           'carbonize:charring_wood', 
+          'enderio:cold_fire',
           'hardcore_torches:lit_lantern',  
           'hardcore_torches:lit_torch', 
           'hardcore_torches:smoldering_torch',
           'minecraft:lantern', 
           'minecraft:torch',
+          'supplementaries:fire_pit',
      ]
 
      event.add('minecraft:wall_post_override', ['hardcore_torches:smoldering_torch', 'hardcore_torches:lit_torch'])

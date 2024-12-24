@@ -7,6 +7,7 @@ const Monster = Java.loadClass('net.minecraft.world.entity.monster.Monster')
 const TrialsMobs = Java.loadClass('net.salju.trialstowers.init.TrialsMobs')
 const TCoreEntities = Java.loadClass('cofh.thermal.core.init.registries.TCoreEntities')
 const Blitz = Java.loadClass('cofh.thermal.core.common.entity.monster.Blitz')
+const HackedHelper = Java.loadClass('com.stockieslad.mobsiege.HackedHelper')
 
 const WART_COVERED_STONE = coveredStone(SoundEvents.WART_BLOCK_STEP)
 const GRASS_COVERED_STONE = coveredStone(SoundEvents.GRASS_STEP)
@@ -69,6 +70,8 @@ StartupEvents.registry('item', event => {
 })
 
 StartupEvents.registry("block", (event) => {
+    HackedHelper.fabricTagFlammability(comfuncs.packDef('carbonize/extra_flammability'), 5, 5)
+
     event.create(custom.gravitium_block)
         .soundType('METAL')
         .hardness(5)

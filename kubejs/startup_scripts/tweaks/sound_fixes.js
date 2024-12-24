@@ -50,14 +50,13 @@
         getSoundTypeHandle('SAND', [
             entries('betterend:charcoal_block'),
             entries([
-                'stack',
-                'log',
-                'planks',
-                'fence',
-                'fence_gate',
-                'stairs',
-                'slab',
-                'charring_wood'
+                'charcoal_stack',
+                'charcoal_log',
+                'charcoal_planks',
+                'charcoal_fence',
+                'charcoal_fence_gate',
+                'charcoal_stairs',
+                'charcoal_slab'
             ], 'carbonize')
         ]),
         getSoundTypeHandle('WEEPING_VINES', entries([
