@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "com.stockieslad.mobsiege.mixins",
+  "compatibilityLevel": "JAVA_16",
+  "refmap": "mobsiege.mixins.refmap.json",
+  "mixins": [
+    "ItemStackMixin",
+    "WaterPurifierBlockEntityMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8.5",
+  "minMixinExtrasVersion": "0.4.0"
+}
