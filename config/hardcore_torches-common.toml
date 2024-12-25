@@ -104,3 +104,14 @@
 	#Range: 0.0 ~ 1.0
 	starterSuccessChance = 0.33
 
+#Campfire Settings
+[campfire]
+	#Whether campfires should be crafted as unlit or vanilla. Setting this to false effectively disables the campfire section of this mod.
+	craftHardcoreCampfire = true
+	#Max fuel that can be added to a campfire
+	#Range: > 0
+	campfireMaxFuel = 24000
+	#Burn time for campfire fuel items is calculated by this value times its furnace duration
+	#Range: 1.0 ~ 1.7976931348623157E308
+	campfireFuelFactor = 8.0
+

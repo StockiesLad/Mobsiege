@@ -1,4 +1,5 @@
-const CustomHacks = Java.loadClass("com.stockieslad.mobsiege.CustomHacks")
+const Mobsiege2Minecraft = Java.loadClass('com.stockieslad.mobsiege.Mobsiege2Minecraft')
+
 
 recipes((event, funcs) => {
      comfuncs.unifiedCall(funcs.removeAndHide, [
@@ -57,19 +58,18 @@ itemTags((event, funcs) => {
       ])
 })
 
-const HackedHelper = Java.loadClass('com.stockieslad.mobsiege.HackedHelper')
-
+/*
 EntityEvents.hurt(event => {
      var sourceEntity = event.getSource().getActual()
      if (sourceEntity != null) {
-          var itemStack = sourceEntity.getItem()
-          if (itemStack != null && itemStack.hasTag(comfuncs.packDef('breaks_randomly')) && random.nextInt(5) == 0)
-               return HackedHelper.damageItem(itemStack, 1, sourceEntity)
+          var itemStack = sourceEntity.getItemBySlot('MAINHAND')
+          if (itemStack != null && itemStack.hasTag(comfuncs.packDef('breaks_randomly')) && event.getLevel().getRandom().nextInt(5) == 0)
+               return Mobsiege2Minecraft.damageItem(itemStack, 1, sourceEntity, null)
      }
      
-})
+})*/
 
-CustomHacks.hook = (item, itemStack, damage, random) => {
+Mobsiege2Minecraft.onBreaksRandomly = (itemStack, damage, random) => {
      if (itemStack != null && itemStack.hasTag(comfuncs.packDef('breaks_randomly')) && random.nextInt(5) == 0) {
           return Math.min(damage + random.nextInt(5), itemStack.getMaxDamage())
      } else return damage
