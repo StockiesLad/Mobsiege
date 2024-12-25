@@ -10,8 +10,8 @@ import java.util.List;
 public class Mobsiege2ToughAsNails {
     public static void init() {}
 
-    public static final HashMap<Item, Integer> PURIFIER_FILTER_ADD_MAP = new HashMap<>();
-    public static final List<Item> PURIFIER_FILTER_REMOVE_LIST = new LinkedList<>();
+    public static HashMap<Item, Integer> PURIFIER_FILTER_ADD_MAP = new HashMap<>();
+    public static List<Item> PURIFIER_FILTER_REMOVE_LIST = new LinkedList<>();
 
     public static void addPurifyingFilter(Item item, int time) {
         PURIFIER_FILTER_ADD_MAP.put(item, time);

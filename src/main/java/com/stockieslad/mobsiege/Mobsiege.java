@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 @Mod(Mobsiege.MODID)
 public class Mobsiege {
     public static final String MODID = "mobsiege";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public Mobsiege(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
