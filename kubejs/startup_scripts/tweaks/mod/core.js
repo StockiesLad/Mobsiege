@@ -60,6 +60,9 @@ StartupEvents.registry('item', event => {
 
     event.create(custom.dry_clay_brick) 
 
+    event.create(custom.wet_silt_brick)
+    event.create(custom.dry_silt_brick)
+
     event.create(custom.wet_mortar_brick)
     event.create(custom.dry_mortar_brick)
 

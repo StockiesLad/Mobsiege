@@ -30,6 +30,9 @@ global.customImpl = addModpackId({
 
     dry_clay_brick: 'dry_clay_brick',
 
+    wet_silt_brick: 'wet_silt_brick',
+    dry_silt_brick: 'dry_silt_brick',
+
     packed_mortar: 'packed_mortar',
     wet_mortar_brick: 'wet_mortar_brick',
     dry_mortar_brick: 'dry_mortar_brick',

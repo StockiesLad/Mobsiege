@@ -141,7 +141,6 @@ recipes((event, funcs) => {
      )*/
      funcs.replaceOutputRecipe('notreepunching:plant_string', r => event.shapeless(r, Item.of('primalstage:plant_twine').withCount(3)))
      event.shapeless('primalstage:plant_twine', Item.of('notreepunching:plant_fiber').withCount(2))
-     event.shapeless('minecraft:bone_meal', ['minecraft:rotten_flesh', '#forge:ash'])
 
      funcs.generate('2x betterend:neon_cactus', ['betternether:nether_cactus', 'betternether:neon_equisetum']).rollingSquare(1, 2).next().vanilla()
      funcs.toolDamagingShapeless('2x notreepunching:plant_fiber', ['#minecraft:wart_blocks', '#notreepunching:knives'])

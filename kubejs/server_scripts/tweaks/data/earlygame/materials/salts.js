@@ -1,5 +1,5 @@
 ServerEvents.recipes(event => {
-     event.shapeless(preferredI('forge:dusts/niter'), ['#forge:ash', '#forge:dusts/salt', '#forge:sand'])
+     event.shapeless(preferredI('forge:dusts/niter'), ['#forge:ash', '#forge:sand'])
 })
 
 itemTags((event, funcs) => {

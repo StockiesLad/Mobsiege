@@ -4,12 +4,12 @@ recipes((event, funcs) => {
           {output: 'minecraft:brick', type: 'minecraft:campfire_cooking'},
           {output: 'minecraft:brick', type: 'enderio:alloy_smelting'},
           {output: 'notreepunching:clay_brick'},
-          {input: 'notreepunching:clay_brick'}
+          {input: 'notreepunching:clay_brick'},
+          {output: 'twigs:silt_brick'}
      ])
 
      event.replaceInput({output: 'primalstage:dark_oak_drying_rack'}, 'dark_oak_planks', '#minecraft:planks')
      
-     event.shapeless('minecraft:clay_ball', ['#forge:ash', '#forge:dirt'])
      funcs.insertAll(insertion => insertion.vanilla(), [
           generate('2x minecraft:clay', ['#forge:sand', funcs.def('|jelly_blocks')]).rollingSquare(1, 2),
           generate('2x minecraft:clay', ['#forge:sand', funcs.def('wart_blocks')]).rollingSquare(1, 2),
@@ -24,10 +24,12 @@ recipes((event, funcs) => {
      ])
      
      funcs.globalPrimitiveDrying(custom.dry_clay_brick, 'notreepunching:clay_brick')
+     funcs.globalPrimitiveDrying(custom.dry_silt_brick, custom.wet_silt_brick)
      funcs.globalPrimitiveDrying(custom.dry_mortar_brick, custom.wet_mortar_brick)
      funcs.globalPrimitiveDrying(custom.dry_cement_brick, custom.wet_cement_brick)
 
      funcs.globalPrimitiveCooking('minecraft:brick', custom.dry_clay_brick, 0.1)
+     funcs.globalPrimitiveCooking('twigs:silt_brick', custom.dry_silt_brick, 0.1)
 
      funcs.globalCooking('primalstage:kiln_brick', custom.dry_mortar_brick, 0.2)
 
@@ -46,6 +48,7 @@ itemTags((event, funcs) => {
      funcs.unifiedAdd([
           ['forge:mortar', ['primalstage:sandy_clay_compound']],
           ['|mud', ['minecraft:mud', 'deep_aether:aether_mud']],
+          ['forge:ingots/brick', ['twigs:silt_brick', 'primalstage:kiln_brick', custom.fire_brick]],
           ['|jelly_blocks', [
               'aether_redux:jellyshroom_jelly_block', 
               'betterend:jellyshroom_cap_purple', 
@@ -54,20 +57,22 @@ itemTags((event, funcs) => {
           ]],
           ['supplementaries:throwable_bricks', [
                'notreepunching:clay_brick',
+               custom.wet_silt_brick,
+               custom.dry_silt_brick,
                'mobsiege:dry_clay_brick',
                'mobsiege:wet_mortar_brick',
                'mobsiege:dry_mortar_brick',
                'primalstage:kiln_brick',
                'mobsiege:wet_cement_brick',
                'mobsiege:dry_cement_brick',
-               'mobsiege:fire_brick',
+               'mobsiege:fire_brick'
           ]]
      ])
 })
 
 commonTags((event, funcs) => {
+     event.add('forge:storage_blocks/silt', ['twigs:silt', 'aether_redux:holysilt'])
      event.add('forge:storage_blocks/mortar', [custom.packed_mortar])
-
 })
 
 LootJS.modifiers(event => {
@@ -85,6 +90,7 @@ LootJS.modifiers(event => {
 })
 
 addBrickDrop('minecraft:clay', 'notreepunching:clay_brick')
+addTagBrickDrop('forge:storage_blocks/silt', custom.wet_silt_brick)
 addTagBrickDrop('forge:storage_blocks/mortar', custom.wet_mortar_brick)
 addBrickDrop(custom.packed_cement, custom.wet_cement_brick)
 
