@@ -32,6 +32,7 @@
 !/config/lmft.json
 !/config/emi.css
 !/config/ambientsounds-client.json
+!/config/bclib
 #Performance
 !/config/immediatelyfast.json
 !/config/forge-client.toml
