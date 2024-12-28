@@ -2,12 +2,14 @@ Platform.mods.kubejs.name = 'Mobsiege'
 
 const SoundType = Java.loadClass('net.minecraft.world.level.block.SoundType')
 const SoundEvents = Java.loadClass('net.minecraft.sounds.SoundEvents')
+const Mobsiege2Fabric = Java.loadClass('com.stockieslad.mobsiege.Mobsiege2Fabric')
+const Mobsiege2ToughAsNails = comfuncs.java('Mobsiege2ToughAsNails')
+
 
 const Monster = Java.loadClass('net.minecraft.world.entity.monster.Monster')
 const TrialsMobs = Java.loadClass('net.salju.trialstowers.init.TrialsMobs')
 const TCoreEntities = Java.loadClass('cofh.thermal.core.init.registries.TCoreEntities')
 const Blitz = Java.loadClass('cofh.thermal.core.common.entity.monster.Blitz')
-const Mobsiege2Fabric = Java.loadClass('com.stockieslad.mobsiege.Mobsiege2Fabric')
 
 const WART_COVERED_STONE = coveredStone(SoundEvents.WART_BLOCK_STEP)
 const GRASS_COVERED_STONE = coveredStone(SoundEvents.GRASS_STEP)
@@ -44,6 +46,11 @@ StartupEvents.registry('item', event => {
         .unstackable()
         .maxDamage(50)
         .tag('forge:tools/swords')
+    //Make this weaker because KubeJS doesn't support tiers or custom tools yet.
+    event.create(custom.flint_saw, 'axe')
+        .unstackable()
+        .maxDamage(40)
+        .tag('notreepunching:saws')
 
     event.create(custom.poor_grade_charcoal)
         .burnTime(400)
@@ -74,6 +81,7 @@ StartupEvents.registry('item', event => {
 
 StartupEvents.registry("block", (event) => {
     Mobsiege2Fabric.fabricTagFlammability(comfuncs.packDef('carbonize/extra_flammability'), 5, 5)
+    Mobsiege2ToughAsNails.addThermoregulators(comfuncs.packDef('thermoregulators'))
 
     event.create(custom.gravitium_block)
         .soundType('METAL')

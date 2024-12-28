@@ -38,11 +38,11 @@ basicLootTables((event, funcs) => {
                     childAlternativesPool([
                          ofChild('minecraft:flint', ofFuncConds(
                               conditionTableBonus([0.125, 0.25, 0.5, 1.0], "minecraft:fortune"), 
-                              countSet(countUniform(0, 2), false)
+                              countSet(countUniform(1, 2), false)
                          )),
                          ofChild('twigs:pebble', ofFuncConds(
                               conditionRandomChance(0.33), 
-                              countSet(countUniform(0, 3), false)
+                              countSet(countUniform(1, 3), false)
                          )),
                          ofChild('minecraft:gravel')
                     ])

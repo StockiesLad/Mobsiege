@@ -48,7 +48,7 @@ itemTags((event, funcs) => {
         'twigs:bloodstone',
         custom.corpstone
     ])
-    event.add('notreepunching:loose_rocks', 'twigs:pebble')
+    event.add('notreepunching:loose_rocks', ['twigs:pebble', 'spelunkers_charm:deepslate_rock', 'spelunkers_charm:rock', 'spelunkers_charm:dripstone_rock', 'spelunkers_charm:basalt_rock'])
     stones = event.get('minecraft:stone_crafting_materials').getObjectIds().toArray()
  })
 

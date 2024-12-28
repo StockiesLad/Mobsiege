@@ -20,6 +20,7 @@ global.customImpl = addModpackId({
 
     pointed_flint: 'pointed_flint',
     flint_sword: 'flint_sword',
+    flint_saw: 'flint_saw',
 
     campfire_rock: 'campfire_rock',
 

@@ -24,6 +24,8 @@ function getCommonFunctions(storage) {
         return path
     }
 
+    var java = (clazz) => Java.loadClass(`com.stockieslad.mobsiege.${clazz}`)
+
     var ensureArray = (possibleArray) => Array.isArray(possibleArray) ? possibleArray : [possibleArray]
 
     var ensureArraySuper = (possibleArray, child) => Array.isArray(child) ? possibleArray : [possibleArray]
@@ -228,6 +230,7 @@ function getCommonFunctions(storage) {
         identifier: identifier,
         packDef: packDef,
         def: def,
+        java: java,
         ensureArray: ensureArray,
         ensureArraySuper: ensureArraySuper,
         unifiedCall: unifiedCall,

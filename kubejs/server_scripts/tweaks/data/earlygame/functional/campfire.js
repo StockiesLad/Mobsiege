@@ -1,4 +1,8 @@
 recipes((event, funcs) => {
+     funcs.removeAndHide('hardcore_torches:unlit_campfire')
+
+     event.remove({output: 'minecraft:campfire'})
+
      funcs.vanillaInsert('minecraft:campfire', [
           ['#minecraft:torches/temp', [3, 5]],
           ['primalstage:primitive_grill', 4],  
