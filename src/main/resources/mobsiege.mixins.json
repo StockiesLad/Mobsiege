@@ -5,6 +5,7 @@
   "refmap": "mobsiege.mixins.refmap.json",
   "mixins": [
     "ItemStackMixin",
+    "TemperatureHandlerMixin",
     "WaterPurifierBlockEntityMixin"
   ],
   "client": [

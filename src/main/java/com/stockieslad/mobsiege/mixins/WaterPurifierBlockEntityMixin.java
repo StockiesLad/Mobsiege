@@ -10,7 +10,6 @@ import toughasnails.block.entity.WaterPurifierBlockEntity;
 
 import java.util.HashMap;
 
-import static com.stockieslad.mobsiege.Mobsiege.LOGGER;
 import static com.stockieslad.mobsiege.Mobsiege2ToughAsNails.PURIFIER_FILTER_ADD_MAP;
 import static com.stockieslad.mobsiege.Mobsiege2ToughAsNails.PURIFIER_FILTER_REMOVE_LIST;
 
@@ -22,7 +21,6 @@ public class WaterPurifierBlockEntityMixin {
         var map = new HashMap<>(cir.getReturnValue());
         PURIFIER_FILTER_REMOVE_LIST.forEach(map::remove);
         map.putAll(PURIFIER_FILTER_ADD_MAP);
-        LOGGER.info("[MOBSIEGE] Modified Filters for Tough as Nails: map=" + map);
         cir.setReturnValue(ImmutableMap.<Item, Integer>builder().putAll(map).build());
     }
 }
