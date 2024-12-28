@@ -16,7 +16,8 @@ recipes((event, funcs) => {
      funcs.replaceOutputRecipe('hardcore_torches:fire_starter', result => funcs.vanillaInsert(result, [[funcs.def('|primitive_string'), 0], ['#forge:rods/wooden', [1, 2]]]))
      funcs.replaceOutputRecipe('notreepunching:fire_starter', result => funcs.vanillaInsert(result, [[funcs.def('|primitive_string'), 0], ['hardcore_torches:fire_starter', [1, 2]], ['notreepunching:flint_shard', 3]]))
      funcs.replaceOutputRecipe('notreepunching:flint_knife', result => funcs.vanillaInsert(result, [[custom.pointed_flint, 1], ['#forge:rods/wooden', 2], [funcs.def('|primitive_string'), 0]]))
-     funcs.replaceOutputRecipe(custom.flint_sword, result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', [1, 3, 5, 7]], ['#forge:rods/wooden', 6], ['#forge:string', 4], [custom.pointed_flint, 2]]))
+     funcs.vanillaInsert(custom.flint_sword, [['notreepunching:flint_shard', [1, 3, 5, 7]], ['#forge:rods/wooden', 6], ['#forge:string', 4], [custom.pointed_flint, 2]])
+     funcs.vanillaInsert(custom.flint_saw, [['minecraft:flint', [1, 4]], ['#forge:rods/wooden', [0, 3, 6]], ['#forge:string', 7]])
 
      funcs.replaceOutputRecipe('primalstage:flint_hatchet', result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', 1], [custom.pointed_flint, 0], ['#forge:rods/wooden', 3], [funcs.def('|primitive_string'), 2]]))
      funcs.replaceOutputRecipe('notreepunching:flint_axe', result => funcs.vanillaInsert(result, [['#forge:string', 0], ['#forge:rods/wooden', [3, 6]], [custom.pointed_flint, [2]], ['notreepunching:flint_shard', [1, 4]]]))
