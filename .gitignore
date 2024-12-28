@@ -58,6 +58,7 @@
 !/config/treechop-client.toml
 !/config/mutantmonsters-common.toml
 !/config/lava_monster-common.toml
+!/config/hordes-common.toml
 #Worldgen
 !/config/the_bumblezone
 !/config/traverse
