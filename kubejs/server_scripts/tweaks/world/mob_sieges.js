@@ -164,6 +164,9 @@ PlayerEvents.tick(event => {
     let difficulty = level.getDifficulty().getKey()
     if (difficulty == 'peaceful') return
 
+    var isInGracePeriod = level.getLevelData().getGameTime() < 24000 && level.getDayTime() > 15000
+    if (isInGracePeriod) return
+
     let random = level.getRandom()
     if (random.nextInt(chanceRandomBound) != 0) return
 
@@ -187,6 +190,7 @@ PlayerEvents.tick(event => {
     
     console.info('[Mobsiege] Attempting a mob seige: {' +
         '\n    difficulty=' + difficulty + ', ' +
+        '\n    gracePeriod=' + isInGracePeriod + ', ' +
         '\n    forPlayer=' + player + ', ' +
         '\n    playerChunkPos=' + playerChunkPos + ', ' +
         '\n    playerOnSurface=' + isPlayerOnSurface + ',' +

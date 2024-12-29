@@ -8,7 +8,6 @@ recipes((event, funcs) => {
      funcs.replace({input: 'minecraft:gravel', output: 'minecraft:flint'}, r => event.shapeless(r, Item.of('minecraft:gravel').withCount(3)))
      
      funcs.insertAll(insertion => insertion.vanilla(), [
-          generate('2x minecraft:gravel', ['minecraft:end_stone', 'promenade:dark_amaranth_wart_block']).rollingSquare(1, 2),
           generate('2x minecraft:gravel', ['aether_redux:driftshale', '#mobsiege:mud']).rollingSquare(1, 2)
      ])
 })
@@ -52,6 +51,8 @@ basicLootTables((event, funcs) => {
           
 })
 
+
+//search for my stone tag on top of sound? requires mixin to notreepunching as well
 BlockEvents.rightClicked(event => {
      var stack = event.getItem()
      var block = event.block
@@ -65,7 +66,7 @@ BlockEvents.rightClicked(event => {
           if (random.nextFloat() < NTPConfig.INSTANCE.flintKnappingConsumeChance.getAsFloat()) {
                if (random.nextFloat() < NTPConfig.INSTANCE.flintKnappingSuccessChance.getAsFloat()) {
                     pos = pos.relative(event.getFacing())
-                    Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of(custom.pointed_flint).withCount(1));
+                    Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of(custom.pointed_flint).withCount(1 + random.nextInt(1)));
                 }
                stack.shrink(1);
                player.setItemInHand(hand, stack);

@@ -33,6 +33,7 @@
 !/config/emi.css
 !/config/ambientsounds-client.json
 !/config/bclib
+!/config/alexsmobs.toml
 #Performance
 !/config/immediatelyfast.json
 !/config/forge-client.toml
@@ -59,6 +60,8 @@
 !/config/mutantmonsters-common.toml
 !/config/lava_monster-common.toml
 !/config/hordes-common.toml
+!/config/enhancedai
+!/config/zombieawareness
 #Worldgen
 !/config/the_bumblezone
 !/config/traverse

@@ -1,18 +1,27 @@
 {
-     "type": "minecraft:ore",
-     "config": {
-       "discard_chance_on_air_exposure": 0,
-       "size": 50,
-       "targets": [
-         {
-           "state": {
-             "Name": "mobsiege:corpstone"
-           },
-           "target": {
-             "block": "minecraft:netherrack",
-             "predicate_type": "minecraft:block_match"
-           }
-         }
-       ]
-     }
-   }
+  "type": "minecraft:ore",
+  "config": {
+    "discard_chance_on_air_exposure": 0,
+    "size": 50,
+    "targets": [
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "biomesoplenty:flesh"
+        },
+        "state": {
+          "Name": "mobsiege:corpstone"
+        }
+      },
+      {
+        "state": {
+          "Name": "mobsiege:corpstone"
+        },
+        "target": {
+          "block": "biomesoplenty:porous_flesh",
+          "predicate_type": "minecraft:block_match"
+        }
+      }
+    ]
+  }
+}

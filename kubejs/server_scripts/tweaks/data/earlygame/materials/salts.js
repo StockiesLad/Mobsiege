@@ -6,8 +6,6 @@ itemTags((event, funcs) => {
      event.add('forge:dusts/salt', ['primalstage:salt', 'ingredientsdelight:salt'])
      event.add('forge:salt', '#forge:dusts/salt')
      event.add('forge:dusts/niter', 'immersiveengineering:dust_saltpeter')
-     event.add('forge:dusts/saltpeter', 'thermal:niter_dust')
-
 })
 
 commonTags((event, funcs) => {

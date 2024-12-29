@@ -1,9 +1,12 @@
 var stones = []
 
 recipes((event, funcs) => {
-    event.remove({id: 'notreepunching:cobblestone_from_rocks'})
-    event.replaceInput({input: 'twigs:pebble'}, 'twigs:pebble', '#notreepunching:loose_rocks')
+    //event.remove({id: 'notreepunching:cobblestone_from_rocks'})
+    //event.remove({id: 'spelunkers_charm:rocks_to_cobblestone'})
+    funcs.replaceTagRecipes({input: '#notreepunching:loose_rocks', type: 'minecraft:crafting_shaped'}, () => {})
+    event.replaceInput({input: 'twigs:pebble'}, 'twigs:pebble', 'minecraft:gravel')
     funcs.twoSquareAlt('minecraft:end_stone', 'betterend:endstone_dust')
+    funcs.twoSquare('minecraft:gravel', '#notreepunching:loose_rocks')
     event.shapeless('primalstage:stone_pebble', ['#notreepunching:loose_rocks', '#notreepunching:loose_rocks'])
     event.shapeless('2x twigs:pebble', 'primalstage:stone_pebble')
     event.shapeless('3x twigs:pebble', Item.of('minecraft:gravel').withCount(2))
@@ -74,7 +77,7 @@ blockTags((event, funcs) => {
             level.destroyBlock(pos, false)
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('twigs:pebble').withCount(2 + random.nextInt(3)))
             if (block.hasTag(comfuncs.packDef('limestone')) && random.nextInt(4) == 0)
-              Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of(AlmostUnified.getPreferredItemForTag('forge:gems/sulfur').getIdLocation().toString()).withCount(1 + random.nextInt(2)))
+              Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of(AlmostUnified.getPreferredItemForTag('forge:gems/sulfur').getIdLocation().toString()).withCount(4 + random.nextInt(4)))
 
                 
          } else level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.stone.break", "blocks", 0.25, 0.5)

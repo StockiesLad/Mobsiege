@@ -141,7 +141,7 @@ BlockEvents.rightClicked(event => {
      var level = event.getLevel()
      var random = level.getRandom()
      var pos = block.getPos()
-     if (item.hasTag('forge:tools/hammers') && block.hasTag('forge:stripped_logs')) {
+     if (item.hasTag('forge:tools/saws') && block.hasTag('forge:stripped_logs')) {
           item.hurtAndBreak(1, event.getEntity(), (entity) => level.broadcastEntityEvent(entity, event.getHand().name() == 'MAIN_HAND' ? 47 : 48))
           if (random.nextInt(4) == 0) {
                level.destroyBlock(pos, false)

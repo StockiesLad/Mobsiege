@@ -34,7 +34,7 @@
 
     # The chance to consume a piece of flint when knapping
     # Range: [0.0, 1.0]
-    flintKnappingConsumeChance = 0.75
+    flintKnappingConsumeChance = 0.25
 
     # The chance to produce flint shards if a piece of flint has been consumed while knapping
     # Range: [0.0, 1.0]

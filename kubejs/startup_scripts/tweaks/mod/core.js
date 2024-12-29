@@ -49,7 +49,7 @@ StartupEvents.registry('item', event => {
     //Make this weaker because KubeJS doesn't support tiers or custom tools yet.
     event.create(custom.flint_saw, 'axe')
         .unstackable()
-        .maxDamage(40)
+        .maxDamage(30)
         .tag('notreepunching:saws')
 
     event.create(custom.poor_grade_charcoal)

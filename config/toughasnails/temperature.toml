@@ -20,7 +20,7 @@
 	#Whether or not Climate Clemency should be granted when respawning.
 	climate_clemency_respawning = true
 	#Number of ticks for the duration of Climate Clemency.
-	climate_clemency_duration = 24000
+	climate_clemency_duration = 15000
 	#Number of ticks to delay changing the player's temperature after their temperature changes when rebounding from an extreme temperature.
 	extremity_rebound_temperature_change_delay = 250
 
