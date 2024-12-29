@@ -339,6 +339,7 @@ function getRecipeFunctions(event) {
      }
      var twoSquare = (result, ingredient) => generate(result, ingredient).flatSquare(2).next().vanilla()
      var twoSquareAlt = (result, ingredient) => generate(result, ingredient).rollingSquare(1, 2).next().vanilla()
+     var threeSquare = (result, ingredient) => generate(result, ingredient).flatSquare(3).next().vanilla()
      var planet = (result, innerInput, outterInput) => vanillaInsert(result, [[innerInput, 4], [outterInput, [], 8]], 3)
      var planetAlt = (result, innerInput, outterInput0, outterInput1) => generate(result, [outterInput0, outterInput1]).rollingSquare(1, 3).override([innerInput, 4]).next().vanilla()
      var planetOrbit = (result, ingredients) => insert(result, [[ingredients[0], [0, 8]], [ingredients[1], [1, 7]], [ingredients[2], [2, 6]], [ingredients[3], [3, 5]], [ingredients[4], 4]])
@@ -399,6 +400,7 @@ function getRecipeFunctions(event) {
           removeAll: removeAll,
           twoSquare: twoSquare,
           twoSquareAlt: twoSquareAlt,
+          threeSquare: threeSquare,
           planet: planet,
           planetAlt: planetAlt,
           planetOrbit: planetOrbit,

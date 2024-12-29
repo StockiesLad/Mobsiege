@@ -65,6 +65,10 @@ StartupEvents.registry('item', event => {
         .burnTime(6400)
         .tag('forge:coal/high_grade')
 
+    event.create(custom.ash_clay_ball) 
+    event.create(custom.wet_ash_clay_brick)
+    event.create(custom.dry_ash_clay_brick)
+
     event.create(custom.dry_clay_brick) 
 
     event.create(custom.wet_silt_brick)
@@ -117,7 +121,7 @@ StartupEvents.registry("block", (event) => {
     event.create(custom.fire_brick_block)
         .soundType('STONE')
         .hardness(2)
-        .resistance(2)
+        .resistance(6)
         .requiresTool(true)
         .tagBlock("mineable/pickaxe")
         .tagBlock('needs_stone_tool')
@@ -142,6 +146,10 @@ StartupEvents.registry("block", (event) => {
 BlockEvents.modification(event => {
     global.functions.sound.invoke('setSoundType', {event: event})
     event.modify('aether:cold_aercloud', block => block.properties.isValidSpawn((state, blockGetter, blockPos, spacePlacement, entityType) => true))
+})
+
+StartupEvents.modifyCreativeTab('kubejs:tab', e => {
+    e.add([custom.packed_ash, custom.ash_clay])
 })
 
 ItemEvents.modification(event => {

@@ -29,6 +29,12 @@ global.customImpl = addModpackId({
     good_grade_charcoal: "good_grade_charcoal",
     high_grade_charcoal: "high_grade_charcoal",
 
+    packed_ash: 'packed_ash',
+    ash_clay: 'ash_clay',
+    ash_clay_ball: 'ash_clay_ball',
+    wet_ash_clay_brick: 'wet_ash_clay_brick',
+    dry_ash_clay_brick: 'dry_ash_clay_brick',
+
     dry_clay_brick: 'dry_clay_brick',
 
     wet_silt_brick: 'wet_silt_brick',

@@ -24,7 +24,11 @@ ClientEvents.lang('en_us', event => {
         ['primalstage:spruce_bark', "Bark"],
         ['biomesoplenty:bramble', 'Organic Bramble'],
         ['cinderscapes:ash_pile', 'Scorched Ash'],
-        ['cinderscapes:ash_block', 'Scorched Ash Block']
+        ['cinderscapes:ash_block', 'Scorched Ash Block'],
+        ['carbonize:ash', 'Enriched Ash'],
+        ['carbonize:ash_block', 'Enriched Ash Block'],
+        ['carbonize:ash_layer', 'Enriched Ash Layer'],
+        ['supplementaries:ash', 'Fine Ash']
     ]
 
     rename = concatSeries(rename, [
