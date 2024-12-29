@@ -38,7 +38,7 @@
 
     # The chance to produce flint shards if a piece of flint has been consumed while knapping
     # Range: [0.0, 1.0]
-    flintKnappingSuccessChance = 0.5
+    flintKnappingSuccessChance = 0.75
 
     # The chance for a fire starter to start fires
     # Range: [0.0, 1.0]
