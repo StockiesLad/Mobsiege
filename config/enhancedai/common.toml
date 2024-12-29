@@ -584,13 +584,13 @@
 	[Mobs."Miner Mobs"]
 		#Chance for a mob in the entity type tag enhancedai:can_be_miner to spawn with the miner ability
 		#Range: 0.0 ~ 1.0
-		"Miner Chance" = 0.1
+		"Miner Chance" = 0.25
 		#Mobs with the miner AI will mine only if they have any tool in the off-hand
 		"Can mine with tool only" = true
 		#Mobs with the miner AI will mine only if their off-hand tool can mine targeted blocks (e.g. zombies with shovels will not mine stone). Blocks that require no tool (e.g. planks) will be minable regardless of proper tool or not.
 		"Can mine with proper tool only" = false
 		#If 'Can mine with proper tool only' is enabled, mobs with the miner AI will mine blocks that don't require a tool only with the proper tool.
-		"Always require proper tool" = false
+		"Always require proper tool" = true
 		#Mobs with Miner AI will spawn with a Stone Pickaxe that never drops.
 		"Equip Stone Pick" = true
 		#Mobs can mine from the bottom of the world to this Y level.
@@ -598,7 +598,7 @@
 		"Max Y" = 320
 		#The maximum distance from the target at which the Mobs can mine. Set to 0 to always mine.
 		#Range: 0 ~ 128
-		"Max Distance" = 58
+		"Max Distance" = 25
 		#Mobs with Miner AI will not be able to break tile entities
 		"Blacklist Tile Entities" = false
 		#Multiplier for the time a mob takes to break blocks. E.g. with this set to 2, mobs will take twice the time to mine a block.

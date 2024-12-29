@@ -57,7 +57,7 @@ chargedChance = 1
 #Chance of Entities Spawning Bloodlusted Out of 100
 angryEntityChance = 10
 #Distance at Which Creepers Will Breach if Blocked (in Blocks)
-breachingDist = 64
+breachingDist = 36
 #Creepers Will Explode if This Close to Player (in Blocks)
 creeperExplodeDist = 6
 #Distance At Which Creepers Breech the Ground (in Blocks)
@@ -83,9 +83,9 @@ entityDigDelay = 5
 #Cooldown time for entities placing blocks in ticks
 entityBuildDelay = 5
 #If entity is within this distance for X and Z, it'll start digging to player
-entityDigDist = 32
+entityDigDist = 25
 #Above Ground Monster Attack Distance (in Blocks)
-groundDist = 90
+groundDist = 36
 #Below Ground Monster Attack Distance (in Blocks)
 caveDist = 42
 #Chance out of 100 for spider shooting webs each tick. Default = 0.5

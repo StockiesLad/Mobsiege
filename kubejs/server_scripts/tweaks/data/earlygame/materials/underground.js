@@ -79,7 +79,7 @@ complexLootTables((event, funcs) => {
 })
 
 blockTags((event, funcs) => {
-     event.add('minecraft:needs_iron_tool', '#forge:ores')
+     event.add('minecraft:needs_iron_tool', ['#forge:ores', 'create_new_age:magnetite_block'])
 })
 
 commonTags((event, funcs) => {
