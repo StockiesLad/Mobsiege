@@ -62,6 +62,7 @@ complex recipes {
 }
 aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
 (later on) add recipe chaining (funcs return output)
+revamp cement, niter and ash brick production use powdered concrete block instances
 add difficulty scaling (woohoo cant wait to mixin to like 10 mods)
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!

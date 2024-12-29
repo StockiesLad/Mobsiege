@@ -5,12 +5,14 @@ recipes((event, funcs) => {
     //event.remove({id: 'spelunkers_charm:rocks_to_cobblestone'})
     funcs.replaceTagRecipes({input: '#notreepunching:loose_rocks', type: 'minecraft:crafting_shaped'}, () => {})
     event.replaceInput({input: 'twigs:pebble'}, 'twigs:pebble', 'minecraft:gravel')
+    funcs.replaceOutputRecipe('5x supplementaries:gravel_bricks', r => event.shapeless(r, Item.of('minecraft:gravel').withCount(5)))
+    funcs.replaceOutputRecipe('6x twigs:gravel_bricks', r => event.shapeless(r, Item.of('minecraft:gravel').withCount(6)))
     funcs.twoSquare('minecraft:end_stone', 'betterend:endstone_dust')
-    funcs.twoSquare('2x minecraft:cobblestone', 'minecraft:gravel')
+    funcs.twoSquare('minecraft:cobblestone', 'minecraft:gravel')
     funcs.twoSquare('minecraft:gravel', '#notreepunching:loose_rocks')
     event.shapeless('primalstage:stone_pebble', ['#notreepunching:loose_rocks', '#notreepunching:loose_rocks'])
-    event.shapeless('2x twigs:pebble', 'primalstage:stone_pebble')
-    event.shapeless('3x twigs:pebble', Item.of('minecraft:gravel').withCount(2))
+    event.shapeless('twigs:pebble', 'primalstage:stone_pebble')
+    event.shapeless('2x twigs:pebble', 'minecraft:gravel')
 })
 
 itemTags((event, funcs) => {
