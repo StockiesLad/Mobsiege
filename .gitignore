@@ -34,6 +34,7 @@
 !/config/ambientsounds-client.json
 !/config/bclib
 !/config/alexsmobs.toml
+!/config/integrateddynamics-common.toml
 #Performance
 !/config/immediatelyfast.json
 !/config/forge-client.toml
