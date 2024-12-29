@@ -149,6 +149,8 @@ BlockEvents.modification(event => {
 })
 
 StartupEvents.modifyCreativeTab('kubejs:tab', e => {
+    e.setDisplayName('Mobsiege')
+    e.setIcon(Item.of(custom.thermoregulator))
     e.add([custom.packed_ash, custom.ash_clay])
 })
 
