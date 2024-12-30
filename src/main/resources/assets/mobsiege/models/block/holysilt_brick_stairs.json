@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "mobsiege:block/holysilt_bricks",
+    "side": "mobsiege:block/holysilt_bricks",
+    "top": "mobsiege:block/holysilt_bricks"
+  }
+}

@@ -2,5 +2,12 @@
   "block.mobsiege.packed_ash": "Packed Ash",
   "block.mobsiege.ash_clay": "Ash Clay",
   "item.mobsiege.packed_ash": "Packed Ash",
-  "item.mobsiege.ash_clay": "Ash Clay"
+  "item.mobsiege.ash_clay": "Ash Clay",
+
+  "block.mobsiege.holysilt_brick_stairs": "Holysilt Brick Stairs",
+  "block.mobsiege.holysilt_brick_slab": "Holysilt Brick Slab",
+  "block.mobsiege.holysilt_brick_wall": "Holysilt Brick Wall",
+  "item.mobsiege.holysilt_brick_stairs": "Holysilt Brick Stairs",
+  "item.mobsiege.holysilt_brick_slab": "Holysilt Brick Slab",
+  "item.mobsiege.holysilt_brick_wall": "Holysilt Brick Wall"
 }
