@@ -65,6 +65,16 @@ StartupEvents.registry('item', event => {
         .burnTime(6400)
         .tag('forge:coal/high_grade')
 
+    event.create(custom.mud_ball)
+    event.create(custom.wet_mud_brick)
+    event.create(custom.dry_mud_brick)
+    event.create(custom.mud_brick)
+
+    event.create(custom.aether_mud_ball)
+    event.create(custom.wet_aether_mud_brick)
+    event.create(custom.dry_aether_mud_brick)
+    event.create(custom.aether_mud_brick)
+
     event.create(custom.ash_clay_ball) 
     event.create(custom.wet_ash_clay_brick)
     event.create(custom.dry_ash_clay_brick)
@@ -73,6 +83,11 @@ StartupEvents.registry('item', event => {
 
     event.create(custom.wet_silt_brick)
     event.create(custom.dry_silt_brick)
+
+    event.create(custom.holysilt_ball)
+    event.create(custom.wet_holysilt_brick)
+    event.create(custom.dry_holysilt_brick)
+    event.create(custom.holysilt_brick)
 
     event.create(custom.wet_mortar_brick)
     event.create(custom.dry_mortar_brick)
@@ -99,6 +114,14 @@ StartupEvents.registry("block", (event) => {
         .soundType('STONE')
         .hardness(1)
         .resistance(1)
+        .requiresTool(true)
+        .tagBlock("mineable/pickaxe")
+        .tagBlock('needs_stone_tool')
+
+    event.create(custom.holysilt_bricks)
+        .soundType('STONE')
+        .hardness(2)
+        .resistance(6)
         .requiresTool(true)
         .tagBlock("mineable/pickaxe")
         .tagBlock('needs_stone_tool')
@@ -149,9 +172,9 @@ BlockEvents.modification(event => {
 })
 
 StartupEvents.modifyCreativeTab('kubejs:tab', e => {
-    e.setDisplayName('Mobsiege')
+    e.setDisplayName('Custom Content')
     e.setIcon(Item.of(custom.thermoregulator))
-    e.add([custom.packed_ash, custom.ash_clay])
+    e.add([custom.packed_ash, custom.ash_clay, custom.holysilt_brick_stairs, custom.holysilt_brick_slab, custom.holysilt_brick_wall])
 })
 
 ItemEvents.modification(event => {

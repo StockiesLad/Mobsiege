@@ -24,3 +24,4 @@ function conditionInverted(condition) {
 function survivesExplosion() {
      return {condition: "minecraft:survives_explosion"}
 }
+

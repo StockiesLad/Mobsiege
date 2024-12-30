@@ -68,10 +68,6 @@ complexLootTables((event, funcs) => {
      })
 })
 
-LootJS.modifiers(event => {
-     
-})
-
 BlockEvents.rightClicked(event => {
      var item = event.getItem()
      var block = event.block

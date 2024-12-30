@@ -29,6 +29,16 @@ global.customImpl = addModpackId({
     good_grade_charcoal: "good_grade_charcoal",
     high_grade_charcoal: "high_grade_charcoal",
 
+    mud_ball: 'mud_ball',
+    wet_mud_brick: 'wet_mud_brick',
+    dry_mud_brick: 'dry_mud_brick',
+    mud_brick: 'mud_brick',
+
+    aether_mud_ball: 'aether_mud_ball',
+    wet_aether_mud_brick: 'wet_aether_mud_brick',
+    dry_aether_mud_brick: 'dry_aether_mud_brick',
+    aether_mud_brick: 'aether_mud_brick',
+
     packed_ash: 'packed_ash',
     ash_clay: 'ash_clay',
     ash_clay_ball: 'ash_clay_ball',
@@ -39,6 +49,15 @@ global.customImpl = addModpackId({
 
     wet_silt_brick: 'wet_silt_brick',
     dry_silt_brick: 'dry_silt_brick',
+
+    holysilt_ball: 'holysilt_ball',
+    wet_holysilt_brick: 'wet_holysilt_brick',
+    dry_holysilt_brick: 'dry_holysilt_brick',
+    holysilt_brick: 'holysilt_brick',
+    holysilt_bricks: 'holysilt_bricks',
+    holysilt_brick_stairs: 'holysilt_brick_stairs',
+    holysilt_brick_slab: 'holysilt_brick_slab',
+    holysilt_brick_wall: 'holysilt_brick_wall',
 
     packed_mortar: 'packed_mortar',
     wet_mortar_brick: 'wet_mortar_brick',

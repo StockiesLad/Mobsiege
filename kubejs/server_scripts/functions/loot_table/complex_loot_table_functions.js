@@ -1,4 +1,6 @@
 function getComplexLootTableFunctions(event) {
+     var dropsItself = (block) => event.addBlockLootModifier(block).addLoot(block)
+
      var replaceBlockDrop = (oldDrop, newDrop, blocks) => comfuncs.ensureArray(blocks).forEach(block => event.addBlockLootModifier(block).replaceLoot(oldDrop, newDrop))
      var removeBlockDrop = (drop, blocks) => comfuncs.ensureArray(blocks).forEach(block => event.addBlockLootModifier(block).removeLoot(drop))
 
@@ -15,6 +17,7 @@ function getComplexLootTableFunctions(event) {
      }
 
      return {
+          dropsItself: dropsItself,
           replaceBlockDrop: replaceBlockDrop,
           removeBlockDrop: removeBlockDrop,
           replaceBlockDrops: replaceBlockDrops,

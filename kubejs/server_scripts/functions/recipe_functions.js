@@ -344,8 +344,9 @@ function getRecipeFunctions(event) {
      var planetAlt = (result, innerInput, outterInput0, outterInput1) => generate(result, [outterInput0, outterInput1]).rollingSquare(1, 3).override([innerInput, 4]).next().vanilla()
      var planetOrbit = (result, ingredients) => insert(result, [[ingredients[0], [0, 8]], [ingredients[1], [1, 7]], [ingredients[2], [2, 6]], [ingredients[3], [3, 5]], [ingredients[4], 4]])
      var box = (result, input) => vanillaInsert(result, [input, [4, 8]])
-     var stairs = (result, input) => vanillaInsert(result, [input, [0, 3, 4, 6, 7, 8]])
-     var slab = (result, input) => vanillaInsert(result, [input, [0, 1, 2]], 3)
+     var stairs = (result, input) => vanillaInsert(result, ['4x ' + input, [0, 3, 4, 6, 7, 8]])
+     var slab = (result, input) => vanillaInsert(result, ['6x ' + input, [0, 1, 2]], 3)
+     var wall = (result, input) => vanillaInsert(result, ['6x ' + input, [0, 1, 2, 3, 4, 5]])
      var circleLoop = (items) => {
           comfuncs.quickerate(items.length, i => {
                var nextI = i + 1
@@ -407,6 +408,7 @@ function getRecipeFunctions(event) {
           box: box,
           stairs: stairs,
           slab: slab,
+          wall: wall,
           circleLoop: circleLoop,
           donutLoop: donutLoop
      }
