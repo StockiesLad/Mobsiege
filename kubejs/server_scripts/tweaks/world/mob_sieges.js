@@ -35,6 +35,7 @@ const MOB_SIEGES = [
         type: 'Slime',
         members: [
             'minecraft:slime',
+            'minecraft:magma_cube',
             'terrarianslimes:spiked_ice_slime',
             'terrarianslimes:spiked_jungle_slime',
             'terrarianslimes:mother_slime',

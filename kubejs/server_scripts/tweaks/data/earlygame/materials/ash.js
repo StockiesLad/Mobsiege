@@ -12,7 +12,7 @@ itemTags((event, funcs) => {
 })
 
 commonTags((event, funcs) => {
-     event.remove('minecraft:sand', 'carbonize:ash_block')
+     event.add('minecraft:sand', '#forge:storage_blocks/ash')
 })
 
 LootJS.modifiers(event => {

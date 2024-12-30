@@ -9,14 +9,17 @@ recipes((event, funcs) => {
           {output: 'supplementaries:ash_brick'}
      ])
 
+     event.replaceInput({input: 'minecraft:clay'}, 'minecraft:clay', funcs.def('|clay_blocks'))
+
      event.replaceInput({output: 'primalstage:dark_oak_drying_rack'}, 'dark_oak_planks', '#minecraft:planks')
      
      funcs.insertAll(insertion => insertion.vanilla(), [
           generate('2x minecraft:clay', ['#forge:sand', funcs.def('|jelly_blocks')]).rollingSquare(1, 2),
           generate('2x minecraft:clay', ['#forge:sand', funcs.def('wart_blocks')]).rollingSquare(1, 2),
-          generate('2x minecraft:clay', ['aether_redux:holysilt', funcs.def('|mud')]).rollingSquare(1, 2),
-          generate(custom.packed_mortar, ['#forge:sand', 'minecraft:clay']).rollingSquare(1, 2),
+          generate('2x minecraft:clay', ['#forge:storage_blocks/silt', funcs.def('|mud')]).rollingSquare(1, 2),
+          generate(custom.packed_mortar, ['#forge:sand', funcs.def('|clay_blocks')]).rollingSquare(1, 2),
           generate(custom.campfire_rock, ['#forge:ingots/brick', '#notreepunching:loose_rocks']).rollingSquare(1, 2),
+          generate(custom.ash_clay, custom.ash_clay_ball).flatSquare(2),
           generate(custom.packed_mortar, 'primalstage:sandy_clay_compound').flatSquare(2),
           generate(custom.packed_cement, custom.cement_compound).flatSquare(2),
           generate(custom.fire_brick_block, custom.fire_brick).flatSquare(2),          
@@ -50,7 +53,10 @@ recipes((event, funcs) => {
 itemTags((event, funcs) => {
      funcs.unifiedAdd([
           ['forge:mortar', ['primalstage:sandy_clay_compound']],
+          ['forge:clay', [custom.ash_clay_ball]],
           ['|mud', ['minecraft:mud', 'deep_aether:aether_mud']],
+          ['|silt', ['aether_redux:holysilt', 'twigs:silt']],
+          ['|clay_blocks', [custom.ash_clay, 'minecraft:clay']],
           ['forge:ingots/brick', ['twigs:silt_brick', 'primalstage:kiln_brick', custom.fire_brick, 'minecraft:nether_brick']],
           ['|jelly_blocks', [
               'aether_redux:jellyshroom_jelly_block', 
