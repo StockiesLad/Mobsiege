@@ -102,7 +102,7 @@
 	canLightLanterns = false
 	#Percentage chance that the fire starter works
 	#Range: 0.0 ~ 1.0
-	starterSuccessChance = 0.33
+	starterSuccessChance = 0.75
 
 #Campfire Settings
 [campfire]

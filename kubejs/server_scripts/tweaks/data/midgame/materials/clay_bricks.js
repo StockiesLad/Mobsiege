@@ -1,5 +1,10 @@
 recipes((event, funcs) => {
-     funcs.globalPressing('notreepunching:clay_brick', 'minecraft:clay_ball')
-     funcs.globalPressing(custom.wet_mortar_brick, '#forge:mortar')
+     funcs.globalPressing(custom.wet_mud_brick, custom.mud_ball)
+     funcs.globalPressing(custom.wet_aether_mud_brick, custom.aether_mud_ball)
+     funcs.globalPressing(custom.wet_silt_brick, custom.silt_ball)
+     funcs.globalPressing(custom.wet_holysilt_brick, custom.holysilt_ball)
+     funcs.globalPressing(custom.wet_ash_clay_brick, custom.ash_clay_ball)
+     funcs.globalPressing(custom.wet_clay_brick, custom.clay_ball)
+     funcs.globalPressing(custom.wet_mortar_brick, custom.mortar)
      funcs.globalPressing(custom.wet_cement_brick, custom.cement_compound)
 })

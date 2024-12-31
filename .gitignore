@@ -11,6 +11,7 @@
 /defaultconfigs/*
 !/defaultconfigs/immersiveengineering-server.toml
 !/defaultconfigs/productivebees-server.toml
+!/defaultconfigs/unlitcampfire-server.toml
 
 !/config
 /config/*

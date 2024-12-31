@@ -1,3 +1,5 @@
+const Properties = Java.loadClass('net.minecraft.world.level.block.state.properties.BlockStateProperties')
+
 recipes((event, funcs) => {
      funcs.removeAndHide('primalstage:fire_sticks')
      funcs.removeAll([
@@ -8,30 +10,61 @@ recipes((event, funcs) => {
      funcs.replaceOutputRecipe('hardcore_torches:fire_starter', result => funcs.vanillaInsert(result, [['#notreepunching:string', 0], ['#forge:rods/wooden', [1, 2]]]))
 
      funcs.replaceOutputRecipe('2x minecraft:torch', result => event.shapeless(result, ['minecraft:blaze_powder', '#minecraft:torches/temp', '#minecraft:torches/temp']))
-     funcs.replaceOutputRecipe('4x minecraft:torch', result => funcs.vanillaInsert(result, [['minecraft:blaze_powder', 0], ['#minecraft:coals', 3], ['#forge:rods/wooden', 6]]))
+     funcs.replaceOutputRecipe('4x minecraft:torch', result => funcs.vanillaInsert(result, [['minecraft:blaze_powder', 0], [packTag('coal/grade/medium'), 3], ['#forge:rods/wooden', 6]]))
 
-     funcs.replace({input: 'minecraft:stick', output: '8x hardcore_torches:unlit_torch'}, r => funcs.toolDamagingShapeless(r, [custom.high_grade_charcoal, 'primalstage:spruce_logs', '#minecraft:saws'])) 
-     funcs.toolDamagingShapeless('4x hardcore_torches:unlit_torch', [custom.good_grade_charcoal, 'primalstage:spruce_logs', '#minecraft:saws'])
-     funcs.replaceOutputRecipe('2x hardcore_torches:unlit_torch', result => funcs.vanillaInsert(result,[['#minecraft:coals', 0], ['#forge:rods/wooden', 2]]))
-     funcs.toolDamagingShapeless('hardcore_torches:unlit_torch', [custom.low_grade_charcoal, 'primalstage:spruce_logs', '#minecraft:saws'])
+     funcs.replace({input: 'minecraft:stick', output: '8x hardcore_torches:unlit_torch'}, r => funcs.toolDamagingShapeless(r, [packTag('coal/grade/high'), 'primalstage:spruce_logs', '#minecraft:saws'])) 
+     funcs.toolDamagingShapeless('4x hardcore_torches:unlit_torch', [packTag('coal/grade/good'), 'primalstage:spruce_logs', '#minecraft:saws'])
+     funcs.replaceOutputRecipe('2x hardcore_torches:unlit_torch', result => funcs.vanillaInsert(result,[[packTag('coal/grade/medium'), 0], ['#forge:rods/wooden', 2]]))
+     funcs.toolDamagingShapeless('hardcore_torches:unlit_torch', [packTag('coal/grade/low'), 'primalstage:spruce_logs', '#minecraft:saws'])
 
-     event.shapeless('hardcore_torches:unlit_torch', [custom.poor_grade_charcoal, 'hardcore_torches:burnt_torch'])
-     event.shapeless('2x hardcore_torches:unlit_torch', [custom.low_grade_charcoal, Item.of('hardcore_torches:burnt_torch').withCount(2)])
-     event.shapeless('4x hardcore_torches:unlit_torch', ['#forge:coal', Item.of('hardcore_torches:burnt_torch').withCount(4)])
-     event.shapeless('6x hardcore_torches:unlit_torch', [custom.good_grade_charcoal, Item.of('hardcore_torches:burnt_torch').withCount(6)])
-     event.shapeless('8x hardcore_torches:unlit_torch', [custom.high_grade_charcoal, Item.of('hardcore_torches:burnt_torch').withCount(8)])
+     event.shapeless('hardcore_torches:unlit_torch', [packTag('coal/grade/poor'), 'hardcore_torches:burnt_torch'])
+     event.shapeless('2x hardcore_torches:unlit_torch', [packTag('coal/grade/low'), Item.of('hardcore_torches:burnt_torch').withCount(2)])
+     event.shapeless('4x hardcore_torches:unlit_torch', [packTag('coal/grade/medium'), Item.of('hardcore_torches:burnt_torch').withCount(4)])
+     event.shapeless('6x hardcore_torches:unlit_torch', [packTag('coal/grade/good'), Item.of('hardcore_torches:burnt_torch').withCount(6)])
+     event.shapeless('8x hardcore_torches:unlit_torch', [packTag('coal/grade/high'), Item.of('hardcore_torches:burnt_torch').withCount(8)])
 })
 
-itemTags((event, funcs) => {
-     event.add('minecraft:torches/temp', ['hardcore_torches:unlit_torch', 'hardcore_torches:lit_torch'])
-     event.add('hardcore_torches:damage_torch_light_items', 'notreepunching:fire_starter')
-     event.add('hardcore_torches:damage_lantern_light_items', 'notreepunching:fire_starter')
-     event.add('ad_astra:destroyed_in_space', '#hardcore_torches:torches/temp')
-     event.add('carbonize:damage_igniters', 'notreepunching:fire_starter')
-     event.add('carbonize:consume_igniters', 'hardcore_torches:fire_starter')
+ServerEvents.tags('item', event => {
+     var funcs = getTagFunctions(event)
+
+     var cooling = [
+          'blockus:soul_lantern_block', 
+          'hardcore_torches:lit_soul_lantern', 
+          'minecraft:soul_lantern', 
+     ]
+
+     var heating = [
+          'ancient_aether:sun_lantern',
+          'hardcore_torches:lit_lantern',  
+          'ancient_aether:ambrosium_lantern',
+          'minecraft:lantern', 
+          'blockus:blaze_lantern', 
+          'blockus:amethyst_lantern',
+          'botania:fire_rod',
+     ]
+
+     funcs.addEntriesRespectively([
+          [pack('igniters/consumable'), ['hardcore_torches:fire_starter']],
+          [pack('igniters/damageable'), 'notreepunching:fire_starter', 'minecraft:flint_and_steel'],
+
+          ['hardcore_torches:consume_torch_light_items', packTag('igniters/consumable')],
+          ['hardcore_torches:consume_lantern_light_items', packTag('igniters/consumable')],
+          ['carbonize:consume_igniters', [packTag('igniters/consumable'), '#hardcore_torches:free_torch_light_items']],
+          ['hardcore_torches:damage_torch_light_items', packTag('igniters/damageable')],
+          ['hardcore_torches:damage_lantern_light_items', packTag('igniters/damageable')],
+          ['carbonize:damage_igniters', packTag('igniters/damageable')],
+
+          ['minecraft:torches/temp', ['hardcore_torches:unlit_torch', 'hardcore_torches:lit_torch']],
+          ['ad_astra:destroyed_in_space', '#hardcore_torches:torches/temp'],
+          ['|soul_torches', ['minecraft:soul_torch', 'framedblocks:framed_soul_torch']],
+          ['toughasnails:cooling_held_items', cooling],
+          ['toughasnails:heating_held_items', heating]
+     ])
 })
 
-blockTags((event, funcs) => {
+ServerEvents.tags('block', event => {
+     var funcs = getTagFunctions(event)
+
      var cooling = [
           'blockus:soul_lantern_block', 
           'decorative_blocks:soul_brazier', 
@@ -40,10 +73,13 @@ blockTags((event, funcs) => {
           'minecraft:soul_lantern', 
           'minecraft:soul_torch',
           'supplementaries:sconce_soul',
-          'twigs:soul_lamp'
+          'twigs:soul_lamp',
+          'enderio:cold_fire',
      ]
      var heating = [
           'ancient_aether:sun_lantern',
+          'ancient_aether:ambrosium_lantern',
+          'aether:ambrosium_torch',
           'botania:fire_rod',
           'blockus:blaze_lantern', 
           'blockus:lantern_block', 
@@ -56,7 +92,6 @@ blockTags((event, funcs) => {
           'cinderscapes:scorched_shrub',
           'cinderscapes:scorched_hyphae',
           'carbonize:charring_wood', 
-          'enderio:cold_fire',
           'hardcore_torches:lit_lantern',  
           'hardcore_torches:lit_torch', 
           'hardcore_torches:smoldering_torch',
@@ -64,12 +99,33 @@ blockTags((event, funcs) => {
           'minecraft:torch',
           'supplementaries:fire_pit',
      ]
-
-     event.add('minecraft:wall_post_override', ['hardcore_torches:smoldering_torch', 'hardcore_torches:lit_torch'])
-     
-     event.add('toughasnails:cooling_blocks', cooling)
-     event.add('toughasnails:cooling_held_items', cooling)
-     event.add('toughasnails:heating_blocks', heating)
-     event.add('toughasnails:heating_held_items', heating)
+     funcs.add('minecraft:wall_post_override', ['hardcore_torches:smoldering_torch', 'hardcore_torches:lit_torch'])
+          .add('hardcore_torches:free_torch_light_blocks', '#forge:campfires')
+          .add('toughasnails:cooling_blocks', cooling)
+          .add('toughasnails:heating_blocks', heating)
+          .add('primalstage:lit_blocks', ['#forge:campfires', 'minecraft:soul_campfire'])
 })
+const WrapperBoolean = Java.loadClass('java.lang.Boolean')
 
+BlockEvents.rightClicked('ancient_aether:ambrosium_campfire', event => {
+     var item = event.getItem()
+
+     if (!item.is('aether:ambrosium_torch')) return 'pass'
+
+     var block = event.getBlock()
+     var state = block.getBlockState()
+
+     if (state.getValue(Properties.LIT)) return 'pass'
+
+     var player = event.getPlayer()
+     var level = event.getLevel()
+     var pos = block.getPos()
+
+     item.use(event.getLevel(), event.getEntity(), event.getHand())
+     if (player != null && !player.isCreative()) item.setCount(item.getCount() - 1)
+
+     level.playSound(null, pos, 'item.flintandsteel.use', 'blocks')
+     level.setBlockAndUpdate(pos, state.trySetValue(Properties.LIT, WrapperBoolean.valueOf(true)))
+
+     return 'success'
+})

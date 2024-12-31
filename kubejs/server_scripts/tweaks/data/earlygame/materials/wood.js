@@ -23,7 +23,7 @@ recipes((event, funcs) => {
      funcs.removeAndHide('primalstage:cutting_log')
      
      event.replaceInput({input: 'minecraft:spruce_planks', output: 'primalstage:spruce_drying_rack'}, 'minecraft:spruce_planks', 'decorative_blocks:lattice')
-     funcs.replaceOutputRecipe('carbonize:wood_stack', r => funcs.planet(r, funcs.def('|primitive_string'), 'primalstage:spruce_logs'))
+     funcs.replaceOutputRecipe('carbonize:wood_stack', r => funcs.planet(r, packTag('primitive_string'), 'primalstage:spruce_logs'))
      funcs.replace({input: '#notreepunching:h/saws', output: 'minecraft:stick'}, result => {
           funcs.toolDamagingShapeless('2x ' + result, ['#minecraft:saws', '#minecraft:planks'])
           funcs.toolDamagingShapeless('8x ' + result, ['#minecraft:saws', '#minecraft:logs'])
@@ -39,8 +39,8 @@ recipes((event, funcs) => {
      funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', input: '#aether:skyroot_repairing', output: 'aether:skyroot_stick'}, (output, ingredients) => {
           funcs.toolDamagingShapeless(Item.of(output).withCount(1), [ingredients[0], '#minecraft:axes'])
           funcs.toolDamagingShapeless(Item.of(output).withCount(2), [ingredients[0], '#minecraft:saws'])
-          funcs.toolDamagingShapeless(Item.of(output).withCount(6), [funcs.def('|aether_logs'), '#minecraft:axes'])
-          funcs.toolDamagingShapeless(Item.of(output).withCount(8), [funcs.def('|aether_logs'), '#minecraft:saws'])
+          funcs.toolDamagingShapeless(Item.of(output).withCount(6), [packTag('aether_logs'), '#minecraft:axes'])
+          funcs.toolDamagingShapeless(Item.of(output).withCount(8), [packTag('aether_logs'), '#minecraft:saws'])
      })
      funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: '#minecraft:wooden_slabs'}, (output, ingredients) => {
           if (!Item.of(ingredients[0]).hasTag('minecraft:logs')) {
@@ -64,14 +64,16 @@ recipes((event, funcs) => {
 
 })
 
-blockTags((event, funcs) => {
-     event.add(comfuncs.packDef('carbonize/extra_flammability'), ['#forge:chests/wooden', '#forge:workbench'])
+ServerEvents.tags('block', event => {
+     event.add(pack('carbonize/extra_flammability'), ['#forge:chests/wooden', '#forge:workbench'])
      event.add('minecraft:needs_stone_tool', '#minecraft:logs')
      event.add('minecraft:planks', ['#aether:planks_crafting', '#c:planks_that_burn'])
+     event.add('notreepunching:always_breaks', 'supplementaries:stick')
+     event.add('notreepunching:always_drops', 'supplementaries:stick')
 })
 
 commonTags((event, funcs) => {
-     funcs.unifiedAdd([
+     funcs.addEntriesRespectively([
           ['forge:stripped_logs', '#forge:logs/stripped'],
           ['|aether_logs', [
                'aether:golden_oak_log', 
@@ -106,17 +108,13 @@ commonTags((event, funcs) => {
                'deep_aether:stripped_cruderoot_log'
           ]],
           ['logs', [
-               funcs.def('|aether_logs'),
+               packTag('aether_logs'),
                'minecraft:bamboo_block',
                'minecraft:stripped_bamboo_block'
           ]],
      ])
      event.add('forge:stripped_logs', event.get('minecraft:logs').getObjectIds().toArray().filter(log => log.toString().includes('stripped')))
-     event.add(comfuncs.packDef('raw_logs'), event.get('minecraft:logs').getObjectIds().toArray().filter(log => !log.toString().includes('stripped')))
-})
-
-ServerEvents.tags('block', event => {
-     
+     event.add(pack('raw_logs'), event.get('minecraft:logs').getObjectIds().toArray().filter(log => !log.toString().includes('stripped')))
 })
 
 complexLootTables((event, funcs) => {
@@ -128,12 +126,7 @@ complexLootTables((event, funcs) => {
          )
 })
 
-/*
-ServerEvents.tags('worldgen/biome', event => {
-     event.add('twigs:spawns_twig', '#')
-})*/
 PrimalStageItems.REGISTERED_BARKS = new HashMap()
-//PrimalStageItems.REGISTERED_BARKS.put(comfuncs.packLocation('raw_logs'), PrimalStageItems.SPRUCE_BARK)
 
 BlockEvents.rightClicked(event => {
      var item = event.getItem()
@@ -147,6 +140,6 @@ BlockEvents.rightClicked(event => {
                level.destroyBlock(pos, false)
                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('primalstage:spruce_logs').withCount(2 + random.nextInt(3)))
           } else level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.bamboo.hit", "blocks", 0.25, 0.5)
-     } else if (item.hasTag('forge:tools/axes') && block.hasTag(comfuncs.packDef('raw_logs')))
+     } else if (item.hasTag('forge:tools/axes') && block.hasTag(pack('raw_logs')))
           Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('primalstage:spruce_bark').withCount(1 + random.nextInt(2)))
 })

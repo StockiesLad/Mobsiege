@@ -1,102 +1,102 @@
 function getTagFunctions(event) {
-    var of = (resourceLocation) => {
-        return '#' + resourceLocation
-    }
+    var funcs = {}
+    funcs.add = (tag, entries) => comfuncs.performSideEffect(funcs, () => event.add(tag, entries))
+    funcs.remove = (tag, entries) => comfuncs.performSideEffect(funcs, () => event.remove(tag, entries))
+    funcs.getEntriesOfTags = (tags) => comfuncs.performSideEffect(funcs, () => getEntriesOfTags(event, tags))
+    funcs.getIdsOfTags = (tags) => comfuncs.performSideEffect(funcs, () => getIdsOfTags(event, tags))
+    funcs.switchTagsUniformly = (entry, oldTag, newTag) => comfuncs.performSideEffect(funcs, () => switchTagsUniformly(event, entry, oldTag, newTag))
+    funcs.modifyTagsUniformly = (tag, oldEntries, newEntries) => comfuncs.performSideEffect(funcs, () => modifyTagsUniformly(event, tag, oldEntries, newEntries))
 
-    var def = (path) => {
-        return of(comfuncs.def(path))
-    }
+    funcs.addEntriesRespectively = (compressedParams) => comfuncs.performSideEffect(funcs, () => addEntriesRespectively(event, compressedParams))
+    funcs.removeEntriesRespectively = (compressedParams) => comfuncs.performSideEffect(funcs, () => removeEntriesRespectively(event, compressedParams))
+    funcs.switchTagsRespectively = (compressedParams) => comfuncs.performSideEffect(funcs, () => switchTagsRespectively(event, compressedParams))
+    funcs.modifyTagsRespectively = (compressedParams) => comfuncs.performSideEffect(funcs, () => modifyTagsRespectively(event, compressedParams))
 
-    var preferredItem = (tag) => {
-        return AlmostUnified.getPreferredItemForTag(tag).getIdLocation().toString()
-    }
-
-    var preferredItemOf = (tag) => {
-        return Item.of(preferredItem(tag))
-    }   
-
-    var replaceTag = (item, removedTag, addedTag) => {
-        event.remove(removedTag, item)
-        event.add(addedTag, item)
-    }
-
-    var replaceItem = (tag, removeItem, addedItem) => {
-        event.remove(tag, removeItem)
-        event.add(tag, addedItem)
-    }
-
-    var handle = (tag, addArray, removeArray) => {
-        if (addArray != null)
-            event.add(tag, addArray)
-        if (removeArray != null)
-            event.remove(tag, removeArray)
-    }
-
-    var unifiedHandle = (arrayInvokeParams) => {
-        comfuncs.unifiedCall(
-            invokeParams => handle(comfuncs.def(invokeParams[0]), invokeParams[1], invokeParams[2]), 
-            arrayInvokeParams
-        )
-    }
-
-    var unifiedAdd = (arrayInvokeParams) => {
-        comfuncs.unifiedCall(
-            invokeParams => event.add(comfuncs.def(invokeParams[0]), invokeParams[1]), 
-            arrayInvokeParams
-        )
-    }
-
-    var unifiedRemove = (arrayInvokeParams) => {
-        comfuncs.unifiedCall(
-            invokeParams => event.remove(comfuncs.def(invokeParams[0]), invokeParams[1]), 
-            arrayInvokeParams
-        )
-    }
-
-    var unifiedReplaceTag = (arrayInvokeParams) => {
-        comfuncs.unifiedCall(
-            invokeParams => replaceTag(invokeParams[0], invokeParams[1], invokeParams[2]), 
-            arrayInvokeParams
-        )
-    }
-
-    var unifiedReplaceItem = (arrayInvokeParams) => {
-        comfuncs.unifiedCall(
-            invokeParams => replaceItem(comfuncs.def(invokeParams[0]), invokeParams[1], invokeParams[2]), 
-            arrayInvokeParams
-        )
-    }
-
-    return {
-        of: of,
-        def: def,
-        preferredItem: preferredItem,
-        preferredItemOf: preferredItemOf,
-        replaceTag: replaceTag,
-        replaceItem: replaceItem,
-        handle: handle,
-        unifiedHandle: unifiedHandle,
-        unifiedAdd: unifiedAdd,
-        unifiedRemove: unifiedRemove,
-        unifiedReplaceTag: unifiedReplaceTag,
-        unifiedReplaceItem: unifiedReplaceItem
-    }
+    return funcs
 }
 
-function ofFluid(fluid, amount) {
-    var stack
-    if (fluid.includes('#'))
-        stack = {fluid_tag: fluid.replace('#', '')}
-    else stack = {fluid: fluid}
-    if (amount != null)
-        stack.amount = amount
-    return stack
+function tag(id) {
+    return '#' + id
 }
 
-function preferred(tag) {
-    return AlmostUnified.getPreferredItemForTag(tag).getIdLocation().toString()
+function def(path) {
+    return comfuncs.def(path)
 }
 
-function preferredI(tag) {
-    return Item.of(preferred(tag))
+function defTag(path) {
+    return tag(def(path))
+}
+
+function pack(path) {
+    return comfuncs.packDef(path)
+}
+
+function packTag(path) {
+    return tag(pack(path))
+}
+
+function preferredItemId(tag) {
+    return preferredStack(tag).getIdLocation().toString()
+}
+
+function preferredStack(tag) {
+    return AlmostUnified.getPreferredItemForTag(tag)
+}
+
+////////REQUIRES EVENT////////
+
+function getEntriesOfTags(event, tags) {
+    var entries = []
+    comfuncs.ensureArray(tags).forEach(tag => {
+        entries = entries.concat(event.get(tag).getObjectIds().toArray())
+    })
+
+    return entries
+}
+
+function getIdsOfTags(event, tags) {
+    return getEntriesOfTags(event, tags).map(loc => loc.toString())
+}
+
+function switchTagsUniformly(event, entries, oldTags, newTags) {
+    comfuncs.ensureArray(entries).forEach(entry => {
+        comfuncs.ensureArray(oldTags).forEach(oldTag => event.remove(oldTag, entry))
+        comfuncs.ensureArray(newTags).forEach(newTag => event.remove(newTag, entry))
+    })
+}
+
+function modifyTagsUniformly(event, tags, oldEntries, newEntries) {
+    comfuncs.ensureArray(tags).forEach(tag => {
+        event.remove(tag, oldEntries)
+        event.add(tag, newEntries)
+    })
+}
+
+function addEntriesRespectively(event, compressedParams) {
+    comfuncs.unifiedCall(
+        individualParams => event.add(comfuncs.def(individualParams[0]), individualParams[1]), 
+        compressedParams
+    )
+}
+
+function removeEntriesRespectively(event, compressedParams) {
+    comfuncs.unifiedCall(
+        individualParams => event.remove(comfuncs.def(individualParams[0]), individualParams[1]), 
+        compressedParams
+    )
+}
+
+function switchTagsRespectively(event, compressedParams) {
+    comfuncs.unifiedCall(
+        individualParams => switchTagsUniformly(event, individualParams[0], individualParams[1], individualParams[2]), 
+        compressedParams
+    )
+}
+
+
+function modifyTagsRespectively(event, compressedParams) {
+    comfuncs.unifiedCall(
+        individualParams => modifyTagsUniformly(event, individualParams[0], individualParams[1], individualParams[2]), 
+        compressedParams
+    )
 }

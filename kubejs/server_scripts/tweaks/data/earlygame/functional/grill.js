@@ -1,5 +1,5 @@
 recipes((event, funcs) => {
-     var excempted = [
+     var excepted = [
           'minecraft:brick',
           'minecraft:charcoal',
           'minecraft:flower_pot',
@@ -11,9 +11,11 @@ recipes((event, funcs) => {
      event.remove({type: 'primalstage:grill'})
      event.forEachRecipe({type: 'minecraft:campfire_cooking'}, recipe => {
           var result = recipe.originalRecipeResult.toItemString().replace('\'', '')
-          if (!excempted.some(exempt => exempt == result)) {
-               excempted.push(result)
+          if (!excepted.some(exempt => exempt == result)) {
+               excepted.push(result)
                funcs.grilling(result, Item.of(recipe.originalRecipeIngredients[0]).toItemString().replace('\'', ''))
           }
      })
+
+     event.replaceInput({output: 'primalstage:grill'}, 'minecraft:cobblestone', '#minecraft:stone_crafting_materials')
 })

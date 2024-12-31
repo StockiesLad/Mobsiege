@@ -2,48 +2,23 @@ var sand = []
 
 recipes((event, funcs) => {
      //event.shapeless('4x primalstage:sand_dust', '#forge:sand')
-     funcs.generate('minecraft:sand', 'primalstage:sand_dust').flatSquare(3).next().vanilla()
+     funcs.twoSquare('minecraft:sand', 'primalstage:sand_dust')
      event.blasting('ae2:silicon', 'primalstage:sand_dust').xp(0.05) // Needs to be super hot
 })
 
 commonTags((event, funcs) => {
      event.add('minecraft:sand', [
+          'blockus:redstone_sand',
           'aether:quicksoil', 
           'betterend:endstone_dust', 
           'carbonize:ash_block', 
           'minecraft:soul_sand', 
-          'betterend:charcoal_block'
+          'betterend:charcoal_block',
+          custom.packed_ash
      ])
      event.add('forge:sand', '#minecraft:sand')
      sand = event.get('minecraft:sand').getObjectIds().toArray().map(location => location.toString())
 })
-     /*
-basicLootTables((event, funcs) => {
-     console.info(sand)
-     sand.forEach(block => {
-          var json = {
-               pools: [
-                    alternativesPool([
-                         ofChild(block, ofConditions(conditionSilkTouch())),
-                         childAlternativesPool([
-                              ofChild('minecraft:bone_meal', ofFuncConds(
-                                   conditionTableBonus([0.1, 0.14285715, 0.25,1.0], "minecraft:fortune"), 
-                                   countSet(countUniform(1, 2), false)
-                              )),
-                              ofChild(funcs.preferredItem('forge:dusts/salt'), ofFuncConds(
-                                   conditionRandomChance(0.1), 
-                                   countSet(countUniform(0, 2), false)
-                              )),
-                              ofChild(block)
-                         ])
-                    ], ofConditions(survivesExplosion()))
-               ]
-          }
-          console.info(JSON.stringify(json))
-          funcs.raw('block', block, json)
-     })
-          
-})*/
 
 complexLootTables((event, funcs) => {
      sand.forEach(block => {
@@ -51,14 +26,21 @@ complexLootTables((event, funcs) => {
                .removeLoot(Ingredient.all)
                .addAlternativesLoot(
                     LootEntry.ofJson(
-                         ofChild(block, ofConditions(conditionSilkTouch()))
+                         ofChild(block, ofConditions(conditionSilkTouch())),
+                         
+                    ),
+                    LootEntry.ofJson(
+                         ofChild('primalstage:sand_dust', ofFuncConds(
+                              conditionMatchTool('minecraft:clubs'),
+                              countSet(countConstant(4), false)
+                         ))
                     ),
                     LootEntry.ofJson(childAlternativesPool([
-                         ofChild('minecraft:bone_meal', ofFuncConds(
+                         ofChild('minecraft:bone', ofFuncConds(
                               conditionTableBonus([0.125, 0.25, 0.5, 1.0], "minecraft:fortune"), 
                               countSet(countUniform(1, 2), false)
                          )),
-                         ofChild(funcs.preferredItem('forge:dusts/salt'), ofFuncConds(
+                         ofChild('primalstage:sand_dust', ofFuncConds(
                               conditionRandomChance(0.33), 
                               countSet(countUniform(1, 3), false)
                          )),

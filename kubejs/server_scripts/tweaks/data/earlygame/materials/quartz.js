@@ -9,15 +9,16 @@ recipes((event, funcs) => {
           funcs.replaceOutputRecipe(`4x cinderscapes:smooth_${quartzType}_quartz_stairs`, result => generate(result, `cinderscapes:${quartzType}_quartz_stairs`).flatSquare(2).next().vanilla())
      }, ['sulfur', 'smoky', 'rose'])
 
-     funcs.globalCrushing([funcs.preferredItem('forge:gems/sulfur'), Item.of(funcs.preferredItem('forge:gems/sulfur')).withChance(0.5)], '#forge:sulfur_quartz')
-     funcs.globalCrushing([Item.of('minecraft:coal'), Item.of(funcs.preferredItem('forge:gems/coal')).withChance(0.5)], '#forge:smoky_quartz')
-     funcs.globalCrushing([funcs.preferredItem('forge:gems/rose_quartz'), Item.of(funcs.preferredItem('forge:gems/rose_quartz')).withChance(0.5)], '#forge:rose_quartz')
+     funcs.globalCrushing([preferredItemId('forge:gems/sulfur'), Item.of(preferredItemId('forge:gems/sulfur')).withChance(0.5)], '#forge:sulfur_quartz')
+     funcs.globalCrushing([Item.of('minecraft:coal'), Item.of(preferredItemId('forge:gems/coal')).withChance(0.5)], '#forge:smoky_quartz')
+     funcs.globalCrushing([preferredItemId('forge:gems/rose_quartz'), Item.of(preferredItemId('forge:gems/rose_quartz')).withChance(0.5)], '#forge:rose_quartz')
 })
 
-itemTags((event, funcs) => {
+
+ServerEvents.tags('item', event => {
      event.remove('forge:quartz', ['cinderscapes:sulfur_quartz', 'cinderscapes:smoky_quartz', 'cinderscapes:rose_quartz'])
      event.remove('forge:ores/quartz', ['cinderscapes:sulfur_quartz_ore', 'cinderscapes:smoky_quartz_ore', 'cinderscapes:rose_quartz_ore'])
-     funcs.unifiedAdd([
+     addEntriesRespectively(event, [
           ['forge:sulfur_quartz', 'cinderscapes:sulfur_quartz'], 
           ['forge:ores/sulfur_quartz', 'cinderscapes:sulfur_quartz_ore'],
 

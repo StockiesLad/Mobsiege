@@ -10,4 +10,6 @@ ItemEvents.tooltip(event => {
           'notreepunching:flint_pickaxe',
           'notreepunching:flint_axe'
      ], item => event.add(item, Text.darkRed('Unreliable')))
+
+     event.add('primalstage:stone_club', Text.green('Breaks sand & gravel into their composite materials'))
 })

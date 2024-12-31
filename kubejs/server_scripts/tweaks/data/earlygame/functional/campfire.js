@@ -1,23 +1,34 @@
 recipes((event, funcs) => {
      funcs.removeAndHide('hardcore_torches:unlit_campfire')
-
      event.remove({output: 'minecraft:campfire'})
 
      funcs.vanillaInsert('minecraft:campfire', [
           ['#minecraft:torches/temp', [3, 5]],
           ['primalstage:primitive_grill', 4],  
-          ['#forge:coal/high_grade', 1], 
+          [packTag('coal/grade/high'), 1], 
           [custom.campfire_rock, 7],
           ['#minecraft:logs', [6, 8]] 
      ])
 
      funcs.vanillaInsert('minecraft:soul_campfire', [
-          ['#minecraft:torches/temp', [3, 5]],
+          [packTag('soul_torches'), [3, 5]],
           ['primalstage:primitive_grill', 4],  
-          ['#minecraft:soul_fire_base_blocks', 1], 
+          ['minecraft:soul_soil', 1], 
           [custom.campfire_rock, 7],
           ['#minecraft:logs', [6, 8]] 
      ])
+
+     funcs.replaceOutputRecipe('ancient_aether:ambrosium_campfire', r => funcs.vanillaInsert(r, [
+          ['aether:ambrosium_torch', [3, 5]],
+          ['primalstage:primitive_grill', 4],  
+          ['aether:ambrosium_shard', 1], 
+          [custom.campfire_rock, 7],
+          ['#minecraft:logs', [6, 8]] 
+     ]))
+})
+
+commonTags((event, funcs) => {
+     event.add('forge:campfires', 'ancient_aether:ambrosium_campfire')
 })
 
 LootJS.modifiers(event => {

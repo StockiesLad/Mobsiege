@@ -24,10 +24,14 @@ global.customImpl = addModpackId({
 
     campfire_rock: 'campfire_rock',
 
+    fine_ash: 'supplementaries:ash',
     poor_grade_charcoal: "poor_grade_charcoal",
     low_grade_charcoal: "low_grade_charcoal",
+    medium_grade_charcoal: 'minecraft:charcoal',
+    coal: 'minecraft:coal',
     good_grade_charcoal: "good_grade_charcoal",
     high_grade_charcoal: "high_grade_charcoal",
+    alchemical_coal: 'projecte:alchemical_coal',
 
     mud_ball: 'mud_ball',
     wet_mud_brick: 'wet_mud_brick',
@@ -45,8 +49,11 @@ global.customImpl = addModpackId({
     wet_ash_clay_brick: 'wet_ash_clay_brick',
     dry_ash_clay_brick: 'dry_ash_clay_brick',
 
+    clay_ball: 'minecraft:clay_ball',
+    wet_clay_brick: 'notreepunching:clay_brick',
     dry_clay_brick: 'dry_clay_brick',
 
+    silt_ball: 'twigs:silt_ball',
     wet_silt_brick: 'wet_silt_brick',
     dry_silt_brick: 'dry_silt_brick',
 
@@ -59,6 +66,7 @@ global.customImpl = addModpackId({
     holysilt_brick_slab: 'holysilt_brick_slab',
     holysilt_brick_wall: 'holysilt_brick_wall',
 
+    mortar: 'primalstage:sandy_clay_compound',
     packed_mortar: 'packed_mortar',
     wet_mortar_brick: 'wet_mortar_brick',
     dry_mortar_brick: 'dry_mortar_brick',
@@ -76,5 +84,9 @@ global.customImpl = addModpackId({
 })
 
 function addModpackId(entries) {
-    return comfuncs.handleProperties(entries, entry => comfuncs.packDef(entry))
+    return comfuncs.handleProperties(entries, entry => {
+        if (!entry.includes(':'))
+            return comfuncs.packDef(entry)
+        else return entry
+    })
 }

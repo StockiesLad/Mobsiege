@@ -61,7 +61,7 @@ recipes((event, funcs) => {
      funcs.globalSmelting('immersivegeology:refractory_brick', custom.wet_cement_brick, 0.3)
 })
 
-itemTags((event, funcs) => {
+ServerEvents.tags('item', event => {
      event.add('notreepunching:ceramics', 'ceramicbucket:ceramic_bucket')
      event.add('forge:ingots/brick', ['twigs:silt_brick', 'primalstage:kiln_brick', custom.fire_brick, 'minecraft:nether_brick', custom.mud_brick, custom.holysilt_brick, custom.aether_mud_brick, 'immersivegeology:refractory_brick'])
      event.add('supplementaries:throwable_bricks', [
@@ -89,9 +89,10 @@ itemTags((event, funcs) => {
      ])
 })
 
-blockTags((event, funcs) => {
-     event.add('minecraft:need_stone_tool', [custom.holysilt_bricks, custom.holysilt_brick_stairs, custom.holysilt_brick_slab, custom.holysilt_brick_wall])
-     event.add('minecraft:mineable/pickaxe', [custom.holysilt_bricks, custom.holysilt_brick_stairs, custom.holysilt_brick_slab, custom.holysilt_brick_wall])
+ServerEvents.tags('block', event => {
+     var silt_brick_set = [custom.holysilt_bricks, custom.holysilt_brick_stairs, custom.holysilt_brick_slab, custom.holysilt_brick_wall]
+     event.add('minecraft:need_stone_tool', silt_brick_set)
+     event.add('minecraft:mineable/pickaxe', silt_brick_set)
 })
 
 commonTags((event, funcs) => {

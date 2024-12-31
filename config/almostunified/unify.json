@@ -50,6 +50,7 @@
     "glacio_stone"
   ],
   "tags": [
+    "forge:{material}",
     "forge:nuggets/{material}",
     "forge:dusts/{material}",
     "forge:gears/{material}",
@@ -130,11 +131,13 @@
   "itemTagInheritance": {},
   "blockTagInheritanceMode": "ALLOW",
   "blockTagInheritance": {},
-  "ignoredTags": [],
+  "ignoredTags": [
+    "forge:coal",
+    "minecraft:coals"
+  ],
   "ignoredItems": [
-	".*thallasium.*", 
-	".*cincinnasite.*",
-	""
+    ".*thallasium.*", 
+    ".*cincinnasite.*"
   ],
   "ignoredRecipeTypes": [
     "cucumber:shaped_tag"

@@ -19,6 +19,6 @@ recipes((event, funcs) => {
      event.blasting('ae2:smooth_sky_stone_chest', 'ae2:sky_stone_chest').xp(0.2)  
 })
 
-itemTags((event, funcs) => {
+ServerEvents.tags('item', event => {
      event.add('forge:chests/wooden', 'expandedstorage:wooden_chests')
 })

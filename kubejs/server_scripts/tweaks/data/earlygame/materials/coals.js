@@ -1,7 +1,3 @@
-const ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegistries')
-const Shapes = Java.loadClass('net.minecraft.world.phys.shapes.Shapes')
-const Blocks = Java.loadClass('net.minecraft.world.level.block.Blocks')
-
 var coalStorageBlocks
 
 recipes((event, funcs) => {
@@ -11,13 +7,23 @@ recipes((event, funcs) => {
         {output: 'minecraft:charcoal', type: 'minecraft:blasting'},
         {id: 'betterend:charcoal_block'}
     ])
+
+    event.replaceInput({input: custom.medium_grade_charcoal, output: 'minecraft:black_dye'}, custom.medium_grade_charcoal, packTag('coal/all'))
+    event.replaceInput({output: 'toughasnails:charc_os'}, custom.medium_grade_charcoal, packTag('coal/grade/atleast_good'))
+    event.replaceInput({output: 'thermal:ice_charge'}, custom.medium_grade_charcoal, packTag('coal/grade/at_most_low'))
+    event.replaceInput({output: 'thermal:lightning_charge'}, custom.medium_grade_charcoal, packTag('coal/grade/atleast_good'))
+    event.replaceInput({output: 'decorative_blocks:brazier'}, custom.medium_grade_charcoal, packTag('coal/grade/atleast_good'))
+    event.replaceInput({output: 'valhesia_structures:brazier'}, custom.medium_grade_charcoal, packTag('coal/grade/atleast_good'))
+
+    event.replaceInput({input: 'forge:coal'}, 'forge:coal', packTag('coal/grade/medium'))
+
     funcs.globalCooking(Item.of(custom.poor_grade_charcoal, 2), '#minecraft:planks', 0.1)
     funcs.globalCooking(Item.of(custom.low_grade_charcoal, 2), '#minecraft:logs', 0.2)
     funcs.generate('2x betterend:charcoal_block', ['#forge:storage_blocks/charcoal', 'minecraft:soul_sand']).rollingSquare(1, 2).next().vanilla()
 
     event.shapeless(custom.low_grade_charcoal, Item.of(custom.poor_grade_charcoal, 4))
-    event.shapeless('minecraft:charcoal', Item.of(custom.low_grade_charcoal, 4))
-    event.shapeless(custom.good_grade_charcoal, Item.of('minecraft:charcoal', 4))
+    event.shapeless(custom.medium_grade_charcoal, Item.of(custom.low_grade_charcoal, 4))
+    event.shapeless(custom.good_grade_charcoal, Item.of(custom.medium_grade_charcoal, 4))
     event.shapeless(custom.high_grade_charcoal, Item.of(custom.good_grade_charcoal, 4))
 })
 
@@ -41,13 +47,13 @@ basicLootTables((event, funcs) => {
                     entries: [{
                         type: "minecraft:group",
                         children: [
-                            item('projecte:alchemical_coal', Math.pow(quality, 8)),
+                            item(custom.alchemical_coal, Math.pow(quality, 8)),
                             item(custom.high_grade_charcoal, Math.pow(quality, 4)),
                             item(custom.good_grade_charcoal, Math.pow(quality, 2)),
-                            item('minecraft:charcoal', quality),
+                            item(custom.medium_grade_charcoal, quality),
                             item(custom.low_grade_charcoal, 1 - quality),
                             item(custom.poor_grade_charcoal, Math.pow(1 - quality, 2)),
-                            item('supplementaries:ash', Math.pow(1 - quality, 4))
+                            item(custom.fine_ash, Math.pow(1 - quality, 4))
                         ]
                     }]
                 },
@@ -72,21 +78,30 @@ basicLootTables((event, funcs) => {
     charcoal('carbonize:charcoal_slab', 0.1, 1)
 })
 
-itemTags((event, funcs) => {
+ServerEvents.tags('item', event => {
+    var coal_coke = event.get('forge:coal_coke').getObjectIds()
+
+    event.add(pack('coal/grade/poor'), custom.poor_grade_charcoal)
+    event.add(pack('coal/grade/low'), custom.low_grade_charcoal)
+    event.add(pack('coal/grade/medium'), event.get('forge:coal').getObjectIds().filter(id => !coal_coke.contains(id)).concat(custom.medium_grade_charcoal))
+    event.add(pack('coal/grade/good'), ['#forge:coal_coke', custom.good_grade_charcoal])
+    event.add(pack('coal/grade/high'), [custom.high_grade_charcoal])
+
+    event.add(pack('coal/grade/atleast_good'), [packTag('coal/grade/good'), packTag('coal/grade/high')])
+    event.add(pack('coal/grade/at_most_low'), [packTag('coal/grade/poor'), packTag('coal/grade/low')])
+
+    event.add(pack('coal/all'), [packTag('coal/grade/poor'), packTag('coal/grade/low'),packTag('coal/grade/medium'), packTag('coal/grade/good'), packTag('coal/grade/high')])
+
+    event.add('forge:coal', [packTag('coal/medium_grade'), packTag('coal/good_grade'), packTag('coal/high_grade')])
+
     event.remove('forge:storage_block/charcoal', 'betterend:charcoal_block')
-    event.add('forge:coal', 'minecraft:charcoal')
-    event.add('forge:storage_blocks/charcoal', [
-        'carbonize:charcoal_block',
-        'quark:charcoal_block',
-        'blockus:charcoal_block',
-    ])
-    coalStorageBlocks = event.get('forge:coal').getObjectIds().map(entry => funcs.preferredItem('forge:storage_blocks/' + entry.toString().split(':')[1]))
-    event.add(comfuncs.packDef('storage_blocks/coals'), coalStorageBlocks)
+    event.add('forge:storage_blocks/charcoal', ['carbonize:charcoal_block','quark:charcoal_block','blockus:charcoal_block',])
+    event.add(pack('storage_blocks/coals'), event.get('forge:coal').getObjectIds().map(entry => preferredItemId('forge:storage_blocks/' + entry.toString().split(':')[1])))
 })
 
-blockTags((event, funcs) => {
+ServerEvents.tags('block', event => {
     event.remove('minecraft:mineable/pickaxe', 'betterend:charcoal_block')
-    funcs.unifiedAdd([
+    addEntriesRespectively(event, [
         ['carbonize:charcoal_block', ['minecraft:mineable/pickaxe']],
         ['minecraft:needs_stone_tool', [
             'carbonize:charcoal_block', 

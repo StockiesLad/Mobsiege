@@ -2,39 +2,44 @@ const NTPSounds = Java.loadClass('com.alcatrazescapee.notreepunching.client.ModS
 const NTPConfig = Java.loadClass('com.alcatrazescapee.notreepunching.Config')
 const SoundType = Java.loadClass('net.minecraft.world.level.block.SoundType')
 
+var gravel = []
+
 recipes((event, funcs) => {
      var generate = funcs.generate
 
      funcs.replace({input: 'minecraft:gravel', output: 'minecraft:flint'}, r => event.shapeless(r, Item.of('minecraft:gravel').withCount(3)))
-     
+     funcs.twoSquare('minecraft:gravel', 'biomeswevegone:peat')
      funcs.insertAll(insertion => insertion.vanilla(), [
           generate('2x minecraft:gravel', ['aether_redux:driftshale', '#mobsiege:mud']).rollingSquare(1, 2)
      ])
 })
-/*
-complexLootTables((event, funcs) => [
-     event.addBlockLootModifier('minecraft:gravel')
-          .removeLoot(Ingredient.all)
-          .customCondition(survivesExplosion())
-          .addAlternativesLoot(
-               LootEntry.of(block).when(c => c.customCondition(conditionSilkTouch())),
-               LootEntry.of('minecraft:flint').when(c => c.customCondition(conditionTableBonus([
-                    0.1,
-                    0.14285715,
-                    0.25,
-                    1.0
-               ], "minecraft:fortune"))).customFunction(countSet(countUniform(0, 2), false)),
-               LootEntry.of('twigs:pebble').withChance(0.1).customFunction(countSet(countUniform(0, 2), false)),
-               LootEntry.of('minecraft:gravel')
-     )
-])*/
 
-basicLootTables((event, funcs) => {
-     funcs.raw('block', 'minecraft:gravel', {
-          pools: [
-               alternativesPool([
-                    ofChild('minecraft:gravel', ofConditions(conditionSilkTouch())),
-                    childAlternativesPool([
+commonTags((event, funcs) => {
+     event.add('forge:gravel', 'ancient_aether:gravity_gravel')
+     gravel = event.get('forge:gravel').getObjectIds().toArray().map(location => location.toString())
+})
+
+ServerEvents.tags('block', event => {
+     event.add('notreepunching:always_breakable', '#forge:gravel')
+     event.add('notreepunching:always_drops', '#forge:gravel')
+})
+
+complexLootTables((event, funcs) => {
+     gravel.forEach(block => {
+          event.addBlockLootModifier(block)
+               .removeLoot(Ingredient.all)
+               .addAlternativesLoot(
+                    LootEntry.ofJson(
+                         ofChild(block, ofConditions(conditionSilkTouch()))
+                         
+                    ),
+                    LootEntry.ofJson(
+                         ofChild('twigs:pebble', ofFuncConds(
+                              conditionMatchTool('minecraft:clubs'),
+                              countSet(countConstant(4), false)
+                         ))
+                    ),
+                    LootEntry.ofJson(childAlternativesPool([
                          ofChild('minecraft:flint', ofFuncConds(
                               conditionTableBonus([0.125, 0.25, 0.5, 1.0], "minecraft:fortune"), 
                               countSet(countUniform(1, 2), false)
@@ -43,16 +48,13 @@ basicLootTables((event, funcs) => {
                               conditionRandomChance(0.33), 
                               countSet(countUniform(1, 3), false)
                          )),
-                         ofChild('minecraft:gravel')
-                    ])
-               ], ofConditions(survivesExplosion()))
-          ]
+                         ofChild(block)
+                    ]))
+               )
      })
-          
 })
 
-
-//search for my stone tag on top of sound? requires mixin to notreepunching as well
+//search for my stone tag on top of sound? requires mixin to notreepunching as well for consistency
 BlockEvents.rightClicked(event => {
      var stack = event.getItem()
      var block = event.block

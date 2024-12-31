@@ -5,7 +5,7 @@ recipes((event, funcs) => {
      funcs.threeSquare(custom.packed_ash, '#forge:ash')
 })
 
-itemTags((event, funcs) => {
+ServerEvents.tags('item', event => {
      event.add('forge:ash', ['carbonize:ash', 'cinderscapes:ash_pile', 'supplementaries:ash'])
      event.add('forge:storage_blocks/ash', ['carbonize:ash_block', 'cinderscapes:ash_block'])
      event.add('forge:fertilizer', 'carbonize:ash')

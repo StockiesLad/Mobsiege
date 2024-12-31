@@ -225,6 +225,11 @@ function getCommonFunctions(storage) {
 
     var packLocation = (path) => resourceLocation(global.modpackId, path)
 
+    var performSideEffect = (instance, sideEffect) => {
+        sideEffect()
+        return instance;
+    }
+
     return {
         storage: storage,
         identifier: identifier,
@@ -263,6 +268,7 @@ function getCommonFunctions(storage) {
         functionalVar: functionalVar,
         notNull: notNull,
         resourceLocation: resourceLocation,
-        packLocation: packLocation
+        packLocation: packLocation,
+        performSideEffect: performSideEffect
     }
 }

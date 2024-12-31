@@ -12,9 +12,9 @@ recipes((event, funcs) => {
           Item.of('aether_redux:raw_gravitite').withChance(0.0025),
           Item.of('deep_aether:skyjade').withChance(0.005),
           Item.of('aether_genesis:continuum_orb').withChance(0.01)
-     ], funcs.def('|holystone'))
+     ], packTag('holystone'))
 })
 
-itemTags((event, funcs) => {
+ServerEvents.tags('item', event => {
      event.add(comfuncs.packDef('holystone'), holystone)
 })

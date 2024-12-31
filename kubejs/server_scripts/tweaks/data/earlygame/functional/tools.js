@@ -1,6 +1,5 @@
 const Mobsiege2Minecraft = Java.loadClass('com.stockieslad.mobsiege.Mobsiege2Minecraft')
 
-
 recipes((event, funcs) => {
      comfuncs.unifiedCall(funcs.removeAndHide, [
           'aether:skyroot_sword', 'aether:skyroot_pickaxe', 'aether:skyroot_axe', 'aether:skyroot_shovel', 'aether:skyroot_hoe',
@@ -13,20 +12,21 @@ recipes((event, funcs) => {
           'notreepunching:netherite_knife'
      ])
      event.replaceInput({output: 'notreepunching:flint_shovel'}, 'notreepunching:flint_shard', custom.pointed_flint)
-     funcs.replaceOutputRecipe('hardcore_torches:fire_starter', result => funcs.vanillaInsert(result, [[funcs.def('|primitive_string'), 0], ['#forge:rods/wooden', [1, 2]]]))
-     funcs.replaceOutputRecipe('notreepunching:fire_starter', result => funcs.vanillaInsert(result, [[funcs.def('|primitive_string'), 0], ['hardcore_torches:fire_starter', [1, 2]], ['notreepunching:flint_shard', 3]]))
-     funcs.replaceOutputRecipe('notreepunching:flint_knife', result => funcs.vanillaInsert(result, [[custom.pointed_flint, 1], ['#forge:rods/wooden', 2], [funcs.def('|primitive_string'), 0]]))
+     funcs.replaceOutputRecipe('hardcore_torches:fire_starter', result => funcs.vanillaInsert(result, [[packTag('primitive_string'), 0], ['#forge:rods/wooden', [1, 2]]]))
+     funcs.replaceOutputRecipe('notreepunching:fire_starter', result => funcs.vanillaInsert(result, [[packTag('primitive_string'), 0], ['hardcore_torches:fire_starter', [1, 2]], ['notreepunching:flint_shard', 3]]))
+     funcs.replaceOutputRecipe('notreepunching:flint_knife', result => funcs.vanillaInsert(result, [[custom.pointed_flint, 1], ['#forge:rods/wooden', 2], [packTag('primitive_string'), 0]]))
      funcs.vanillaInsert(custom.flint_sword, [['notreepunching:flint_shard', [1, 3, 5, 7]], ['#forge:rods/wooden', 6], ['#forge:string', 4], [custom.pointed_flint, 2]])
      funcs.vanillaInsert(custom.flint_saw, [['minecraft:flint', [1, 4]], ['#forge:rods/wooden', [0, 3, 6]], ['#forge:string', 7]])
 
-     funcs.replaceOutputRecipe('primalstage:flint_hatchet', result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', 1], [custom.pointed_flint, 0], ['#forge:rods/wooden', 3], [funcs.def('|primitive_string'), 2]]))
+     funcs.replaceOutputRecipe('primalstage:flint_hatchet', result => funcs.vanillaInsert(result, [['notreepunching:flint_shard', 1], [custom.pointed_flint, 0], ['#forge:rods/wooden', 3], [packTag('primitive_string'), 2]]))
      funcs.replaceOutputRecipe('notreepunching:flint_axe', result => funcs.vanillaInsert(result, [['#forge:string', 0], ['#forge:rods/wooden', [3, 6]], [custom.pointed_flint, [2]], ['notreepunching:flint_shard', [1, 4]]]))
      funcs.replaceOutputRecipe('notreepunching:flint_pickaxe', r => funcs.vanillaInsert(r, [['notreepunching:flint_shard', [0, 2]], ['#forge:string', 1], [custom.pointed_flint, [3, 5]], ['#forge:rods/wooden', [4, 7]]]))
 })
 
-itemTags((event, funcs) => {
-     funcs.unifiedAdd([
+ServerEvents.tags('item', event => {
+     addEntriesRespectively(event, [
           ['minecraft:axes', ['notreepunching:flint_axe', 'primalstage:flint_hatchet']],
+          ['minecraft:clubs', 'primalstage:stone_club'],
           ['minecraft:shovels', 'notreepunching:flint_shovel'],
           ['notreepunching:weak_saws', '#minecraft:axes'],
           ['minecraft:saws', ['#notreepunching:saws', '#cb_microblock:tools/saws']],
@@ -43,7 +43,6 @@ itemTags((event, funcs) => {
                'notreepunching:flint_pickaxe',
                'notreepunching:flint_axe'
           ]],
-          //['notreepunching:knives', '#forge:tools/knives'],
           ['forge:tools/knives', '#notreepunching:knives'],
           ['forge:tools/hammers', [
                '#primalstage:mallets',
@@ -56,23 +55,11 @@ itemTags((event, funcs) => {
                'thermal_extra:dragonsteel_hammer',
                'thermal_extra:abyssal_hammer'
           ]]
-          //['notreepunching:knives', '#minecraft:axes']
       ])
 })
 
-/*
-EntityEvents.hurt(event => {
-     var sourceEntity = event.getSource().getActual()
-     if (sourceEntity != null) {
-          var itemStack = sourceEntity.getItemBySlot('MAINHAND')
-          if (itemStack != null && itemStack.hasTag(comfuncs.packDef('breaks_randomly')) && event.getLevel().getRandom().nextInt(5) == 0)
-               return Mobsiege2Minecraft.damageItem(itemStack, 1, sourceEntity, null)
-     }
-     
-})*/
-
 Mobsiege2Minecraft.onBreaksRandomly = (itemStack, damage, random) => {
-     if (itemStack != null && itemStack.hasTag(comfuncs.packDef('breaks_randomly')) && random.nextInt(5) == 0) {
+     if (itemStack != null && itemStack.hasTag(pack('breaks_randomly')) && random.nextInt(5) == 0) {
           return Math.min(damage + random.nextInt(5), itemStack.getMaxDamage())
      } else return damage
 }

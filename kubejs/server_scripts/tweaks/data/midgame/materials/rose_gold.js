@@ -1,3 +1,3 @@
 recipes((event, funcs) => {
-     event.shapeless(Item.of(funcs.preferredItem('forge:dusts/rose_gold'), 3), [Item.of(funcs.preferredItem('forge:dusts/copper'), 2), funcs.preferredItem('forge:dusts/gold')])
+     event.shapeless(preferredStack('forge:dusts/rose_gold').withCount(3), [preferredStack('forge:dusts/copper').withCount(2), preferredItemId('forge:dusts/gold')])
 })

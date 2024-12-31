@@ -1,4 +1,4 @@
-itemTags((event, funcs) => {
+ServerEvents.tags('item', event => {
      event.add('forge:dusts/sulfur', '#forge:sulfurs')
 })
 

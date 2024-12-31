@@ -1,8 +1,4 @@
-ServerEvents.recipes(event => {
-     //event.shapeless(preferredI('forge:dusts/niter'), ['#forge:ash', '#forge:sand'])
-})
-
-itemTags((event, funcs) => {
+ServerEvents.tags('item', event => {
      event.add('forge:dusts/salt', ['primalstage:salt', 'ingredientsdelight:salt'])
      event.add('forge:salt', '#forge:dusts/salt')
      event.add('forge:dusts/niter', 'immersiveengineering:dust_saltpeter')
@@ -20,7 +16,7 @@ complexLootTables((event, funcs) => {
           .addAlternativesLoot(
                LootEntry.of('primalstage:salt_block').when(c => c.customCondition(conditionSilkTouch())),
                LootEntry.of('primalstage:salt_block').when(c => c.customCondition(conditionMatchTool('minecraft:trowels'))),
-               LootEntry.of(funcs.preferredItem('forge:dusts/salt'))
+               LootEntry.of(preferredItemId('forge:dusts/salt'))
                     .customFunction(countSet(countUniform(4, 8), false))
                     .customFunction(funcFortune(formulaUniformBonus(1)))
           )

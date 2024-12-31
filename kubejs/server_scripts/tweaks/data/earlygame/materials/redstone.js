@@ -1,4 +1,4 @@
-itemTags((event, funcs) => {
+ServerEvents.tags('item', event => {
      event.add('forge:raw_materials/redstone', 'createoreexcavation:raw_redstone')
 })
 

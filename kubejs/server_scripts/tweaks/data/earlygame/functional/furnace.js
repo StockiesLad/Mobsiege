@@ -9,16 +9,15 @@ recipes((event, funcs) => {
      funcs.removeAndHide('betternether:blackstone_furnace')
 
      event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', '#forge:furnaces')
-     event.replaceInput({output: 'minecraft:blast_furnace'}, 'primalstage:diamond_plate', funcs.preferredItem('forge:plates/iron'))
-     //funcs.replaceOutputRecipe('minecraft:furnace', result => generate(result, ['#forge:stone', comfuncs.packDef('advanced_fire_bricks')]).rollingSquare(1, 3).override(['primalstage:kiln', 4]).next().vanilla())
+     event.replaceInput({output: 'minecraft:blast_furnace'}, 'primalstage:diamond_plate', preferredItemId('forge:plates/iron'))
      funcs.replaceOutputRecipe('minecraft:furnace', result => funcs.planetAlt(result, 'primalstage:kiln', '#forge:stone', custom.fire_brick_block))
-     funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: funcs.def('|primitive_furnaces')}, (output, ingredients) => {
+     funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: packTag('primitive_furnaces')}, (output, ingredients) => {
           generate(output, [ingredients[0], custom.fire_brick_block]).rollingSquare(1, 3).override(['primalstage:kiln', 4]).next().vanilla()
       })
 })
 
-itemTags((event, funcs) => {
-     funcs.unifiedAdd([
+ServerEvents.tags('item', event => {
+     addEntriesRespectively(event, [
           ['%furnaces', [
                'aether_genesis:holystone_furnace',
                'betterend:sulphuric_rock_furnace', 

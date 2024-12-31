@@ -6,25 +6,14 @@ const commaths = global.functions.math
 const custom = global.customImpl
 
 ServerEvents.tags('item', event => {
-    var context = {
+    comfuncs.invokeSignedCalls('commonTags', {
         event: event,
         funcs: getTagFunctions(event)
-    }
-    comfuncs.invokeSignedCalls('itemTags', context)
-    comfuncs.invokeSignedCalls('commonTags', context)
+    })
 })
 
 ServerEvents.tags('block', event => {
-    var context = {
-        event: event,
-        funcs: getTagFunctions(event)
-    }
-    comfuncs.invokeSignedCalls('blockTags', context)
-    comfuncs.invokeSignedCalls('commonTags', context)
-})
-
-ServerEvents.tags('fluid', event => {
-    comfuncs.invokeSignedCalls('fluidTags', {
+    comfuncs.invokeSignedCalls('commonTags', {
         event: event,
         funcs: getTagFunctions(event)
     })
@@ -33,21 +22,21 @@ ServerEvents.tags('fluid', event => {
 ServerEvents.lowPriorityData(event => {
     comfuncs.invokeSignedCalls('basicLootTables', {
         event: event,
-        funcs: comfuncs.incorpProperties(getBasicLootTableFunctions(event), getTagFunctions(null))
+        funcs: getBasicLootTableFunctions(event)
     })
 })
 
 LootJS.modifiers(event => {
     comfuncs.invokeSignedCalls('complexLootTables', {
         event: event,
-        funcs: comfuncs.incorpProperties(getComplexLootTableFunctions(event), getTagFunctions(null))
+        funcs: getComplexLootTableFunctions(event)
     })
 })
 
 ServerEvents.recipes(event => {
     comfuncs.invokeSignedCalls('recipes', {
         event: event,
-        funcs: comfuncs.incorpProperties(getRecipeFunctions(event), getTagFunctions(null))
+        funcs: getRecipeFunctions(event)
     })
 })
 
@@ -57,18 +46,6 @@ function register(ids, calls) {
 
 function impl(ids, call) {
     register(ids, context => call(context.event, context.funcs))
-}
-
-function itemTags(call) {
-    impl('itemTags', call)
-}
-
-function blockTags(call) {
-    impl('blockTags', call)
-}
-
-function fluidTags(call) {
-    impl('fluidTags', call)
 }
 
 function commonTags(call) {
@@ -86,9 +63,3 @@ function complexLootTables(call) {
 function recipes(call) {
     impl('recipes', call)
 }
-
-/*
-    //impl:    recipes('shapeless')('minecraft:torch', 'minecraft:stick')
-
-    disabled: earlygame.js, world.js, midgame.js, mobsieges
-*/

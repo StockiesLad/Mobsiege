@@ -44,7 +44,18 @@ recipes((event, funcs) => {
           {id: 'create_confectionery:chocolate_recipe_6'},
           {id: 'create_confectionery:white_chocolate_recipe_6'},
           {id: 'create_confectionery:ruby_chocolate_recipe_6'},
-          {id: 'create_confectionery:black_chocolate_recipe_6'}
+          {id: 'create_confectionery:black_chocolate_recipe_6'},
+          {id: 'ancient_aether:stripped_sakura_wood_wall'},
+          //Why the hell aint this working?
+          {id: 'deeperdarker:resonarium_helmet_smithing'},
+          {id: 'deeperdarker:resonarium_chestplate_smithing'},
+          {id: 'deeperdarker:resonarium_leggings_smithing'},
+          {id: 'deeperdarker:resonarium_boots_smithing'},
+          {id: 'deeperdarker:resonarium_sword_smithing'},
+          {id: 'deeperdarker:resonarium_pickaxe_smithing'},
+          {id: 'deeperdarker:resonarium_axe_smithing'},
+          {id: 'deeperdarker:resonarium_shovel_smithing'},
+          {id: 'deeperdarker:resonarium_hoe_smithing'}
      ], (o) => event.remove(o))
 
      comfuncs.iterate([
@@ -58,9 +69,18 @@ recipes((event, funcs) => {
      funcs.replaceOutputRecipe('aetherdelight:aether_grass_bale', r => funcs.generate(r, 'aether_redux:short_aether_grass').flatSquare(3).next().vanilla())
      funcs.replaceOutputRecipe('otbwgdelight:puffball_sandwich', r => event.shapeless(r, ['biomeswevegone:cooked_white_puffball_cap', Item.of('minecraft:bread', 2)]))
 
-})
+     var wardenSmithing = (result, base, addon) => event.smithing(result, 'quark:smithing_template_rune', base, addon)
+     funcs.replaceOutputRecipe('deeperdarker:resonarium_helmet', r => wardenSmithing(r, 'minecraft:iron_helmet', 'deeperdarker:resonarium_plate'))
+     funcs.replaceOutputRecipe('deeperdarker:resonarium_chestplate', r => wardenSmithing(r, 'minecraft:iron_chestplate', 'deeperdarker:resonarium_plate'))
+     funcs.replaceOutputRecipe('deeperdarker:resonarium_leggings', r => wardenSmithing(r, 'minecraft:iron_leggings', 'deeperdarker:resonarium_plate'))
+     funcs.replaceOutputRecipe('deeperdarker:resonarium_boots', r => wardenSmithing(r, 'minecraft:iron_boots', 'deeperdarker:resonarium_plate'))
+     funcs.replaceOutputRecipe('deeperdarker:resonarium_sword', r => wardenSmithing(r, 'minecraft:iron_sword', 'deeperdarker:resonarium_plate'))
+     funcs.replaceOutputRecipe('deeperdarker:resonarium_pickaxe', r => wardenSmithing(r, 'minecraft:iron_pickaxe', 'deeperdarker:resonarium_plate'))
+     funcs.replaceOutputRecipe('deeperdarker:resonarium_axe', r => wardenSmithing(r, 'minecraft:iron_axe', 'deeperdarker:resonarium_plate'))
+     funcs.replaceOutputRecipe('deeperdarker:resonarium_shovel', r => wardenSmithing(r, 'minecraft:iron_shovel', 'deeperdarker:resonarium_plate'))
+     funcs.replaceOutputRecipe('deeperdarker:resonarium_hoe', r => wardenSmithing(r, 'minecraft:iron_hoe', 'deeperdarker:resonarium_plate'))
 
-ServerEvents.recipes(event => {
+     funcs.wall('ancient_aether:stripped_sakura_wood_wall', 'ancient_aether:stripped_sakura_log')
      
 })
 
@@ -98,12 +118,11 @@ ServerEvents.recipes(event => {
      })
 })*/
 
-itemTags((event, funcs) => {
+ServerEvents.tags('item', event => {
      event.add('forge:storage_blocks/sulfur', 'cinderscapes:sulfur_block')
      event.add('forge:sandstone/venus_sandstone', ['ad_astra:venus_sandstone'])
      event.add('ad_astra:venus_sandstone', ['ad_astra:venus_sandstone'])
-     
-     funcs.unifiedAdd([
+     addEntriesRespectively(event, [
           ['%plates/copper', 'primalstage:copper_plate'],
           ['%plates/iron', 'primalstage:iron_plate'],
           ['%plates/diamond', 'primalstage:diamond_plate'],
@@ -111,6 +130,6 @@ itemTags((event, funcs) => {
      ])
 })
 
-blockTags((event, funcs) => {
+ServerEvents.tags('block', event => [
      global.functions.sound.invoke('setSoundTag', {event: event})
-})
+])

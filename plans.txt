@@ -61,12 +61,13 @@ complex recipes {
 	turrets (mekanism turrets are fine)
 }
 aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
+port basic loot tables to complex (even if its still in JSON)
 (later on) add recipe chaining (funcs return output)
-revamp cement, niter and ash brick production use powdered concrete block instances
 add difficulty scaling (woohoo cant wait to mixin to like 10 mods)
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+revamp cement, niter and ash brick production use powdered concrete block instances
 fix recipes and tags (this is last)
 Document primitive states (flint tools, stone grill, brick campfire, mortar kiln, cement furnace)
 fix vines not breaking
