@@ -5,8 +5,16 @@ recipes((event, funcs) => {
      ])
 
      event.replaceInput({input: 'minecraft:crafting_table'}, 'minecraft:crafting_table', '#forge:workbench')
-     funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: '#forge:workbench'}, (output, ingredients) => {
-          funcs.toolDamagingInsert(output, [['decorative_blocks:lattice', [0, 1]], [ingredients[0], 2], ['#minecraft:axes', 3]])
+     funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: '#forge:workbench'}, (result, ingredients) => {
+          result = Item.of(result)
+          var ingredient = ingredients[0]
+
+          if (result.is('minecraft:chest'))
+               ingredient = packTag('non_aether_planks')
+          else if (result.is('aether_genesis:skyroot_crafting_table'))
+               ingredient = packTag('aether_planks')
+
+          funcs.toolDamagingInsert(result, [['decorative_blocks:lattice', [0, 1]], [ingredient, 2], ['#minecraft:axes', 3]])
      })
 
      event.shapeless('minecraft:crafting_table', '#forge:workbench')

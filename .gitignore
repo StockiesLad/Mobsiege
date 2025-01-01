@@ -81,6 +81,7 @@
 
 !/kubejs
 /kubejs/probe/
+/kubejs/documentation
 /kubejs/jsconfig.json
 /kubejs/README.txt
 

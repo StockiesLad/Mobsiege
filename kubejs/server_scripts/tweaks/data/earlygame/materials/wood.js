@@ -1,7 +1,14 @@
 const HashMap = Java.loadClass('java.util.HashMap')
 const PrimalStageItems = Java.loadClass('com.nanokulon.primalstage.init.ModItems')
 
+var planks = []
+var hollow_logs = []
+var quark_posts = []
+
 recipes((event, funcs) => {
+     event.remove({id: 'enderio:stick'}),
+     event.remove({id: 'utilitarian:utility/logs_to_bowls'})
+
      comfuncs.iterate([
           'oak',
           'dark_oak',
@@ -21,47 +28,115 @@ recipes((event, funcs) => {
      ], funcs.removeAndHide))
 
      funcs.removeAndHide('primalstage:cutting_log')
-     
+     event.remove({input: '#notreepunching:h/saws', output: 'minecraft:stick'})
+     event.remove({input: '#notreepunching:weak_saws', output: 'minecraft:stick'})
+     event.remove({input: '#aether:skyroot_repairing', output: 'aether:skyroot_stick'})
+
+     event.replaceInput({input: 'minecraft:stick'}, 'minecraft:stick', '#forge:rods/wooden')
      event.replaceInput({input: 'minecraft:spruce_planks', output: 'primalstage:spruce_drying_rack'}, 'minecraft:spruce_planks', 'decorative_blocks:lattice')
      funcs.replaceOutputRecipe('carbonize:wood_stack', r => funcs.planet(r, packTag('primitive_string'), 'primalstage:spruce_logs'))
-     funcs.replace({input: '#notreepunching:h/saws', output: 'minecraft:stick'}, result => {
-          funcs.toolDamagingShapeless('2x ' + result, ['#minecraft:saws', '#minecraft:planks'])
-          funcs.toolDamagingShapeless('8x ' + result, ['#minecraft:saws', '#minecraft:logs'])
-     })
-     funcs.replace({input: '#notreepunching:weak_saws', output: 'minecraft:stick'}, result => {
-          funcs.toolDamagingShapeless(result, ['#minecraft:axes', '#minecraft:planks'])
-          funcs.toolDamagingShapeless('3x ' + result, ['#minecraft:axes', '#minecraft:logs'])
-     })
-     funcs.replaceTagRecipes({type: 'minecraft:crafting_shapeless', input: ['#minecraft:logs', '#minecraft:axes'], output: '#minecraft:planks'}, (output, ingredients) => {
-          funcs.toolDamagingShapeless(Item.of(output).withCount(1), [ingredients[0], '#minecraft:axes'])
-          funcs.toolDamagingShapeless(Item.of(output).withCount(2), [ingredients[0], '#minecraft:saws'])
-     })
-     funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', input: '#aether:skyroot_repairing', output: 'aether:skyroot_stick'}, (output, ingredients) => {
-          funcs.toolDamagingShapeless(Item.of(output).withCount(1), [ingredients[0], '#minecraft:axes'])
-          funcs.toolDamagingShapeless(Item.of(output).withCount(2), [ingredients[0], '#minecraft:saws'])
-          funcs.toolDamagingShapeless(Item.of(output).withCount(6), [packTag('aether_logs'), '#minecraft:axes'])
-          funcs.toolDamagingShapeless(Item.of(output).withCount(8), [packTag('aether_logs'), '#minecraft:saws'])
+
+     funcs.replaceTagRecipes({type: 'minecraft:crafting_shapeless', input: ['#minecraft:logs', '#forge:tools/axes'], output: '#minecraft:planks'}, (output, ingredients) => {
+          funcs.toolDamagingShapeless(Item.of(output).withCount(1), [ingredients[0], '#forge:tools/axes'])
+          funcs.toolDamagingShapeless(Item.of(output).withCount(2), [ingredients[0], '#forge:tools/saws'])
      })
      funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: '#minecraft:wooden_slabs'}, (output, ingredients) => {
           if (!Item.of(ingredients[0]).hasTag('minecraft:logs')) {
-               funcs.toolDamagingShapeless(Item.of(output).withCount(1), [ingredients[0], '#minecraft:axes'])
-               funcs.toolDamagingShapeless(Item.of(output).withCount(2), [ingredients[0], '#minecraft:saws'])
+               funcs.toolDamagingShapeless(Item.of(output).withCount(1), [ingredients[0], '#forge:tools/axes'])
+               funcs.toolDamagingShapeless(Item.of(output).withCount(2), [ingredients[0], '#forge:tools/saws'])
           }
      })
      funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: '#minecraft:wooden_stairs'}, (output, ingredients) => {
           if (!Item.of(ingredients[0]).hasTag('minecraft:logs')) {
-               funcs.toolDamagingShapeless(Item.of(output).withCount(1), [Item.of(ingredients[0]).withCount(2), '#minecraft:axes'])
-               funcs.toolDamagingShapeless(Item.of(output).withCount(2), [Item.of(ingredients[0]).withCount(2), '#minecraft:saws'])
+               funcs.toolDamagingShapeless(Item.of(output).withCount(1), [Item.of(ingredients[0]).withCount(2), '#forge:tools/axes'])
+               funcs.toolDamagingShapeless(Item.of(output).withCount(2), [Item.of(ingredients[0]).withCount(2), '#forge:tools/saws'])
           }
      })
 
-     funcs.twoSquare('minecraft:oak_planks', '#forge:rods/wooden')
-     event.shapeless('minecraft:stick', Item.of('primalstage:spruce_bark').withCount(2))
+     funcs.replaceTagRecipes({input: '#minecraft:logs', output: '#minecraft:walls'}, (result, ingredients) => {
+          var ingredient = ingredients[0]
+          funcs.toolDamagingShapeless(Item.of(result, 1), ['#forge:tools/axes', ingredient, ingredient])
+          funcs.toolDamagingShapeless(Item.of(result, 2), ['#forge:tools/saws', ingredient, ingredient])
+     })
+
+     funcs.replaceTagRecipes({input: '#blockus:wooden_posts', output: '#minecraft:planks'}, (result, ingredients) => {
+          var ingredient = ingredients[0]
+          funcs.toolDamagingShapeless(Item.of(result, 1), ['#forge:tools/saws', ingredient])
+     })
+
+     quark_posts.forEach(post => {
+          var type = post.split(':')[1].replace('stripped_', '').replace('_post', '')
+          var matchingPlanks = filterBiasedly(planks, 'quark:ancient', type)
+          funcs.toolDamagingShapeless(matchingPlanks, ['#forge:tools/saws', post])
+     })
+
+     hollow_logs.forEach(hollog => {
+          var type = hollog.split(':')[1].replace('stripped_', '').replace('fallen_', '').replace('hollow_', '').replace('_log', '').replace('_stem', '').replace('_hyphae', '')
+          type = type.replace('vangrove', 'mangrove') //Typo by twilight forest....
+          var matchingPlanks = planks.find(plank => plank.includes(type))
+          funcs.toolDamagingShapeless(matchingPlanks, ['#forge:tools/saws', hollog])
+     })
+     
+     funcs.replaceTagRecipes({input: '#minecraft:logs', output: '#minecraft:boats'})
+     funcs.replaceTagRecipes({input: '#minecraft:logs', output: '#minecraft:wooden_doors'})
+     funcs.replaceTagRecipes({input: '#minecraft:logs', output: '#minecraft:wooden_trapdoors'})
+     funcs.replaceTagRecipes({input: '#minecraft:logs', output: '#minecraft:wooden_pressure_plates'})
+
      funcs.replaceOutputRecipe('primalstage:spruce_lattice', r => event.shapeless(r, Item.of('decorative_blocks:lattice').withCount(2))) 
      funcs.replaceOutputRecipe('primalstage:spruce_hedge', r => event.shapeless(r, ['decorative_blocks:lattice', 'primalstage:spruce_logs']))
-     funcs.replaceOutputRecipe('2x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#minecraft:axes']))
-     funcs.replaceOutputRecipe('3x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#minecraft:saws']))
+     funcs.replaceOutputRecipe('2x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#forge:tools/axes']))
+     funcs.replaceOutputRecipe('3x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#forge:tools/saws']))
 
+     funcs.toolDamagingShapeless('2x minecraft:stick', ['#forge:tools/axes', 'primalstage:spruce_bark'])
+     funcs.toolDamagingShapeless('3x minecraft:stick', ['#forge:tools/saws', 'primalstage:spruce_bark'])
+     funcs.toolDamagingShapeless('minecraft:stick', ['#blockus:wooden_posts', '#forge:tools/axes'])
+     funcs.toolDamagingShapeless('minecraft:stick', ['#quark:posts', '#forge:tools/axes'])
+     funcs.toolDamagingShapeless('minecraft:stick', [packTag('hollow_logs'), '#forge:tools/axes'])
+
+     funcs.toolDamagingShapeless('1x minecraft:stick', [packTag('non_aether_planks'), '#forge:tools/axes'])
+     funcs.toolDamagingShapeless('2x minecraft:stick', [packTag('non_aether_planks'), '#forge:tools/saws'])
+     funcs.toolDamagingShapeless('4x minecraft:stick', [packTag('non_aether_logs'), '#forge:tools/axes'])
+     funcs.toolDamagingShapeless('8x minecraft:stick', [packTag('non_aether_logs'), '#forge:tools/saws'])
+     funcs.toolDamagingShapeless('1x aether:skyroot_stick', [packTag('aether_planks'), '#forge:tools/axes'])
+     funcs.toolDamagingShapeless('2x aether:skyroot_stick', [packTag('aether_planks'), '#forge:tools/saws'])
+     funcs.toolDamagingShapeless('4x aether:skyroot_stick', [packTag('aether_logs'), '#forge:tools/axes'])
+     funcs.toolDamagingShapeless('8x aether:skyroot_stick', [packTag('aether_logs'), '#forge:tools/saws'])
+
+     funcs.planet('primalstage:spruce_logs', packTag('primitive_string'), '#forge:rods/wooden')
+
+     hollow_logs = null
+     planks = null
+     quark_posts = null
+})
+
+//Fucking shitty mods can't tag their blocks properly
+ServerEvents.tags('item', event => {
+     event.add('missingwilds:fallen_logs', ['missingwilds:fallen_birch_log', 'missingwilds:fallen_spruce_log', 'missingwilds:fallen_jungle_log', 'missingwilds:fallen_dark_oak_log', 'missingwilds:fallen_acacia_log',  'missingwilds:fallen_mangrove_log', 'missingwilds:fallen_crimson_stem', 'missingwilds:fallen_warped_stem', 'missingwilds:fallen_cherry_log'])
+
+     event.add('twilightforest:hollow_logs', ['twilightforest:hollow_twilight_oak_log', 'twilightforest:hollow_canopy_log', 'twilightforest:hollow_mangrove_log', 'twilightforest:hollow_dark_log', 'twilightforest:hollow_time_log', 'twilightforest:hollow_transformation_log', 'twilightforest:hollow_mining_log', 'twilightforest:hollow_sorting_log', 'twilightforest:hollow_oak_log', 'twilightforest:hollow_spruce_log', 'twilightforest:hollow_birch_log', 'twilightforest:hollow_jungle_log', 'twilightforest:hollow_acacia_log', 'twilightforest:hollow_dark_oak_log', 'twilightforest:hollow_warped_stem', 'twilightforest:hollow_crimson_stem', 'twilightforest:hollow_vangrove_log', 'twilightforest:hollow_cherry_log'])
+
+     event.add('blockus:wooden_posts', ['blockus:oak_post', 'blockus:stripped_oak_post', 'blockus:spruce_post', 'blockus:stripped_spruce_post', 'blockus:birch_post', 'blockus:stripped_birch_post', 'blockus:jungle_post', 'blockus:stripped_jungle_post', 'blockus:acacia_post', 'blockus:stripped_acacia_post', 'blockus:dark_oak_post', 'blockus:stripped_dark_oak_post', 'blockus:mangrove_post', 'blockus:stripped_mangrove_post', 'blockus:cherry_post', 'blockus:stripped_cherry_post', 'blockus:warped_post', 'blockus:stripped_warped_post', 'blockus:crimson_post', 'blockus:stripped_crimson_post', 'blockus:white_oak_post', 'blockus:stripped_white_oak_post', 'blockus:oak_post'])
+
+     event.add('minecraft:walls', ['aether_redux:fieldsproot_wood_wall', 'aether_redux:stripped_fieldsproot_wood_wall', 'aether_redux:blightwillow_wood_wall', 'aether_redux:stripped_blightwillow_wood_wall', 'aether_redux:crystal_wood_wall', 'aether_redux:stripped_crystal_wood_wall', 'aether_redux:glacia_wood_wall', 'aether_redux:stripped_glacia_wood_wall'])
+
+     event.add(pack('hollow_logs'), ['#missingwilds:fallen_logs', '#quark:hollow_logs', '#twilightforest:hollow_logs'])
+
+     //This is truly the peak of human intelligence. Just break mod pack why dont ya
+     event.add('minecraft:planks', getIdsOfTags(event, 'aether:planks_crafting'))
+
+     planks = getIdsOfTags(event, 'minecraft:planks')
+     hollow_logs = getIdsOfTags(event, pack('hollow_logs'))
+     quark_posts = getIdsOfTags(event, 'quark:posts')
+
+     var aether_planks = []
+     var non_aether_planks = planks.filter(plank => {
+          if (!plank.includes('aether')) return true
+          aether_planks.push(plank)
+          return false
+     })
+
+     event.add(pack('aether_planks'), aether_planks)
+     event.add(pack('non_aether_planks'), non_aether_planks)
 })
 
 ServerEvents.tags('block', event => {
@@ -73,57 +148,66 @@ ServerEvents.tags('block', event => {
 })
 
 commonTags((event, funcs) => {
-     funcs.addEntriesRespectively([
-          ['forge:stripped_logs', '#forge:logs/stripped'],
-          ['|aether_logs', [
-               'aether:golden_oak_log', 
-               'aether:stripped_skyroot_log', 
-               'aether:skyroot_log', 
-               'aether_redux:glacia_log', 
-               'aether_redux:cloudcap_planks', 
-               'aether_redux:jellyshroom_planks',
-               'aether_redux:cloudcap_stem', 
-               'aether_redux:stripped_cloudcap_stem', 
-               'aether_redux:jellyshroom_stem', 
-               'aether_redux:jellyshroom_hyphae', 
-               'aether_redux:crystal_log', 
-               'aether_redux:stripped_cloudcap_hyphae', 
-               'aether_redux:cloudcap_hyphae', 
-               'aether_redux:stripped_fieldsproot_log', 
-               'aether_redux:sporing_blightwillow_log', 
-               'aether_redux:blightwillow_log', 
-               'aether_redux:stripped_glacia_log', 
-               'aether_redux:stripped_blightwillow_log', 
-               'aether_redux:stripped_crystal_log', 
-               'aether_redux:fieldsproot_log',
-               'deep_aether:cruderoot_log', 
-               'deep_aether:conberry_log', 
-               'deep_aether:stripped_conberry_log', 
-               'deep_aether:stripped_roseroot_log', 
-               'deep_aether:yagroot_log', 
-               'deep_aether:sunroot_log', 
-               'deep_aether:stripped_yagroot_log', 
-               'deep_aether:stripped_sunroot_log', 
-               'deep_aether:roseroot_log', 
-               'deep_aether:stripped_cruderoot_log'
-          ]],
-          ['logs', [
-               packTag('aether_logs'),
-               'minecraft:bamboo_block',
-               'minecraft:stripped_bamboo_block'
-          ]],
-     ])
-     event.add('forge:stripped_logs', event.get('minecraft:logs').getObjectIds().toArray().filter(log => log.toString().includes('stripped')))
-     event.add(pack('raw_logs'), event.get('minecraft:logs').getObjectIds().toArray().filter(log => !log.toString().includes('stripped')))
+     //GOOD JOB LADS... GREAT JOB! YA CANT EVEN TAG YOUR LOGS
+     event.add('minecraft:logs', funcs.getIdsOfTags('aether_genesis:log_walls').concat([
+          'minecraft:bamboo_block',
+          'minecraft:stripped_bamboo_block',
+          'aether:golden_oak_log', 
+          'aether:stripped_skyroot_log', 
+          'aether:skyroot_log', 
+          'aether_redux:glacia_log', 
+          'aether_redux:cloudcap_stem', 
+          'aether_redux:stripped_cloudcap_stem', 
+          'aether_redux:jellyshroom_stem', 
+          'aether_redux:jellyshroom_hyphae', 
+          'aether_redux:crystal_log', 
+          'aether_redux:stripped_cloudcap_hyphae', 
+          'aether_redux:cloudcap_hyphae', 
+          'aether_redux:stripped_fieldsproot_log', 
+          'aether_redux:sporing_blightwillow_log', 
+          'aether_redux:blightwillow_log', 
+          'aether_redux:stripped_glacia_log', 
+          'aether_redux:stripped_blightwillow_log', 
+          'aether_redux:stripped_crystal_log', 
+          'aether_redux:fieldsproot_log',
+          'deep_aether:cruderoot_log', 
+          'deep_aether:conberry_log', 
+          'deep_aether:stripped_conberry_log', 
+          'deep_aether:stripped_roseroot_log', 
+          'deep_aether:yagroot_log', 
+          'deep_aether:sunroot_log', 
+          'deep_aether:stripped_yagroot_log', 
+          'deep_aether:stripped_sunroot_log', 
+          'deep_aether:roseroot_log', 
+          'deep_aether:stripped_cruderoot_log'
+     ]))
+
+     var logs = funcs.getIdsOfTags('minecraft:logs')
+     var stripped_logs = []
+     var raw_logs = logs.filter(log => {
+          if (!log.includes('stripped')) return true
+          stripped_logs.push(log)
+          return false;
+     })
+
+     var aether_logs = []
+     var non_aether_logs = logs.filter(log => {
+          if (!log.includes('aether')) return true
+          aether_logs.push(log)
+          return false
+     })
+
+     event.add(pack('aether_logs'),aether_logs)
+     event.add(pack('non_aether_logs'), non_aether_logs)
+     event.add('forge:stripped_logs', stripped_logs.concat(funcs.getIdsOfTags('forge:logs/stripped')))
+     event.add(pack('raw_logs'), raw_logs)
 })
 
-complexLootTables((event, funcs) => {
-     event.addBlockLootModifier('carbonize:wood_stack')
-         .removeLoot(Ingredient.all)
-         .addAlternativesLoot(
-             LootEntry.of('carbonize:wood_stack').when(c => c.customCondition(conditionSilkTouch())),
-             LootEntry.of('primalstage:spruce_logs', 8)
-         )
+LootJS.modifiers(event => {
+     event.addBlockLootModifier('carbonize:wood_stack').removeLoot(Ingredient.all).addAlternativesLoot(
+          LootEntry.of('carbonize:wood_stack').when(c => c.customCondition(conditionSilkTouch())),
+          LootEntry.of('primalstage:spruce_logs', 8)
+     )
 })
 
 PrimalStageItems.REGISTERED_BARKS = new HashMap()
@@ -136,10 +220,11 @@ BlockEvents.rightClicked(event => {
      var pos = block.getPos()
      if (item.hasTag('forge:tools/saws') && block.hasTag('forge:stripped_logs')) {
           item.hurtAndBreak(1, event.getEntity(), (entity) => level.broadcastEntityEvent(entity, event.getHand().name() == 'MAIN_HAND' ? 47 : 48))
+          level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.bamboo.hit", "blocks", 0.25, 0.5)
           if (random.nextInt(4) == 0) {
                level.destroyBlock(pos, false)
                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('primalstage:spruce_logs').withCount(2 + random.nextInt(3)))
-          } else level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.bamboo.hit", "blocks", 0.25, 0.5)
+          } 
      } else if (item.hasTag('forge:tools/axes') && block.hasTag(pack('raw_logs')))
           Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('primalstage:spruce_bark').withCount(1 + random.nextInt(2)))
 })

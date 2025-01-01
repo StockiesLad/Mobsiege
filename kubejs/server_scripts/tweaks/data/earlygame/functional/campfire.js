@@ -23,7 +23,7 @@ recipes((event, funcs) => {
           ['primalstage:primitive_grill', 4],  
           ['aether:ambrosium_shard', 1], 
           [custom.campfire_rock, 7],
-          ['#minecraft:logs', [6, 8]] 
+          [packTag('aether_logs'), [6, 8]] 
      ]))
 })
 
@@ -44,4 +44,35 @@ LootJS.modifiers(event => {
                LootEntry.of('minecraft:soul_sand').customFunction(countSet(countUniform(1, 2), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
                LootEntry.of('minecraft:stick').customFunction(countSet(countUniform(1, 3), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch())))
           )
+     event.addBlockLootModifier('ancient_aether:ambrosium_campfire').removeLoot('aether:ambrosium_shard')
+          .addSequenceLoot(
+               LootEntry.of('primalstage:primitive_grill').when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
+               LootEntry.of('aether:ambrosium_shard').customFunction(countSet(countUniform(1, 2), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
+               LootEntry.of('aether:skyroot_stick').customFunction(countSet(countUniform(1, 3), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch())))
+          )
+})
+
+const WrapperBoolean = Java.loadClass('java.lang.Boolean')
+
+BlockEvents.rightClicked('ancient_aether:ambrosium_campfire', event => {
+     var item = event.getItem()
+
+     if (!item.is('aether:ambrosium_torch')) return 'pass'
+
+     var block = event.getBlock()
+     var state = block.getBlockState()
+
+     if (state.getValue(Properties.LIT)) return 'pass'
+
+     var player = event.getPlayer()
+     var level = event.getLevel()
+     var pos = block.getPos()
+
+     item.use(event.getLevel(), event.getEntity(), event.getHand())
+     if (player != null && !player.isCreative()) item.setCount(item.getCount() - 1)
+
+     level.playSound(null, pos, 'item.firecharge.use', 'blocks')
+     level.setBlockAndUpdate(pos, state.trySetValue(Properties.LIT, WrapperBoolean.valueOf(true)))
+
+     return 'success'
 })

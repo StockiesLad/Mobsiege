@@ -314,7 +314,8 @@ function getRecipeFunctions(event) {
           event.forEachRecipe(discriminator, recipe => {
                var id = recipe.getId()
                runnables.push(() => event.remove({id: id}))
-               recipeCall(recipe.originalRecipeResult, recipe.originalRecipeIngredients, id)
+               if (recipeCall != null)
+                    recipeCall(recipe.originalRecipeResult, recipe.originalRecipeIngredients, id)
           })
           runnables.forEach(run => run())
      }
@@ -440,7 +441,7 @@ function parseIngredients(ingredientInserts, size) {
                          dest = 0
                     }
                     for (var index = origin; index <= dest; index++)
-                         if (!exceptedIndexes.includes(index)) 
+                         if (exceptedIndexes == null || !exceptedIndexes.includes(index)) 
                               parsedIngredientInsert.indexes.push(index)
                }
                return parsedIngredientInsert
@@ -523,4 +524,13 @@ function insertion(ingredientObjects, size) {
                '\n        pattern=' + pattern
           )     
      return {pattern: pattern, keys: keys}
+}
+
+//Add support for multiple preffered source
+function filterBiasedly(expressions, preferredSource, regex) {
+     var matchedExpressions = expressions.filter(exp => exp.includes(regex))
+     var preferredExp = matchedExpressions.find(exp => exp.includes(preferredSource))
+     if (preferredExp != null)
+          return preferredExp
+     else return matchedExpressions[0]
 }

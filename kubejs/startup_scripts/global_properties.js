@@ -33,6 +33,9 @@ global.customImpl = addModpackId({
     high_grade_charcoal: "high_grade_charcoal",
     alchemical_coal: 'projecte:alchemical_coal',
 
+    holy_pebble: 'holy_pebble',
+    quicksoil_dust: 'quicksoil_dust',
+
     mud_ball: 'mud_ball',
     wet_mud_brick: 'wet_mud_brick',
     dry_mud_brick: 'dry_mud_brick',

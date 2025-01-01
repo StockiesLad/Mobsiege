@@ -18,3 +18,7 @@ recipes((event, funcs) => {
 ServerEvents.tags('item', event => {
      event.add(comfuncs.packDef('holystone'), holystone)
 })
+
+commonTags((event) => {
+     event.add('forge:ores', ['aether:ambrosium_ore', 'ancient_aether:aether_quartz_ore', 'aether:zanite_ore', 'aether_redux:veridium_ore', 'aether:gravitite_ore', 'ancient_aether:valkyrum_ore', 'deep_aether:skyjade_ore', 'aether_genesis:continuum_ore'])
+})

@@ -7,7 +7,7 @@ recipes((event, funcs) => {
 
      funcs.replaceOutputRecipe('primalstage:kiln', r => funcs.vanillaInsert(r, [
           ['primalstage:kiln_bricks', [6, 3, 1, 5, 8]],
-          ['minecraft:ambrosium_shard', 4],
+          ['aether:ambrosium_shard', 4],
           ['minecraft:campfire', 7]
      ]))
 

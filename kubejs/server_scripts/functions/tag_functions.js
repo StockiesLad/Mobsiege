@@ -2,8 +2,8 @@ function getTagFunctions(event) {
     var funcs = {}
     funcs.add = (tag, entries) => comfuncs.performSideEffect(funcs, () => event.add(tag, entries))
     funcs.remove = (tag, entries) => comfuncs.performSideEffect(funcs, () => event.remove(tag, entries))
-    funcs.getEntriesOfTags = (tags) => comfuncs.performSideEffect(funcs, () => getEntriesOfTags(event, tags))
-    funcs.getIdsOfTags = (tags) => comfuncs.performSideEffect(funcs, () => getIdsOfTags(event, tags))
+    funcs.getEntriesOfTags = (tags) => getEntriesOfTags(event, tags)
+    funcs.getIdsOfTags = (tags) => getIdsOfTags(event, tags)
     funcs.switchTagsUniformly = (entry, oldTag, newTag) => comfuncs.performSideEffect(funcs, () => switchTagsUniformly(event, entry, oldTag, newTag))
     funcs.modifyTagsUniformly = (tag, oldEntries, newEntries) => comfuncs.performSideEffect(funcs, () => modifyTagsUniformly(event, tag, oldEntries, newEntries))
 

@@ -84,6 +84,7 @@ recipes((event, funcs) => {
      
 })
 
+//Failed attempt at syncing recipes for the same concept (e.g. pulverising, crushing) between different mods.
 /*
 ServerEvents.recipes(event => {
      
@@ -130,6 +131,7 @@ ServerEvents.tags('item', event => {
      ])
 })
 
-ServerEvents.tags('block', event => [
+ServerEvents.tags('block', event => {
      global.functions.sound.invoke('setSoundTag', {event: event})
-])
+     event.add('mineable/pickaxe', 'minecraft:glowstone')
+})

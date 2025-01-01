@@ -68,7 +68,7 @@ BlockEvents.rightClicked(event => {
           if (random.nextFloat() < NTPConfig.INSTANCE.flintKnappingConsumeChance.getAsFloat()) {
                if (random.nextFloat() < NTPConfig.INSTANCE.flintKnappingSuccessChance.getAsFloat()) {
                     pos = pos.relative(event.getFacing())
-                    Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of(custom.pointed_flint).withCount(1 + random.nextInt(1)));
+                    Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of(custom.pointed_flint).withCount(1 + random.nextInt(2)));
                 }
                stack.shrink(1);
                player.setItemInHand(hand, stack);
