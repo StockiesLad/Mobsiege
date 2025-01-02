@@ -1,58 +1,41 @@
+const WrapperBoolean = Java.loadClass('java.lang.Boolean')
+
+var campfires = [
+     {type: 'minecraft:campfire', torch: '#minecraft:torches/temp', fuel: custom.high_grade_charcoal, logs: '#minecraft:logs', sticks: 'minecraft:stick'},
+     {type: 'minecraft:soul_campfire', torch: packTag('soul_torches'), fuel: 'minecraft:soul_soil', logs: '#minecraft:logs', sticks: 'minecraft:stick'},
+     {type: 'ancient_aether:ambrosium_campfire', torch: 'aether:ambrosium_torch', fuel: 'aether:ambrosium_shard', logs: packTag('aether_logs'), sticks: 'aether:skyroot_stick'}
+]
+
 recipes((event, funcs) => {
      funcs.removeAndHide('hardcore_torches:unlit_campfire')
-     event.remove({output: 'minecraft:campfire'})
 
-     funcs.vanillaInsert('minecraft:campfire', [
-          ['#minecraft:torches/temp', [3, 5]],
-          ['primalstage:primitive_grill', 4],  
-          [packTag('coal/grade/high'), 1], 
-          [custom.campfire_rock, 7],
-          ['#minecraft:logs', [6, 8]] 
-     ])
+     campfires.forEach(campfire => {
+          funcs.replaceOutputRecipe(campfire.type, () => funcs.vanillaInsert(campfire.type, [
+               [campfire.torch, [3, 5]],
+               ['primalstage:primitive_grill', 4],  
+               [campfire.fuel, 1], 
+               [custom.campfire_rock, 7],
+               [campfire.logs, [6, 8]] 
+          ])) 
+     })
+})
 
-     funcs.vanillaInsert('minecraft:soul_campfire', [
-          [packTag('soul_torches'), [3, 5]],
-          ['primalstage:primitive_grill', 4],  
-          ['minecraft:soul_soil', 1], 
-          [custom.campfire_rock, 7],
-          ['#minecraft:logs', [6, 8]] 
-     ])
+LootJS.modifiers(event => {
 
-     funcs.replaceOutputRecipe('ancient_aether:ambrosium_campfire', r => funcs.vanillaInsert(r, [
-          ['aether:ambrosium_torch', [3, 5]],
-          ['primalstage:primitive_grill', 4],  
-          ['aether:ambrosium_shard', 1], 
-          [custom.campfire_rock, 7],
-          [packTag('aether_logs'), [6, 8]] 
-     ]))
+     campfires.forEach(campfire => {
+          event.addBlockLootModifier(campfire.type).removeLoot(Ingredient.all)
+          .addLoot(
+               LootEntry.of(campfire.type).when(c => c.customCondition(conditionSilkTouch())),
+               LootEntry.of('primalstage:primitive_grill').when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
+               LootEntry.of(campfire.fuel).when(c => c.randomChance(0.2).customCondition(conditionInverted(conditionSilkTouch()))),
+               LootEntry.of(campfire.sticks).customFunction(countSet(countUniform(1, 3), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch())))
+          )
+     })
 })
 
 commonTags((event, funcs) => {
      event.add('forge:campfires', 'ancient_aether:ambrosium_campfire')
 })
-
-LootJS.modifiers(event => {
-     event.addBlockLootModifier('minecraft:campfire').removeLoot('minecraft:charcoal')
-          .addSequenceLoot(
-               LootEntry.of('primalstage:primitive_grill').when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
-               LootEntry.of('minecraft:charcoal').customFunction(countSet(countUniform(1, 2), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
-               LootEntry.of('minecraft:stick').customFunction(countSet(countUniform(1, 3), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch())))
-          )
-     event.addBlockLootModifier('minecraft:soul_campfire').removeLoot('minecraft:soul_soil')
-          .addSequenceLoot(
-               LootEntry.of('primalstage:primitive_grill').when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
-               LootEntry.of('minecraft:soul_sand').customFunction(countSet(countUniform(1, 2), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
-               LootEntry.of('minecraft:stick').customFunction(countSet(countUniform(1, 3), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch())))
-          )
-     event.addBlockLootModifier('ancient_aether:ambrosium_campfire').removeLoot('aether:ambrosium_shard')
-          .addSequenceLoot(
-               LootEntry.of('primalstage:primitive_grill').when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
-               LootEntry.of('aether:ambrosium_shard').customFunction(countSet(countUniform(1, 2), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
-               LootEntry.of('aether:skyroot_stick').customFunction(countSet(countUniform(1, 3), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch())))
-          )
-})
-
-const WrapperBoolean = Java.loadClass('java.lang.Boolean')
 
 BlockEvents.rightClicked('ancient_aether:ambrosium_campfire', event => {
      var item = event.getItem()
