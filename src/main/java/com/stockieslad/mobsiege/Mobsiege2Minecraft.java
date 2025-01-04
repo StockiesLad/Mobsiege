@@ -10,6 +10,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -30,6 +32,10 @@ public class Mobsiege2Minecraft {
         itemStack.hurtAndBreak(damageAmount, entity, (p_150686_) -> p_150686_.broadcastBreakEvent(parsedHand));
         if (entity instanceof Player player)
             player.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
+    }
+
+    public static <T extends Comparable<T>> BlockState stateWith(BlockState state, Property<T> property, T value) {
+        return state.trySetValue(property, value);
     }
 
     protected static void init() {}
