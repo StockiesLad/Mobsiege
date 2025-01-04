@@ -82,18 +82,19 @@ refactor recipes and loot tables (especially fucking loot tables)
 
 test dimthread reforked???
 use danger close instead of dangerous stone cutter
-replace onsoulfire with Soul fire'd
 replace fork of ESM with a mixin instead (fixes licensing)
 
-get rid of some unbalanced and shitty mods like mekanism (and draconic evo even tho it is fun... maybe I can just lock it behind other shit)
+
+make create ender transmission harder to make
+
+account for a blaze
 add proper tech progression (embers rekindled (this fits the theme way better anyways) -> create -> immersive engineering -> magic cubes)
 disable aether redux menu
-replace leather from aether cows with animal pelt
 add better way to process pelt into leather
 maybe add rotten flesh to intermidiary leather?
 add gravel, flint, clay & pebble support for aether  (u already have a tag for holystone)
 (need textures for holy pebble and quicksoil dust)
-make holy pebble spawn like no tree punchings's one
+make holy pebble spawn like no tree punchings's one (work on this next)
 make no tree punching - like pebbles for nether & end maybe???
 add soulsoil dust for nether
 fix twigs and notreepunching rock duplicates
@@ -103,13 +104,18 @@ make a way to get glowstone, and to "freeze" that into icestone for some eventua
 supa important aether ores (this needs to be a thing if aether is to be a viable starting dimension)
 we need a new, better name that properly reflects this modpack, mobsiege isn't right
 add a higher quality respirator, then an unbreakable one
-2 bamboo leaves to 1 plant fiber
 fix weird issue where a restart is required for plant fiber to drop properly
 add group pool for loot tables (we want to port any JSON-exclusive shit to LootJS)
-fix ambrosium campfire mining speed
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+replace leather from aether cows with animal pelt
+2 bamboo leaves to 1 plant fiber
+fix fire bow
+mekanism ---> biggerreactors (uranium)
+remove quark vertical slabs
+remove also; unstable tools bygone nether, pineapple delight
+get rid of some unbalanced and shitty mods like mekanism
 revamp cement, niter and ash brick production use powdered concrete block instances
 fix recipes and tags (this is last)
 Document primitive states (flint tools, stone grill, brick campfire, mortar kiln, cement furnace)

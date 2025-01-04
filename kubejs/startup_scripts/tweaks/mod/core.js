@@ -2,8 +2,8 @@ Platform.mods.kubejs.name = 'Mobsiege'
 
 const SoundType = Java.loadClass('net.minecraft.world.level.block.SoundType')
 const SoundEvents = Java.loadClass('net.minecraft.sounds.SoundEvents')
-const Mobsiege2Fabric = Java.loadClass('com.stockieslad.mobsiege.Mobsiege2Fabric')
-const Mobsiege2ToughAsNails = comfuncs.java('Mobsiege2ToughAsNails')
+const Mobsiege2Fabric = comfuncs.local('Mobsiege2Fabric')
+const Mobsiege2ToughAsNails = comfuncs.local('Mobsiege2ToughAsNails')
 
 
 const Monster = Java.loadClass('net.minecraft.world.entity.monster.Monster')
@@ -60,6 +60,9 @@ StartupEvents.registry('item', event => {
         .burnTime(3200)
     event.create(custom.high_grade_charcoal)
         .burnTime(6400)
+
+    event.create(custom.quicksoil_dust)
+    event.create(custom.soulsand_dust)
 
     event.create(custom.mud_ball)
     event.create(custom.wet_mud_brick)
@@ -164,13 +167,17 @@ StartupEvents.registry("block", (event) => {
 
 BlockEvents.modification(event => {
     global.functions.sound.invoke('setSoundType', {event: event})
-    event.modify('aether:cold_aercloud', block => block.properties.isValidSpawn((state, blockGetter, blockPos, spacePlacement, entityType) => true))
+    event.modify('aether:cold_aercloud', block => block.properties.isValidSpawn(() => true))
+    event.modify('ancient_aether:ambrosium_campfire', block => {
+        block.setDestroySpeed(2)
+        block.setExplosionResistance(2)
+    })
 })
 
 StartupEvents.modifyCreativeTab('kubejs:tab', e => {
     e.setDisplayName('Custom Content')
     e.setIcon(Item.of(custom.thermoregulator))
-    e.add([custom.packed_ash, custom.ash_clay, custom.holysilt_brick_stairs, custom.holysilt_brick_slab, custom.holysilt_brick_wall])
+    e.add([custom.holy_pebble, custom.packed_ash, custom.ash_clay, custom.holysilt_brick_stairs, custom.holysilt_brick_slab, custom.holysilt_brick_wall])
 })
 
 ItemEvents.modification(event => {
@@ -217,14 +224,6 @@ WorldgenEvents.remove(event => {
             'betternether:nether_redstone_ore', 
             'betternether:nether_lapis_ore',
             'cinderscapes:sulfur_ore',
-            'mekanismaaa:glacio_tin_ore', 
-            'mekanismaaa:mars_tin_ore', 
-            'mekanismaaa:moon_tin_ore', 
-            'mekanismaaa:glacio_lead_ore',
-            'mekanismaaa:mercury_lead_ore',
-            'mekanismaaa:venus_lead_ore',
-            'biggerreactors:deepslate_uranium_ore',
-            'biggerreactors:uranium_ore',
             'galosphere:deepslate_silver_ore',
             'galosphere:silver_ore',
             'silentgems:deepslate_silver_ore',
@@ -252,10 +251,6 @@ WorldgenEvents.remove(event => {
             'immersiveengineering:ore_nickel',
             'immersiveengineering:deepslate_ore_lead',
             'immersiveengineering:ore_lead',
-            'mekanism:deepslate_tin_ore', 
-            'mekanism:tin_ore', 
-            'mekanism:deepslate_lead_ore',
-            'mekanism:lead_ore',
             'projectred_exploration:peridot_ore',
             'projectred_exploration:deepslate_peridot_ore',
             'projectred_exploration:deepslate_silver_ore',
@@ -268,6 +263,18 @@ WorldgenEvents.remove(event => {
             'projectred_exploration:tin_ore',
 
             //Deprecated
+            //'biggerreactors:deepslate_uranium_ore',
+            //'biggerreactors:uranium_ore',
+            //'mekanismaaa:glacio_tin_ore', 
+            //'mekanismaaa:mars_tin_ore', 
+            //'mekanismaaa:moon_tin_ore', 
+            //'mekanismaaa:glacio_lead_ore',
+            //'mekanismaaa:mercury_lead_ore',
+            //'mekanismaaa:venus_lead_ore',
+            //'mekanism:deepslate_tin_ore', 
+            //'mekanism:tin_ore', 
+            //'mekanism:deepslate_lead_ore',
+            //'mekanism:lead_ore',
             //'bluepower:zinc_deepslate',
             //'bluepower:zinc_ore',
             //'bluepower:silver_deepslate',

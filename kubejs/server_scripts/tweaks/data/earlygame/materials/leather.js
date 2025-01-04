@@ -4,5 +4,7 @@ recipes((event, funcs) => {
 })
 
 LootJS.modifiers(event => {
-     event.addEntityLootModifier('minecraft:trader_llama').replaceLoot('minecraft:leather', 'primalstage:pelt')
+     event.addEntityLootModifier('aether:flying_cow').replaceLoot('minecraft:leather', 'primalstage:pelt', true)
+     event.addEntityLootModifier('aether_redux:shimmercow').replaceLoot('minecraft:leather', 'primalstage:pelt', true)
+     event.addEntityLootModifier('minecraft:trader_llama').replaceLoot('minecraft:leather', 'primalstage:pelt', true)
 })

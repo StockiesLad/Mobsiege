@@ -1,7 +1,5 @@
 recipes((event, funcs) => {
-     event.remove([
-          {id: 'biggerreactors:smelting/uranium_chunk'}, 
-          {id: 'biggerreactors:blasting/uranium_chunk'}])
+     funcs.globalPressing(preferredStack('forge:ingots/uranium', 2), 'alexscaves:uranium')
 })
 
 commonTags((event, funcs) => {

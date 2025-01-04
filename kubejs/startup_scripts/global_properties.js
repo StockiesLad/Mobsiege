@@ -35,6 +35,7 @@ global.customImpl = addModpackId({
 
     holy_pebble: 'holy_pebble',
     quicksoil_dust: 'quicksoil_dust',
+    soulsand_dust: 'soulsand_dust',
 
     mud_ball: 'mud_ball',
     wet_mud_brick: 'wet_mud_brick',

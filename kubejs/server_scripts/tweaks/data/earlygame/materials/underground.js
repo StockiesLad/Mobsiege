@@ -63,12 +63,8 @@ complexLootTables((event, funcs) => {
                'gravelores:uranium_gravel_ore', 
                'bno:nether_uranium_ore', 
                'beo:end_uranium_ore', 
-               'mekanism:uranium_ore',
-               'mekanism:deepslate_uranium_ore',
-               'mekanismaaa:glacio_uranium_ore',
-               'mekanismaaa:mars_uranium_ore',
-               'mekanismaaa:mercury_uranium_ore',
-               'mekanismaaa:venus_uranium_ore'
+               'biggerreactors:uranium_ore', 
+               'biggerreactors:deepslate_uranium_ore'
           ]],
           [tag('zinc'), preferredItemId('forge:raw_materials/zinc'), [
                'gravelores:zinc_gravel_ore', 
