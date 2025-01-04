@@ -1,0 +1,6 @@
+{
+  "parent": "notreepunching:block/loose_rock",
+  "textures": {
+    "all": "aether:block/natural/holystone"
+  }
+}
