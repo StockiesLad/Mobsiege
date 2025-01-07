@@ -3,6 +3,5 @@ ServerEvents.tags('item', event => {
 })
 
 recipes((event, funcs) => {
-     event.smelting('2x minecraft:redstone', 'createoreexcavation:raw_redstone').xp(0.7)
-     event.blasting('2x minecraft:redstone', 'createoreexcavation:raw_redstone').xp(0.7)
+     funcs.globalSmelting('2x minecraft:redstone', 'createoreexcavation:raw_redstone', 0.7)
 })

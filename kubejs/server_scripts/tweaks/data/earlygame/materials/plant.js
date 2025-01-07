@@ -130,17 +130,17 @@ var missingTallFlowers = ['biomeswevegone:allium_flower_bush', 'biomeswevegone:p
 var missingFlowers = missingTallFlowers.concat([])
 
 recipes((event, funcs) => {
-     funcs.removeAll([
+     funcs.remove([
           {input: 'minecraft:vine', output: 'notreepunching:plant_fiber'},
           {id: 'notreepunching:plant_fiber_from_leaves_with_knife'}
      ])
 
      event.replaceInput({input: 'primalstage:plant_twine'}, 'primalstage:plant_twine', packTag('primitive_string'))
 
-     funcs.replaceOutputRecipe('notreepunching:plant_string', r => event.shapeless(r, Item.of('primalstage:plant_twine').withCount(3)))
+     event.shapeless(funcs.removeByOutput('notreepunching:plant_string'), Item.of('primalstage:plant_twine').withCount(3))
      event.shapeless('primalstage:plant_twine', Item.of('notreepunching:plant_fiber').withCount(2))
 	event.shapeless('notreepunching:plant_fiber', '2x twigs:bamboo_leaves')
-	funcs.twoSquareAlt('2x betterend:neon_cactus', ['betternether:nether_cactus', 'betternether:neon_equisetum'])
+	funcs.twoSquareAlt('2x betterend:neon_cactus', ['betternether:nether_cactus', 'betternether:neon_equisetum']).vanilla()
      funcs.toolDamagingShapeless('2x notreepunching:plant_fiber', ['#minecraft:wart_blocks', '#notreepunching:knives'])
      funcs.globalPrimitiveCooking('minecraft:string', 'notreepunching:plant_string', 0.1)
 })
@@ -150,8 +150,7 @@ commonTags((event) => {
 	event.add('minecraft:tall_flowers', missingTallFlowers)
 })
 
-ServerEvents.tags('item', event => {
-	var funcs = getTagFunctions(event)
+itemTags((event, funcs) => {
 	funcs.removeEntriesRespectively([
           ['minecraft:nylium', ['edenring:eden_grass', 'edenring:eden_mycelium']],
           ['notreepunching:h/string', 'notreepunching:plant_string']
@@ -165,8 +164,8 @@ ServerEvents.tags('item', event => {
      partialOrganic = partialOrganic.concat(getIdsOfTags(event, ['supplementaries:flower_box_plantable', 'forge:plant', 'minecraft:flowers', 'forge:compostable', 'biomeswevegone:flowers'])).concat(missingFlowers).filter((element, index, self) => self.indexOf(element) == index).filter(element => !element.includes('leaves')).filter(element => !subtractPartialOrganic.includes(element))
 })
 
-ServerEvents.tags('block', event => {
-	addEntriesRespectively(event, [
+blockTags((event, funcs) => {
+	funcs.addEntriesRespectively([
           ['twilightforest:portal/decoration', 'cinderscapes:umbral_fungus'],
 		['|partial_organic', partialOrganic],
           ['|whole_organic', wholeOrganic],
@@ -186,9 +185,7 @@ commonTags((event, funcs) => {
      ])
 })
 
-LootJS.modifiers(event => {
-	var funcs = getComplexLootTableFunctions(event)
-
+lootTables((event, funcs) => {
 	funcs.removeBlockDrop('primalstage:plant_fiber', 'minecraft:grass')
      funcs.removeBlockDrop('notreepunching:plant_fiber', ['minecraft:grass', 'minecraft:tall_grass'])
 
@@ -211,10 +208,10 @@ LootJS.modifiers(event => {
 	function addWholeOrganicDrops(blocks, stick) {
 		blocks.forEach(block => {
 			event.addBlockLootModifier(block).addAlternativesLoot(
-				LootEntry.of(stick).when(c => c.randomChance(0.25).customCondition(conditionMatchTool('forge:tools/knives'))).customFunction(countSet(countUniform(1, 2), false)),
-				LootEntry.of('notreepunching:plant_fiber').when(c => c.customCondition(conditionMatchTool('forge:tools/knives'))).customFunction(countSet(countUniform(1, 3), false)),
+				LootEntry.of(stick).when(c => c.randomChance(0.25).customCondition(conditionMatchTool('forge:tools/knives'))).customFunction(setCount(countUniform(1, 2), false)),
+				LootEntry.of('notreepunching:plant_fiber').when(c => c.customCondition(conditionMatchTool('forge:tools/knives'))).customFunction(setCount(countUniform(1, 3), false)),
 				LootEntry.of(stick).when(c => c.randomChance(0.25).customCondition(conditionInverted(conditionSilkTouch()))).customFunction(funcFortune(formulaUniformBonus(1))),
-				LootEntry.of('notreepunching:plant_fiber').when(c => c.randomChance(0.5).customCondition(conditionInverted(conditionSilkTouch()))).customFunction(countSet(countUniform(1, 2), false)).customFunction(funcFortune(formulaUniformBonus(1)))
+				LootEntry.of('notreepunching:plant_fiber').when(c => c.randomChance(0.5).customCondition(conditionInverted(conditionSilkTouch()))).customFunction(setCount(countUniform(1, 2), false)).customFunction(funcFortune(formulaUniformBonus(1)))
 			)
 		})
 	}
@@ -226,7 +223,7 @@ LootJS.modifiers(event => {
 				LootEntry.of(block).when(c => c.customCondition(conditionMatchTool('forge:shears'))),
 
 				LootEntry.of(stick).when(c => c.randomChance(0.05).customCondition(conditionMatchTool('forge:tools/knives'))),
-				LootEntry.of('notreepunching:plant_fiber').when(c => c.customCondition(conditionMatchTool('forge:tools/knives'))).customFunction(countSet(countUniform(1, 2), false)),
+				LootEntry.of('notreepunching:plant_fiber').when(c => c.customCondition(conditionMatchTool('forge:tools/knives'))).customFunction(setCount(countUniform(1, 2), false)),
 				LootEntry.of(stick).when(c => c.customCondition(conditionTableBonus([0.025, 0.5, 0.1, 0.25], "minecraft:fortune"))),
 				LootEntry.of('notreepunching:plant_fiber').when(c => c.customCondition(conditionTableBonus([0.25, 0.5, 0.75, 1.0], "minecraft:fortune")))
 			)

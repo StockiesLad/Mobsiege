@@ -1,20 +1,21 @@
 const Properties = Java.loadClass('net.minecraft.world.level.block.state.properties.BlockStateProperties')
 
 recipes((event, funcs) => {
-     funcs.removeAndHide('primalstage:fire_sticks')
-     funcs.removeAll([
-          {id: 'hardcore_torches:lit_torch'},
-          {id: 'hardcore_torches:light_torch_free_item'}
+     funcs.nuke('primalstage:fire_sticks')
+     
+     funcs.removeById([
+          'hardcore_torches:lit_torch',
+          'hardcore_torches:light_torch_free_item'
      ])
 
-     funcs.replaceOutputRecipe('hardcore_torches:fire_starter', result => funcs.vanillaInsert(result, [['#notreepunching:string', 0], ['#forge:rods/wooden', [1, 2]]]))
+     funcs.vanillaInsert(funcs.removeByOutput('hardcore_torches:fire_starter'), [['#notreepunching:string', 0], ['#forge:rods/wooden', [1, 2]]])
 
-     funcs.replaceOutputRecipe('2x minecraft:torch', result => event.shapeless(result, ['minecraft:blaze_powder', '#minecraft:torches/temp', '#minecraft:torches/temp']))
-     funcs.replaceOutputRecipe('4x minecraft:torch', result => funcs.vanillaInsert(result, [['minecraft:blaze_powder', 0], [packTag('coal/grade/medium'), 3], ['#forge:rods/wooden', 6]]))
+     event.shapeless(funcs.removeByOutput('2x minecraft:torch'), ['minecraft:blaze_powder', '#minecraft:torches/temp', '#minecraft:torches/temp'])
+     funcs.vanillaInsert('4x minecraft:torch', [['minecraft:blaze_powder', 0], [packTag('coal/grade/medium'), 3], ['#forge:rods/wooden', 6]])
 
-     funcs.replace({input: 'minecraft:stick', output: '8x hardcore_torches:unlit_torch'}, r => funcs.toolDamagingShapeless(r, [packTag('coal/grade/high'), 'primalstage:spruce_logs', '#minecraft:saws'])) 
+     funcs.toolDamagingShapeless(funcs.removeInsurely({input: 'minecraft:stick', output: '8x hardcore_torches:unlit_torch'}), [packTag('coal/grade/high'), 'primalstage:spruce_logs', '#minecraft:saws'])
      funcs.toolDamagingShapeless('4x hardcore_torches:unlit_torch', [packTag('coal/grade/good'), 'primalstage:spruce_logs', '#minecraft:saws'])
-     funcs.replaceOutputRecipe('2x hardcore_torches:unlit_torch', result => funcs.vanillaInsert(result,[[packTag('coal/grade/medium'), 0], ['#forge:rods/wooden', 2]]))
+     funcs.vanillaInsert(funcs.removeByOutput('2x hardcore_torches:unlit_torch'), [[packTag('coal/grade/medium'), 0], ['#forge:rods/wooden', 2]])
      funcs.toolDamagingShapeless('hardcore_torches:unlit_torch', [packTag('coal/grade/low'), 'primalstage:spruce_logs', '#minecraft:saws'])
 
      event.shapeless('hardcore_torches:unlit_torch', [packTag('coal/grade/poor'), 'hardcore_torches:burnt_torch'])
@@ -24,9 +25,7 @@ recipes((event, funcs) => {
      event.shapeless('8x hardcore_torches:unlit_torch', [packTag('coal/grade/high'), Item.of('hardcore_torches:burnt_torch').withCount(8)])
 })
 
-ServerEvents.tags('item', event => {
-     var funcs = getTagFunctions(event)
-
+itemTags((event, funcs) => {
      var cooling = [
           'blockus:soul_lantern_block', 
           'hardcore_torches:lit_soul_lantern', 
@@ -62,9 +61,7 @@ ServerEvents.tags('item', event => {
      ])
 })
 
-ServerEvents.tags('block', event => {
-     var funcs = getTagFunctions(event)
-
+blockTags((event, funcs) => {
      var cooling = [
           'blockus:soul_lantern_block', 
           'decorative_blocks:soul_brazier', 
@@ -99,6 +96,7 @@ ServerEvents.tags('block', event => {
           'minecraft:torch',
           'supplementaries:fire_pit',
      ]
+
      funcs.add('minecraft:wall_post_override', ['hardcore_torches:smoldering_torch', 'hardcore_torches:lit_torch'])
           .add('hardcore_torches:free_torch_light_blocks', '#forge:campfires')
           .add('toughasnails:cooling_blocks', cooling)

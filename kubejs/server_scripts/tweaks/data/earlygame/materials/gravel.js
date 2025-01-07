@@ -1,41 +1,54 @@
 var gravel = []
 
 var gravel_drops = [
-     {type: 'minecraft:gravel', common_drop: 'twigs:pebble'},
+     {type: 'minecraft:gravel', common_drop: 'notreepunching:stone_loose_rock'},
      {type: 'ancient_aether:gravity_gravel', common_drop: custom.holy_pebble},
      {type: 'immersiveengineering:slag_gravel', common_drop: preferredItemId('forge:slag')}
-
 ]
+
+recipes((event, funcs) => {
+     event.replaceInput({input: '#forge:slag', output: 'thermal:slag_block'}, '#forge:slag', 'immersiveengineering:slag_gravel')
+     gravel_drops.forEach(gravel => {
+          funcs.twoSquare(gravel.type, gravel.common_drop).vanilla()
+     })
+})
+
+blockTags((event, funcs) => {
+     event.add('notreepunching:always_breakable', '#forge:gravel')
+     event.add('notreepunching:always_drops', '#forge:gravel')
+})
 
 commonTags((event, funcs) => {
      event.add('forge:gravel', 'ancient_aether:gravity_gravel')
      gravel = event.get('forge:gravel').getObjectIds().toArray().map(location => location.toString())
 })
 
-LootJS.modifiers(event => {
+lootTables((event, funcs) => {
+     event.addBlockLootModifier('twigs:pebble').replaceLoot('twigs:pebble', 'notreepunching:stone_loose_rock', true)
+
      gravel_drops.forEach(gravel => {
           event.addBlockLootModifier(gravel.type)
                .removeLoot(Ingredient.all)
                .addAlternativesLoot(
                     LootEntry.ofJson(
-                         ofChild(gravel.type, ofConditions(conditionSilkTouch()))
+                         ltItemEntry(gravel.type, ofConditions(conditionSilkTouch()))
                     ),
                     LootEntry.ofJson(
-                         ofChild(gravel.common_drop, ofFuncConds(
+                         ltItemEntry(gravel.common_drop, ofFuncConds(
                               conditionMatchTool('minecraft:clubs'),
-                              countSet(countConstant(4), false)
+                              setCount(countConstant(4), false)
                          ))
                     ),
                     LootEntry.ofJson(childAlternativesPool([
-                         ofChild('minecraft:flint', ofFuncConds(
+                         ltItemEntry('minecraft:flint', ofFuncConds(
                               conditionTableBonus([0.125, 0.25, 0.5, 1.0], "minecraft:fortune"), 
-                              countSet(countUniform(1, 2), false)
+                              setCount(countUniform(1, 2), false)
                          )),
-                         ofChild(gravel.common_drop, ofFuncConds(
+                         ltItemEntry(gravel.common_drop, ofFuncConds(
                               conditionRandomChance(0.33), 
-                              countSet(countUniform(1, 3), false)
+                              setCount(countUniform(1, 3), false)
                          )),
-                         ofChild(gravel.type)
+                         ltItemEntry(gravel.type)
                     ]))
                )
      })

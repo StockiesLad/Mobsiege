@@ -9,21 +9,7 @@ recipes((event, funcs) => {
      event.replaceInput({id: 'immersiveengineering:crafting/gunpowder_from_dusts'}, 'minecraft:charcoal', '#forge:coal')
 })
 
-basicLootTables((event, funcs) => {
-     funcs.replaceBasiclt(funcs.createBasicLt(
-          () => preferredItemId('forge:gems/sulfur'), 
-          [funcFortune(formulaUniformBonus(1)), funcExplosionDecay()], 
-          [
-              funcs.blockEntry({functions: countSet(countUniform(3, 4), false)}, 'alexscaves:sulfur_cluster'),
-              funcs.blockEntry({functions: countSet(countUniform(2, 3), false)}, 'alexscaves:sulfur_bud_large'),
-              funcs.blockEntry({functions: countSet(countUniform(1, 2), false)}, 'alexscaves:sulfur_bud_medium'),
-              funcs.blockEntry({functions: countSet(countUniform(0, 1), false)}, 'alexscaves:sulfur_bud_small'),
-              funcs.blockEntry({functions: countSet(countUniform(0, 1), false)}, 'betterend:sulphur_crystal')
-          ]
-     ))
-})
-
-complexLootTables((event, funcs) => {
+lootTables((event, funcs) => {
      var tag = (mat) => `#gravelores:ore_drops/${mat}`
      funcs.replaceBlockDrops([
           [tag('aluminum'), preferredItemId('forge:raw_materials/aluminum'), [
@@ -72,6 +58,7 @@ complexLootTables((event, funcs) => {
                'beo:end_zinc_ore'
           ]]
      ])
+     
 })
 
 ServerEvents.tags('block', event => {

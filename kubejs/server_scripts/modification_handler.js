@@ -5,61 +5,72 @@ const comfuncs = global.functions.common({})
 const commaths = global.functions.math
 const custom = global.customImpl
 
-ServerEvents.tags('item', event => {
-    comfuncs.invokeSignedCalls('commonTags', {
-        event: event,
-        funcs: getTagFunctions(event)
-    })
-})
+//Tags
+    /**
+     * @callback ExtendedTagEvent
+     * @param {Internal.TagEventJS} call.event
+     * @param {TagObject} call.funcs
+     */
 
-ServerEvents.tags('block', event => {
-    comfuncs.invokeSignedCalls('commonTags', {
-        event: event,
-        funcs: getTagFunctions(event)
-    })
-})
+    /**
+     * @param {ExtendedTagEvent} call
+     */
+    function commonTags(call) {
+        itemTags(call)
+        blockTags(call)
+    }
 
-ServerEvents.lowPriorityData(event => {
-    comfuncs.invokeSignedCalls('basicLootTables', {
-        event: event,
-        funcs: getBasicLootTableFunctions(event)
-    })
-})
+    /**
+     * @param {ExtendedTagEvent} call
+     */
+    function itemTags(call) {
+        ServerEvents.tags('item', event => {
+            call(event, new TagObject(event))
+        })
+    }
 
-LootJS.modifiers(event => {
-    comfuncs.invokeSignedCalls('complexLootTables', {
-        event: event,
-        funcs: getComplexLootTableFunctions(event)
-    })
-})
+    /**
+     * @param {ExtendedTagEvent} call
+     */
+    function blockTags(call) {
+        ServerEvents.tags('block', event => {
+            call(event, new TagObject(event))
+        })
+    }
 
-ServerEvents.recipes(event => {
-    comfuncs.invokeSignedCalls('recipes', {
-        event: event,
-        funcs: getRecipeFunctions(event)
-    })
-})
 
-function register(ids, calls) {
-    comfuncs.addSignedCalls(ids, calls)
-}
+//Loot Tables
+    /**
+     * @callback ExtendedLootTableEvent
+     * @param {Internal.LootModificationEventJS} call.event
+     * @param {LootTableObject} call.funcs
+     */
 
-function impl(ids, call) {
-    register(ids, context => call(context.event, context.funcs))
-}
+    /**
+     * @param {ExtendedLootTableEvent} call
+     */
+    function lootTables(call) {
+        LootJS.modifiers(event => {
+            call(event, new LootTableObject(event))
+        })
+    }
 
-function commonTags(call) {
-    impl('commonTags', call)
-}
 
-function basicLootTables(call) {
-    impl('basicLootTables', call)
-}
+//Recipes
 
-function complexLootTables(call) {
-    impl('complexLootTables', call)
-}
+    /**
+     * @callback ExtendedRecipeEvent
+     * @param {Internal.RecipesEventJS} call.event
+     * @param {RecipeObject} call.funcs
+     */
 
-function recipes(call) {
-    impl('recipes', call)
-}
+    /**
+     * @param {ExtendedRecipeEvent} call
+     */
+    function recipes(call) {
+        ServerEvents.recipes(event => {
+            var recipes = new RecipeObject(event)
+            call(event, recipes)
+            recipes.testInsertions()
+        })
+    }

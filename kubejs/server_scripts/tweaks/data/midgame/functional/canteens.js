@@ -1,8 +1,6 @@
 recipes((event, funcs) => {
-
      var canteenRecipe = (item, ingredient, binder) => {
-          item = Item.of(item, '{Damage:0}')
-          funcs.replace({output: item}, () => funcs.componentAssembly(item, [ofFluid('#forge:molten_iron', 100), preferredStack(ingredient).withCount(4), preferredStack(binder).withCount(4)]))
+          funcs.componentAssembly(funcs.removeByOutput(Item.of(item, '{Damage:0}')), [ofFluid('#forge:molten_iron', 100), preferredStack(ingredient).withCount(4), preferredStack(binder).withCount(4)])
      }
 
      canteenRecipe('toughasnails:empty_copper_canteen', 'forge:ingots/copper', 'forge:ingots/prismalium')

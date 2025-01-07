@@ -2,10 +2,9 @@ const holystone = ['aether:icestone', 'aether:holystone', 'aether_redux:gilded_h
 
 recipes((event, funcs) => {
      // one too many entries, also look at ancient aether 
-     funcs.twoSquareAlt('2x aether:icestone', ['minecraft:packed_ice', 'minecraft:glowstone'])
+     funcs.twoSquareAlt('2x aether:icestone', ['minecraft:packed_ice', 'minecraft:glowstone']).vanilla()
      event.recipes.create.crushing([
-          Item.of('twigs:pebble').withCount(2),
-          Item.of('twigs:pebble').withChance(0.5),
+          Item.of(custom.holy_pebble).withCount(2),
           Item.of('aether:ambrosium_shard').withChance(0.05),
           Item.of('aether:zanite_gemstone').withChance(0.025),
           Item.of('aether_redux:raw_veridium').withChance(0.015),

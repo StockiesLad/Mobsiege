@@ -1,11 +1,9 @@
 recipes((event, funcs) => {
-     funcs.removeAll([
-          {id: 'ancient_aether:skyroot_crafting_table_from_ancient_aether_planks'},
-          {id: 'deep_aether:skyroot_crafting_table'},
-     ])
+     funcs.removeById('ancient_aether:skyroot_crafting_table_from_ancient_aether_planks')
+          .removeById('deep_aether:skyroot_crafting_table')
 
      event.replaceInput({input: 'minecraft:crafting_table'}, 'minecraft:crafting_table', '#forge:workbench')
-     funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: '#forge:workbench'}, (result, ingredients) => {
+     funcs.removeRecipes({type: 'minecraft:crafting_shaped', output: '#forge:workbench'}, (result, ingredients) => {
           result = Item.of(result)
           var ingredient = ingredients[0]
 

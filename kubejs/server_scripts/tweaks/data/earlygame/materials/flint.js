@@ -2,14 +2,8 @@ const NTPSounds = Java.loadClass('com.alcatrazescapee.notreepunching.client.ModS
 const NTPConfig = Java.loadClass('com.alcatrazescapee.notreepunching.Config')
 const SoundType = Java.loadClass('net.minecraft.world.level.block.SoundType')
 
-
 recipes((event, funcs) => {
-     funcs.replace({input: 'minecraft:gravel', output: 'minecraft:flint'}, r => event.shapeless(r, Item.of('minecraft:gravel').withCount(3)))
-})
-
-ServerEvents.tags('block', event => {
-     event.add('notreepunching:always_breakable', '#forge:gravel')
-     event.add('notreepunching:always_drops', '#forge:gravel')
+     event.shapeless(funcs.removeInsurely({input: 'minecraft:gravel', output: 'minecraft:flint'}), Item.of('minecraft:gravel').withCount(3))
 })
 
 //search for my stone tag on top of sound? requires mixin to notreepunching as well for consistency

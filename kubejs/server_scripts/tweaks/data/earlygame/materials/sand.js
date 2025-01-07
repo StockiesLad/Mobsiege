@@ -2,7 +2,7 @@ var sand = []
 
 recipes((event, funcs) => {
      //event.shapeless('4x primalstage:sand_dust', '#forge:sand')
-     funcs.twoSquare('minecraft:sand', 'primalstage:sand_dust')
+     funcs.twoSquare('minecraft:sand', 'primalstage:sand_dust').vanilla()
      event.blasting('ae2:silicon', 'primalstage:sand_dust').xp(0.05) // Needs to be super hot
 })
 
@@ -20,31 +20,31 @@ commonTags((event, funcs) => {
      sand = event.get('minecraft:sand').getObjectIds().toArray().map(location => location.toString())
 })
 
-complexLootTables((event, funcs) => {
+lootTables((event, funcs) => {
      sand.forEach(block => {
           event.addBlockLootModifier(block)
                .removeLoot(Ingredient.all)
                .addAlternativesLoot(
                     LootEntry.ofJson(
-                         ofChild(block, ofConditions(conditionSilkTouch())),
+                         ltItemEntry(block, ofConditions(conditionSilkTouch())),
                          
                     ),
                     LootEntry.ofJson(
-                         ofChild('primalstage:sand_dust', ofFuncConds(
+                         ltItemEntry('primalstage:sand_dust', ofFuncConds(
                               conditionMatchTool('minecraft:clubs'),
-                              countSet(countConstant(4), false)
+                              setCount(countConstant(4), false)
                          ))
                     ),
                     LootEntry.ofJson(childAlternativesPool([
-                         ofChild('minecraft:bone', ofFuncConds(
+                         ltItemEntry('minecraft:bone', ofFuncConds(
                               conditionTableBonus([0.125, 0.25, 0.5, 1.0], "minecraft:fortune"), 
-                              countSet(countUniform(1, 2), false)
+                              setCount(countUniform(1, 2), false)
                          )),
-                         ofChild('primalstage:sand_dust', ofFuncConds(
+                         ltItemEntry('primalstage:sand_dust', ofFuncConds(
                               conditionRandomChance(0.33), 
-                              countSet(countUniform(1, 3), false)
+                              setCount(countUniform(1, 3), false)
                          )),
-                         ofChild(block)
+                         ltItemEntry(block)
                     ]))
                )
      })

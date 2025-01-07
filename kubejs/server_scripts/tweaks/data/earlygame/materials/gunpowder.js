@@ -3,7 +3,7 @@ var tNiter = tag(niter)
 var sulfur = comfuncs.packDef('sulfur')
 var tSulfur = tag(sulfur)
 
-ServerEvents.recipes(event => {
+recipes((event, funcs) => {
      event.remove({id: 'immersiveengineering:crafting/gunpowder_from_dusts'})
 
      event.shapeless('2x minecraft:gunpowder', [packTag('coal/grade/at_most_low'), tNiter, tSulfur])
@@ -15,7 +15,7 @@ ServerEvents.recipes(event => {
      event.shapeless('30x minecraft:gunpowder', ['projecte:aeternalis_fuel', Ingredient.of(tNiter, 5), Ingredient.of(tSulfur, 3)])
 })
 
-ServerEvents.tags('item', event => {
+itemTags((event, funcs) => {
      event.add(niter, ['#forge:dusts/niter', '#forge:gems/niter'])
      event.add(sulfur, ['#forge:dusts/sulfur', '#forge:gems/sulfur'])
 })

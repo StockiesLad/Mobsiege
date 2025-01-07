@@ -1,9 +1,10 @@
+//Formulas
 function formulaUniformBonus(bonusMultiplier) {
      return {
           formula: 'minecraft:uniform_bonus_count', 
           parameters: {bonusMultiplier: bonusMultiplier}
      }
- }
+}
 
 function formulaBinomialBonus(extra, probability) {
      return {
@@ -12,13 +13,15 @@ function formulaBinomialBonus(extra, probability) {
      }
 }
 
-function countSet (count, shouldAdd) {
+//Counts
+function setCount(count, shouldAdd) {
+     shouldAdd = comfuncs.notNull(shouldAdd, false)
      return {
           function: "minecraft:set_count",
           count: count,
           add: shouldAdd
      }
- }
+}
  
 function countUniform(min, max) {
      return {type: "minecraft:uniform", min: min, max: max}

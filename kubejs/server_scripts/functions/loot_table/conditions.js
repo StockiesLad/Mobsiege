@@ -21,7 +21,30 @@ function conditionInverted(condition) {
      }
 }
 
-function survivesExplosion() {
-     return {condition: "minecraft:survives_explosion"}
+function condSurvivesExplosion() {
+     return {
+          condition: "minecraft:survives_explosion"
+     }
+}
+
+function conditionMatchTool(toolTag) {
+     return {
+          condition: "minecraft:match_tool",
+          predicate: {
+               tag: toolTag
+          }
+     }
+ }
+ 
+function conditionSilkTouch() {
+     return {
+          condition: "minecraft:match_tool",
+          predicate: {
+          enchantments: [{
+               enchantment: "minecraft:silk_touch",
+               levels: {min: 1}
+          }]
+          }
+     }
 }
 

@@ -1,14 +1,14 @@
 var stones = []
 
 recipes((event, funcs) => {
-    funcs.replaceTagRecipes({input: '#notreepunching:loose_rocks', type: 'minecraft:crafting_shaped'}, () => {})
+    funcs.removeRecipes({input: '#notreepunching:loose_rocks', type: 'minecraft:crafting_shaped'})
     event.replaceInput({input: 'twigs:pebble'}, 'twigs:pebble', 'minecraft:gravel')
     event.replaceInput({input: 'minecraft:cobblestone', output: 'projecte:low_covalence_dust'}, 'minecraft:cobblestone', '#forge:cobblestone')
-    funcs.replaceOutputRecipe('5x supplementaries:gravel_bricks', r => event.shapeless(r, Item.of('minecraft:gravel').withCount(5)))
-    funcs.replaceOutputRecipe('6x twigs:gravel_bricks', r => event.shapeless(r, Item.of('minecraft:gravel').withCount(6)))
-    funcs.twoSquare('minecraft:end_stone', 'betterend:endstone_dust')
-    funcs.twoSquare('minecraft:cobblestone', 'minecraft:gravel')
-    funcs.twoSquare('minecraft:gravel', '#notreepunching:loose_rocks')
+    event.shapeless(funcs.removeByOutput('5x supplementaries:gravel_bricks'), Item.of('minecraft:gravel').withCount(5))
+    event.shapeless(funcs.removeByOutput('6x twigs:gravel_bricks'), Item.of('minecraft:gravel').withCount(6))
+    funcs.twoSquare('minecraft:end_stone', 'betterend:endstone_dust').vanilla()
+    funcs.twoSquare('minecraft:cobblestone', 'minecraft:gravel').vanilla()
+    funcs.twoSquare('minecraft:gravel', '#notreepunching:loose_rocks').vanilla()
     event.shapeless('primalstage:stone_pebble', ['#notreepunching:loose_rocks', '#notreepunching:loose_rocks'])
     event.shapeless('twigs:pebble', 'primalstage:stone_pebble')
     event.shapeless('2x twigs:pebble', 'minecraft:gravel')
@@ -63,7 +63,7 @@ ServerEvents.tags('block', event => {
     event.add(pack('limestone'), ['create:limestone', 'quark:limestone', 'geologicexpansion:limestone', 'alexscaves:limestone'])
 })
 
- BlockEvents.rightClicked(event => {
+BlockEvents.rightClicked(event => {
     var item = event.getItem()
     var block = event.block
     if (item.hasTag('forge:tools/hammers') && block.hasTag(pack('stone'))) {

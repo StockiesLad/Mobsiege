@@ -1,0 +1,7 @@
+function ShapedIngredientObject() {
+     
+}
+
+ShapedIngredientObject.prototype = {
+
+}

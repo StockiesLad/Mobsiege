@@ -84,9 +84,14 @@ test dimthread reforked???
 use danger close instead of dangerous stone cutter
 replace fork of ESM with a mixin instead (fixes licensing)
 
+fix old inputs for: weapon_printer.js, power_matter
+fix insertions
+test all loot tables
 
 make create ender transmission harder to make
 
+fix alchemical coal burntimes being clamped for being too high. Lower it pls
+fix multiple tag sources in almost unified
 account for a blaze
 add proper tech progression (embers rekindled (this fits the theme way better anyways) -> create -> immersive engineering -> magic cubes)
 disable aether redux menu

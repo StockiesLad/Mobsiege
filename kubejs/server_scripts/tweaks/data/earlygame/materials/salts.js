@@ -9,7 +9,7 @@ commonTags((event, funcs) => {
      event.add('forge:ores/salt', 'primalstage:salt_block')
 })
 
-complexLootTables((event, funcs) => {
+lootTables((event, funcs) => {
      event.addBlockLootModifier('primalstage:salt_block')
           .removeLoot('primalstage:salt_block')
           .removeLoot('primalstage:salt')
@@ -17,7 +17,7 @@ complexLootTables((event, funcs) => {
                LootEntry.of('primalstage:salt_block').when(c => c.customCondition(conditionSilkTouch())),
                LootEntry.of('primalstage:salt_block').when(c => c.customCondition(conditionMatchTool('minecraft:trowels'))),
                LootEntry.of(preferredItemId('forge:dusts/salt'))
-                    .customFunction(countSet(countUniform(4, 8), false))
+                    .customFunction(setCount(countUniform(4, 8), false))
                     .customFunction(funcFortune(formulaUniformBonus(1)))
           )
 

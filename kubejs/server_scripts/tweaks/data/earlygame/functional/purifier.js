@@ -13,5 +13,5 @@ Mobsiege2ToughAsNails.addPurifyingFilterStack(Item.of(custom.good_grade_charcoal
 Mobsiege2ToughAsNails.addPurifyingFilterStack(Item.of(custom.high_grade_charcoal), 1800)
 
 recipes((event, funcs) => {
-     funcs.replaceOutputRecipe('toughasnails:water_purifier', r => funcs.vanillaInsert(r, [['minecraft:glass', [0, 2]], ['minecraft:copper_ingot', [3, 1, 5]], ['decorative_blocks:lattice', 4], ['#minecraft:planks', [6, 7, 8]]]))
+    funcs.vanillaInsert(funcs.removeByOutput('toughasnails:water_purifier'), [['minecraft:glass', [0, 2]], ['minecraft:copper_ingot', [3, 1, 5]], ['decorative_blocks:lattice', 4], ['#minecraft:planks', [6, 7, 8]]])
 })

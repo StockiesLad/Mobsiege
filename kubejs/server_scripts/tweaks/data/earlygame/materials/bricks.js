@@ -1,5 +1,5 @@
 recipes((event, funcs) => {
-     funcs.removeAll([
+     funcs.remove([
           {output: 'minecraft:brick', type: 'minecraft:campfire_cooking'},
           {output: 'minecraft:brick', type: 'enderio:alloy_smelting'},
           {output: 'notreepunching:clay_brick'},
@@ -11,11 +11,11 @@ recipes((event, funcs) => {
 
      event.replaceOutput({output: 'notreepunching:ceramic_bucket'}, 'notreepunching:ceramic_bucket', 'ceramicbucket:ceramic_bucket')
 
-     funcs.removeAndHide('notreepunching:ceramic_water_bucket')
-     funcs.removeAndHide('immersivegeology:raw_fire_clay')
+     funcs.nuke('notreepunching:ceramic_water_bucket')
+     funcs.nuke('immersivegeology:raw_fire_clay')
 
-     funcs.twoSquareAlt(custom.campfire_rock, ['#forge:ingots/brick', '#notreepunching:loose_rocks'])
-     funcs.twoSquare(custom.fire_brick_block, custom.fire_brick)
+     funcs.twoSquareAlt(custom.campfire_rock, ['#forge:ingots/brick', '#notreepunching:loose_rocks']).vanilla()
+     funcs.twoSquare(custom.fire_brick_block, custom.fire_brick).vanilla()
 
      funcs.globalPrimitiveDrying(custom.dry_clay_brick, 'notreepunching:clay_brick')
      funcs.globalPrimitiveCooking('minecraft:brick', custom.dry_clay_brick, 0.1)
@@ -32,21 +32,21 @@ recipes((event, funcs) => {
      funcs.globalPrimitiveDrying(custom.dry_holysilt_brick, custom.wet_holysilt_brick)
      funcs.globalPrimitiveCooking(custom.holysilt_brick, custom.dry_holysilt_brick, 0.1)
      funcs.globalSmelting(custom.holysilt_brick, custom.dry_holysilt_brick, 0.1)
-     funcs.twoSquare(custom.holysilt_bricks, custom.holysilt_brick)
-     funcs.stairs(custom.holysilt_brick_stairs, custom.holysilt_bricks)
-     funcs.slab(custom.holysilt_brick_slab, custom.holysilt_bricks)
-     funcs.wall(custom.holysilt_brick_wall, custom.holysilt_bricks)
+     funcs.twoSquare(custom.holysilt_bricks, custom.holysilt_brick).vanilla()
+     funcs.stairs(custom.holysilt_brick_stairs, custom.holysilt_bricks).vanilla()
+     funcs.slab(custom.holysilt_brick_slab, custom.holysilt_bricks).vanilla()
+     funcs.wall(custom.holysilt_brick_wall, custom.holysilt_bricks).vanilla()
 
      funcs.globalPrimitiveDrying(custom.dry_mud_brick, custom.wet_mud_brick)
      funcs.globalPrimitiveCooking(custom.mud_brick, custom.dry_mud_brick, 0.1)
      funcs.globalSmelting(custom.mud_brick, custom.dry_mud_brick, 0.1)
-     funcs.replaceOutputRecipe('minecraft:mud_bricks', r => funcs.twoSquare(r, custom.mud_brick))
+     funcs.twoSquare(funcs.removeByOutput('minecraft:mud_bricks'), custom.mud_brick).vanilla()
      event.shapeless('minecraft:mud_bricks', Item.of('minecraft:packed_mud', 2))
 
      funcs.globalPrimitiveDrying(custom.dry_aether_mud_brick, custom.wet_aether_mud_brick)
      funcs.globalPrimitiveCooking(custom.aether_mud_brick, custom.dry_aether_mud_brick, 0.1)
      funcs.globalSmelting(custom.aether_mud_brick, custom.dry_aether_mud_brick, 0.1)
-     funcs.replaceOutputRecipe('deep_aether:aether_mud_bricks', r => funcs.twoSquare(r, custom.aether_mud_brick))
+     funcs.twoSquare(funcs.removeByOutput('deep_aether:aether_mud_bricks'), custom.aether_mud_brick).vanilla()
      event.shapeless('deep_aether:aether_mud_bricks', Item.of('deep_aether:packed_aether_mud', 2))
 
      funcs.globalPrimitiveDrying(custom.dry_mortar_brick, custom.wet_mortar_brick)
@@ -57,11 +57,11 @@ recipes((event, funcs) => {
      funcs.kilnSmelting(custom.fire_brick, custom.dry_cement_brick)
      funcs.globalSmelting(custom.fire_brick, custom.dry_cement_brick, 0.3)
 
-     funcs.kilnSmelting('immersivegeology:refractory_brick', custom.wet_cement_brick)
-     funcs.globalSmelting('immersivegeology:refractory_brick', custom.wet_cement_brick, 0.3)
+     //funcs.kilnSmelting('immersivegeology:refractory_brick', custom.wet_cement_brick)
+     //funcs.globalSmelting('immersivegeology:refractory_brick', custom.wet_cement_brick, 0.3)
 })
 
-ServerEvents.tags('item', event => {
+itemTags((event, funcs) => {
      event.add('notreepunching:ceramics', 'ceramicbucket:ceramic_bucket')
      event.add('forge:ingots/brick', ['twigs:silt_brick', 'primalstage:kiln_brick', custom.fire_brick, 'minecraft:nether_brick', custom.mud_brick, custom.holysilt_brick, custom.aether_mud_brick, 'immersivegeology:refractory_brick'])
      event.add('supplementaries:throwable_bricks', [
@@ -89,7 +89,7 @@ ServerEvents.tags('item', event => {
      ])
 })
 
-ServerEvents.tags('block', event => {
+blockTags((event, funcs) => {
      var silt_brick_set = [custom.holysilt_bricks, custom.holysilt_brick_stairs, custom.holysilt_brick_slab, custom.holysilt_brick_wall]
      event.add('minecraft:need_stone_tool', silt_brick_set)
      event.add('minecraft:mineable/pickaxe', silt_brick_set)
@@ -99,13 +99,10 @@ commonTags((event, funcs) => {
      event.add('minecraft:walls', custom.holysilt_brick_wall)
 })
 
-complexLootTables((event, funcs) => {
-     funcs.dropsItself(custom.holysilt_brick_stairs)
-     funcs.dropsItself(custom.holysilt_brick_wall)
-})
-
-LootJS.modifiers(event => {
+lootTables((event, funcs) => {
      event.addBlockLootModifier(custom.holysilt_brick_slab).addLoot(LootEntry.of(custom.holysilt_brick_slab).customFunction(functionSlab(custom.holysilt_brick_slab)))
+     funcs.blockDropsItself(custom.holysilt_brick_stairs)
+     funcs.blockDropsItself(custom.holysilt_brick_wall)
 })
 
 addBrickDrop('minecraft:clay', 'notreepunching:clay_brick')

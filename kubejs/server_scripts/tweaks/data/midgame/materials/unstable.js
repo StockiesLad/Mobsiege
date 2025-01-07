@@ -1,4 +1,4 @@
 recipes((event, funcs) => {
-     funcs.replaceOutputRecipe('miniutilities:unstable_ingot', r => event.shapeless(r, ['edenring:gravilite_shards', 'unstabletools:unstable_ingot']))
-     funcs.replaceOutputRecipe('miniutilities:unstable_ingot', r => event.shapeless(r, ['edenring:gravilite_block', 'unstabletools:unstable_block']))
+     event.shapeless(funcs.removeByOutput('miniutilities:unstable_ingot'), ['edenring:gravilite_shards', '#forge:ingots/signalum'])
+     event.shapeless(funcs.removeByOutput('miniutilities:unstable_ingot'), ['edenring:gravilite_block', '#forge:storage_blocks/signalum'])
 })

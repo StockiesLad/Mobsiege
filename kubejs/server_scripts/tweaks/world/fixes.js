@@ -62,25 +62,25 @@ recipes((event, funcs) => {
           'aetherdelight:quickroot_crate',
           'aetherdelight:chromaberry_crate',
           'aetherdelight:luxbuds_salad'
-     ], o => funcs.removeAndHide(o))
+     ], o => funcs.nuke(o))
 
-     funcs.replaceOutputRecipe('aetherdelight:strange_root_salad', r => event.shapeless(r, ['aether_redux:zanberry', 'aether_redux:lightroot_clump', 'minecraft:bowl']))
-     funcs.replaceOutputRecipe('aetherdelight:oat_cookie', r => event.shapeless(r, ['aether:swet_ball', Item.of('aether_redux:wynd_oats', 2)]))
-     funcs.replaceOutputRecipe('aetherdelight:aether_grass_bale', r => funcs.generate(r, 'aether_redux:short_aether_grass').flatSquare(3).next().vanilla())
-     funcs.replaceOutputRecipe('otbwgdelight:puffball_sandwich', r => event.shapeless(r, ['biomeswevegone:cooked_white_puffball_cap', Item.of('minecraft:bread', 2)]))
+     event.shapeless(funcs.removeByOutput('aetherdelight:strange_root_salad'), ['aether_redux:zanberry', 'aether_redux:lightroot_clump', 'minecraft:bowl'])
+     event.shapeless(funcs.removeByOutput('aetherdelight:oat_cookie'), ['aether:swet_ball', Item.of('aether_redux:wynd_oats', 2)])
+     funcs.threeSquare(funcs.removeByOutput('aetherdelight:aether_grass_bale'), 'aether_redux:short_aether_grass').vanilla()
+     event.shapeless(funcs.removeByOutput('otbwgdelight:puffball_sandwich'), ['biomeswevegone:cooked_white_puffball_cap', Item.of('minecraft:bread', 2)])
 
      var wardenSmithing = (result, base, addon) => event.smithing(result, 'quark:smithing_template_rune', base, addon)
-     funcs.replaceOutputRecipe('deeperdarker:resonarium_helmet', r => wardenSmithing(r, 'minecraft:iron_helmet', 'deeperdarker:resonarium_plate'))
-     funcs.replaceOutputRecipe('deeperdarker:resonarium_chestplate', r => wardenSmithing(r, 'minecraft:iron_chestplate', 'deeperdarker:resonarium_plate'))
-     funcs.replaceOutputRecipe('deeperdarker:resonarium_leggings', r => wardenSmithing(r, 'minecraft:iron_leggings', 'deeperdarker:resonarium_plate'))
-     funcs.replaceOutputRecipe('deeperdarker:resonarium_boots', r => wardenSmithing(r, 'minecraft:iron_boots', 'deeperdarker:resonarium_plate'))
-     funcs.replaceOutputRecipe('deeperdarker:resonarium_sword', r => wardenSmithing(r, 'minecraft:iron_sword', 'deeperdarker:resonarium_plate'))
-     funcs.replaceOutputRecipe('deeperdarker:resonarium_pickaxe', r => wardenSmithing(r, 'minecraft:iron_pickaxe', 'deeperdarker:resonarium_plate'))
-     funcs.replaceOutputRecipe('deeperdarker:resonarium_axe', r => wardenSmithing(r, 'minecraft:iron_axe', 'deeperdarker:resonarium_plate'))
-     funcs.replaceOutputRecipe('deeperdarker:resonarium_shovel', r => wardenSmithing(r, 'minecraft:iron_shovel', 'deeperdarker:resonarium_plate'))
-     funcs.replaceOutputRecipe('deeperdarker:resonarium_hoe', r => wardenSmithing(r, 'minecraft:iron_hoe', 'deeperdarker:resonarium_plate'))
+     wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_helmet'), 'minecraft:iron_helmet', 'deeperdarker:resonarium_plate')
+     wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_chestplate'), 'minecraft:iron_chestplate', 'deeperdarker:resonarium_plate')
+     wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_leggings'), 'minecraft:iron_leggings', 'deeperdarker:resonarium_plate')
+     wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_boots'), 'minecraft:iron_boots', 'deeperdarker:resonarium_plate')
+     wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_sword'), 'minecraft:iron_sword', 'deeperdarker:resonarium_plate')
+     wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_pickaxe'), 'minecraft:iron_pickaxe', 'deeperdarker:resonarium_plate')
+     wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_axe'), 'minecraft:iron_axe', 'deeperdarker:resonarium_plate')
+     wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_shovel'), 'minecraft:iron_shovel', 'deeperdarker:resonarium_plate')
+     wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_hoe'), 'minecraft:iron_hoe', 'deeperdarker:resonarium_plate')
 
-     funcs.wall('ancient_aether:stripped_sakura_wood_wall', 'ancient_aether:stripped_sakura_log')
+     funcs.wall('ancient_aether:stripped_sakura_wood_wall', 'ancient_aether:stripped_sakura_log').vanilla()
      
 })
 

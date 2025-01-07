@@ -10,10 +10,9 @@ commonTags((event, funcs) => {
      ])
 })
 
-basicLootTables((event, funcs) => { 
-     funcs.replaceBasiclt(funcs.createBasicLt(
-          () => preferredItemId('forge:raw_materials/uranium'), 
-          funcExplosionDecay(), 
-          funcs.blockEntry({functions: [countSet(countUniform(3, 5), false), funcFortune(formulaUniformBonus(1))]}, 'alexscaves:radrock_uranium_ore')
-     ))
+lootTables((event, funcs) => {
+     event.addBlockLootModifier('alexscaves:radrock_uranium_ore').removeLoot(Ingredient.all).addAlternativesLoot(
+          LootEntry.of('alexscaves:radrock_uranium_ore').when(c => c.customCondition(conditionSilkTouch())),
+          LootEntry.of(preferredItemId('forge:raw_materials/uranium')).customFunction(setCount(countUniform(3, 5), false)).customFunction(funcFortune(formulaUniformBonus(1))).customFunction(funcExplosionDecay())
+     )
 })

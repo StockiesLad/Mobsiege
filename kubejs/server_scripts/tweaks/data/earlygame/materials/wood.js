@@ -25,41 +25,41 @@ recipes((event, funcs) => {
           `primalstage:${type}_logs`,
           `primalstage:${type}_drying_rack`,
           `primalstage:${type}_shelf`
-     ], funcs.removeAndHide))
+     ], i => funcs.nuke(i)))
 
-     funcs.removeAndHide('primalstage:cutting_log')
+     funcs.nuke('primalstage:cutting_log')
      event.remove({input: '#notreepunching:h/saws', output: 'minecraft:stick'})
      event.remove({input: '#notreepunching:weak_saws', output: 'minecraft:stick'})
      event.remove({input: '#aether:skyroot_repairing', output: 'aether:skyroot_stick'})
 
      event.replaceInput({input: 'minecraft:stick'}, 'minecraft:stick', '#forge:rods/wooden')
      event.replaceInput({input: 'minecraft:spruce_planks', output: 'primalstage:spruce_drying_rack'}, 'minecraft:spruce_planks', 'decorative_blocks:lattice')
-     funcs.replaceOutputRecipe('carbonize:wood_stack', r => funcs.planet(r, packTag('primitive_string'), 'primalstage:spruce_logs'))
+     funcs.planet(funcs.removeByOutput('carbonize:wood_stack'), packTag('primitive_string'), 'primalstage:spruce_logs').vanilla()
 
-     funcs.replaceTagRecipes({type: 'minecraft:crafting_shapeless', input: ['#minecraft:logs', '#forge:tools/axes'], output: '#minecraft:planks'}, (output, ingredients) => {
+     funcs.removeRecipes({type: 'minecraft:crafting_shapeless', input: ['#minecraft:logs', '#forge:tools/axes'], output: '#minecraft:planks'}, (output, ingredients) => {
           funcs.toolDamagingShapeless(Item.of(output).withCount(1), [ingredients[0], '#forge:tools/axes'])
           funcs.toolDamagingShapeless(Item.of(output).withCount(2), [ingredients[0], '#forge:tools/saws'])
      })
-     funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: '#minecraft:wooden_slabs'}, (output, ingredients) => {
+     funcs.removeRecipes({type: 'minecraft:crafting_shaped', output: '#minecraft:wooden_slabs'}, (output, ingredients) => {
           if (!Item.of(ingredients[0]).hasTag('minecraft:logs')) {
-               funcs.toolDamagingShapeless(Item.of(output).withCount(1), [ingredients[0], '#forge:tools/axes'])
-               funcs.toolDamagingShapeless(Item.of(output).withCount(2), [ingredients[0], '#forge:tools/saws'])
+               funcs.toolDamagingShapeless(Item.of(output).withCount(2), [ingredients[0], '#forge:tools/axes'])
+               funcs.toolDamagingShapeless(Item.of(output).withCount(4), [ingredients[0], '#forge:tools/saws'])
           }
      })
-     funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: '#minecraft:wooden_stairs'}, (output, ingredients) => {
+     funcs.removeRecipes({type: 'minecraft:crafting_shaped', output: '#minecraft:wooden_stairs'}, (output, ingredients) => {
           if (!Item.of(ingredients[0]).hasTag('minecraft:logs')) {
-               funcs.toolDamagingShapeless(Item.of(output).withCount(1), [Item.of(ingredients[0]).withCount(2), '#forge:tools/axes'])
-               funcs.toolDamagingShapeless(Item.of(output).withCount(2), [Item.of(ingredients[0]).withCount(2), '#forge:tools/saws'])
+               funcs.toolDamagingShapeless(Item.of(output).withCount(2), [Item.of(ingredients[0]).withCount(2), '#forge:tools/axes'])
+               funcs.toolDamagingShapeless(Item.of(output).withCount(3), [Item.of(ingredients[0]).withCount(2), '#forge:tools/saws'])
           }
      })
 
-     funcs.replaceTagRecipes({input: '#minecraft:logs', output: '#minecraft:walls'}, (result, ingredients) => {
+     funcs.removeRecipes({input: '#minecraft:logs', output: '#minecraft:walls'}, (result, ingredients) => {
           var ingredient = ingredients[0]
           funcs.toolDamagingShapeless(Item.of(result, 1), ['#forge:tools/axes', ingredient, ingredient])
           funcs.toolDamagingShapeless(Item.of(result, 2), ['#forge:tools/saws', ingredient, ingredient])
      })
 
-     funcs.replaceTagRecipes({input: '#blockus:wooden_posts', output: '#minecraft:planks'}, (result, ingredients) => {
+     funcs.removeRecipes({input: '#blockus:wooden_posts', output: '#minecraft:planks'}, (result, ingredients) => {
           var ingredient = ingredients[0]
           funcs.toolDamagingShapeless(Item.of(result, 1), ['#forge:tools/saws', ingredient])
      })
@@ -77,15 +77,15 @@ recipes((event, funcs) => {
           funcs.toolDamagingShapeless(matchingPlanks, ['#forge:tools/saws', hollog])
      })
      
-     funcs.replaceTagRecipes({input: '#minecraft:logs', output: '#minecraft:boats'})
-     funcs.replaceTagRecipes({input: '#minecraft:logs', output: '#minecraft:wooden_doors'})
-     funcs.replaceTagRecipes({input: '#minecraft:logs', output: '#minecraft:wooden_trapdoors'})
-     funcs.replaceTagRecipes({input: '#minecraft:logs', output: '#minecraft:wooden_pressure_plates'})
+     funcs.removeRecipes({input: '#minecraft:logs', output: '#minecraft:boats'})
+     funcs.removeRecipes({input: '#minecraft:logs', output: '#minecraft:wooden_doors'})
+     funcs.removeRecipes({input: '#minecraft:logs', output: '#minecraft:wooden_trapdoors'})
+     funcs.removeRecipes({input: '#minecraft:logs', output: '#minecraft:wooden_pressure_plates'})
 
-     funcs.replaceOutputRecipe('primalstage:spruce_lattice', r => event.shapeless(r, Item.of('decorative_blocks:lattice').withCount(2))) 
-     funcs.replaceOutputRecipe('primalstage:spruce_hedge', r => event.shapeless(r, ['decorative_blocks:lattice', 'primalstage:spruce_logs']))
-     funcs.replaceOutputRecipe('2x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#forge:tools/axes']))
-     funcs.replaceOutputRecipe('3x decorative_blocks:lattice', r => funcs.toolDamagingShapeless(r, ['#minecraft:wooden_slabs', '#forge:tools/saws']))
+     event.shapeless(funcs.removeByOutput('primalstage:spruce_lattice'), Item.of('decorative_blocks:lattice').withCount(2))
+     event.shapeless(funcs.removeByOutput('primalstage:spruce_hedge'), ['decorative_blocks:lattice', 'primalstage:spruce_logs'])
+     funcs.toolDamagingShapeless(funcs.removeByOutput('2x decorative_blocks:lattice'), ['#minecraft:wooden_slabs', '#forge:tools/axes'])
+     funcs.toolDamagingShapeless(funcs.removeByOutput('3x decorative_blocks:lattice'), ['#minecraft:wooden_slabs', '#forge:tools/saws'])
 
      funcs.toolDamagingShapeless('2x minecraft:stick', ['#forge:tools/axes', 'primalstage:spruce_bark'])
      funcs.toolDamagingShapeless('3x minecraft:stick', ['#forge:tools/saws', 'primalstage:spruce_bark'])
@@ -102,7 +102,7 @@ recipes((event, funcs) => {
      funcs.toolDamagingShapeless('4x aether:skyroot_stick', [packTag('aether_logs'), '#forge:tools/axes'])
      funcs.toolDamagingShapeless('8x aether:skyroot_stick', [packTag('aether_logs'), '#forge:tools/saws'])
 
-     funcs.planet('primalstage:spruce_logs', packTag('primitive_string'), '#forge:rods/wooden')
+     funcs.planet('primalstage:spruce_logs', packTag('primitive_string'), '#forge:rods/wooden').vanilla()
 
      hollow_logs = null
      planks = null
@@ -206,7 +206,7 @@ commonTags((event, funcs) => {
 LootJS.modifiers(event => {
      event.addBlockLootModifier('carbonize:wood_stack').removeLoot(Ingredient.all).addAlternativesLoot(
           LootEntry.of('carbonize:wood_stack').when(c => c.customCondition(conditionSilkTouch())),
-          LootEntry.of('primalstage:spruce_logs', 8)
+          LootEntry.of('primalstage:spruce_logs', 8).when(c => c.customCondition(condSurvivesExplosion()))
      )
 })
 

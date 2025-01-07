@@ -10,10 +10,10 @@ recipes((event, funcs) => {
 
      event.remove({type: 'primalstage:grill'})
      event.forEachRecipe({type: 'minecraft:campfire_cooking'}, recipe => {
-          var result = recipe.originalRecipeResult.toItemString().replace('\'', '')
+          var result = recipe.originalRecipeResult
           if (!excepted.some(exempt => exempt == result)) {
                excepted.push(result)
-               funcs.grilling(result, Item.of(recipe.originalRecipeIngredients[0]).toItemString().replace('\'', ''))
+               funcs.grilling(result, recipe.originalRecipeIngredients[0])
           }
      })
 

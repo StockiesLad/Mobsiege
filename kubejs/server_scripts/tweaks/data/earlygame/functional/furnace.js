@@ -1,23 +1,22 @@
 recipes((event, funcs) => {
-     var {generate} = funcs
+     funcs.nuke('betternether:blackstone_furnace')
 
-     funcs.removeAll([
-          {id: 'quark:building/crafting/furnaces/blackstone_blast_furnace'},
-          {id: 'quark:building/crafting/furnaces/deepslate_blast_furnace'},
-          {id: 'aether_genesis:holystone_blast_furnace'}
+     funcs.removeById([
+          'quark:building/crafting/furnaces/blackstone_blast_furnace',
+          'quark:building/crafting/furnaces/deepslate_blast_furnace',
+          'aether_genesis:holystone_blast_furnace'
      ])
-     funcs.removeAndHide('betternether:blackstone_furnace')
 
      event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', '#forge:furnaces')
      event.replaceInput({output: 'minecraft:blast_furnace'}, 'primalstage:diamond_plate', preferredItemId('forge:plates/iron'))
-     funcs.replaceOutputRecipe('minecraft:furnace', result => funcs.planetAlt(result, 'primalstage:kiln', '#forge:stone', custom.fire_brick_block))
-     funcs.replaceTagRecipes({type: 'minecraft:crafting_shaped', output: packTag('primitive_furnaces')}, (output, ingredients) => {
-          generate(output, [ingredients[0], custom.fire_brick_block]).rollingSquare(1, 3).override(['primalstage:kiln', 4]).next().vanilla()
-      })
+     funcs.planetAlt(funcs.removeByOutput('minecraft:furnace'), 'primalstage:kiln', '#forge:stone', custom.fire_brick_block).vanilla()
+     funcs.removeRecipes({type: 'minecraft:crafting_shaped', output: packTag('primitive_furnaces')}, (result, ingredients) => {
+          funcs.planetAlt(result.withCount(1), [ingredients[0], custom.fire_brick_block], 'primalstage:kiln').vanilla()
+     })
 })
 
-ServerEvents.tags('item', event => {
-     addEntriesRespectively(event, [
+itemTags((event, funcs) => {
+     funcs.addEntriesRespectively([
           ['%furnaces', [
                'aether_genesis:holystone_furnace',
                'betterend:sulphuric_rock_furnace', 

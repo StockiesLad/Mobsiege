@@ -7,28 +7,27 @@ var campfires = [
 ]
 
 recipes((event, funcs) => {
-     funcs.removeAndHide('hardcore_torches:unlit_campfire')
+     funcs.nuke('hardcore_torches:unlit_campfire')
 
      campfires.forEach(campfire => {
-          funcs.replaceOutputRecipe(campfire.type, () => funcs.vanillaInsert(campfire.type, [
+          funcs.vanillaInsert(funcs.removeByOutput(campfire.type), [
                [campfire.torch, [3, 5]],
                ['primalstage:primitive_grill', 4],  
                [campfire.fuel, 1], 
                [custom.campfire_rock, 7],
                [campfire.logs, [6, 8]] 
-          ])) 
+          ])
      })
 })
 
-LootJS.modifiers(event => {
-
+lootTables((event, funcs) => {
      campfires.forEach(campfire => {
           event.addBlockLootModifier(campfire.type).removeLoot(Ingredient.all)
           .addLoot(
                LootEntry.of(campfire.type).when(c => c.customCondition(conditionSilkTouch())),
                LootEntry.of('primalstage:primitive_grill').when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
                LootEntry.of(campfire.fuel).when(c => c.randomChance(0.2).customCondition(conditionInverted(conditionSilkTouch()))),
-               LootEntry.of(campfire.sticks).customFunction(countSet(countUniform(1, 3), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch())))
+               LootEntry.of(campfire.sticks).customFunction(setCount(countUniform(1, 3), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch())))
           )
      })
 })

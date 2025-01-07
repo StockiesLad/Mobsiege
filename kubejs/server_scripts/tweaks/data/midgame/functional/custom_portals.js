@@ -16,5 +16,5 @@ recipes((event, funcs) => {
           'customportals:purple_portal_catalyst',
           'customportals:magenta_portal_catalyst',
           'customportals:pink_portal_catalyst'
-     ], item => event.replaceInput({input: 'minecraft:ender_eye', output: item}, 'minecraft:ender_eye', '#forge:ingots/enderium'))
+     ], item => event.replaceInput({input: 'minecraft:ender_eye', output: item}, 'minecraft:ender_pearl', '#forge:ingots/enderium'))
 })
