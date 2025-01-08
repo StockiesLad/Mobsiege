@@ -33,6 +33,11 @@ RecipeObject.prototype = {
           return output != null ? output : insuredOutput != null ? insuredOutput : input 
      },
 
+     removeFor: function(filter, item) {
+          this.remove(filter)
+          return item
+     },
+
      /**
       * @callback RecipeContext
       * @param {Internal.ItemStack} result

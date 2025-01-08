@@ -42,7 +42,7 @@ itemTags((event, funcs) => {
                'notreepunching:flint_pickaxe',
                'notreepunching:flint_axe'
           ]],
-          ['forge:tools/knives', '#notreepunching:knives'],
+          ['forge:tools/knives', ['#notreepunching:knives', '#tconstruct:modifiable/melee/parry']],
           ['forge:tools/hammers', [
                '#primalstage:mallets',
                'thermal_extra:signalum_hammer',

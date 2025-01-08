@@ -74,36 +74,40 @@ themes {
 	exploration
 }
 
-aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
-add difficulty scaling (woohoo cant wait to mixin to like 10 mods)
+low priority {
+	aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
+	add difficulty scaling (woohoo cant wait to mixin to like 10 mods)
+	add tinkers support for other stuff
+	add a higher quality respirator, then an unbreakable one,
+	add more mining levels
+	make certain ores spawn in certain biomes
+}
 
+maybe make more stages (earlygame, midgame, endgame) --> (primal, tool, forge, power, automation, magic, completion)
+add support to start in 3 dimensions (aether, overworld, nether) and re document
 test dimthread reforked???
 replace fork of ESM with a mixin instead (fixes licensing)
-
 rewrite rolling square (the current code is trash)
 rewrite comfuncs & commaths - completing the refactor
 test all loot tables (fix charcoal loot tables)
 water rain collector harder to make
 brick block consistency (gravel, nether, slag, etc)
 remove block variant duplicates
-
+make mobs spawn with modded armor
 make create ender transmission harder to make
-
 fix alchemical coal burntimes being clamped for being too high. Lower it pls
 fix multiple tag sources in almost unified
-add proper tech progression (embers rekindled (this fits the theme way better anyways) -> create -> immersive engineering -> magic cubes)
-add better way to process pelt into leather
-maybe add rotten flesh to intermidiary leather?
-re-document modpack with aether and nether start in mind
-add support to start in 3 dimensions (aether, overworld, nether)
+add proper tech progression (tinkers construct -> create & immersive engineering -> industrial foregoing -> magic cubes)
+add better way to process pelt into leather (add support for machine automation too)
+clean flesh into pelt
 make a way to get glowstone, and to "freeze" that into icestone for some eventual logic for making farmable aether blocks.
 supa important aether ores (this needs to be a thing if aether is to be a viable starting dimension)
-we need a new, better name that properly reflects this modpack, mobsiege isn't right
-add a higher quality respirator, then an unbreakable one
+add a higher quality respirator & an unbreakable one
 fix weird issue where a restart is required for plant fiber to drop properly
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+add melee/parry to knives
 port basic loot tables to complex (even if its still in JSON)
 (later on) add recipe chaining (funcs return output)
 fix old inputs for: weapon_printer.js, power_matter

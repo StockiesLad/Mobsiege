@@ -29,6 +29,7 @@ recipes((event, funcs) => {
      event.remove({input: '#notreepunching:weak_saws', output: 'minecraft:stick'})
      event.remove({input: '#aether:skyroot_repairing', output: 'aether:skyroot_stick'})
 
+     event.replaceInput({input: 'farmersdelight:tree_bark'}, 'farmersdelight:tree_bark', packTag('bark'))
      event.replaceInput({input: 'minecraft:stick'}, 'minecraft:stick', '#forge:rods/wooden')
      event.replaceInput({input: 'minecraft:spruce_planks', output: 'primalstage:spruce_drying_rack'}, 'minecraft:spruce_planks', 'decorative_blocks:lattice')
      funcs.planet(funcs.removeByOutput('carbonize:wood_stack'), packTag('primitive_string'), 'primalstage:spruce_logs').vanilla()
@@ -84,8 +85,8 @@ recipes((event, funcs) => {
      funcs.toolDamagingShapeless(funcs.removeByOutput('2x decorative_blocks:lattice'), ['#minecraft:wooden_slabs', '#forge:tools/axes'])
      funcs.toolDamagingShapeless(funcs.removeByOutput('3x decorative_blocks:lattice'), ['#minecraft:wooden_slabs', '#forge:tools/saws'])
 
-     funcs.toolDamagingShapeless('2x minecraft:stick', ['#forge:tools/axes', 'primalstage:spruce_bark'])
-     funcs.toolDamagingShapeless('3x minecraft:stick', ['#forge:tools/saws', 'primalstage:spruce_bark'])
+     funcs.toolDamagingShapeless('2x minecraft:stick', ['#forge:tools/axes', packTag('bark')])
+     funcs.toolDamagingShapeless('3x minecraft:stick', ['#forge:tools/saws', packTag('bark')])
      funcs.toolDamagingShapeless('minecraft:stick', ['#blockus:wooden_posts', '#forge:tools/axes'])
      funcs.toolDamagingShapeless('minecraft:stick', ['#quark:posts', '#forge:tools/axes'])
      funcs.toolDamagingShapeless('minecraft:stick', [packTag('hollow_logs'), '#forge:tools/axes'])
@@ -108,6 +109,8 @@ recipes((event, funcs) => {
 
 //Fucking shitty mods can't tag their blocks properly
 ServerEvents.tags('item', event => {
+     event.add(pack('bark'), ['farmersdelight:tree_bark', 'primalstage:spruce_bark'])
+
      event.add('missingwilds:fallen_logs', ['missingwilds:fallen_birch_log', 'missingwilds:fallen_spruce_log', 'missingwilds:fallen_jungle_log', 'missingwilds:fallen_dark_oak_log', 'missingwilds:fallen_acacia_log',  'missingwilds:fallen_mangrove_log', 'missingwilds:fallen_crimson_stem', 'missingwilds:fallen_warped_stem', 'missingwilds:fallen_cherry_log'])
 
      event.add('twilightforest:hollow_logs', ['twilightforest:hollow_twilight_oak_log', 'twilightforest:hollow_canopy_log', 'twilightforest:hollow_mangrove_log', 'twilightforest:hollow_dark_log', 'twilightforest:hollow_time_log', 'twilightforest:hollow_transformation_log', 'twilightforest:hollow_mining_log', 'twilightforest:hollow_sorting_log', 'twilightforest:hollow_oak_log', 'twilightforest:hollow_spruce_log', 'twilightforest:hollow_birch_log', 'twilightforest:hollow_jungle_log', 'twilightforest:hollow_acacia_log', 'twilightforest:hollow_dark_oak_log', 'twilightforest:hollow_warped_stem', 'twilightforest:hollow_crimson_stem', 'twilightforest:hollow_vangrove_log', 'twilightforest:hollow_cherry_log'])
