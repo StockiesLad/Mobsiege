@@ -1,7 +1,7 @@
 recipes((event, funcs) => {
      event.replaceInput({input: 'minecraft:clay'}, 'minecraft:clay', '#forge:storage_blocks/clay')
      event.replaceInput({input: 'minecraft:clay_ball'}, 'minecraft:clay_ball', '#forge:clay')
-     funcs.twoSquareAlt(funcs.removeByOutput(Item.of(custom.mortar, 2)), ['primalstage:sand_dust', '#forge:clay']).vanilla()
+     funcs.twoSquareAlt(funcs.removeByOutput(Item.of(custom.mortar, 2)), [packTag('dusts/sand'), '#forge:clay']).vanilla()
 
      funcs.twoSquareAlt('2x minecraft:clay', ['#forge:sand', '#forge:storage_blocks/jelly']).vanilla()
      funcs.twoSquareAlt('2x minecraft:clay', ['#forge:sand', tag('wart_blocks')]).vanilla()

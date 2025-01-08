@@ -17,6 +17,7 @@ recipes((event, funcs) => {
 ServerEvents.tags('item', event => {
     stones = getIdsOfTags(event, 'minecraft:stone_crafting_materials')
     event.add('minecraft:stone_crafting_materials', [
+        'alexscaves:limestone',
         'blockus:limestone', 
         'blockus:marble', 
         'blockus:bluestone',
@@ -26,7 +27,6 @@ ServerEvents.tags('item', event => {
         'create:asurine',
         'create:ochrum',
         'create:crimsite',
-        'alexscaves:limestone',
         'create:scorchia',
         'create:scoria',
         'create:veridium',
@@ -60,8 +60,9 @@ ServerEvents.tags('item', event => {
     event.add('notreepunching:loose_rocks', custom.holy_pebble)
 })
 
+
 ServerEvents.tags('block', event => {
-    event.add('notreepunching:loose_rock_placeable_on', ['#forge:terrain', '#forge:sand', '#forge:stone','#aether:aether_dirt', '#aether:holystone','#minecraft:dirt'])
+    //event.add('notreepunching:loose_rock_placeable_on', ['#forge:terrain', '#forge:sand', '#forge:stone','#aether:aether_dirt', '#aether:holystone','#minecraft:dirt'])
     event.add(pack('stone'), stones.concat(['#forge:stone', packTag('holystone')]))
     event.add(pack('limestone'), ['create:limestone', 'quark:limestone', 'geologicexpansion:limestone', 'alexscaves:limestone'])
 })

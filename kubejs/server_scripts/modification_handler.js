@@ -1,4 +1,25 @@
+//Java
+const WrapperBoolean = Java.loadClass('java.lang.Boolean')
+const HashMap = Java.loadClass('java.util.HashMap')
+const LinkedList = Java.loadClass('java.util.LinkedList')
+//Minecraft
+const BlockPos = Java.loadClass('net.minecraft.core.BlockPos')
 const Containers = Java.loadClass('net.minecraft.world.Containers')
+const Direction = Java.loadClass('net.minecraft.core.Direction')
+const Properties = Java.loadClass('net.minecraft.world.level.block.state.properties.BlockStateProperties')
+const ServerPlayer = Java.loadClass('net.minecraft.server.level.ServerPlayer')
+const SoundType = Java.loadClass('net.minecraft.world.level.block.SoundType')
+const SpawnType = Java.loadClass('net.minecraft.world.entity.SpawnPlacements$Type')
+//Modloader
+const ForgeFakePlayer = Java.loadClass('net.minecraftforge.common.util.FakePlayer')
+const FabricFakePlayer = Java.loadClass('net.fabricmc.fabric.api.entity.FakePlayer')
+//Mod
+const PrimalStageItems = Java.loadClass('com.nanokulon.primalstage.init.ModItems')
+const NTPSounds = Java.loadClass('com.alcatrazescapee.notreepunching.client.ModSounds')
+const NTPConfig = Java.loadClass('com.alcatrazescapee.notreepunching.Config')
+//Mobsiege
+const Mobsiege2Minecraft = Java.loadClass('com.stockieslad.mobsiege.Mobsiege2Minecraft')
+const Mobsiege2ToughAsNails = Java.loadClass('com.stockieslad.mobsiege.Mobsiege2ToughAsNails')
 
 const modpackId = global.modpackId
 const comfuncs = global.functions.common({})

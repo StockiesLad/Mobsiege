@@ -1,36 +1,57 @@
-var sand = []
+var defaultSand = []
 
 recipes((event, funcs) => {
      //event.shapeless('4x primalstage:sand_dust', '#forge:sand')
-     funcs.twoSquare('minecraft:sand', 'primalstage:sand_dust').vanilla()
-     event.blasting('ae2:silicon', 'primalstage:sand_dust').xp(0.05) // Needs to be super hot
+     funcs.twoSquare(funcs.removeByOutput('blockus:redstone_sand'), 'minecraft:redstone').vanilla()
+     funcs.twoSquare(funcs.removeByOutput('betterend:charcoal_block'), custom.medium_grade_charcoal).vanilla()
+     funcs.twoSquare('betterend:endstone_dust', custom.end_dust).vanilla()
+     funcs.twoSquare('aether:quicksoil', custom.quicksoil_dust).vanilla()
+     funcs.twoSquare('minecraft:sand', custom.sand_dust).vanilla()
+     funcs.twoSquare('minecraft:soul_sand', custom.soulsand_dust).vanilla()
+
+     event.blasting('ae2:silicon', packTag('dusts/sand')).xp(0.05) // Needs to be super hot
+})
+
+itemTags((event, funcs) => {
+     event.add(pack('dusts/sand'), [custom.sand_dust, 'minecraft:redstone', custom.quicksoil_dust, custom.end_dust, custom.soulsand_dust])
 })
 
 commonTags((event, funcs) => {
-     event.add('minecraft:sand', [
+     event.add('forge:sand', '#minecraft:sand')
+
+     defaultSand = funcs.getIdsOfTags('forge:sand')
+
+     event.add('forge:sand', [
           'blockus:redstone_sand',
           'aether:quicksoil', 
           'betterend:endstone_dust', 
           'carbonize:ash_block', 
           'minecraft:soul_sand', 
-          'betterend:charcoal_block',
+          '#forge:storage_blocks/ash',
           custom.packed_ash
      ])
-     event.add('forge:sand', '#minecraft:sand')
-     sand = event.get('minecraft:sand').getObjectIds().toArray().map(location => location.toString())
+})
+
+blockTags((event, funcs) => {
+     event.add('notreepunching:always_breakable', '#forge:sand')
+     event.add('notreepunching:always_drops', '#forge:sand')
 })
 
 lootTables((event, funcs) => {
-     sand.forEach(block => {
+     event.addBlockLootModifier(custom.packed_ash).addLoot(
+          LootEntry.of(custom.packed_ash).when(c => c.customCondition(conditionSilkTouch())),
+          LootEntry.of('supplementaries:ash', 9)
+     )
+
+     function sandDrop(block, dust) {
           event.addBlockLootModifier(block)
                .removeLoot(Ingredient.all)
                .addAlternativesLoot(
                     LootEntry.ofJson(
                          ltItemEntry(block, ofConditions(conditionSilkTouch())),
-                         
                     ),
                     LootEntry.ofJson(
-                         ltItemEntry('primalstage:sand_dust', ofFuncConds(
+                         ltItemEntry(dust, ofFuncConds(
                               conditionMatchTool('minecraft:clubs'),
                               setCount(countConstant(4), false)
                          ))
@@ -40,31 +61,45 @@ lootTables((event, funcs) => {
                               conditionTableBonus([0.125, 0.25, 0.5, 1.0], "minecraft:fortune"), 
                               setCount(countUniform(1, 2), false)
                          )),
-                         ltItemEntry('primalstage:sand_dust', ofFuncConds(
+                         ltItemEntry(dust, ofFuncConds(
                               conditionRandomChance(0.33), 
                               setCount(countUniform(1, 3), false)
                          )),
                          ltItemEntry(block)
                     ]))
                )
-     })
+     }
+
+     defaultSand.forEach(block => sandDrop(block, custom.sand_dust))
+     sandDrop('aether:quicksoil', custom.quicksoil_dust)
+     sandDrop('betterend:charcoal_block', custom.medium_grade_charcoal)
+     sandDrop('betterend:endstone_dust', custom.end_dust)
+     sandDrop('blockus:redstone_sand', 'minecraft:redstone')
+     sandDrop('carbonize:ash_block', 'carbonize:ash')
+     sandDrop('cinderscapes:ash_block', 'cinderscapes:ash_pile')
+     sandDrop('minecraft:soul_sand', custom.soulsand_dust)
 })
 
+//Compat with betterend because their loot tables are broken asf
 BlockEvents.rightClicked(event => {
      var item = event.getItem()
      var block = event.block
-     if (item.hasTag('forge:tools/hammers') && block.hasTag('minecraft:sand')) {
+     var state = block.getBlockState()
+     var isCharcoalSand = state.is('betterend:charcoal_block')
+     var isEndSand = state.is('betterend:endstone_dust')
+
+     if (item.hasTag('forge:tools/shovels') && (isCharcoalSand || isEndSand)) {
           var level = event.getLevel()
           var random = level.getRandom()
           var pos = block.getPos()
           item.use(event.getLevel(), event.getEntity(), event.getHand())
           item.hurtAndBreak(1, event.getEntity(), (entity) => level.broadcastEntityEvent(entity, event.getHand().name() == 'MAIN_HAND' ? 47 : 48))
-
-          if (random.nextInt(4) == 0) {
+          if (random.nextInt(2) == 0) {
+               var drop = isCharcoalSand ? custom.medium_grade_charcoal : custom.end_dust
                level.destroyBlock(pos, false)
-               Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('primalstage:sand_dust').withCount(4 + random.nextInt(4)))
+               Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of(drop).withCount(2 + random.nextInt(3)))
                if (random.nextInt(2) == 0)
-                    Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('minecraft:bone').withCount(1 + random.nextInt(1)))
+                    Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('minecraft:bone').withCount(1 + random.nextInt(2)))
           } else level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.sand.hit", "blocks", 0.25, 0.5)
      }
 })

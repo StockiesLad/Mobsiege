@@ -1,8 +1,4 @@
-const Mobsiege2ToughAsNails = Java.loadClass('com.stockieslad.mobsiege.Mobsiege2ToughAsNails')
-const LinkedList = Java.loadClass('java.util.LinkedList')
-const HashMap0 = Java.loadClass('java.util.HashMap')
-
-Mobsiege2ToughAsNails.PURIFIER_FILTER_ADD_MAP = new HashMap0();
+Mobsiege2ToughAsNails.PURIFIER_FILTER_ADD_MAP = new HashMap();
 Mobsiege2ToughAsNails.PURIFIER_FILTER_REMOVE_LIST = new LinkedList();
 
 Mobsiege2ToughAsNails.removePurifyingFilterStack(Item.of('minecraft:charcoal'))

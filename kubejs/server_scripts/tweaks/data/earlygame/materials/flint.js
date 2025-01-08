@@ -1,7 +1,3 @@
-const NTPSounds = Java.loadClass('com.alcatrazescapee.notreepunching.client.ModSounds')
-const NTPConfig = Java.loadClass('com.alcatrazescapee.notreepunching.Config')
-const SoundType = Java.loadClass('net.minecraft.world.level.block.SoundType')
-
 recipes((event, funcs) => {
      event.shapeless(funcs.removeInsurely({input: 'minecraft:gravel', output: 'minecraft:flint'}), Item.of('minecraft:gravel').withCount(3))
 })

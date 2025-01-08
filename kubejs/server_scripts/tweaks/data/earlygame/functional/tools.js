@@ -1,5 +1,3 @@
-const Mobsiege2Minecraft = Java.loadClass('com.stockieslad.mobsiege.Mobsiege2Minecraft')
-
 recipes((event, funcs) => {
      funcs.nuke([
           'aether:skyroot_sword', 'aether:skyroot_pickaxe', 'aether:skyroot_axe', 'aether:skyroot_shovel', 'aether:skyroot_hoe',

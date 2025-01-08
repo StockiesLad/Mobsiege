@@ -61,6 +61,7 @@ StartupEvents.registry('item', event => {
     event.create(custom.high_grade_charcoal)
         .burnTime(6400)
 
+    event.create(custom.end_dust)
     event.create(custom.quicksoil_dust)
     event.create(custom.soulsand_dust)
 

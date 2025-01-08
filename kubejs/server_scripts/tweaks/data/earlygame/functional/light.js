@@ -1,5 +1,3 @@
-const Properties = Java.loadClass('net.minecraft.world.level.block.state.properties.BlockStateProperties')
-
 recipes((event, funcs) => {
      funcs.nuke('primalstage:fire_sticks')
      

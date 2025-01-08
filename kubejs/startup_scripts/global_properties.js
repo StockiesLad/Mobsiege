@@ -34,6 +34,8 @@ global.customImpl = addModpackId({
     alchemical_coal: 'projecte:alchemical_coal',
 
     holy_pebble: 'holy_pebble',
+    sand_dust: 'primalstage:sand_dust',
+    end_dust: 'end_dust',
     quicksoil_dust: 'quicksoil_dust',
     soulsand_dust: 'soulsand_dust',
 

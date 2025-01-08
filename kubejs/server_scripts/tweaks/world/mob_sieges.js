@@ -1,11 +1,3 @@
-//Imports
-const BlockPos = Java.loadClass('net.minecraft.core.BlockPos')
-const SpawnType = Java.loadClass('net.minecraft.world.entity.SpawnPlacements$Type')
-const Direction = Java.loadClass('net.minecraft.core.Direction')
-const ServerPlayer = Java.loadClass('net.minecraft.server.level.ServerPlayer')
-const ForgeFakePlayer = Java.loadClass('net.minecraftforge.common.util.FakePlayer')
-const FabricFakePlayer = Java.loadClass('net.fabricmc.fabric.api.entity.FakePlayer')
-
 //Modification Variables
 const disabled = false
 const testDirections = getScanningDirections()
@@ -23,6 +15,7 @@ const MOB_SIEGES = [
         name: 'Bliztic Barrage',
         type: 'Blaze',
         members: [
+            'create_dd:seething_ablaze',
             'minecraft:blaze',
             'thermal:basalz',
             'thermal:blitz',

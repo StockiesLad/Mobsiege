@@ -1,6 +1,6 @@
 EntityEvents.spawned('minecraft:creeper', event => {
      var level = event.getLevel()
-     if (level.random.nextInt(100) == 0) {
+     if (level.random.nextInt(50) == 0) {
         const {entity} = event
         let nuclear_creeper = event.level.createEntity('alexscaves:nucleeper')
         nuclear_creeper.setPosition(entity.x, entity.y, entity.z)
@@ -8,6 +8,17 @@ EntityEvents.spawned('minecraft:creeper', event => {
         event.cancel()
      }
  })
+
+ EntityEvents.spawned('minecraft:blaze', event => {
+    var level = event.getLevel()
+    if (level.random.nextInt(50) == 0) {
+       const {entity} = event
+       let nuclear_creeper = event.level.createEntity('create_dd:seething_ablaze')
+       nuclear_creeper.setPosition(entity.x, entity.y, entity.z)
+       nuclear_creeper.spawn()
+       event.cancel()
+    }
+})
 
  EntityEvents.spawned('lava_monster:lava_monster', event => {
     var level = event.getLevel()

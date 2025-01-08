@@ -1,5 +1,3 @@
-const WrapperBoolean = Java.loadClass('java.lang.Boolean')
-
 var campfires = [
      {type: 'minecraft:campfire', torch: '#minecraft:torches/temp', fuel: custom.high_grade_charcoal, logs: '#minecraft:logs', sticks: 'minecraft:stick'},
      {type: 'minecraft:soul_campfire', torch: packTag('soul_torches'), fuel: 'minecraft:soul_soil', logs: '#minecraft:logs', sticks: 'minecraft:stick'},

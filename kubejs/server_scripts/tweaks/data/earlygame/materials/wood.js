@@ -1,6 +1,3 @@
-const HashMap = Java.loadClass('java.util.HashMap')
-const PrimalStageItems = Java.loadClass('com.nanokulon.primalstage.init.ModItems')
-
 var planks = []
 var hollow_logs = []
 var quark_posts = []

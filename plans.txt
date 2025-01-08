@@ -75,31 +75,25 @@ themes {
 }
 
 aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
-port basic loot tables to complex (even if its still in JSON)
-(later on) add recipe chaining (funcs return output)
 add difficulty scaling (woohoo cant wait to mixin to like 10 mods)
 
 test dimthread reforked???
 replace fork of ESM with a mixin instead (fixes licensing)
 
 rewrite rolling square (the current code is trash)
-fix old inputs for: weapon_printer.js, power_matter
-test all loot tables
+rewrite comfuncs & commaths - completing the refactor
+test all loot tables (fix charcoal loot tables)
 water rain collector harder to make
-conssitency for gravel, nether, slag and other form of bricks
+brick block consistency (gravel, nether, slag, etc)
+remove block variant duplicates
 
 make create ender transmission harder to make
 
 fix alchemical coal burntimes being clamped for being too high. Lower it pls
 fix multiple tag sources in almost unified
-account for ablaze
 add proper tech progression (embers rekindled (this fits the theme way better anyways) -> create -> immersive engineering -> magic cubes)
 add better way to process pelt into leather
 maybe add rotten flesh to intermidiary leather?
-add gravel, flint, clay & pebble support for aether  (u already have a tag for holystone)
-make holy pebble spawn like no tree punchings's one (work on this next)
-make no tree punching - like pebbles for nether & end maybe???
-add soulsoil dust for nether
 re-document modpack with aether and nether start in mind
 add support to start in 3 dimensions (aether, overworld, nether)
 make a way to get glowstone, and to "freeze" that into icestone for some eventual logic for making farmable aether blocks.
@@ -110,6 +104,14 @@ fix weird issue where a restart is required for plant fiber to drop properly
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+port basic loot tables to complex (even if its still in JSON)
+(later on) add recipe chaining (funcs return output)
+fix old inputs for: weapon_printer.js, power_matter
+account for ablaze
+add gravel, flint, clay & pebble support for aether  (u already have a tag for holystone)
+make no tree punching - like pebbles for nether & end maybe???
+add soulsoil dust for nether
+make holy pebble spawn like no tree punchings's one (work on this next)
 fix insertions
 need textures for holy pebble and quicksoil dust
 disable aether redux menu
