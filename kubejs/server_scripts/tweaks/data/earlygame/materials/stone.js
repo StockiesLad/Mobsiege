@@ -8,13 +8,14 @@ recipes((event, funcs) => {
     event.shapeless(funcs.removeByOutput('6x twigs:gravel_bricks'), Item.of('minecraft:gravel').withCount(6))
     funcs.twoSquare('minecraft:end_stone', 'betterend:endstone_dust').vanilla()
     funcs.twoSquare('minecraft:cobblestone', 'minecraft:gravel').vanilla()
-    funcs.twoSquare('minecraft:gravel', '#notreepunching:loose_rocks').vanilla()
+    funcs.twoSquare('aether:holystone', 'ancient_aether:gravity_gravel').vanilla()
     event.shapeless('primalstage:stone_pebble', ['#notreepunching:loose_rocks', '#notreepunching:loose_rocks'])
     event.shapeless('twigs:pebble', 'primalstage:stone_pebble')
     event.shapeless('2x twigs:pebble', 'minecraft:gravel')
 })
 
 ServerEvents.tags('item', event => {
+    stones = getIdsOfTags(event, 'minecraft:stone_crafting_materials')
     event.add('minecraft:stone_crafting_materials', [
         'blockus:limestone', 
         'blockus:marble', 
@@ -54,7 +55,9 @@ ServerEvents.tags('item', event => {
         custom.corpstone
     ])
     event.add('notreepunching:loose_rocks', ['twigs:pebble', 'spelunkers_charm:deepslate_rock', 'spelunkers_charm:rock', 'spelunkers_charm:dripstone_rock', 'spelunkers_charm:basalt_rock'])
-    stones = event.get('minecraft:stone_crafting_materials').getObjectIds().toArray()
+    event.add(pack('overworld_rocks'), getIdsOfTags(event, 'notreepunching:loose_rocks'))
+    event.add(pack('aether_rocks'), custom.holy_pebble)
+    event.add('notreepunching:loose_rocks', custom.holy_pebble)
 })
 
 ServerEvents.tags('block', event => {

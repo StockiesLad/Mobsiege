@@ -36,6 +36,7 @@
 !/config/bclib
 !/config/alexsmobs.toml
 !/config/integrateddynamics-common.toml
+!/config/cumulus_menus-client.toml
 #Performance
 !/config/immediatelyfast.json
 !/config/forge-client.toml

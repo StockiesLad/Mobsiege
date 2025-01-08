@@ -313,7 +313,7 @@ RecipeObject.prototype = {
      testInsertions: function() {
           this.insertions.forEach(insert => {
                if (!insert.terminated)
-                    console.error(`The following insertion hasn't been registered! result=${insert.result}, ingredientObjects=${JSON.stringify(insert.ingredientObjects)}`)
+                    console.error(`The following insertion hasn't been registered! result=${insert.result}, ingredientObjects=${JSON.stringify(insert.ingredients)}`)
           })
           this.insertions = []
      },
@@ -459,11 +459,11 @@ RecipeObject.prototype = {
      /**
       * This is an example of why I should really by recompiling the insertions.
       * @param {Object} result
-      * @param {Array} ingredients 
+      * @param {Array} outter 
       * @returns {RecipeInsertion}
       */
-     planetAltAlt: function(result, ingredients) {
-          return this.insert(result, [[ingredients[0], [0, 8]], [ingredients[1], [1, 7]], [ingredients[2], [2, 6]], [ingredients[3], [3, 5]], [ingredients[4], 4]])
+     planetAltAlt: function(result, outter, inner) {
+          return this.insert(result, [[outter[0], [0, 8]], [outter[1], [1, 7]], [outter[2], [2, 6]], [outter[3], [3, 5]], [inner, 4]])
      },
 
      /**

@@ -1,15 +1,15 @@
 var gravel = []
 
 var gravel_drops = [
-     {type: 'minecraft:gravel', common_drop: 'notreepunching:stone_loose_rock'},
-     {type: 'ancient_aether:gravity_gravel', common_drop: custom.holy_pebble},
-     {type: 'immersiveengineering:slag_gravel', common_drop: preferredItemId('forge:slag')}
+     {type: 'minecraft:gravel', common_drop: 'notreepunching:stone_loose_rock', ingredient: packTag('overworld_rocks')},
+     {type: 'ancient_aether:gravity_gravel', common_drop: custom.holy_pebble, ingredient: packTag('aether_rocks')},
+     {type: 'immersiveengineering:slag_gravel', common_drop: preferredItemId('forge:slag'), ingredient: '#forge:slag'}
 ]
 
 recipes((event, funcs) => {
      event.replaceInput({input: '#forge:slag', output: 'thermal:slag_block'}, '#forge:slag', 'immersiveengineering:slag_gravel')
      gravel_drops.forEach(gravel => {
-          funcs.twoSquare(gravel.type, gravel.common_drop).vanilla()
+          funcs.twoSquare(gravel.type, gravel.ingredient).vanilla()
      })
 })
 
@@ -20,7 +20,7 @@ blockTags((event, funcs) => {
 
 commonTags((event, funcs) => {
      event.add('forge:gravel', 'ancient_aether:gravity_gravel')
-     gravel = event.get('forge:gravel').getObjectIds().toArray().map(location => location.toString())
+     gravel = funcs.getIdsOfTags('forge:gravel')
 })
 
 lootTables((event, funcs) => {
@@ -65,7 +65,7 @@ BlockEvents.rightClicked(event => {
 
           if (random.nextInt(4) == 0) {
                level.destroyBlock(pos, false)
-               Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('twigs:pebble').withCount(2 + random.nextInt(2)))
+               Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('notreepunching:stone_loose_rock').withCount(2 + random.nextInt(2)))
                if (random.nextInt(2) == 0)
                     Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of('minecraft:flint').withCount(1 + random.nextInt(2)))
           } else level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.gravel.hit", "blocks", 0.25, 0.5)

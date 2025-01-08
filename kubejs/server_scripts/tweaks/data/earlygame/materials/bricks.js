@@ -10,6 +10,8 @@ recipes((event, funcs) => {
      ])
 
      event.replaceOutput({output: 'notreepunching:ceramic_bucket'}, 'notreepunching:ceramic_bucket', 'ceramicbucket:ceramic_bucket')
+     funcs.removeById('immersiveengineering:crafting/slag_brick')
+     funcs.twoSquare('immersiveengineering:slag_brick', 'immersiveengineering:slag_gravel').vanilla()
 
      funcs.nuke('notreepunching:ceramic_water_bucket')
      funcs.nuke('immersivegeology:raw_fire_clay')

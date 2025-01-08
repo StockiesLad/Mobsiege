@@ -70,6 +70,12 @@ function getEntriesOfTags(event, tags) {
      return entries
  }
  
+ /**
+  * 
+  * @param {Internal.TagEventJS} event 
+  * @param {Array<String>} tags 
+  * @returns {Array<String>}
+  */
 function getIdsOfTags(event, tags) {
      return getEntriesOfTags(event, tags).map(loc => loc.toString())
 }
