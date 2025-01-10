@@ -104,6 +104,15 @@ RecipeObject.prototype = {
           return this
      },
 
+     //Replacement
+     globallyReplaceInput: function(oldItem, newItem) {
+          this.event.replaceInput({input: oldItem}, oldItem, newItem)
+     },
+
+     globallyReplaceInput: function(oldItem, newItem) {
+          this.event.replaceOutput({output: oldItem}, oldItem, newItem)
+     },
+
      //Custom Recipes
      toolDamagingShaped: function(result, pattern, keys) {
           this.event.custom({

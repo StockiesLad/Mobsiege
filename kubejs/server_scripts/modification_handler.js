@@ -26,6 +26,8 @@ const comfuncs = global.functions.common({})
 const commaths = global.functions.math
 const custom = global.customImpl
 
+global.hiddenItems = []
+
 //It's very important that we always cache the event extensions. This is far more performant
 
 //Tags

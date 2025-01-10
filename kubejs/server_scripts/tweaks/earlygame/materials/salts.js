@@ -2,6 +2,7 @@ ServerEvents.tags('item', event => {
      event.add('forge:dusts/salt', ['primalstage:salt', 'ingredientsdelight:salt'])
      event.add('forge:salt', '#forge:dusts/salt')
      event.add('forge:dusts/niter', 'immersiveengineering:dust_saltpeter')
+     event.remove('forge:dusts/saltpeter', 'immersiveengineering:dust_saltpeter')
 })
 
 commonTags((event, funcs) => {

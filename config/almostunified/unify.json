@@ -134,6 +134,11 @@
   "blockTagInheritance": {},
   "ignoredTags": [
     "forge:coal",
+    "forge:lapis",
+    "forge:quartz",
+    "forge:rose_quartz",
+    "forge:gems/rose_quartz",
+    "forge:salt",
     "minecraft:coals"
   ],
   "ignoredItems": [

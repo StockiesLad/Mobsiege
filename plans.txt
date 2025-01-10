@@ -78,6 +78,7 @@ low priority {
 	aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
 	add more mining levels
 	make certain ores spawn in certain biomes
+	add proper tech progression (tinkers construct -> create & immersive engineering -> industrial foregoing -> magic cubes)
 }
 
 maybe make more stages (earlygame, midgame, endgame) --> (primal, tool, forge, power, automation, magic, completion)
@@ -87,12 +88,8 @@ replace fork of ESM with a mixin instead (fixes licensing)
 rewrite rolling square (the current code is trash)
 rewrite comfuncs & commaths - completing the refactor
 test all loot tables (fix charcoal loot tables)
-brick block consistency (gravel, nether, slag, etc)
-remove block variant duplicates
 make mobs spawn with modded armor
 fix alchemical coal burntimes being clamped for being too high. Lower it pls
-fix multiple tag sources in almost unified
-add proper tech progression (tinkers construct -> create & immersive engineering -> industrial foregoing -> magic cubes)
 make a way to get glowstone, and to "freeze" that into icestone for some eventual logic for making farmable aether blocks.
 supa important aether ores (this needs to be a thing if aether is to be a viable starting dimension) or creatively use tinkers construct to make it more interesting (I like this better)
 add a higher quality respirator & an unbreakable one
@@ -101,6 +98,9 @@ fix weird issue where u sometimes cant use creative mode flying properly
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+brick block consistency (gravel, nether, slag, etc)
+remove block variant duplicates
+fix multiple tag sources in almost unified
 more intercompatibility (gravel, sand, obsidian, ender pearls)
 make create ender transmission harder to make
 water rain collector harder to make
