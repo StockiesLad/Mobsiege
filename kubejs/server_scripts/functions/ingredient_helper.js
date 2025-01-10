@@ -26,6 +26,11 @@ function preferredStack(tag) {
     return AlmostUnified.getPreferredItemForTag(tag)
 }
 
+/**
+ * @param {String} fluid 
+ * @param {Number} amount 
+ * @returns 
+ */
 function ofFluid(fluid, amount) {
     var stack
     if (fluid.includes('#'))

@@ -1,21 +1,20 @@
 var stones = []
 
 recipes((event, funcs) => {
+    funcs.nuke('supplementaries:gravel_bricks')
     funcs.removeRecipes({input: '#notreepunching:loose_rocks', type: 'minecraft:crafting_shaped'})
     event.replaceInput({input: 'twigs:pebble'}, 'twigs:pebble', 'minecraft:gravel')
     event.replaceInput({input: 'minecraft:cobblestone', output: 'projecte:low_covalence_dust'}, 'minecraft:cobblestone', '#forge:cobblestone')
-    event.shapeless(funcs.removeByOutput('5x supplementaries:gravel_bricks'), Item.of('minecraft:gravel').withCount(5))
-    event.shapeless(funcs.removeByOutput('6x twigs:gravel_bricks'), Item.of('minecraft:gravel').withCount(6))
+    funcs.threeSquare(funcs.removeByOutput('9x twigs:gravel_bricks'), 'minecraft:gravel').vanilla()
     funcs.twoSquare('minecraft:end_stone', 'betterend:endstone_dust').vanilla()
     funcs.twoSquare('minecraft:cobblestone', 'minecraft:gravel').vanilla()
     funcs.twoSquare('aether:holystone', 'ancient_aether:gravity_gravel').vanilla()
     event.shapeless('primalstage:stone_pebble', ['#notreepunching:loose_rocks', '#notreepunching:loose_rocks'])
-    event.shapeless('twigs:pebble', 'primalstage:stone_pebble')
-    event.shapeless('2x twigs:pebble', 'minecraft:gravel')
+    event.shapeless('notreepunching:stone_loose_rock', 'primalstage:stone_pebble')
+    event.shapeless('2x notreepunching:stone_loose_rock', 'minecraft:gravel')
 })
 
 ServerEvents.tags('item', event => {
-    stones = getIdsOfTags(event, 'minecraft:stone_crafting_materials')
     event.add('minecraft:stone_crafting_materials', [
         'alexscaves:limestone',
         'blockus:limestone', 
@@ -30,6 +29,7 @@ ServerEvents.tags('item', event => {
         'create:scorchia',
         'create:scoria',
         'create:veridium',
+        '#forge:cobblestone',
         'geologicexpansion:white_prismatic_stone',
         'geologicexpansion:orange_prismatic_stone',
         'geologicexpansion:magenta_prismatic_stone',
@@ -54,10 +54,13 @@ ServerEvents.tags('item', event => {
         'twigs:bloodstone',
         custom.corpstone
     ])
+
     event.add('notreepunching:loose_rocks', ['twigs:pebble', 'spelunkers_charm:deepslate_rock', 'spelunkers_charm:rock', 'spelunkers_charm:dripstone_rock', 'spelunkers_charm:basalt_rock'])
     event.add(pack('overworld_rocks'), getIdsOfTags(event, 'notreepunching:loose_rocks'))
     event.add(pack('aether_rocks'), custom.holy_pebble)
     event.add('notreepunching:loose_rocks', custom.holy_pebble)
+
+    stones = getIdsOfTags(event, 'minecraft:stone_crafting_materials')
 })
 
 

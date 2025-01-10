@@ -164,6 +164,8 @@ PlayerEvents.tick(event => {
     let random = level.getRandom()
     if (random.nextInt(chanceRandomBound) != 0) return
 
+    if (random.nextInt(1) != 0) return
+
     let siegeGroup = MOB_SIEGES[random.nextInt(MOB_SIEGES.length)]
     let siegeMembers = siegeGroup.members
     let playerPos = new BlockPos(player.getX(), player.getY(), player.getZ())
@@ -317,4 +319,17 @@ function varRandInt(random, base, bound) {
 
 function getRandomElement(random, array) {
     return array[random.nextInt(array.length)]
+}
+
+/**
+ * @param {String} difficulty 
+ * @returns {Number}
+ */
+function transformDifficulty(difficulty) {
+    switch (difficulty) {
+        default: return null
+        case 'easy': return 3
+        case 'normal': return 2
+        case 'hard': return 1
+    }
 }

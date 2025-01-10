@@ -10,34 +10,42 @@ function LootTableObject(event) {
 }
 
 LootTableObject.prototype = {
-     blockDropsItself: function(block) {
-          this.event.addBlockLootModifier(block).addLoot(block)
-          return this
-     },
+    /**
+      * Checks the insertions to see if that have been registered as a recipe. Makes debugging missing recipes way easier!
+      * @param {Internal.LootModificationEventJS} event
+      */
+    start: function(event) {
+        this.event = event
+    },
 
-     replaceBlockDrop: function(oldDrop, newDrop, blocks) {
-          comfuncs.ensureArray(blocks).forEach(block => this.event.addBlockLootModifier(block).replaceLoot(oldDrop, newDrop, true))
-          return this
-     },
+    blockDropsItself: function(block) {
+        this.event.addBlockLootModifier(block).addLoot(block)
+        return this
+    },
 
-     removeBlockDrop: function(drop, blocks) {
-          comfuncs.ensureArray(blocks).forEach(block => this.event.addBlockLootModifier(block).removeLoot(drop))
-          return this
-     },
+    replaceBlockDrop: function(oldDrop, newDrop, blocks) {
+        comfuncs.ensureArray(blocks).forEach(block => this.event.addBlockLootModifier(block).replaceLoot(oldDrop, newDrop, true))
+        return this
+    },
 
-     replaceBlockDrops: function(arrayVariables) {
-          arrayVariables.forEach(vars => {
-               this.replaceBlockDrop(vars[0], vars[1], vars[2])
-          })
-          return this
-     },
+    removeBlockDrop: function(drop, blocks) {
+        comfuncs.ensureArray(blocks).forEach(block => this.event.addBlockLootModifier(block).removeLoot(drop))
+        return this
+    },
 
-     removeBlockDrops: function(arrayVariables) {
-          arrayVariables.forEach(vars => {
-               this.removeBlockDrop(vars[0], vars[1])
-          })
-          return this
-     }
+    replaceBlockDrops: function(arrayVariables) {
+        arrayVariables.forEach(vars => {
+            this.replaceBlockDrop(vars[0], vars[1], vars[2])
+        })
+        return this
+    },
+
+    removeBlockDrops: function(arrayVariables) {
+        arrayVariables.forEach(vars => {
+            this.removeBlockDrop(vars[0], vars[1])
+        })
+        return this
+    }
 }
 
 //Json stuff that LootJs cannot do on it's own

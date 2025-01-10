@@ -7,6 +7,7 @@ var gravel_drops = [
 ]
 
 recipes((event, funcs) => {
+     event.replaceInput({input: 'minecraft:gravel'}, 'minecraft:gravel', '#forge:gravel')
      event.replaceInput({input: '#forge:slag', output: 'thermal:slag_block'}, '#forge:slag', 'immersiveengineering:slag_gravel')
      gravel_drops.forEach(gravel => {
           funcs.twoSquare(gravel.type, gravel.ingredient).vanilla()

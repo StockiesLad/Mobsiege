@@ -10,6 +10,8 @@ recipes((event, funcs) => {
 
     //Making variants of charcoal more unique and useful
     event.replaceInput({input: custom.medium_grade_charcoal, output: 'minecraft:black_dye'}, custom.medium_grade_charcoal, packTag('coal/all'))
+    event.replaceInput({input: '#minecraft:coals', output: 'blockus:asphalt'}, '#minecraft:coals', packTag('coal/all'))
+
     event.replaceInput({output: 'toughasnails:charc_os'}, custom.medium_grade_charcoal, packTag('coal/grade/atleast_good'))
     event.replaceInput({output: 'thermal:ice_charge'}, custom.medium_grade_charcoal, packTag('coal/grade/at_most_low'))
     event.replaceInput({output: 'thermal:lightning_charge'}, custom.medium_grade_charcoal, packTag('coal/grade/atleast_good'))

@@ -26,6 +26,8 @@ const comfuncs = global.functions.common({})
 const commaths = global.functions.math
 const custom = global.customImpl
 
+//It's very important that we always cache the event extensions. This is far more performant
+
 //Tags
     /**
      * @callback ExtendedTagEvent
@@ -41,26 +43,38 @@ const custom = global.customImpl
         blockTags(call)
     }
 
+    /** @type {TagObject} */ var itemTagsCache = null
+
     /**
      * @param {ExtendedTagEvent} call
      */
     function itemTags(call) {
         ServerEvents.tags('item', event => {
-            call(event, new TagObject(event))
+            if (itemTagsCache == null) 
+                itemTagsCache = new TagObject(event)
+            else itemTagsCache.start(event)
+            call(event, itemTagsCache)
         })
     }
+
+    /** @type {TagObject} */ var blockTagsCache = null
 
     /**
      * @param {ExtendedTagEvent} call
      */
     function blockTags(call) {
         ServerEvents.tags('block', event => {
-            call(event, new TagObject(event))
+            if (blockTagsCache == null) 
+                blockTagsCache = new TagObject(event)
+            else blockTagsCache.start(event)
+            call(event, blockTagsCache)
         })
     }
 
 
 //Loot Tables
+    /** @type {LootTableObject} */ var lootTablesCache = null
+
     /**
      * @callback ExtendedLootTableEvent
      * @param {Internal.LootModificationEventJS} call.event
@@ -72,13 +86,17 @@ const custom = global.customImpl
      */
     function lootTables(call) {
         LootJS.modifiers(event => {
-            call(event, new LootTableObject(event))
+            if (lootTablesCache == null) 
+                lootTablesCache = new LootTableObject(event)
+            else lootTablesCache.start(event)
+            call(event, lootTablesCache)
         })
     }
 
 
 //Recipes
-
+    /** @type {RecipeObject} */ var recipesCache = null
+    
     /**
      * @callback ExtendedRecipeEvent
      * @param {Internal.RecipesEventJS} call.event
@@ -90,8 +108,10 @@ const custom = global.customImpl
      */
     function recipes(call) {
         ServerEvents.recipes(event => {
-            var recipes = new RecipeObject(event)
-            call(event, recipes)
-            recipes.testInsertions()
+            if (recipesCache == null) 
+                recipesCache = new RecipeObject(event)
+            else recipesCache.start(event)
+            call(event, recipesCache)
+            recipesCache.testInsertions(event)
         })
     }

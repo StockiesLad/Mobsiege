@@ -14,6 +14,14 @@ function RecipeObject(event) {
 }
 // There are too many god damn recipes. But funnily enough, I need/use them all.
 RecipeObject.prototype = {
+     /**
+      * Checks the insertions to see if that have been registered as a recipe. Makes debugging missing recipes way easier!
+      * @param {Internal.RecipesEventJS} event
+      */
+     start: function(event) {
+          this.event = event
+     },
+
      //Removal - some of these return their removed entry.
      removeInsurely: function(filter, insuredOutput) {
           var output
@@ -225,6 +233,33 @@ RecipeObject.prototype = {
           return this
      },
 
+     /**
+      * 
+      * @param {Array.<Internal.Item | Internal.InputFluid>} results 
+      * @param {Internal.Item} ingredient 
+      * @returns 
+      */
+     squeezing: function(results, ingredient) {
+          //Abstract this process to other custom recipes
+          var json = {
+               type: "integrateddynamics:squeezer",
+               item: ingredient,
+               result: {}
+          }
+
+          results.forEach(result => {
+               if (result['fluid'] != null || result['fluidTag'] != null)
+                    json.result.fluid = result
+               else {
+                    if (json.result['items'] == null)
+                         json.result.items = []
+                    json.result.items.push(Item.of(result))
+               }
+          })
+
+          return this.event.custom(json)
+     },
+
      //Global Recipes - this is to ensure compat between multiple mods in one spot.
      globalDrying: function(result, ingredient) {
           this.basinDrying(result, ingredient)
@@ -283,7 +318,7 @@ RecipeObject.prototype = {
      },
 
      globalPressing: function(results, ingredients) {
-          this.event.recipes.immersiveengineering.metal_press(results, ingredients, 'immersiveengineering:mold_plate')
+          //this.event.recipes.immersiveengineering.metal_press(results, ingredients, 'immersiveengineering:mold_plate')
           this.event.recipes.create.pressing(results, ingredients)
           this.event.recipes.thermal.press(results, ingredients)
           return this
@@ -314,6 +349,7 @@ RecipeObject.prototype = {
 
      /**
       * Checks the insertions to see if that have been registered as a recipe. Makes debugging missing recipes way easier!
+      * Insertions will not default to vanilla but I'd rather the code be a little bit more verbose to be more explicit with recipe types.
       */
      testInsertions: function() {
           this.insertions.forEach(insert => {

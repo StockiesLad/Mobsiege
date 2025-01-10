@@ -4,14 +4,18 @@ recipes((event, funcs) => {
      funcs.removeById([
           'quark:building/crafting/furnaces/blackstone_blast_furnace',
           'quark:building/crafting/furnaces/deepslate_blast_furnace',
+          'quark:building/crafting/furnaces/cobblestone_furnace',
+          'quark:building/crafting/furnaces/mixed_furnace',
           'aether_genesis:holystone_blast_furnace'
      ])
 
      event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', '#forge:furnaces')
      event.replaceInput({output: 'minecraft:blast_furnace'}, 'primalstage:diamond_plate', preferredItemId('forge:plates/iron'))
-     funcs.planetAlt(funcs.removeByOutput('minecraft:furnace'), 'primalstage:kiln', '#forge:stone', custom.fire_brick_block).vanilla()
+     event.shapeless(packTag('primitive_furnaces'), packTag('primitive_furnaces'))
      funcs.removeRecipes({type: 'minecraft:crafting_shaped', output: packTag('primitive_furnaces')}, (result, ingredients) => {
-          funcs.planetAlt(result.withCount(1), [ingredients[0], custom.fire_brick_block], 'primalstage:kiln').vanilla()
+          //The places are switching to prevent potential overrides. It just makes more sense
+          if (result.is('minecraft:furnace')) funcs.planetAlt(result.withCount(1), [custom.fire_brick_block, ingredients[0]], 'primalstage:kiln').vanilla()
+          else funcs.planetAlt(result.withCount(1), [ingredients[0], custom.fire_brick_block], 'primalstage:kiln').vanilla()
      })
 })
 

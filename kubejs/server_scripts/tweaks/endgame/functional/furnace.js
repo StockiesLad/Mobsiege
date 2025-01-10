@@ -1,4 +1,4 @@
 recipes((event, funcs) => {
-     funcs.planetAlt(funcs.removeByOutput('projecte:dm_furnace'), ['ironfurnaces:diamond_furnace', 'projecte:dark_matter'], 'enderio:ender_crystal').vanilla()
-     funcs.planetAlt(funcs.removeByOutput('projecte:rm_furnace'), ['projecte:dm_furnace', 'projecte:red_matter'], 'enderio:ender_crystal').vanilla()
+     funcs.planetAlt(funcs.removeByOutput('projecte:dm_furnace'), ['bedrockium_awaken:bedrockium_ingot', 'projecte:dark_matter'], 'ironfurnaces:diamond_furnace').vanilla()
+     funcs.planetAlt(funcs.removeByOutput('projecte:rm_furnace'), ['bedrockium_awaken:awakened_bedrockium_ingot', 'projecte:red_matter'],  'projecte:dm_furnace').vanilla()
 })

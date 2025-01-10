@@ -10,6 +10,14 @@ function TagObject(event) {
 }
 
 TagObject.prototype = {
+     /**
+      * Checks the insertions to see if that have been registered as a recipe. Makes debugging missing recipes way easier!
+      * @param {Internal.TagEventJS} event
+      */
+     start: function(event) {
+          this.event = event
+     },
+
      add: function(tag, entries) {
           this.event.add(tag, entries)
           return this
