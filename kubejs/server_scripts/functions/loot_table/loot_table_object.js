@@ -24,12 +24,12 @@ LootTableObject.prototype = {
     },
 
     replaceBlockDrop: function(oldDrop, newDrop, blocks) {
-        comfuncs.ensureArray(blocks).forEach(block => this.event.addBlockLootModifier(block).replaceLoot(oldDrop, newDrop, true))
+        common.alwaysArray(blocks).forEach(block => this.event.addBlockLootModifier(block).replaceLoot(oldDrop, newDrop, true))
         return this
     },
 
     removeBlockDrop: function(drop, blocks) {
-        comfuncs.ensureArray(blocks).forEach(block => this.event.addBlockLootModifier(block).removeLoot(drop))
+        common.alwaysArray(blocks).forEach(block => this.event.addBlockLootModifier(block).removeLoot(drop))
         return this
     },
 
@@ -54,15 +54,15 @@ function ofOverride(overrides) {
  }
  
  function ofConditions(conditions, overrides) {
-     return {conditions: comfuncs.ensureArray(conditions), functions: [],  overrides: overrides}
+     return {conditions: common.alwaysArray(conditions), functions: [],  overrides: overrides}
  }
  
  function ofFunctions(functions, overrides) {
-     return {conditions: [], functions: comfuncs.ensureArray(functions), overrides: overrides}
+     return {conditions: [], functions: common.alwaysArray(functions), overrides: overrides}
  }
  
  function ofFuncConds(conditions, functions, overrides) {
-     return {conditions: comfuncs.ensureArray(conditions), functions: comfuncs.ensureArray(functions),  overrides: overrides}
+     return {conditions: common.alwaysArray(conditions), functions: common.alwaysArray(functions),  overrides: overrides}
  }
  
  function ltItemEntry(item, modifiers) {
@@ -85,7 +85,7 @@ function ofOverride(overrides) {
      return {
          rolls: 1,
          type: "minecraft:group",
-         children: comfuncs.ensureArray(children)
+         children: common.alwaysArray(children)
     }
  }
  
@@ -93,7 +93,7 @@ function ofOverride(overrides) {
      var json = {
          rolls: 1,
          type: "minecraft:alternatives",
-         entries: comfuncs.ensureArray(entries)
+         entries: common.alwaysArray(entries)
      }
  
      if (modifiers != null) {
@@ -107,7 +107,7 @@ function ofOverride(overrides) {
  function childGroupPool(children, modifiers) {
      var json = {
          type: "minecraft:group",
-         children: comfuncs.ensureArray(children)
+         children: common.alwaysArray(children)
      }
  
      if (modifiers != null) {
@@ -121,12 +121,12 @@ function ofOverride(overrides) {
  function childAlternativesPool(children, modifiers) {
      var json = {
         type: "minecraft:alternatives",
-        children: comfuncs.ensureArray(children)
+        children: common.alwaysArray(children)
      }
  
      if (modifiers != null) {
-         json.conditions = comfuncs.ensureArray(modifiers.conditions)
-         json.functions = comfuncs.ensureArray(modifiers.functions)
+         json.conditions = common.alwaysArray(modifiers.conditions)
+         json.functions = common.alwaysArray(modifiers.functions)
      }
  
      return json
@@ -134,10 +134,10 @@ function ofOverride(overrides) {
  
  function nonSilkTouchPool(entries, rolls, bonus_rolls) {
      return {
-         conditions: comfuncs.ensureArray(conditionInverted(conditionSilkTouch())),
-         rolls: comfuncs.notNull(rolls, 1),
-         bonus_rolls: comfuncs.notNull(bonus_rolls, 0),
-         entries: comfuncs.ensureArray(entries)
+         conditions: common.alwaysArray(conditionInverted(conditionSilkTouch())),
+         rolls: common.insure(rolls, 1),
+         bonus_rolls: common.insure(bonus_rolls, 0),
+         entries: common.alwaysArray(entries)
     }
  }
  
@@ -147,7 +147,7 @@ function ofOverride(overrides) {
          entries: [{
               type: 'minecraft:item',
               name: item,
-              conditions: comfuncs.ensureArray(conditionSilkTouch())
+              conditions: common.alwaysArray(conditionSilkTouch())
          }]
     }
  }

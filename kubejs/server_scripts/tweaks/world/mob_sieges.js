@@ -169,13 +169,13 @@ PlayerEvents.tick(event => {
     let siegeGroup = MOB_SIEGES[random.nextInt(MOB_SIEGES.length)]
     let siegeMembers = siegeGroup.members
     let playerPos = new BlockPos(player.getX(), player.getY(), player.getZ())
-    let playerInSafeBiome = comfuncs.functionalVar(level.getBiome(player), biome => biome == 'minecraft:mushroom_fields')  
+    let playerInSafeBiome = level.getBiome(player) == 'minecraft:mushroom_fields'  
     let playerChunkPos = level.getChunkAt(playerPos).getPos()
     let isPlayerOnSurface = testUnderground(level, playerPos).length > 1
     let isPlayerCreative = player.isCreative()
     let siegeBlockPos = new BlockPos(player.getX() + varRandInt(random, spawnDistBase, spawnDistVariation), player.getY(), player.getZ() + varRandInt(random, spawnDistBase, spawnDistVariation))
     let isProtected = isChunkSafe(level, playerChunkPos)
-    let spawnDist = commaths.diff(siegeBlockPos.getY(), player.getY())
+    let spawnDist = maths.diff(siegeBlockPos.getY(), player.getY())
     let mobCount = random.nextInt(mobCountVariation) + mobCountBase
 
     while(!level.canSeeSky(siegeBlockPos))
@@ -199,7 +199,7 @@ PlayerEvents.tick(event => {
 
     )
     if (spawnDist < spawnDistMax && isPlayerOnSurface && !isProtected && !playerInSafeBiome && !isPlayerCreative) {
-        level.tell(Text.darkRed('[Mobsiege] ' + comfuncs.interlaceString(getRandomElement(random, announcements), [
+        level.tell(Text.darkRed('[Mobsiege] ' + common.interlaceString(getRandomElement(random, announcements), [
             {name: 'playerName', value: player.getName().getString()}, 
             {name: 'siegeGroup', value: siegeGroup.name},
             {name: 'sgArticle', value: siegeGroup.name.charAt(0) == 'U' ? 'an' : 'a'}, 
@@ -216,7 +216,7 @@ PlayerEvents.tick(event => {
                     let memberPos = findSurfacePosition(level, variedPos)
 
                     // Error Correction //
-                    if (commaths.diff(memberPos.getY(), siegeBlockPos.getY()) >= 10) {
+                    if (maths.diff(memberPos.getY(), siegeBlockPos.getY()) >= 10) {
                         var corrected = false
                         var directions = [
                             Direction.NORTH,
@@ -229,7 +229,7 @@ PlayerEvents.tick(event => {
                             var newMemberPos = variedPos
                             for (var deviation = 0; deviation < square ; deviation++) {
                                 newMemberPos = findSurfacePosition(level, newMemberPos.relative(direction))
-                                if (commaths.diff(newMemberPos.getY(), siegeBlockPos.getY()) >= 10) {
+                                if (maths.diff(newMemberPos.getY(), siegeBlockPos.getY()) >= 10) {
                                     corrected = true
                                     memberPos = newMemberPos
                                     break
@@ -304,7 +304,7 @@ function testDirection(level, originBlockPos, blockPos, direction, exposedPositi
             exposedPositions.push(blockPos)
         else {
             direction.forEach(axisMove => blockPos = blockPos.relative(axisMove))
-            if (!(commaths.diff(originBlockPos.getX(), blockPos.getX()) > surfaceSearchDist || commaths.diff(originBlockPos.getY(), blockPos.getY()) > surfaceSearchDist || commaths.diff(originBlockPos.getZ(), blockPos.getZ()) > surfaceSearchDist))
+            if (!(maths.diff(originBlockPos.getX(), blockPos.getX()) > surfaceSearchDist || maths.diff(originBlockPos.getY(), blockPos.getY()) > surfaceSearchDist || maths.diff(originBlockPos.getZ(), blockPos.getZ()) > surfaceSearchDist))
                 testDirection(level, originBlockPos, blockPos, direction, exposedPositions)
         }
     }

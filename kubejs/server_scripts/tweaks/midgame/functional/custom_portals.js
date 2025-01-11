@@ -1,5 +1,5 @@
 recipes((event, funcs) => {
-     comfuncs.iterate([
+     common.alwaysArray([
           'customportals:white_portal_catalyst',
           'customportals:light_gray_portal_catalyst',
           'customportals:gray_portal_catalyst',
@@ -16,5 +16,5 @@ recipes((event, funcs) => {
           'customportals:purple_portal_catalyst',
           'customportals:magenta_portal_catalyst',
           'customportals:pink_portal_catalyst'
-     ], item => event.replaceInput({input: 'minecraft:ender_eye', output: item}, 'minecraft:ender_pearl', '#forge:ingots/enderium'))
+     ]).forEach(item => event.replaceInput({input: 'minecraft:ender_eye', output: item}, 'minecraft:ender_pearl', '#forge:ingots/enderium'))
 })

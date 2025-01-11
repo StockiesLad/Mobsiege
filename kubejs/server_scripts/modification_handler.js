@@ -22,11 +22,12 @@ const Mobsiege2Minecraft = Java.loadClass('com.stockieslad.mobsiege.Mobsiege2Min
 const Mobsiege2ToughAsNails = Java.loadClass('com.stockieslad.mobsiege.Mobsiege2ToughAsNails')
 
 const modpackId = global.modpackId
-const comfuncs = global.functions.common({})
-const commaths = global.functions.math
-const custom = global.customImpl
+const maths = global.mathHelper
+const common = global.commonHelper
+const stacks = global.stackHelper
+const content = global.content
 
-global.hiddenItems = []
+/** @type {Array<String|Internal.Item>} */ global.hiddenItems = []
 
 //It's very important that we always cache the event extensions. This is far more performant
 

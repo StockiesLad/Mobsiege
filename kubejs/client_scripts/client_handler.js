@@ -1,2 +1,2 @@
-const comfuncs = global.functions.common()
-const custom = global.customImpl
+const common = global.commonHelper
+const content = global.content

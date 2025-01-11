@@ -5,6 +5,12 @@
  * @property {Number[]} indexes
  */
 
+/**
+ * @class ShapedIngredients
+ * @constructor
+ * @param {[]} ingredients 
+ * @param {Number} size 
+ */
 function ShapedIngredients(ingredients, size) {
      if (!(typeof(ingredients[0]) == 'string' || ingredients.every(ingredientInsert => Array.isArray(ingredientInsert))))  {
           console.error(`Failed to create ShapedIngredients. ingredients=${JSON.stringify(ingredients)}`)
@@ -13,8 +19,8 @@ function ShapedIngredients(ingredients, size) {
 
      if (size == null) {
           var largestIndex = -1
-          comfuncs.ensureArraySuper(ingredients, ingredients[0]).forEach(ingredient => {
-               comfuncs.ensureArray(ingredient[1]).forEach(i => {
+          common.alwaysSquareArray(ingredients, ingredients[0]).forEach(ingredient => {
+               common.alwaysArray(ingredient[1]).forEach(i => {
                     if (i > largestIndex)
                          largestIndex = i
                })
@@ -25,12 +31,12 @@ function ShapedIngredients(ingredients, size) {
      /** @type {Array.<IngredientObject>} */ this.mapper = []
      this.size = size
           
-     comfuncs.ensureArraySuper(ingredients, ingredients[0]).forEach(ingredient => {
-          var indexes = comfuncs.ensureArray(ingredient[1])
+     common.alwaysSquareArray(ingredients, ingredients[0]).forEach(ingredient => {
+          var indexes = common.alwaysArray(ingredient[1])
           if (ingredient.length == 3) {
                var exceptedIndexes = indexes
                indexes = []
-               var fillArea = comfuncs.ensureArray(ingredient[2])
+               var fillArea = common.alwaysArray(ingredient[2])
                var fillOrigin = fillArea.length == 2 ? fillArea[0] : 0
                var fillDestination = fillArea.length != 0 ? fillArea[fillArea.length - 1] : this.length
                for (var i = fillOrigin; i <= fillDestination; i++)

@@ -27,12 +27,12 @@ RecipeObject.prototype = {
           var output
           var input
 
-          if (Object.getOwnPropertyNames(filter).includes('output')) {
+          if (filter['output'] != null) {
                output = filter.output
                filter.output = Item.of(output)
           } else output = null
                
-          if (Object.getOwnPropertyNames(filter).includes('input')) {
+          if (filter['input'] != null) {
                input = filter.input
                filter.input = Item.of(input)
           } else input = null
@@ -82,13 +82,17 @@ RecipeObject.prototype = {
           return item
      },
 
+     /**
+      * @param {String[]|String} ids 
+      * @returns 
+      */
      removeById: function(ids) {
-          comfuncs.ensureArray(ids).forEach(id => this.removeInsurely({id: id}))
+          common.alwaysArray(ids).forEach(id => this.removeInsurely({id: id}))
           return this
      },
 
      remove: function(filters) {
-          comfuncs.ensureArray(filters).forEach(filter => {
+          common.alwaysArray(filters).forEach(filter => {
                this.removeInsurely(filter)
           })
      },
@@ -97,8 +101,8 @@ RecipeObject.prototype = {
       * Removes an item from the Recipe Viewers as well as from Recipes by IO.
       */
      nuke: function(items) {
-          comfuncs.ensureArray(items).forEach(item => {
-               comfuncs.hide(item)
+          common.alwaysArray(items).forEach(item => {
+               stacks.hide(item)
                this.removeByIo(item)
           })
           return this
@@ -120,19 +124,23 @@ RecipeObject.prototype = {
                recipe: {
                     type: 'minecraft:crafting_shaped',
                     pattern: pattern,
-                    key: comfuncs.handleProperties(keys, ingredient => Ingredient.of(ingredient)), //ingredientEntries,
+                    key: common.mapProperties(keys, ingredient => Ingredient.of(ingredient)), //ingredientEntries,
                     result: Item.of(result)
                }
           })
           return this
      },
 
+     /**
+      * @param {String|Internal.Item} result 
+      * @param {(String|Internal.Item|Internal.Ingredient)[]} ingredients 
+      */
      toolDamagingShapeless: function(result, ingredients) {
           this.event.custom({
                type: 'notreepunching:tool_damaging_shapeless',
                recipe: {
                     type: 'minecraft:crafting_shapeless',
-                    ingredients: comfuncs.handleValues(ingredients, ingredient => Ingredient.of(ingredient)),
+                    ingredients: common.alwaysArray(ingredients).map(ingredient => Ingredient.of(ingredient)),
                     result: Item.of(result)
                }
           })
@@ -143,7 +151,7 @@ RecipeObject.prototype = {
           this.event.custom({
                type: "primalstage:kiln",
                input: findId(ingredient),
-               cookingtime: comfuncs.notNull(cookingTime, 1200),
+               cookingtime: common.insure(cookingTime, 1200),
                result: findId(result)
           })
           return this
@@ -164,28 +172,33 @@ RecipeObject.prototype = {
      drying: function(result, ingredient, cookingTime) {
           this.event.custom({
                type: "primalstage:drying",
-               input: ingredient,
-               cookingtime: comfuncs.notNull(cookingTime, 600),
-               result: result
+               input: findId(ingredient),
+               cookingtime: common.insure(cookingTime, 600),
+               result: findId(result)
           })
           return this
      },
 
+     /**
+      * 
+      * @param {String|Item} result 
+      * @param {String|Ingredient} ingredient 
+      * @param {Number} cookingTime 
+      */
      basinDrying: function(result, ingredient, cookingTime) {
-          cookingTime = comfuncs.notNull(cookingTime, 100)
           this.event.custom({
                type: "integrateddynamics:drying_basin",
                item: ingredient,
-               duration: cookingTime,
+               duration: common.insure(cookingTime, 100),
                result: Item.of(result)
           })
           return this
      },
 
-     endothermicDehydration: function(result, ingredient) {
+     endothermicDehydration: function(result, ingredient, energy) {
           this.event.custom({
                type: "thermal_extra:endothermic_dehydrator",
-               energy: 4000,
+               energy: common.insure(energy, 4000),
                ingredients: [Ingredient.of(ingredient)],
                result: [Item.of(result)]
           })
@@ -196,48 +209,48 @@ RecipeObject.prototype = {
           this.event.custom({
                type: "primalstage:grill",
                input: Item.of(ingredient).getIdLocation().toString(),
-               cookingtime: comfuncs.notNull(cookingTime, 600),
+               cookingtime: common.insure(cookingTime, 600),
                result: Item.of(result).getIdLocation().toString()
           })
           return this
      },
 
-     fluidMixing: function(results, ingredients) {
+     fluidMixing: function(results, ingredients, energy) {
           this.event.custom({
                type: "thermal_extra:fluid_mixer",
-               energy: 10000,
-               ingredients: comfuncs.ensureArray(ingredients),
-               result: comfuncs.ensureArray(results)
+               energy: common.insure(energy, 10000),
+               ingredients: common.alwaysArray(ingredients),
+               result: common.alwaysArray(results)
           })
           return this
      },
 
-     componentAssembly: function(results, ingredients) {
+     componentAssembly: function(results, ingredients, energy) {
           this.event.custom({
                type: "thermal_extra:component_assembly",
-               energy: 25000,
-               ingredients: comfuncs.ensureArray(ingredients),
-               result: comfuncs.ensureArray(results)
+               energy: common.insure(energy, 25000),
+               ingredients: common.alwaysArray(ingredients),
+               result: common.alwaysArray(results)
           })
           return this
      },
 
-     chilling: function(results, ingredients) {
+     chilling: function(results, ingredients, energy) {
           this.event.custom({
                type: "thermal:chiller",
-               energy: 15000,
-               ingredients: comfuncs.ensureArray(ingredients),
-               result: comfuncs.ensureArray(results),
+               energy: common.insure(energy, 15000),
+               ingredients: common.alwaysArray(ingredients),
+               result: common.alwaysArray(results),
           })
           return this
      },
 
-     advancedFluidRefining: function(results, ingredients) {
+     advancedFluidRefining: function(results, ingredients, energy) {
           this.event.custom({
                type: "thermal_extra:advanced_refinery",
-               energy: 4000,
-               ingredients: comfuncs.ensureArray(ingredients),
-               result: comfuncs.ensureArray(results),
+               energy: common.insure(energy, 4000),
+               ingredients: common.alwaysArray(ingredients),
+               result: common.alwaysArray(results),
           })
           return this
      },
@@ -289,21 +302,21 @@ RecipeObject.prototype = {
      },
 
      globalSmelting: function(result, ingredient, xp) {
-          xp = comfuncs.notNull(xp, 0)
+          xp = common.insure(xp, 0)
           this.event.smelting(result, ingredient).xp(xp)
           this.event.blasting(result, ingredient).xp(xp)
           return this
      },
 
      globalCooking: function(result, ingredient, xp) {
-          xp = comfuncs.notNull(xp, 0)
+          xp = common.insure(xp, 0)
           this.event.campfireCooking(result, ingredient).xp(xp)
           this.globalSmelting(result, ingredient, xp)
           return this
      },
 
      globalPrimitiveCooking: function(result, ingredient, xp) {
-          xp = comfuncs.notNull(xp, 0)
+          xp = common.insure(xp, 0)
           this.grilling(result, ingredient)
           this.globalCooking(result, ingredient)
           return this
@@ -334,7 +347,7 @@ RecipeObject.prototype = {
      },
 
      globalLiquefaction: function(resultFluid, resultItem, ingredient) {
-          resultItem = comfuncs.notNull(resultItem, 'minecraft:air')
+          resultItem = common.insure(resultItem, 'minecraft:air')
           this.event.recipes.thermal.pyrolyzer([resultFluid, resultItem], ingredient)
           this.event.recipes.immersiveengineering.coke_oven(resultItem, ingredient).creosote(resultFluid.amount)
           return this
@@ -426,27 +439,28 @@ RecipeObject.prototype = {
 
      /**
       * @param {Object} result
-      * @param {Array} ingredientObjects 
+      * @param {[]} ingredients 
+      * @param {Number} gaps
       * @param {Number} size
       * @returns {RecipeInsertion}
       */
      rollingSquare: function(result, ingredients, gaps, size) {
-          gaps = comfuncs.ensureArray(gaps)
+          gaps = common.alwaysArray(gaps)
           if (gaps == null || size == null)
                console.error('[recipes.generate.rollingSquare]: Invalid gaps and/or size!')
           var ingredientObjects = []
-          comfuncs.quickerate(ingredients, (ingredient, index) => ingredientObjects[index] = [ingredient, []])
-          comfuncs.forEasy(size, height => comfuncs.forEasy(size, width => {
+          ingredients.forEach((ingredient, index) => ingredientObjects[index] = [ingredient, []])
+          for (var height = 0; height < size; height++) for (var width = 0; width < size; width++) {
                var ingredientIndex
                if (gaps.length == 1)
                     ingredientIndex = width + height * gaps[0]
                else if (gaps.length >= 2) {
-                    ingredientIndex = width * gaps[1] + commaths.rotate1D(height * gaps[0], ingredients.length)
+                    ingredientIndex = width * gaps[1] + maths.locateLine(height * gaps[0], ingredients.length)
                     if (gaps.length == 3)
                          ingredientIndex = gaps[2](ingredientIndex, ingredients.length, size, width, height)
                }    
-               ingredientObjects[commaths.rotate1D(ingredientIndex, ingredients.length)][1].push(width + height * size)
-          }))
+               ingredientObjects[maths.locateLine(ingredientIndex, ingredients.length)][1].push(width + height * size)
+          }
           return this.insert(result, ingredientObjects, size)
      },
      
@@ -552,11 +566,16 @@ RecipeObject.prototype = {
           return this.insert(result, ['6x ' + input, [0, 1, 2, 3, 4, 5]])
      },
 
+     /**
+      * 
+      * @param {(Internal.Item|String)[]} items 
+      * @returns 
+      */
      loop: function(items) {
-          comfuncs.quickerate(items.length, i => {
+          for (var i = 0; i < items.length; i++) {
                var nextI = i + 1
-               event.shapeless(items[i], items[nextI >= items.length ? 0 : nextI])
-          })
+               this.event.shapeless(items[i], items[nextI >= items.length ? 0 : nextI])
+          }
           return this
      }
 }

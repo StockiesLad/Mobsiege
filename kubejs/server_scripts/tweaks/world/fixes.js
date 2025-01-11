@@ -25,21 +25,21 @@ var woodSet = (modid, type) => {
      ]
 }
 
-comfuncs.hide([
+stacks.hide([
      'primalstage:diamond_plate',
      'primalstage:charcoal_log'
      /*'biomeswevegone:tall_prairie_grass', 
      'biomeswevegone:prairie_grass'*/
 ])
 
-comfuncs.hide(woodSet('traverse', 'fir'))
-comfuncs.hide(woodSet('biomeswevegone', 'cypress'))
-comfuncs.hide(woodSet('biomeswevegone', 'fir'))
-comfuncs.hide(woodSet('biomeswevegone', 'mahogany'))
-comfuncs.hide(woodSet('biomesoplenty', 'redwood'))
+stacks.hide(woodSet('traverse', 'fir'))
+stacks.hide(woodSet('biomeswevegone', 'cypress'))
+stacks.hide(woodSet('biomeswevegone', 'fir'))
+stacks.hide(woodSet('biomeswevegone', 'mahogany'))
+stacks.hide(woodSet('biomesoplenty', 'redwood'))
 
 recipes((event, funcs) => {
-     comfuncs.iterate([
+     common.alwaysArray([
           {id: 'quark:tweaks/crafting/slab_to_block'},
           {id: 'create_confectionery:chocolate_recipe_6'},
           {id: 'create_confectionery:white_chocolate_recipe_6'},
@@ -56,13 +56,13 @@ recipes((event, funcs) => {
           {id: 'deeperdarker:resonarium_axe_smithing'},
           {id: 'deeperdarker:resonarium_shovel_smithing'},
           {id: 'deeperdarker:resonarium_hoe_smithing'}
-     ], (o) => event.remove(o))
+     ]).forEach((o) => event.remove(o))
 
-     comfuncs.iterate([
+     common.alwaysArray([
           'aetherdelight:quickroot_crate',
           'aetherdelight:chromaberry_crate',
           'aetherdelight:luxbuds_salad'
-     ], o => funcs.nuke(o))
+     ]).forEach(o => funcs.nuke(o))
 
      event.shapeless(funcs.removeByOutput('aetherdelight:strange_root_salad'), ['aether_redux:zanberry', 'aether_redux:lightroot_clump', 'minecraft:bowl'])
      event.shapeless(funcs.removeByOutput('aetherdelight:oat_cookie'), ['aether:swet_ball', Item.of('aether_redux:wynd_oats', 2)])
@@ -112,7 +112,7 @@ ServerEvents.recipes(event => {
           })
           if (!fail)
                if (!event.containsRecipe({input: ingredients, output: result, type: 'create:pressing'}))
-                    if ((ingredients.length == 1 || (ingredients.length == 2 && comfuncs.functionalVar(ingredients[1]['item'], i => i != null && Item.of(i).getTags().contains('thermal:crafting/dies'))) && result.length == 1)) {
+                    if ((ingredients.length == 1 || (ingredients.length == 2 && ${comfuncs}.functionalVar(ingredients[1]['item'], i => i != null && Item.of(i).getTags().contains('thermal:crafting/dies'))) && result.length == 1)) {
                          console.info(`PASSED: ${recipe.getId()}`)
                          event.recipes.create.pressing(result[0], ingredients[0])
                }
@@ -132,6 +132,6 @@ ServerEvents.tags('item', event => {
 })
 
 ServerEvents.tags('block', event => {
-     global.functions.sound.invoke('setSoundTag', {event: event})
+     stacks.soundMap('setSoundTag', {event: event})
      event.add('mineable/pickaxe', 'minecraft:glowstone')
 })

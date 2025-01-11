@@ -1,55 +1,55 @@
 StartupEvents.registry('item', event => {
-     Mobsiege2ToughAsNails.addThermoregulators(comfuncs.packDef('thermoregulators'))
+     Mobsiege2ToughAsNails.addThermoregulators(stacks.packId('thermoregulators'))
 
      var items = [
-          {id: custom.thermoregulator, unstackable: true},
+          {id: content.thermoregulator, unstackable: true},
 
-          {id: custom.gravitium},
+          {id: content.gravitium},
 
-          {id: custom.pointed_flint},
-          {id: custom.flint_sword, type: 'sword', maxDamage: 50, tag: 'forge:tools/swords'},
-          {id: custom.flint_saw, type: 'axe', maxDamage: 30, tag: 'notreepunching:saws'}, //Make this weaker because KubeJS doesn't support tiers or custom tools yet.
+          {id: content.pointed_flint},
+          {id: content.flint_sword, type: 'sword', maxDamage: 50, tag: 'forge:tools/swords'},
+          {id: content.flint_saw, type: 'axe', maxDamage: 30, tag: 'notreepunching:saws'}, //Make this weaker because KubeJS doesn't support tiers or custom tools yet.
 
-          {id: custom.poor_grade_charcoal, burnTime: 400},
-          {id: custom.low_grade_charcoal, burnTime: 800},
-          {id: custom.good_grade_charcoal, burnTime: 3200},
-          {id: custom.high_grade_charcoal, burnTime: 6400},
+          {id: content.poor_grade_charcoal, burnTime: 400},
+          {id: content.low_grade_charcoal, burnTime: 800},
+          {id: content.good_grade_charcoal, burnTime: 3200},
+          {id: content.high_grade_charcoal, burnTime: 6400},
 
-          {id: custom.end_dust},
-          {id: custom.quicksoil_dust},
-          {id: custom.soulsand_dust},
+          {id: content.end_dust},
+          {id: content.quicksoil_dust},
+          {id: content.soulsand_dust},
 
-          {id: custom.mud_ball},
-          {id: custom.wet_mud_brick},
-          {id: custom.dry_mud_brick},
-          {id: custom.mud_brick},
+          {id: content.mud_ball},
+          {id: content.wet_mud_brick},
+          {id: content.dry_mud_brick},
+          {id: content.mud_brick},
 
-          {id: custom.aether_mud_ball},
-          {id: custom.wet_aether_mud_brick},
-          {id: custom.dry_aether_mud_brick},
-          {id: custom.aether_mud_brick},
+          {id: content.aether_mud_ball},
+          {id: content.wet_aether_mud_brick},
+          {id: content.dry_aether_mud_brick},
+          {id: content.aether_mud_brick},
 
-          {id: custom.ash_clay_ball}, 
-          {id: custom.wet_ash_clay_brick},
-          {id: custom.dry_ash_clay_brick},
+          {id: content.ash_clay_ball}, 
+          {id: content.wet_ash_clay_brick},
+          {id: content.dry_ash_clay_brick},
 
-          {id: custom.dry_clay_brick}, 
+          {id: content.dry_clay_brick}, 
 
-          {id: custom.wet_silt_brick},
-          {id: custom.dry_silt_brick},
+          {id: content.wet_silt_brick},
+          {id: content.dry_silt_brick},
 
-          {id: custom.holysilt_ball},
-          {id: custom.wet_holysilt_brick},
-          {id: custom.dry_holysilt_brick},
-          {id: custom.holysilt_brick},
+          {id: content.holysilt_ball},
+          {id: content.wet_holysilt_brick},
+          {id: content.dry_holysilt_brick},
+          {id: content.holysilt_brick},
 
-          {id: custom.wet_mortar_brick},
-          {id: custom.dry_mortar_brick},
+          {id: content.wet_mortar_brick},
+          {id: content.dry_mortar_brick},
 
-          {id: custom.cement_compound},
-          {id: custom.wet_cement_brick},
-          {id: custom.dry_cement_brick},
-          {id: custom.fire_brick}
+          {id: content.cement_compound},
+          {id: content.wet_cement_brick},
+          {id: content.dry_cement_brick},
+          {id: content.fire_brick}
      ]
 
      items.forEach(item => {
@@ -82,7 +82,7 @@ ItemEvents.modification(event => {
      var aeternalis_fuel = Math.floor((mobius_fuel + mobius_fuel_block) * 4 * singleToBlockEfficiencyConst)
      var aeternalis_fuel_block = Math.floor(aeternalis_fuel * 9 * singleToBlockEfficiencyConst)
  
-     comfuncs.iterate([
+     common.alwaysArray([
          ['minecraft:blaze_powder', 1200],
          ['minecraft:blaze_rod', 1600],
          ['projecte:alchemical_coal', alchemical_coal],
@@ -91,9 +91,9 @@ ItemEvents.modification(event => {
          ['projecte:mobius_fuel_block', mobius_fuel_block],
          ['projecte:aeternalis_fuel', aeternalis_fuel],
          ['projecte:aeternalis_fuel_block', aeternalis_fuel_block]
-     ], val => event.modify(val[0], item => item.burnTime = val[1]))
+     ]).forEach(val => event.modify(val[0], item => item.burnTime = val[1]))
  
-     comfuncs.iterate([
+     common.alwaysArray([
          ['notreepunching:flint_knife', 20],
          ['primalstage:flint_hatchet', 30],
          ['notreepunching:flint_shovel', 50],
@@ -101,5 +101,5 @@ ItemEvents.modification(event => {
          ['notreepunching:flint_pickaxe', 50],
          ['notreepunching:flint_axe', 50],
          ['primalstage:flint_mallet', 50]
-     ], vals =>  event.modify(vals[0], item => item.maxDamage = vals[1]))
+     ]).forEach(vals =>  event.modify(vals[0], item => item.maxDamage = vals[1]))
  })

@@ -1,7 +1,7 @@
 const insertionKeyStorage = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*'
 
 /** @param {ShapedIngredients} shapedIngredients */
-function createPattern(shapedIngredients) {
+function createShape(shapedIngredients) {
      var size = shapedIngredients.size
      var pattern = []
      var keys = {}
@@ -9,7 +9,7 @@ function createPattern(shapedIngredients) {
      for (var height = 0; height < size; height++) {
           var patternLayer = ''
           for (var width = 0; width < size; width++) {
-               var index = commaths.roll(width, height, size)
+               var index = maths.place(width, height, size)
                var ingredient = shapedIngredients.at(index)
                var key = ingredient != null ? insertionKeyStorage.charAt(shapedIngredients.mapper.indexOf(ingredient)) : ' '
                patternLayer = patternLayer + key
@@ -73,12 +73,7 @@ RecipeInsertion.prototype = {
       * @param {Number} anchor 0 = top-left, 1 = top-right, 2 = bottom-left, 3 = bottom-right
       */
      rotate: function(anchor) {
-          this.ingredients.remap(map => {
-               var newMap = []
-               for (var i = 0; i < map.length; i++)
-                    newMap[comfuncs.findRotation(i, this.size, anchor)] = map[i]
-               return newMap
-          })
+          this.ingredients.mapper.forEach(object => object.indexes = object.indexes.forEach(i => maths.rotate(i, this.size, anchor)))
           return this
      },
 
@@ -88,20 +83,14 @@ RecipeInsertion.prototype = {
      flip: function (anchor) {
           var vertical = anchor == 2 || anchor == 3
           var horizontal = anchor == 1 || anchor == 3
-
-          this.ingredients.remap(map => {
-               var newMap = []
-               for (var i = 0; i < map.length; i++) {
-                    var {width, height} = commaths.rotate2D(i, this.size)
-                    if (vertical)
-                         width = commaths.flip(width, this.size)
-                    if (horizontal)
-                         height = commaths.flip(height, this.size)
-                    newMap[commaths.roll(width, height, this.size)] = map[i]
-               }
-               return newMap
-          })
-
+          this.ingredients.mapper.forEach(object => object.indexes = object.indexes.map(i => {
+               var {width, height} = maths.locateSquare(i, this.size)
+               if (vertical)
+                    width = maths.flipLine(width, this.size)
+               if (horizontal)
+                    height = maths.flipLine(height, this.size)
+               return maths.place(width, height, this.size)
+          }))
           return this
      },
 
@@ -111,19 +100,14 @@ RecipeInsertion.prototype = {
      snake: function (anchor) {
           var vertical = anchor == 1 || anchor == 3 
           var horizontal = anchor == 2 || anchor == 3
-
-          this.ingredients.remap(map => {
-               var newMap = []
-               for (var i = 0; i < map.length; i++) {
-                    var {width, height} = commaths.rotate2D(i, this.size)
-                    if (vertical && commaths.isOdd(height))
-                         width = commaths.flip(width, size)
-                    if (horizontal && commaths.isOdd(width))
-                         height = commaths.flip(height, size)
-                    newMap[commaths.roll(width, height, this.size)] = map[i]
-               }
-               return newMap
-          })
+          this.ingredients.mapper.forEach(object => object.indexes = object.indexes.map(i => {
+               var {width, height} = maths.locateSquare(i, this.size)
+               if (vertical && maths.isOdd(height))
+                    width = maths.flipLine(width, size)
+               if (horizontal && maths.isOdd(width))
+                    height = maths.flipLine(height, size)
+               return maths.flipLine(width, height, this.size)
+          }))
           return this
      },
 
@@ -140,7 +124,7 @@ RecipeInsertion.prototype = {
       */
      finalise: function(recipe) {
           this.terminated = true
-          var final = createPattern(this.ingredients)
+          var final = createShape(this.ingredients)
           recipe(this.result, final.pattern, final.keys)
      },
 

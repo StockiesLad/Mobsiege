@@ -1,5 +1,5 @@
 recipes((event, funcs) => {
-     funcs.threeSquareAlt(funcs.removeByOutput('minecraft:tnt'), ['minecraft:gunpowder', custom.mortar]).vanilla()
+     funcs.threeSquareAlt(funcs.removeByOutput('minecraft:tnt'), ['minecraft:gunpowder', content.mortar]).vanilla()
 })
 
 itemTags((event, funcs) => {

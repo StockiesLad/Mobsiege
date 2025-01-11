@@ -69,12 +69,13 @@ TagObject.prototype = {
 
 ////////REQUIRES EVENT////////
 
+/**
+ * @param {Internal.TagEventJS} event 
+ * @param {(String, Internal.ResourceLocation)[]} tags 
+ */
 function getEntriesOfTags(event, tags) {
      var entries = []
-     comfuncs.ensureArray(tags).forEach(tag => {
-         entries = entries.concat(event.get(tag).getObjectIds().toArray())
-     })
- 
+     common.alwaysArray(tags).forEach(tag => entries = entries.concat(event.get(tag).getObjectIds().toArray()))
      return entries
  }
  
@@ -87,46 +88,61 @@ function getEntriesOfTags(event, tags) {
 function getIdsOfTags(event, tags) {
      return getEntriesOfTags(event, tags).map(loc => loc.toString())
 }
- 
+
+/**
+ * @param {Internal.TagEventJS} event 
+ * @param {(Internal.Item|String)[]} entries 
+ * @param {String[]} oldTags 
+ * @param {String[]} newTags 
+ */
 function switchTagsUniformly(event, entries, oldTags, newTags) {
-     comfuncs.ensureArray(entries).forEach(entry => {
-         comfuncs.ensureArray(oldTags).forEach(oldTag => event.remove(oldTag, entry))
-         comfuncs.ensureArray(newTags).forEach(newTag => event.remove(newTag, entry))
+     common.alwaysArray(entries).forEach(entry => {
+         common.alwaysArray(oldTags).forEach(oldTag => event.remove(oldTag, entry))
+         common.alwaysArray(newTags).forEach(newTag => event.remove(newTag, entry))
      })
 }
- 
+
+/**
+ * @param {Internal.TagEventJS} event 
+ * @param {String[]} tags 
+ * @param {(Internal.Item|String)[]} oldEntries 
+ * @param {(Internal.Item|String)[]} newEntries 
+ */
 function modifyTagsUniformly(event, tags, oldEntries, newEntries) {
-     comfuncs.ensureArray(tags).forEach(tag => {
+     common.alwaysArray(tags).forEach(tag => {
          event.remove(tag, oldEntries)
          event.add(tag, newEntries)
      })
 }
- 
+
+/**
+ * @param {Internal.TagEventJS} event 
+ * @param {Object[][]} compressedParams 
+ */
 function addEntriesRespectively(event, compressedParams) {
-     comfuncs.unifiedCall(
-         individualParams => event.add(comfuncs.def(individualParams[0]), individualParams[1]), 
-         compressedParams
-     )
+     common.alwaysArray(compressedParams).forEach(params => event.add(def(params[0]), params[1]))
 }
- 
+
+/**
+ * @param {Internal.TagEventJS} event 
+ * @param {Object[][]} compressedParams 
+ */
 function removeEntriesRespectively(event, compressedParams) {
-     comfuncs.unifiedCall(
-         individualParams => event.remove(comfuncs.def(individualParams[0]), individualParams[1]), 
-         compressedParams
-     )
+     common.alwaysArray(compressedParams).forEach(params => event.remove(def(params[0]), params[1]))
 }
- 
+
+/**
+ * @param {Internal.TagEventJS} event 
+ * @param {Object[][]} compressedParams 
+ */
 function switchTagsRespectively(event, compressedParams) {
-     comfuncs.unifiedCall(
-         individualParams => switchTagsUniformly(event, individualParams[0], individualParams[1], individualParams[2]), 
-         compressedParams
-     )
+     common.alwaysArray(compressedParams).forEach(params => switchTagsUniformly(event, params[0], params[1], params[2]))
 }
  
- 
+/**
+ * @param {Internal.TagEventJS} event 
+ * @param {Object[][]} compressedParams 
+ */
 function modifyTagsRespectively(event, compressedParams) {
-     comfuncs.unifiedCall(
-         individualParams => modifyTagsUniformly(event, individualParams[0], individualParams[1], individualParams[2]), 
-         compressedParams
-     )
+     common.alwaysArray(compressedParams).forEach(params => modifyTagsUniformly(event, params[0], params[1], params[2]))
 }

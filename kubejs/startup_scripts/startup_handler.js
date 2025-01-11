@@ -1,5 +1,6 @@
 Platform.mods.kubejs.name = 'Mobsiege'
 
+const ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
 const SoundType = Java.loadClass('net.minecraft.world.level.block.SoundType')
 const SoundEvents = Java.loadClass('net.minecraft.sounds.SoundEvents')
 
@@ -8,8 +9,8 @@ const TrialsMobs = Java.loadClass('net.salju.trialstowers.init.TrialsMobs')
 const TCoreEntities = Java.loadClass('cofh.thermal.core.init.registries.TCoreEntities')
 const Blitz = Java.loadClass('cofh.thermal.core.common.entity.monster.Blitz')
 
-const Mobsiege2Fabric = comfuncs.local('Mobsiege2Fabric')
-const Mobsiege2ToughAsNails = comfuncs.local('Mobsiege2ToughAsNails')
+const Mobsiege2Fabric = common.loadLocal('Mobsiege2Fabric')
+const Mobsiege2ToughAsNails = common.loadLocal('Mobsiege2ToughAsNails')
 
 const WART_COVERED_STONE = coveredStone(SoundEvents.WART_BLOCK_STEP)
 const GRASS_COVERED_STONE = coveredStone(SoundEvents.GRASS_STEP)
@@ -35,4 +36,4 @@ function coveredStone(step) {
     )
 }
 
-var custom = global.customImpl
+var content = global.content

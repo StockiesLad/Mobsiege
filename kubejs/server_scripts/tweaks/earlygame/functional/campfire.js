@@ -1,5 +1,5 @@
 var campfires = [
-     {type: 'minecraft:campfire', torch: '#minecraft:torches/temp', fuel: custom.high_grade_charcoal, logs: '#minecraft:logs', sticks: 'minecraft:stick'},
+     {type: 'minecraft:campfire', torch: '#minecraft:torches/temp', fuel: content.high_grade_charcoal, logs: '#minecraft:logs', sticks: 'minecraft:stick'},
      {type: 'minecraft:soul_campfire', torch: packTag('soul_torches'), fuel: 'minecraft:soul_soil', logs: '#minecraft:logs', sticks: 'minecraft:stick'},
      {type: 'ancient_aether:ambrosium_campfire', torch: 'aether:ambrosium_torch', fuel: 'aether:ambrosium_shard', logs: packTag('aether_logs'), sticks: 'aether:skyroot_stick'}
 ]
@@ -12,7 +12,7 @@ recipes((event, funcs) => {
                [campfire.torch, [3, 5]],
                ['primalstage:primitive_grill', 4],  
                [campfire.fuel, 1], 
-               [custom.campfire_rock, 7],
+               [content.campfire_rock, 7],
                [campfire.logs, [6, 8]] 
           ])
      })

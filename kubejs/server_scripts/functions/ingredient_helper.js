@@ -3,7 +3,7 @@ function tag(id) {
 }
 
 function def(path) {
-    return comfuncs.def(path)
+    return stacks.autoId(path)
 }
 
 function defTag(path) {
@@ -11,7 +11,7 @@ function defTag(path) {
 }
 
 function pack(path) {
-    return comfuncs.packDef(path)
+    return stacks.packId(path)
 }
 
 function packTag(path) {
@@ -42,12 +42,12 @@ function ofFluid(fluid, amount) {
 }
 
 function stack(id, count) {
-    count = comfuncs.notNull(count, 1)
+    count = common.insure(count, 1)
     return Item.of(id, count)
 }
 
 function ingr(id, count) {
-    count = comfuncs.notNull(count, 1)
+    count = common.insure(count, 1)
     return Ingredient.of(id, count)
 }
 

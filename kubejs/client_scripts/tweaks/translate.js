@@ -5,7 +5,7 @@ ClientEvents.lang('en_us', event => {
         ['betterend:crystalline_sulphur', 'Crystalline Sulphur'],
         ['betterend:charcoal_block', 'Charcoal Sand'],
         ['ae2:smooth_sky_stone_chest', 'Smooth Sky Stone Chest'],
-        [/*'biome.*/'biomeswevegone.orchard', 'Old Growth Orchard'],
+        //[/*'biome.*/'biomeswevegone.orchard', 'Old Growth Orchard'],
         ['bluepower:tiles', 'Basalt & Beige Marble Tiles'],
         ['alexscaves:radrock_uranium_ore', 'Pure Uranium Ore'],
         ['alexscaves:uranium_shard', 'Pure Uranium Shard'],
@@ -48,11 +48,11 @@ ClientEvents.lang('en_us', event => {
         regexIn('terrestria', ['redwood', 'dark_redwood'], woodSet),
         getStandardStoneCategory('geologicexpansion', 'limestone', 'rocky_limestone'),
         getStandardStoneCategory('projectred_exploration', 'marble', 'grey_marble'),
-        getStandardStoneCategory('bluepower', 'marble', 'beige_marble', [
+        /*getStandardStoneCategory('bluepower', 'marble', 'beige_marble', [
             ['fancy_marble', 'fancy_beige_marble'],
             ['marble_brick_small', 'small_beige_marble_bricks'],
             ['marble_paver', 'beige_marble_paver']
-        ]),
+        ]),*/
         getStandardStoneCategory('what_is_stone', 'dacite', 'grey_dacite'),
         getStandardStoneCategory('what_is_stone', 'schist', 'dark_schist'),
         getStandardStoneCategory('what_is_stone', 'rhyolite', 'light_rhyolite'),

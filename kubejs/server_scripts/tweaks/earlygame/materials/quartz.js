@@ -1,19 +1,18 @@
 recipes((event, funcs) => {
-     var {generate} = funcs
-     comfuncs.unifiedCall(quartzType => {
+     common.alwaysArray(['sulfur', 'smoky', 'rose']).forEach(quartzType => {
           funcs.globalCrushing([`cinderscapes:${quartzType}_quartz`, Item.of(`cinderscapes:${quartzType}_quartz`).withChance(0.75), Item.of(`cinderscapes:${quartzType}_quartz`).withChance(0.5)], `cinderscapes:polypite_${quartzType}_quartz`)
           event.replaceOutput({id: `cinderscapes:${quartzType}_quartz_block`}, 'minecraft:quartz_block', `cinderscapes:crystalline_${quartzType}_quartz`)
           funcs.slab(funcs.removeByOutput(`6x cinderscapes:${quartzType}_quartz_slab`), `cinderscapes:crystalline_${quartzType}_quartz`).vanilla()
           funcs.stairs(funcs.removeByOutput(`4x cinderscapes:${quartzType}_quartz_stairs`), `cinderscapes:crystalline_${quartzType}_quartz`).vanilla()
           funcs.twoSquare(funcs.removeByOutput(`4x cinderscapes:smooth_${quartzType}_quartz_slab`), `cinderscapes:${quartzType}_quartz_slab`).vanilla()
           funcs.twoSquare(funcs.removeByOutput(`4x cinderscapes:smooth_${quartzType}_quartz_stairs`), `cinderscapes:${quartzType}_quartz_stairs`).vanilla()
-     }, ['sulfur', 'smoky', 'rose'])
+     })
 
      event.smelting('minecraft:quartz', packTag('quartz/elemental')).xp(0.1)
 
-     funcs.globalCrushing([preferredItemId('forge:gems/sulfur'), Item.of(preferredItemId('forge:gems/sulfur')).withChance(0.5)], '#forge:sulfur_quartz')
-     funcs.globalCrushing([Item.of('minecraft:coal'), Item.of(preferredItemId('forge:gems/coal')).withChance(0.5)], '#forge:smoky_quartz')
-     funcs.globalCrushing([preferredItemId('forge:gems/rose_quartz'), Item.of(preferredItemId('forge:gems/rose_quartz')).withChance(0.5)], '#forge:rose_quartz')
+     funcs.globalCrushing([preferredStack('forge:gems/sulfur'), preferredStack('forge:gems/sulfur').withChance(0.5)], '#forge:sulfur_quartz')
+     funcs.globalCrushing([Item.of(content.coal), Item.of(content.coal).withChance(0.5)], '#forge:smoky_quartz')
+     funcs.globalCrushing([Item.of('create:rose_quartz'), Item.of('create:rose_quartz').withChance(0.5)], '#forge:rose_quartz')
 })
 
 

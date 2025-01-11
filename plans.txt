@@ -61,7 +61,7 @@ complex recipes {
 	turrets (mekanism turrets are fine)
 }
 
-dim spawn mods{
+dim spawn mods {
 	ultimate spawn
 	spawn dimension setter
 	initial dimension
@@ -85,8 +85,6 @@ maybe make more stages (earlygame, midgame, endgame) --> (primal, tool, forge, p
 add support to start in 3 dimensions (aether, overworld, nether) and re document (ambrosium is picking because its soft)
 test dimthread reforked???
 replace fork of ESM with a mixin instead (fixes licensing)
-rewrite rolling square (the current code is trash)
-rewrite comfuncs & commaths - completing the refactor
 test all loot tables (fix charcoal loot tables)
 make mobs spawn with modded armor
 fix alchemical coal burntimes being clamped for being too high. Lower it pls
@@ -98,6 +96,7 @@ fix weird issue where u sometimes cant use creative mode flying properly
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+rewrite comfuncs & commaths - completing the refactor
 brick block consistency (gravel, nether, slag, etc)
 remove block variant duplicates
 fix multiple tag sources in almost unified

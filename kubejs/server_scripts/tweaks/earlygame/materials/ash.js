@@ -2,7 +2,7 @@ recipes((event, funcs) => {
      funcs.vanillaInsert('3x carbonize:ash_layer', ['carbonize:ash_block', [0, 1]])
      funcs.twoSquare('carbonize:ash_block', 'carbonize:ash').vanilla()
      event.shapeless('carbonize:ash', ['#forge:ash', '#forge:ash'])
-     funcs.threeSquare(custom.packed_ash, '#forge:ash').vanilla()
+     funcs.threeSquare(content.packed_ash, '#forge:ash').vanilla()
 })
 
 itemTags((event, funcs) => {
@@ -16,9 +16,9 @@ commonTags((event, funcs) => {
 })
 
 lootTables((event, funcs) => {
-     event.addBlockLootModifier(custom.packed_ash).addAlternativesLoot(
-          LootEntry.of(custom.packed_ash).when(c => c.customCondition(conditionSilkTouch())),
-          LootEntry.of(custom.packed_ash).when(c => c.customCondition(conditionMatchTool('minecraft:trowels'))),
+     event.addBlockLootModifier(content.packed_ash).addAlternativesLoot(
+          LootEntry.of(content.packed_ash).when(c => c.customCondition(conditionSilkTouch())),
+          LootEntry.of(content.packed_ash).when(c => c.customCondition(conditionMatchTool('minecraft:trowels'))),
           LootEntry.of(Item.of('supplementaries:ash', 9))
      )
 })

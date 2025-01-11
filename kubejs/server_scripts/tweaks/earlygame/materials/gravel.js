@@ -2,7 +2,7 @@ var gravel = []
 
 var gravel_drops = [
      {type: 'minecraft:gravel', common_drop: 'notreepunching:stone_loose_rock', ingredient: packTag('overworld_rocks')},
-     {type: 'ancient_aether:gravity_gravel', common_drop: custom.holy_pebble, ingredient: packTag('aether_rocks')},
+     {type: 'ancient_aether:gravity_gravel', common_drop: content.holy_pebble, ingredient: packTag('aether_rocks')},
      {type: 'immersiveengineering:slag_gravel', common_drop: preferredItemId('forge:slag'), ingredient: '#forge:slag'}
 ]
 

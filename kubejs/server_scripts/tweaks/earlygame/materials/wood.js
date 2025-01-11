@@ -6,7 +6,7 @@ recipes((event, funcs) => {
      event.remove({id: 'enderio:stick'}),
      event.remove({id: 'utilitarian:utility/logs_to_bowls'})
 
-     comfuncs.iterate([
+     common.alwaysArray([
           'oak',
           'dark_oak',
           'birch',
@@ -15,14 +15,14 @@ recipes((event, funcs) => {
           'mangrove',
           'crimson',
           'warped'
-     ], type => comfuncs.iterate([
+     ]).forEach(type => common.alwaysArray([
           `primalstage:${type}_hedge`,
           `primalstage:${type}_bark`,
           `primalstage:${type}_lattice`,
           `primalstage:${type}_logs`,
           `primalstage:${type}_drying_rack`,
           `primalstage:${type}_shelf`
-     ], i => funcs.nuke(i)))
+     ]).forEach(i => funcs.nuke(i)))
 
      funcs.nuke('primalstage:cutting_log')
      event.remove({input: '#notreepunching:h/saws', output: 'minecraft:stick'})

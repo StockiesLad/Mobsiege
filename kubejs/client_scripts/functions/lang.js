@@ -54,7 +54,7 @@ function getStandardStoneCategory(modid, expType, newExpType, extraExps) {
         ['chiseled_' + expType, 'chiseled_' + newExpType]
     ]
     if (extraExps != null)
-        comfuncs.incorp(exps, extraExps)
+        common.unifyArrays([exps, extraExps])
     return getCategory(modid, stoneSet, exps)
 }
 

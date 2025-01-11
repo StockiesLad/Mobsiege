@@ -6,7 +6,7 @@ function conditionRandomChance(chance) {
 }
 
 function conditionTableBonus(table, enchantment) {
-     enchantment = comfuncs.notNull(enchantment, 'minecraft:fortune')
+     enchantment = common.insure(enchantment, 'minecraft:fortune')
      return {
           chances: table,
           condition: "minecraft:table_bonus",

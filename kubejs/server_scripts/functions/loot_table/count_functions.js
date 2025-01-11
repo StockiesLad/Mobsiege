@@ -15,7 +15,7 @@ function formulaBinomialBonus(extra, probability) {
 
 //Counts
 function setCount(count, shouldAdd) {
-     shouldAdd = comfuncs.notNull(shouldAdd, false)
+     shouldAdd = common.insure(shouldAdd, false)
      return {
           function: "minecraft:set_count",
           count: count,

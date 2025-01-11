@@ -98,7 +98,7 @@
 // (-)
 // (+) Entries
     function entries(blocks, modid) {
-        return comfuncs.handleValues(blocks, block => modid != null ? comfuncs.identifier(modid, block) : block)
+        return common.alwaysArray(blocks).map(block => modid != null ? stacks.identifier(modid, block) : block)
     }
 // (-)
 // (+) Functions
@@ -121,16 +121,16 @@
         return getHandle([getSoundTypeFunction(soundType), getSoundTagFunction(soundTag)], allEntries)
     }
     function getHandle(functions, allEntries) {
-        var basicHandle = comfuncs.handleProperties(functions, func => 
+        var basicHandle = common.mapProperties(functions, func => 
             (params) => 
                 allEntries.forEach(entries => 
-                    comfuncs.ensureArray(entries).forEach(entry => {
+                    common.alwaysArray(entries).forEach(entry => {
                         params.entry = entry
                         func(params)
                     })
             )
         )
-        basicHandle.invoke = comfuncs.invoker(basicHandle, false)
+        basicHandle.invoke = common.maybe(basicHandle, false)
         return basicHandle
     }
 // (-)

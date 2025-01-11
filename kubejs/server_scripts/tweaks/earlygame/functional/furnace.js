@@ -14,8 +14,8 @@ recipes((event, funcs) => {
      event.shapeless(packTag('primitive_furnaces'), packTag('primitive_furnaces'))
      funcs.removeRecipes({type: 'minecraft:crafting_shaped', output: packTag('primitive_furnaces')}, (result, ingredients) => {
           //The places are switching to prevent potential overrides. It just makes more sense
-          if (result.is('minecraft:furnace')) funcs.planetAlt(result.withCount(1), [custom.fire_brick_block, ingredients[0]], 'primalstage:kiln').vanilla()
-          else funcs.planetAlt(result.withCount(1), [ingredients[0], custom.fire_brick_block], 'primalstage:kiln').vanilla()
+          if (result.is('minecraft:furnace')) funcs.planetAlt(result.withCount(1), [content.fire_brick_block, ingredients[0]], 'primalstage:kiln').vanilla()
+          else funcs.planetAlt(result.withCount(1), [ingredients[0], content.fire_brick_block], 'primalstage:kiln').vanilla()
      })
 })
 

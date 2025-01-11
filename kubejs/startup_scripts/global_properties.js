@@ -1,19 +1,16 @@
 global.debug = true
 global.modpackId = 'mobsiege'
 global.hiddenItems = []
-global.storage = {}
 
-const commaths = getMathFunctions()
-const comfuncs = getCommonFunctions()
+const maths = new MathHelper()
+const common = new CommonHelper()
+const stacks = new StackHelper()
 
-//Function groups that require params can be accessed with null but you have to be careful to not invoke any functions that require them.
-global.functions = {
-    math: commaths,
-    sound: getSoundFunctions(),
-    common: getCommonFunctions
-}
+/** @type {MathHelper} */ global.mathHelper = maths
+/** @type {CommonHelper} */ global.commonHelper = common
+/** @type {StackHelper} */ global.stackHelper = stacks
 
-global.customImpl = addModpackId({
+global.content = addModpackId({
     thermoregulator: 'orb_of_thermoregulation',
     gravitium: 'gravitium_alloy',
     gravitium_block: 'gravitium_alloy_block',
@@ -86,13 +83,13 @@ global.customImpl = addModpackId({
 
     corpstone: 'corpstone',
     decapitated_debris: 'decapitated_debris'
-
 })
 
+/**
+ * @template T
+ * @param {T} entries 
+ * @returns {T}
+ */
 function addModpackId(entries) {
-    return comfuncs.handleProperties(entries, entry => {
-        if (!entry.includes(':'))
-            return comfuncs.packDef(entry)
-        else return entry
-    })
+    return common.mapProperties(entries, entry => entry.includes(':') ? entry : stacks.packId(entry))
 }

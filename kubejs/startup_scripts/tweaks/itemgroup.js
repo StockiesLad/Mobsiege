@@ -1,5 +1,5 @@
 StartupEvents.modifyCreativeTab('kubejs:tab', e => {
     e.setDisplayName('Custom Content')
-    e.setIcon(Item.of(custom.thermoregulator))
-    e.add([custom.holy_pebble, custom.packed_ash, custom.ash_clay, custom.holysilt_brick_stairs, custom.holysilt_brick_slab, custom.holysilt_brick_wall])
+    e.setIcon(Item.of(content.thermoregulator))
+    e.add([content.holy_pebble, content.packed_ash, content.ash_clay, content.holysilt_brick_stairs, content.holysilt_brick_slab, content.holysilt_brick_wall])
  })
