@@ -77,6 +77,7 @@ minecraft {
 
             mods {
                 "${mod_id}" {
+                    //noinspection GroovyAssignabilityCheck
                     source sourceSets.main
                 }
             }
@@ -137,7 +138,9 @@ dependencies {
 
     compileOnly "net.jmb19905:carbonize:1.0.0+1.20.1"
     implementation("curse.maven:notreepunching-289043:4599926")
-    implementation "curse.maven:tough-as-nails-246391:5815863"
+    implementation("curse.maven:tough-as-nails-246391:5815863")
+    implementation fg.deobf("curse.maven:epic-mob-siege-nightmare-957414:5003615")
+
 }
 
 mixin {
