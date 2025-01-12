@@ -79,6 +79,8 @@ lootTables((event, funcs) => {
      sandDrop('carbonize:ash_block', 'carbonize:ash')
      sandDrop('cinderscapes:ash_block', 'cinderscapes:ash_pile')
      sandDrop('minecraft:soul_sand', content.soulsand_dust)
+
+     defaultSand = []
 })
 
 //Compat with betterend because their loot tables are broken asf

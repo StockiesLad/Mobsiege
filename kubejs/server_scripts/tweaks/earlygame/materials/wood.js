@@ -102,9 +102,9 @@ recipes((event, funcs) => {
 
      funcs.planet('primalstage:spruce_logs', packTag('primitive_string'), '#forge:rods/wooden').vanilla()
 
-     hollow_logs = null
-     planks = null
-     quark_posts = null
+     hollow_logs = []
+     planks = []
+     quark_posts = []
 })
 
 //Fucking shitty mods can't tag their blocks properly

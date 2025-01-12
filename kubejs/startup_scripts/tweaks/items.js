@@ -67,20 +67,15 @@ StartupEvents.registry('item', event => {
 
 })
 
-ItemEvents.modification(event => {
-     var singleToBlockEfficiencyConst = 10/9
+ItemEvents.modification(event => {  
+     var alchemical_coal = 3200 * 4
+     var alchemical_coal_block = Math.floor(alchemical_coal * 10 / 9)
  
-     var coal = 1600
-     var coal_block = coal * 9 * singleToBlockEfficiencyConst
+     var mobius_fuel = alchemical_coal * 4
+     var mobius_fuel_block = Math.floor(mobius_fuel * 10 / 9)
  
-     var alchemical_coal = Math.floor((coal + coal_block) * 4 * singleToBlockEfficiencyConst)
-     var alchemical_coal_block = Math.floor(alchemical_coal * 9 * singleToBlockEfficiencyConst)
- 
-     var mobius_fuel = Math.floor((alchemical_coal + alchemical_coal_block) * 4 * singleToBlockEfficiencyConst)
-     var mobius_fuel_block = Math.floor(mobius_fuel * 9 * singleToBlockEfficiencyConst)
- 
-     var aeternalis_fuel = Math.floor((mobius_fuel + mobius_fuel_block) * 4 * singleToBlockEfficiencyConst)
-     var aeternalis_fuel_block = Math.floor(aeternalis_fuel * 9 * singleToBlockEfficiencyConst)
+     var aeternalis_fuel = mobius_fuel * 4 
+     var aeternalis_fuel_block = Math.floor(aeternalis_fuel * 10 / 9)
  
      common.alwaysArray([
          ['minecraft:blaze_powder', 1200],

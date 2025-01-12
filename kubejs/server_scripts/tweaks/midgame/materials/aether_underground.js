@@ -1,8 +1,6 @@
-const holystone = ['aether:icestone', 'aether:holystone', 'aether_redux:gilded_holystone', 'aether_redux:blightmoss_holystone', 'aether:mossy_holystone', 'aether_genesis:blood_moss_holystone']
+const holystone = ['aether:holystone', 'aether_redux:gilded_holystone', 'aether_redux:blightmoss_holystone', 'aether:mossy_holystone', 'aether_genesis:blood_moss_holystone']
 
 recipes((event, funcs) => {
-     // one too many entries, also look at ancient aether 
-     funcs.twoSquareAlt('2x aether:icestone', ['minecraft:packed_ice', 'minecraft:glowstone']).vanilla()
      event.recipes.create.crushing([
           Item.of(content.holy_pebble).withCount(2),
           Item.of('aether:ambrosium_shard').withChance(0.05),
@@ -12,6 +10,11 @@ recipes((event, funcs) => {
           Item.of('deep_aether:skyjade').withChance(0.005),
           Item.of('aether_genesis:continuum_orb').withChance(0.01)
      ], packTag('holystone'))
+
+     funcs.globalCrushing([Item.of(content.holy_pebble, 2), 'minecraft:ice'], 'aether:icestone')
+
+     funcs.globalFreezing('aether:icestone', 'minecraft:glowstone', 0.1, true)
+     funcs.twoSquareAlt('2x aether:icestone', ['minecraft:packed_ice', 'minecraft:glowstone']).vanilla()
 })
 
 ServerEvents.tags('item', event => {

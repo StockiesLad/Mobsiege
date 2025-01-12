@@ -79,23 +79,24 @@ low priority {
 	add more mining levels
 	make certain ores spawn in certain biomes
 	add proper tech progression (tinkers construct -> create & immersive engineering -> industrial foregoing -> magic cubes)
+	add functionality to anger random animals by fiddling with their interests (monkeys -> bananas)
+	maybe make more stages (earlygame, midgame, endgame) --> (primal, forgery, basic machines, advanced machines, magic, completion)
+	add support to start in 3 dimensions (aether, overworld, nether) and re document (ambrosium is picked because its soft)
+	supa important aether ores (this needs to be a thing if aether is to be a viable starting dimension) or creatively use tinkers construct to make it more interesting (I like this better)
 }
 
-maybe make more stages (earlygame, midgame, endgame) --> (primal, tool, forge, power, automation, magic, completion)
-add support to start in 3 dimensions (aether, overworld, nether) and re document (ambrosium is picking because its soft)
-test dimthread reforked???
-replace fork of ESM with a mixin instead (fixes licensing)
-test all loot tables (fix charcoal loot tables)
 make mobs spawn with modded armor
-fix alchemical coal burntimes being clamped for being too high. Lower it pls
-make a way to get glowstone, and to "freeze" that into icestone for some eventual logic for making farmable aether blocks.
-supa important aether ores (this needs to be a thing if aether is to be a viable starting dimension) or creatively use tinkers construct to make it more interesting (I like this better)
 add a higher quality respirator & an unbreakable one
-fix weird issue where a restart is required for plant fiber to drop properly
-fix weird issue where u sometimes cant use creative mode flying properly
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+fix random cme (shit makes no sense)
+fix weird issue where a restart is required for plant fiber to drop properly
+fix weird issue where u sometimes cant use creative mode flying properly
+replace fork of ESM with a mixin instead (fixes licensing)
+fix alchemical coal burntimes being clamped for being too high. Lower it pls
+test all loot tables (fix charcoal loot tables)
+make a way to get glowstone, and to "freeze" that into icestone for some eventual logic for making farmable aether blocks.
 rewrite comfuncs & commaths - completing the refactor
 brick block consistency (gravel, nether, slag, etc)
 remove block variant duplicates

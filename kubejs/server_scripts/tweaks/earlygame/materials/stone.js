@@ -68,6 +68,8 @@ ServerEvents.tags('block', event => {
     //event.add('notreepunching:loose_rock_placeable_on', ['#forge:terrain', '#forge:sand', '#forge:stone','#aether:aether_dirt', '#aether:holystone','#minecraft:dirt'])
     event.add(pack('stone'), stones.concat(['#forge:stone', packTag('holystone')]))
     event.add(pack('limestone'), ['create:limestone', 'quark:limestone', 'geologicexpansion:limestone', 'alexscaves:limestone'])
+
+    stones = []
 })
 
 BlockEvents.rightClicked(event => {

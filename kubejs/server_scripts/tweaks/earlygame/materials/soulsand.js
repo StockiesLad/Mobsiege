@@ -5,6 +5,8 @@ recipes((event, funcs) => {
           'cut'
      ]
 
+     event.remove({input: 'blockus:soul_sandstone'})
+
      types.forEach(type => {
           var bSandstone = type != null ? `blockus:${type}_soul_sandstone` : `blockus:soul_sandstone`
           var nSandstone = type != null ? `betternether:soul_sandstone_${type}` :  `betternether:soul_sandstone`
@@ -20,6 +22,7 @@ recipes((event, funcs) => {
           funcs.nuke(`${bSandstone}_slab`)
      })
 
+     funcs.vanillaInsert('2x blockus:rough_soul_sandstone', ['betternether:soul_sandstone', [0, 2]])
      funcs.twoSquare('4x blockus:soul_sandstone_bricks', 'betternether:soul_sandstone_cut').vanilla()
      funcs.twoSquare('4x blockus:small_soul_sandstone_bricks', 'blockus:soul_sandstone_bricks').vanilla()
      

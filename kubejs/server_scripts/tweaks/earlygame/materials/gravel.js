@@ -1,5 +1,3 @@
-var gravel = []
-
 var gravel_drops = [
      {type: 'minecraft:gravel', common_drop: 'notreepunching:stone_loose_rock', ingredient: packTag('overworld_rocks')},
      {type: 'ancient_aether:gravity_gravel', common_drop: content.holy_pebble, ingredient: packTag('aether_rocks')},
@@ -21,7 +19,6 @@ blockTags((event, funcs) => {
 
 commonTags((event, funcs) => {
      event.add('forge:gravel', 'ancient_aether:gravity_gravel')
-     gravel = funcs.getIdsOfTags('forge:gravel')
 })
 
 lootTables((event, funcs) => {

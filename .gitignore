@@ -37,6 +37,7 @@
 !/config/alexsmobs.toml
 !/config/integrateddynamics-common.toml
 !/config/cumulus_menus-client.toml
+!/config/tconstruct-common.toml
 #Performance
 !/config/immediatelyfast.json
 !/config/forge-client.toml

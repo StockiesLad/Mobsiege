@@ -1,5 +1,3 @@
-var coalStorageBlocks
-
 recipes((event, funcs) => {
     funcs.remove([
         {output: 'minecraft:charcoal', type: 'minecraft:campfire_cooking'},
@@ -30,35 +28,54 @@ recipes((event, funcs) => {
 })
 
 lootTables((event, funcs) => {
-    var entry = (item, chance, amount) => {
-        return ltItemEntry(item, ofFuncConds(
-            conditionRandomChance(chance), 
-            setCount(countConstant(amount), false)
-        ))
-    }
+    /**
+     * @param {Internal.Block} block 
+     * @param {Internal.Item} item 
+     * @param {Number} chance
+     * @param {Boolean} isSlab
+     */
+    function entry (block, item, chance, isSlab) {
+        var entry = LootEntry.of(Item.of(item).withChance(chance * 1000)).when(c => {
+            c.customCondition(conditionInverted(conditionSilkTouch()))
+        })
+        if (isSlab) entry.customFunction(functionSlab(block))
 
-    var configuredDrop = (block, quality, volume) => {
-        event.addBlockLootModifier(block).removeLoot(Ingredient.all).addAlternativesLoot(
-            LootEntry.of(block).when(c => c.customCondition(conditionSilkTouch())),
-            LootEntry.ofJson(childGroupPool([
-                entry(content.alchemical_coal, Math.pow(quality, 8), Math.min(1, volume / 4)),
-                entry(content.high_grade_charcoal, Math.pow(quality, 4), Math.min(1, volume / 3)),
-                entry(content.good_grade_charcoal, Math.pow(quality, 2), Math.min(1, volume / 2)),
-                entry(content.medium_grade_charcoal, quality, Math.min(1, volume)),
-                entry(content.low_grade_charcoal, 1 - quality, Math.min(1, volume)),
-                entry(content.poor_grade_charcoal, Math.pow(1 - quality, 2), Math.min(1, volume / 2)),
-                entry(content.poor_grade_charcoal, Math.pow(1 - quality, 4), Math.min(1, volume / 3))
-           ]))
-        )
+        return entry
+    }
+    /**
+     * 
+     * @param {Internal.Block} block 
+     * @param {Number} quality 
+     * @param {Number} volume 
+     * @param {Boolean} isSlab 
+     */
+    var configuredDrop = (block, quality, volume, isSlab) => {
+        isSlab = common.insure(isSlab, false)
+
+        var silkTouchEntry = LootEntry.of(block).when(c => c.customCondition(conditionSilkTouch()))
+        if (isSlab) silkTouchEntry.customFunction(functionSlab(block))
+            
+        event.addBlockLootModifier(block).removeLoot(Ingredient.all).addWeightedLoot(
+            isSlab ? volume / 2 : volume,
+            [
+                entry(block, content.alchemical_coal, Math.pow(quality, 8), isSlab),
+                entry(block, content.high_grade_charcoal, Math.pow(quality, 4), isSlab),
+                entry(block, content.good_grade_charcoal, Math.pow(quality, 2), isSlab),
+                entry(block, content.medium_grade_charcoal, quality, isSlab),
+                entry(block, content.low_grade_charcoal, 1 - quality, isSlab),
+                entry(block, content.poor_grade_charcoal, Math.pow(1 - quality, 2), isSlab),
+                entry(block, content.poor_grade_charcoal, Math.pow(1 - quality, 4), isSlab)
+            ]
+        ).addLoot(silkTouchEntry)
     }
 
     configuredDrop('carbonize:charcoal_stack', 0.5, 8)
     configuredDrop('carbonize:charcoal_log', 0.3, 6)
-    configuredDrop('carbonize:charcoal_planks', 0.2, 3)
+    configuredDrop('carbonize:charcoal_planks', 0.3, 4)
     configuredDrop('carbonize:charcoal_fence', 0.2, 3)
     configuredDrop('carbonize:charcoal_fence_gate', 0.2, 3)
-    configuredDrop('carbonize:charcoal_stairs', 0.1, 2)
-    configuredDrop('carbonize:charcoal_slab', 0.1, 1)
+    configuredDrop('carbonize:charcoal_stairs', 0.3, 3)
+    configuredDrop('carbonize:charcoal_slab', 0.3, 2, true)
 })
 
 itemTags((event, funcs) => {

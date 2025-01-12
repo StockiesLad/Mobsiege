@@ -235,7 +235,7 @@ RecipeObject.prototype = {
           return this
      },
 
-     chilling: function(results, ingredients, energy) {
+     fluidChilling: function(results, ingredients, energy) {
           this.event.custom({
                type: "thermal:chiller",
                energy: common.insure(energy, 15000),
@@ -282,6 +282,37 @@ RecipeObject.prototype = {
           return this.event.custom(json)
      },
 
+     icestoneFreezing: function(result, ingredient) {
+          return this.event.custom({
+               type: "aether:icestone_freezable",
+               ingredient: {
+                 block: ingredient
+               },
+               result: {
+                 block: result
+               }
+          })
+     },
+
+     aetherFreezing: function(result, ingredient, xp, cookingTime) {
+          return this.event.custom({
+               type: "aether:freezing",
+               category: "freezable_blocks",
+               cookingtime: common.insure(cookingTime, 500),
+               experience: common.insure(xp, 0),
+               ingredient: Item.of(ingredient),
+               result: Item.of(result).getIdLocation().toString()
+          })
+     },
+
+     bulkFreezing: function(results, ingredients) {
+          return this.event.custom({
+               type: "create_dd:freezing",
+               ingredients: common.alwaysArray(ingredients).map(i => Item.of(i)),
+               results: common.alwaysArray(results).map(i => Item.of(i))
+          })
+     },
+
      //Global Recipes - this is to ensure compat between multiple mods in one spot.
      globalDrying: function(result, ingredient) {
           this.basinDrying(result, ingredient)
@@ -318,7 +349,7 @@ RecipeObject.prototype = {
      globalPrimitiveCooking: function(result, ingredient, xp) {
           xp = common.insure(xp, 0)
           this.grilling(result, ingredient)
-          this.globalCooking(result, ingredient)
+          this.globalCooking(result, ingredient, xp)
           return this
      },
 
@@ -334,9 +365,15 @@ RecipeObject.prototype = {
           return this
      },
 
-     globalChilling: function(results, ingredients) {
-          this.chilling(results, ingredients)
+     globalFluidFreezing: function(results, ingredients) {
+          this.fluidChilling(results, ingredients)
           return this
+     },
+
+     globalFreezing: function(result, ingredient, xp, inWorld) {
+          if (common.insure(inWorld, false)) this.icestoneFreezing(result, ingredient)
+          this.aetherFreezing(result, ingredient, xp)
+          this.bulkFreezing(result, ingredient)
      },
 
      globalPressing: function(results, ingredients) {
