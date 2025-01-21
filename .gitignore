@@ -74,6 +74,7 @@
 !/config/geologicexpansion-common.toml
 !/config/promenade
 !/config/chancecubes
+config/chancecubes/custom_rewards/CustomSounds-Resourcepack.zip
 #Materials
 !/config/betternether
 !/config/almostunified
@@ -86,5 +87,3 @@
 /kubejs/documentation
 /kubejs/jsconfig.json
 /kubejs/README.txt
-
-

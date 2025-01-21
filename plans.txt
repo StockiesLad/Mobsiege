@@ -86,13 +86,13 @@ low priority {
 }
 
 make mobs spawn with modded armor
-add a higher quality respirator & an unbreakable one
+fix weird issue where u sometimes cant use creative mode flying properly
+two player cannot be in same server ?
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
-fix random cme (shit makes no sense)
+fix random cme (shit makes no sense) (its tinkers construct being weird)
 fix weird issue where a restart is required for plant fiber to drop properly
-fix weird issue where u sometimes cant use creative mode flying properly
 replace fork of ESM with a mixin instead (fixes licensing)
 fix alchemical coal burntimes being clamped for being too high. Lower it pls
 test all loot tables (fix charcoal loot tables)

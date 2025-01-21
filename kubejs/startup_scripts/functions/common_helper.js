@@ -9,10 +9,11 @@ function CommonHelper() {
 CommonHelper.prototype = {
      //Imports
      /**
+      * This package holds custom functionality that KubeJS doesn't have.
       * @param {String} clazz 
       */
      loadLocal: function(clazz) {
-          return Java.loadClass(`com.stockieslad.mobsiege.${clazz}`)
+          return Java.loadClass(`com.stockieslad.mobsiege.api.${clazz}`)
      },
 
      //Method

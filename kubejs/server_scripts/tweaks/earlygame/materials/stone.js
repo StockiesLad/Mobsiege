@@ -56,6 +56,7 @@ ServerEvents.tags('item', event => {
     ])
 
     event.add('notreepunching:loose_rocks', ['twigs:pebble', 'spelunkers_charm:deepslate_rock', 'spelunkers_charm:rock', 'spelunkers_charm:dripstone_rock', 'spelunkers_charm:basalt_rock'])
+    event.remove('notreepunching:loose_rocks', 'notreepunching:sandstone_loose_rock')
     event.add(pack('overworld_rocks'), getIdsOfTags(event, 'notreepunching:loose_rocks'))
     event.add(pack('aether_rocks'), content.holy_pebble)
     event.add('notreepunching:loose_rocks', content.holy_pebble)

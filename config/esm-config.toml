@@ -7,103 +7,103 @@ isMonstersTargetVillagers = true
 #Any part of a block name, which defines which blocks that siege monsters CANNOT break to try and get to your position.
 siegeBreakableBlockBlacklist = "_ore,_sign,air,water,lava,_bed,rail,_block,obsidian,torch,fire,spawner,ladder,furnace,level,iron_door,pressure_plate,_button,sugar_cane,juke,soul_,portal,cake,repeater,trapdoor,iron_bars,chain,vine,lily_pad,enchanting,brewing,cauldron,end_,dragon,potted_,skull,_head,anvil,chest,dropper,comparator,hopper,detector,Pillar,terracotta,light,prismarine,book,grass,snow,flower,sapling,bush,stem,dragon,carrots,potatoes,detector,powered,concrete,barrier,carpet,banner,beet,void,shulker,structure,compost,piston,dispenser,fern,pickle,chorus,purpur,beacon,conduit,frame,lectern,smith,ancient,armor,wither,barrel,cutter,hive,lode,respawn,sculk,brick,copper"
 #Enable Enemies Swarming You
-enableSiege = true
+enablesiege = true
 #Enable Increased Enemy Presence
-incEnemies = true
+incenemies = true
 #Should special mobs spawn riding other mobs?
-isJockies = true
+isjockies = true
 #Charged Creepers Spawn Naturally
-isChargedCreepers = true
+ischargedcreepers = true
 #Allow Bloodlusting Enemies
-isBloodlusting = true
+isbloodlusting = true
 #Give Zombies Pickaxes and Weapons?
-isZombiePickaxes = true
+iszombiepickaxes = true
 #Give Zombies Armor?
-isZombieArmor = true
+iszombiearmor = true
 #Give Skeletons Armor?
-isSkeletonArmor = true
+isskeletonarmor = true
 #Allow Zombies to Lay TNT?
-isZombieTnt = true
+iszombietnt = true
 #Chance of zombies placing TNT each tick if in distance.
-zombieTNTChance = 0.25
+zombietntchance = 0.25
 #How close zombies need to be to player to allow setting TNT.
-zombieTNTDistance = 2
+zombietntdistance = 2
 #Allow Spiders to Shoot Webs?
-isSpiderShootWebs = true
+isspidershootwebs = true
 #Can Creepers Breach Walls?
-isCreeperBreaching = true
+iscreeperbreaching = true
 #Do entities bounce when they touch water? Default = true.
-isOceanSurfing = true
+isoceansurfing = true
 #Allow Sleeping?
-allowSleep = true
+allowsleep = true
 #Allow Monster Infighting?
-allowMonsterInfighting = false
+allowmonsterinfighting = false
 #Allow Zombies and Piglins to light flammable things on fire?
-zombiesLightFires = true
+zombieslightfires = true
 #Allow Super Skeletons to Spawn in the Game?
-allowSuperSkeletons = true
+allowsuperskeletons = true
 #Should only entities holding pickaxes be able to dig?
-zombiePickaxeDigOnly = false
+zombiepickaxedigonly = false
 #What days should sieges occur? 1 = default (everyday, constantly). 2 = every other day, 7 every week, and so on.
-siegeRecurrence = 1
+siegerecurrence = 1
 #Chance of special mob spawning and riding another entity out of 100.
-jockeyChance = 5.0
+jockeychance = 5.0
 #Chance Entity Duplicate on Spawn (Out of 100)
-dupeChance = 10
+dupechance = 10
 #Chance of entity duplicating when in dungeon (Out of 100)
-dungeonDupeChance = 50.0
+dungeondupechance = 50.0
 #Chance of Creepers Spawning Charged Out of 100
-chargedChance = 1
+chargedchance = 1
 #Chance of Entities Spawning Bloodlusted Out of 100
-angryEntityChance = 10
+angryentitychance = 10
 #Distance at Which Creepers Will Breach if Blocked (in Blocks)
-breachingDist = 36
+breachingdist = 64
 #Creepers Will Explode if This Close to Player (in Blocks)
-creeperExplodeDist = 6
+creeperexplodedist = 6
 #Distance At Which Creepers Breech the Ground (in Blocks)
-creepersBreechGroundDist = 6
+creepersbreechgrounddist = 6
 #Ticks Until Blocked Creeper Explodes (in Game Ticks)
-obstructedCreeperExpTicks = 60
+obstructedcreeperexpticks = 60
 #Maximum ticks in an entity's life until they despawn (if their target is the player). 20 Ticks = 1 second.
-mobMaxLife = 4800
+mobmaxlife = 4800
 #Nuclear Creeper Explosion Radius (Default vanilla is 3
-nuclearCreeperExplosionRadius = 10
+nuclearcreeperexplosionradius = 10
 #How long (in ticks) Nuclear Creeper is lit before it blows up
-nuclearCreeperFuse = 120
+nuclearcreeperfuse = 120
 #Chance of Nuclear Creeper out of 100
-chanceNuclearCreeper = 0.25
-#Chance of Zombies Receiving Special Item or Pickaxe Out of 100
-pickaxeChance = 20
+chancenuclearcreeper = 0.25
+#Chance of Zombies Recieving Special Item or Pickaxe Out of 100
+pickaxechance = 20
 #Chance of Zombies Lighting Flammable Items on Fire Per Tick Out of 100
-zombieFireChance = 1.0
+zombiefirechance = 1.0
 #Chance of More Powerful Skeleton Spawning
-superSkeletonChance = 1.0
-#Cooldown time for entities breaking blocks in ticks
-entityDigDelay = 5
-#Cooldown time for entities placing blocks in ticks
-entityBuildDelay = 5
+superskeletonchance = 1.0
+#Cooloff time for entities breaking blocks in ticks
+entitydigdelay = 5
+#Cooloff time for entities placing blocks in ticks
+entitybuilddelay = 5
 #If entity is within this distance for X and Z, it'll start digging to player
-entityDigDist = 25
+entitydigdist = 25
 #Above Ground Monster Attack Distance (in Blocks)
-groundDist = 36
+grounddist = 36
 #Below Ground Monster Attack Distance (in Blocks)
-caveDist = 42
+cavedist = 36
 #Chance out of 100 for spider shooting webs each tick. Default = 0.5
-spiderWebChance = 0.5
+spiderwebchance = 0.5
 #Distance at which spider can shoot a web at player. Default = 2 blocks
-spiderWebDist = 2
+spiderwebdist = 2
 #Maximum Duplicated Enemies. Recommend Min. 1, Max. 4. Must be greater than min duplication clones and greater than 0.
-maxDupes = 3
-#Minimum Duplicated Enemies. Recommend Min. 0, Max. 4. Must be less than max duplication clones, or, will use max dupes value.
-minDupes = 0
+maxdupes = 3
+#Maximum Duplicated Enemies. Recommend Min. 0, Max. 4. Must be less than max duplication clones, or, will use max dupes value.
+mindupes = 0
 #Maximum Duplicated Enemies FROM A DUNGEON. Recommend Min. 1, Max. 6. Must be greater than min duplication clones and greater than 0.
-maxDungeonDupes = 6
+maxdungeondupes = 6
 #Maximum Duplicated Enemies FROM A DUNGEON. Recommend Min. 0, Max. 3. Must be less than max duplication clones, or, will use max dupes value.
-minDungeonDupes = 1
+mindungeondupes = 1
 #Entities that will besiege players.
-siegeWhitelist = "spider,cave spider,creeper,skeleton,witch,ghast,giant,husk,hoglin,pillager,vindicator,illusioner,evoker,ravager,shulker,silverfish,stray,slime,witch,zoglin,zombie,zombie_villager,zombified_piglin,zoglin,drowned,zombie_villager,wither_skeleton,pillager"
+siegewhitelist = "spider,cave spider,creeper,skeleton,witch,ghast,giant,husk,hoglin,pillager,vindicator,illusioner,evoker,ravager,shulker,silverfish,stray,slime,witch,zoglin,zombie,zombie villager,zombified piglin,zoglin,drowned,zombie villager,Wither Skeleton,pillager"
 #Defines all mobs that can spawn as rideable by spawning monsters. E.g. 'chicken' will cause enemies to spawn riding chickens.
-rideableMobs = "creeper,spider,skeleton,chicken,pig,skeleton_horse,zombie_horse"
+rideablemobs = "creeper,spider,skeleton,chicken,pig,skeleton_horse,zombie_horse"
 #Mobs that can spawn riding other mobs.
-jockeyMobs = "creeper,skeleton,zombie,pillager,vindicator,witch,zombified_piglin"
+jockeymobs = "creeper,skeleton,zombie,pillager,vindicator,witch,zombified_piglin"
 

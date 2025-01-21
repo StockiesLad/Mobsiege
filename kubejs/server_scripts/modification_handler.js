@@ -18,8 +18,8 @@ const PrimalStageItems = Java.loadClass('com.nanokulon.primalstage.init.ModItems
 const NTPSounds = Java.loadClass('com.alcatrazescapee.notreepunching.client.ModSounds')
 const NTPConfig = Java.loadClass('com.alcatrazescapee.notreepunching.Config')
 //Mobsiege
-const Mobsiege2Minecraft = Java.loadClass('com.stockieslad.mobsiege.Mobsiege2Minecraft')
-const Mobsiege2ToughAsNails = Java.loadClass('com.stockieslad.mobsiege.Mobsiege2ToughAsNails')
+const Mobsiege2Minecraft = Java.loadClass('com.stockieslad.mobsiege.api.Mobsiege2Minecraft')
+const Mobsiege2ToughAsNails = Java.loadClass('com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails')
 
 const modpackId = global.modpackId
 const maths = global.mathHelper

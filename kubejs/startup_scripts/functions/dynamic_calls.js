@@ -18,13 +18,13 @@ DynamicCalls.prototype = {
      /**
       * Will overwrite any existing calls. Use carefully
       * @param {String[]|String} ids 
-      * @param {Function[]|Function} calls 
+      * @param {?Function[]|Function} calls 
       */
-     add: function(ids, calls) {
+     mutate: function(ids, calls) {
           var callArray = common.alwaysArray(calls)
           common.alwaysArray(ids).forEach(id => {
                this.signedCalls.filter(callObject => callObject.id != id)
-               this.signedCalls.push({id: id, calls: callArray})
+               if (calls != null) this.signedCalls.push({id: id, calls: callArray})
           }) 
      },
      
