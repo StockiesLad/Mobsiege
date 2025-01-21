@@ -10,8 +10,8 @@ import toughasnails.block.entity.WaterPurifierBlockEntity;
 
 import java.util.HashMap;
 
-import static com.stockieslad.mobsiege.Mobsiege2ToughAsNails.PURIFIER_FILTER_ADD_MAP;
-import static com.stockieslad.mobsiege.Mobsiege2ToughAsNails.PURIFIER_FILTER_REMOVE_LIST;
+import static com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails.PURIFIER_FILTER_ADD_MAP;
+import static com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails.PURIFIER_FILTER_REMOVE_LIST;
 
 @Mixin(WaterPurifierBlockEntity.class)
 public class WaterPurifierBlockEntityMixin {

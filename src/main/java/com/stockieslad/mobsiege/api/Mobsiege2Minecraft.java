@@ -1,4 +1,4 @@
-package com.stockieslad.mobsiege;
+package com.stockieslad.mobsiege.api;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -38,7 +38,7 @@ public class Mobsiege2Minecraft {
         return state.trySetValue(property, value);
     }
 
-    protected static void init() {}
+    public static void init() {}
 
     public interface Args {
         int wrap(ItemStack itemStack, int damage, RandomSource random);

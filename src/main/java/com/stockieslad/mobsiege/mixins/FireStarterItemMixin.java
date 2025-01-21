@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 //Fixes bug where a fire block does not perform the AbstractFireBlock#canPlace Check
 @Mixin(FireStarterItem.class)
 public class FireStarterItemMixin {
-    @Redirect(method = "m_5922_", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;m_46597_(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"), remap = false)
+    @Redirect(method = "finishUsingItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"))
     private boolean mobsiege$checkFirePlacement(Level level, BlockPos pos, BlockState state, @Local BlockHitResult result, @Local Player player) {
         if (!state.is(Blocks.FIRE)) return level.setBlockAndUpdate(pos, state);
         var relativePos = pos.below().relative(result.getDirection());

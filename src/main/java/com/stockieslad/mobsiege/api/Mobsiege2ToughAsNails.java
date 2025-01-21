@@ -1,4 +1,4 @@
-package com.stockieslad.mobsiege;
+package com.stockieslad.mobsiege.api;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;

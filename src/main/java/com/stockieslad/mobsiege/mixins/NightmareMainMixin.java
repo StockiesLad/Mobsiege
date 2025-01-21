@@ -9,11 +9,11 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(NightmareMain.class)
+@Mixin(value = NightmareMain.class, remap = false)
 public abstract class NightmareMainMixin {
     @Shadow abstract boolean ShouldDuplicate();
 
-    @Redirect(method = "onEntitySpawn", at = @At(value = "INVOKE", target = "Lcom/esm/nightmare/NightmareMain;ShouldDuplicate()Z"), remap = false)
+    @Redirect(method = "onEntitySpawn", at = @At(value = "INVOKE", target = "Lcom/esm/nightmare/NightmareMain;ShouldDuplicate()Z"))
     private boolean mobsiege$fixDeadlock(NightmareMain instance, @Local(argsOnly = true) MobSpawnEvent.FinalizeSpawn spawn) {
         return spawn.getSpawnType() != MobSpawnType.STRUCTURE && ShouldDuplicate();
     }

@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import static com.stockieslad.mobsiege.Mobsiege2Minecraft.onBreaksRandomly;
+import static com.stockieslad.mobsiege.api.Mobsiege2Minecraft.onBreaksRandomly;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {

@@ -2,35 +2,36 @@ package com.stockieslad.mobsiege;
 
 import com.alcatrazescapee.notreepunching.common.blocks.LooseRockBlock;
 import com.mojang.logging.LogUtils;
-import net.jmb19905.CarbonizeClient;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
+import com.stockieslad.mobsiege.api.Mobsiege2Fabric;
+import com.stockieslad.mobsiege.api.Mobsiege2Minecraft;
+import com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails;
+import fuzs.puzzleslib.api.core.v1.ModConstructor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
+import static com.stockieslad.mobsiege.RegistryHelper.registerBlockAndItem;
 import static net.minecraft.world.level.block.Blocks.BRICKS;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Mobsiege.MODID)
 public class Mobsiege {
     public static final String MODID = "mobsiege";
+    @SuppressWarnings("unused")
     public static final Logger LOGGER = LogUtils.getLogger();
 
     //Only register things that KubeJS absolutely can't do. This is messy but it'll have to work.
+    @SuppressWarnings("unused")
     public static final Block
             ASH_CLAY = registerBlockAndItem("ash_clay", new Block(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.FLUTE).strength(0.6f).sound(SoundType.GRAVEL))),
             PACKED_ASH = registerBlockAndItem("packed_ash", new ConcretePowderBlock(ASH_CLAY, BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.SNARE).strength(0.75f).sound(SoundType.SAND))),
@@ -50,30 +51,15 @@ public class Mobsiege {
         Mobsiege2Fabric.init();
         Mobsiege2Minecraft.init();
         Mobsiege2ToughAsNails.init();
+
+    }
+
+    @SubscribeEvent
+    public void onConstructMod(FMLConstructModEvent event) {
+        ModConstructor.construct(MODID, () -> new ModConstructor() {});
     }
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-    }
-
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            new CarbonizeClient().onInitializeClient();
-        }
-    }
-
-    public static ResourceLocation of(String path) {
-        return new ResourceLocation(MODID, path);
-    }
-
-    private static Block registerBlockAndItem(String path, Block block) {
-        var id = of(path);
-        ForgeRegistries.BLOCKS.register(id, block);
-        ForgeRegistries.ITEMS.register(id, new BlockItem(block, new Item.Properties()));
-        return block;
     }
 }
