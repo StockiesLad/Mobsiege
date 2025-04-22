@@ -118,11 +118,13 @@
     "signalum",
     "silver",
     "steel",
+    "stone",
     "sulfur",
     "tin",
     "tungsten",
     "uranium",
     "quartz",
+    "wood",
     "zinc"
   ],
   "priorityOverrides": {},

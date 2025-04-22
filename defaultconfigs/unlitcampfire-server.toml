@@ -11,6 +11,8 @@
 	generatedSoulCampfireIsLitInfinitely = true
 	#Whether the lit time of a campfire could be extended with combustible/burnable items.
 	campfireAddingBurnables = true
+	#Whether infinite soul campfires should stay lit in rain.
+	infiniteSoulCampfireIgnoresRain = true
 	#The light level of a campfire decreases when the remaining time (ticks) is lower than this configured value. (600 ticks default; 0 deactivates this behaviour)
 	#Range: 0 ~ 2000000
 	campfireRunOutIndicatorTime = 600
@@ -48,6 +50,8 @@
 	soulCampfireAddingBurnables = true
 	#Whether a campfire should be destroyed when it goes out by itself.
 	campfireBreaksWhenUnlitByTime = false
+	#Whether infinite campfires should stay lit in rain.
+	infiniteCampfireIgnoresRain = true
 	#Whether a soul campfire should be destroyed when it goes out by itself.
 	soulCampfireBreaksWhenUnlitByTime = false
 

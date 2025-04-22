@@ -49,7 +49,7 @@ RecipeObject.prototype = {
      /**
       * @callback RecipeContext
       * @param {Internal.ItemStack} result
-      * @param {Array.<Internal.Ingredient>} ingredients
+      * @param {Internal.List<Internal.Ingredient>} ingredients
       * @param {String} id
       */
      /**
@@ -305,12 +305,13 @@ RecipeObject.prototype = {
           })
      },
 
+     //Remove this for now because create:dd is not updated
      bulkFreezing: function(results, ingredients) {
-          return this.event.custom({
+          /*return this.event.custom({
                type: "create_dd:freezing",
                ingredients: common.alwaysArray(ingredients).map(i => Item.of(i)),
                results: common.alwaysArray(results).map(i => Item.of(i))
-          })
+          })*/
      },
 
      //Global Recipes - this is to ensure compat between multiple mods in one spot.

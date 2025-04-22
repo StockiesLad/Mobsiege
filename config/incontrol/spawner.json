@@ -1,1 +1,18 @@
-[]
+[
+     {
+          "mob": "minecraft:zombie",
+          "persecond": 0.1,
+          "attempts": 10,
+          "amount": {
+               "minimum": 25,
+               "maximum": 50,
+               "groupdistance": 5
+          },
+          "conditions": {
+               "dimension": "minecraft:overworld",
+               "mindaycount": 5,
+               "mindist": 30,
+               "maxdist": 60
+          }
+     }
+]

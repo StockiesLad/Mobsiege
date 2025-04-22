@@ -5,14 +5,17 @@
 	tickInInventory = false
 	#If true, certain animals will drop fat as an item, which can be used in lanterns.
 	animalsDropFat = true
-	#How many fuel ticks you get for a single experience point in the soul lanterns and torches.
+	#How many fuel ticks you get for a single experience point in the soul lanterns and torches. Default 4800 (4 minutes).
 	#Range: 1.0 ~ 1.7976931348623157E308
 	soulExpRatio = 1200.0
-	#How many experience points are used in a single right click.
+	#How many experience points are used in a single right click. Default 1.
 	#Range: > 1
 	expIncrement = 1
 	#If true, you can light torches and lanterns within the crafting inventory.
 	craftLight = true
+	#How much exp points should a bottle of enchanting count as. This is multiplied by soulExpRatio. The wiki says 7 is the average.
+	#Range: > 1
+	bottleExpAmount = 7
 
 #Oil Can Settings
 [oil_can]
@@ -65,6 +68,9 @@
 	#How many torches are crafted.
 	#Range: > 1
 	torchCraftAmount = 1
+	#How long a soul torch can last without being refilled, in ticks.
+	#Range: > 1
+	defaultSoulTorchFuel = 48000
 
 #Lantern Settings
 [lantern]
@@ -114,4 +120,9 @@
 	#Burn time for campfire fuel items is calculated by this value times its furnace duration
 	#Range: 1.0 ~ 1.7976931348623157E308
 	campfireFuelFactor = 8.0
+
+#Compatibility Settings
+[compat]
+	#If true, and Farmer's Delight is installed, the Stove will be crafted as a hardcore version which needs fuel.
+	craftHardcoreStove = true
 
