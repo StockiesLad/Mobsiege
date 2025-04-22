@@ -1,0 +1,9 @@
+{
+	"moreBurnableBlocks": true,
+	"burnableContainers": false,
+	"charcoalPile": true,
+	"charcoalPileMinimumCount": 8,
+	"burnCrafting": true,
+	"createAsh": false,
+	"increasedFireSpreadRange": true
+}

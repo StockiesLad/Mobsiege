@@ -38,6 +38,7 @@
 !/config/integrateddynamics-common.toml
 !/config/cumulus_menus-client.toml
 !/config/tconstruct-common.toml
+!/config/carbonize.json5
 #Performance
 !/config/immediatelyfast.json
 !/config/forge-client.toml

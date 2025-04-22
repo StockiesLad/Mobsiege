@@ -45,7 +45,8 @@ recipes((event, funcs) => {
           {id: 'create_confectionery:white_chocolate_recipe_6'},
           {id: 'create_confectionery:ruby_chocolate_recipe_6'},
           {id: 'create_confectionery:black_chocolate_recipe_6'},
-          {id: 'ancient_aether:stripped_sakura_wood_wall'},
+          {id: 'ancient_aether:stripped_sakura_wood_wall'}
+          /*
           //Why the hell aint this working?
           {id: 'deeperdarker:resonarium_helmet_smithing'},
           {id: 'deeperdarker:resonarium_chestplate_smithing'},
@@ -55,7 +56,7 @@ recipes((event, funcs) => {
           {id: 'deeperdarker:resonarium_pickaxe_smithing'},
           {id: 'deeperdarker:resonarium_axe_smithing'},
           {id: 'deeperdarker:resonarium_shovel_smithing'},
-          {id: 'deeperdarker:resonarium_hoe_smithing'}
+          {id: 'deeperdarker:resonarium_hoe_smithing'}*/
      ]).forEach((o) => event.remove(o))
 
      common.alwaysArray([
@@ -70,6 +71,7 @@ recipes((event, funcs) => {
      event.shapeless(funcs.removeByOutput('otbwgdelight:puffball_sandwich'), ['biomeswevegone:cooked_white_puffball_cap', Item.of('minecraft:bread', 2)])
 
      var wardenSmithing = (result, base, addon) => event.smithing(result, 'quark:smithing_template_rune', base, addon)
+     /*
      wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_helmet'), 'minecraft:iron_helmet', 'deeperdarker:resonarium_plate')
      wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_chestplate'), 'minecraft:iron_chestplate', 'deeperdarker:resonarium_plate')
      wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_leggings'), 'minecraft:iron_leggings', 'deeperdarker:resonarium_plate')
@@ -79,6 +81,7 @@ recipes((event, funcs) => {
      wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_axe'), 'minecraft:iron_axe', 'deeperdarker:resonarium_plate')
      wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_shovel'), 'minecraft:iron_shovel', 'deeperdarker:resonarium_plate')
      wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_hoe'), 'minecraft:iron_hoe', 'deeperdarker:resonarium_plate')
+     */
 
      funcs.wall('ancient_aether:stripped_sakura_wood_wall', 'ancient_aether:stripped_sakura_log').vanilla()
      
