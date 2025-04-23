@@ -69,6 +69,7 @@ recipes((event, funcs) => {
 itemTags((event, funcs) => {
      event.add('notreepunching:ceramics', 'ceramicbucket:ceramic_bucket')
      event.add('forge:ingots/brick', ['twigs:silt_brick', 'primalstage:kiln_brick', content.fire_brick, 'minecraft:nether_brick', content.mud_brick, content.holysilt_brick, content.aether_mud_brick, 'immersivegeology:refractory_brick'])
+     event.add('forge:bricks', [content.holysilt_bricks, 'minecraft:bricks'])
      event.add('supplementaries:throwable_bricks', [
           'notreepunching:clay_brick',
           content.wet_ash_clay_brick,

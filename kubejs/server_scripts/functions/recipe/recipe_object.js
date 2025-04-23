@@ -394,6 +394,8 @@ RecipeObject.prototype = {
           //this.event.recipes.immersiveengineering.metal_press(results, ingredients, 'immersiveengineering:mold_plate')
           this.event.recipes.create.pressing(results, ingredients)
           this.event.recipes.thermal.press(results, ingredients)
+          if (Item.of(results).getId().includes('plate'))
+               this.event.recipes.immersiveengineering.metal_press(results, ingredients, 'immersiveengineering:mold_plate')
           return this
      },
 
