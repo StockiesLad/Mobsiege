@@ -21,6 +21,7 @@ recipes((event, funcs) => {
 })
 
 ServerEvents.tags('item', event => {
+     event.remove('forge:clay', 'minecraft:clay')
      addEntriesRespectively(event, [
           ['forge:mortar', 'primalstage:sandy_clay_compound'],
           ['forge:clay', content.ash_clay_ball],

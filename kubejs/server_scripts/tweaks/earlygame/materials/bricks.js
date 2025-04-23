@@ -59,6 +59,9 @@ recipes((event, funcs) => {
      funcs.kilnSmelting(content.fire_brick, content.dry_cement_brick)
      funcs.globalSmelting(content.fire_brick, content.dry_cement_brick, 0.3)
 
+     event.campfireCooking('tconstruct:seared_brick', 'tconstruct:grout').xp(0.3)
+     event.campfireCooking('tconstruct:scorched_brick', 'tconstruct:nether_grout').xp(0.3)
+
      //funcs.kilnSmelting('immersivegeology:refractory_brick', content.wet_cement_brick)
      //funcs.globalSmelting('immersivegeology:refractory_brick', content.wet_cement_brick, 0.3)
 })
@@ -87,7 +90,9 @@ itemTags((event, funcs) => {
           'primalstage:kiln_brick',
           'mobsiege:wet_cement_brick',
           'mobsiege:dry_cement_brick',
-          'mobsiege:fire_brick'
+          'mobsiege:fire_brick',
+          'tconstruct:seared_brick',
+          'tconstruct:scorched_brick'
      ])
 })
 

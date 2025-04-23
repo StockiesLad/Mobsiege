@@ -1,28 +1,48 @@
 recipes((event, funcs) => {
-     /*
-     let pressed = []
+     funcs.remove([
+          {id: 'enderio:wood_gear'},
+          {id: 'enderio:wood_gear_corner'},
+          {id: 'enderio:stone_gear'},
+          {id: 'enderio:iron_gear'},
+          {id: 'thermal:parts/gold_gear'},
+          {id: 'thermal:parts/diamond_gear'},
+          {id: 'buildcraftcore:gear_diamond'}
+     ])
+     
+     let thermalPressed = []
+     let immengPressed = []
+
      event.forEachRecipe({type: 'thermal:press', output: '#forge:gears'}, recipe => {
-          pressed.push(recipe.json.get('result').getAsJsonArray().get(0).getAsJsonObject().get('item').getAsString())
+          thermalPressed.push(recipe.json.get('result').getAsJsonArray().get(0).getAsJsonObject().get('item').getAsString())
      })
 
-     console.info(pressed)
+     event.forEachRecipe({type: 'immersiveengineering:metal_press', output: '#forge:gears'}, recipe => {
+          immengPressed.push(recipe.json.get('result').getAsJsonObject().get('item').getAsString())
+     })
+
 
      event.forEachRecipe({type: 'minecraft:crafting_shaped', output: '#forge:gears'}, recipe => {
-          if (!pressed.some(r => recipe.getOriginalRecipeResult().id === r)) {
-               console.info(InputItem.of(recipe.originalRecipeIngredients[0]))
-               console.info([
-                    recipe.getOriginalRecipeIngredients(),
-                    recipe.getOriginalRecipeIngredients().get(0),
-                    recipe.originalRecipeIngredients[0],
-                    recipe.originalRecipeIngredients[0].asStack(),
-                    recipe.originalRecipeIngredients[0].getFirst(),
-                    recipe.originalRecipeIngredients[0].itemIds
-               ])
-               event.recipes.thermal.press(recipe.getOriginalRecipeResult().id, [InputItem.of(recipe.originalRecipeIngredients[0]), 'thermal:press_gear_die'])
-          }
-     })*/
+          var ingredient
+          recipe.json.get('key').getAsJsonObject().entrySet().forEach(entry => {
+               if (ingredient == null || (!ingredient.includes('ingot') && (ingredient.includes('nugget') || ingredient.includes('gear')))) {
+                    var value = entry.getValue().getAsJsonObject()
+                    if (value.has('item'))
+                         ingredient = value.get('item').getAsString()
+                    else ingredient = '#' + value.get('tag').getAsString()          
+               }
+          })
+
+
+          if (!thermalPressed.some(output => recipe.getOriginalRecipeResult().id === output))
+               event.recipes.thermal.press(recipe.getOriginalRecipeResult().id, ['4x ' + ingredient, 'thermal:press_gear_die'])
+          if (!immengPressed.some(output => recipe.getOriginalRecipeResult().id === output))
+               event.recipes.immersiveengineering.metal_press(recipe.getOriginalRecipeResult().id, '4x ' + ingredient, 'immersiveengineering:mold_gear')
+     })
+
+     event.remove({type: 'minecraft:crafting_shaped', output: '#forge:gears'})
 })
 
 itemTags(event => {
      event.add('forge:gears/wood', 'hammerlib:gears/wooden')
+     event.add('forge:gears', ['redstone_arsenal:flux_gear', 'thermalendergy:prismalium_gear', 'thermalendergy:melodium_gear', 'thermalendergy:stellarium_gear'])
 })

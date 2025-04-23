@@ -314,6 +314,19 @@ RecipeObject.prototype = {
           })*/
      },
 
+     basinCasting: function(result, fluidIngredient, cast, consumeCast) {
+          if (fluidIngredient['fluid_tag'] != null)
+               fluidIngredient = {tag: fluidIngredient.fluid_tag, amount: fluidIngredient.amount}
+          this.event.custom({
+               type: "tconstruct:casting_basin",
+               cast: Item.of(cast),
+               cast_consumed: consumeCast,
+               cooling_time: 20,
+               fluid: fluidIngredient,
+               result: result
+             })
+     },
+
      //Global Recipes - this is to ensure compat between multiple mods in one spot.
      globalDrying: function(result, ingredient) {
           this.basinDrying(result, ingredient)
