@@ -89,13 +89,13 @@ unify ash
 maybe make more stages (earlygame, midgame, endgame) --> (primal, forgery, basic machines, advanced machines, magic, completion)
 add proper tech progression (tinkers construct & buildcraft -> create & immersive engineering -> projectred & industrial foregoing -> magic cubes & ae2)
 progression structure {
-	complex alloys, basic components and quartz-variants are used to build basic machines/redstone - produces advanced components and deep resonance crystals (turrets & guns, basic jetpacks, mob grinding)
-	advanced components, hyper-complex alloys & chips are used to produce magic cubes and a ae2 me system (interdiction torches and portals, elevators, advanced jetpacks)
+	complex alloys, basic components and quartz-variants are used to build basic machines/redstone - produces advanced components and deep resonance crystals (turrets & guns, basic jetpacks, mob grinding, elevators)
+	advanced components, hyper-complex alloys & chips are used to produce magic cubes and a ae2 me system (interdiction torches and portals, advanced jetpacks & ae2)
 
 enable magnets are project red and foregoing
 incorporate clouds in crafting
 look into ranged pumps, pipez, flux networks and energy meter
-balance (deep resonance, industrial foregoing, thermal expansion, integrated dynamics, enderio, bigger reactors, rftools, solarflux, simply jetpacks, ad astra, systeams, mob grinding utils)
+balance (deep resonance, industrial foregoing, thermal expansion, integrated dynamics, enderio, bigger reactors, rftools, solarflux, simply jetpacks, ad astra, systeams, mob grinding utils, ae2)
 use resources from (betterend, betternether, projecte, bedrockium & aether)
 integrate auto crafter deeply (consider buildcraft one too)
 make mobs spawn with modded armor
