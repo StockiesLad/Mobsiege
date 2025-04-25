@@ -27,7 +27,7 @@ const common = global.commonHelper
 const stacks = global.stackHelper
 const content = global.content
 
-/** @type {Array<String|Internal.Item>} */ global.hiddenItems = []
+/** @type {Array<String|Internal.ItemStack>} */ global.hiddenItems = []
 
 //It's very important that we always cache the event extensions. This is far more performant
 

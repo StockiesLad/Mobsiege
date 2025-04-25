@@ -91,6 +91,8 @@ add proper tech progression (tinkers construct & buildcraft -> create & immersiv
 progression structure {
 	complex alloys, basic components and quartz-variants are used to build basic machines/redstone - produces advanced components and deep resonance crystals (turrets & guns, basic jetpacks, mob grinding, elevators)
 	advanced components, hyper-complex alloys & chips are used to produce magic cubes and a ae2 me system (interdiction torches and portals, advanced jetpacks & ae2)
+fix enderium catch 22 with component assembly.
+get back to expanded storage 2/2 in later mechanical/electrical branches
 fix coal input in ad astra steel smelting
 add a way to chop logs into split logs via machines
 make epic siege monsters specifically target machine blocks

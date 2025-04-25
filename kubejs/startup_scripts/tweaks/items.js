@@ -78,14 +78,17 @@ ItemEvents.modification(event => {
      var aeternalis_fuel_block = Math.floor(aeternalis_fuel * 10 / 9)
  
      common.alwaysArray([
-         ['minecraft:blaze_powder', 1200],
-         ['minecraft:blaze_rod', 1600],
-         ['projecte:alchemical_coal', alchemical_coal],
-         ['projecte:alchemical_coal_block', alchemical_coal_block],
-         ['projecte:mobius_fuel', mobius_fuel],
-         ['projecte:mobius_fuel_block', mobius_fuel_block],
-         ['projecte:aeternalis_fuel', aeternalis_fuel],
-         ['projecte:aeternalis_fuel_block', aeternalis_fuel_block]
+          ['unearthed:lignite_slab', 100],
+          ['unearthed:lignite_stairs', 150],
+          ['unearthed:lignite_wall', 200],
+          ['minecraft:blaze_powder', 1000],
+          ['minecraft:blaze_rod', 1600],
+          ['projecte:alchemical_coal', alchemical_coal],
+          ['projecte:alchemical_coal_block', alchemical_coal_block],
+          ['projecte:mobius_fuel', mobius_fuel],
+          ['projecte:mobius_fuel_block', mobius_fuel_block],
+          ['projecte:aeternalis_fuel', aeternalis_fuel],
+          ['projecte:aeternalis_fuel_block', aeternalis_fuel_block]
      ]).forEach(val => event.modify(val[0], item => item.burnTime = val[1]))
  
      common.alwaysArray([

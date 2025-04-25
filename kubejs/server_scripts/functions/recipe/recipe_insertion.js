@@ -43,7 +43,7 @@ function createShape(shapedIngredients) {
  * @param {?Number} size If null - will be inferred. See {@link inferPatternSize}
  */
 function RecipeInsertion(recipeObject, result, ingredientInserts, size) {
-     if (result == null || result instanceof RecipeObject || result instanceof RecipeInsertion || ingredientInserts == null || (Array.isArray(ingredientInserts) && ingredientInserts.length == 0))
+     if (result == null || Item.of(result).isEmpty() || result instanceof RecipeObject || result instanceof RecipeInsertion || ingredientInserts == null || (Array.isArray(ingredientInserts) && ingredientInserts.length == 0))
           console.error(
                '[recipes.insertion]: Invalid insertion recipe!' +
                '\n        result=' + result + 

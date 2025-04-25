@@ -65,7 +65,7 @@ StackHelper.prototype = {
 
      /**
       * 
-      * @param {(String|Internal.Item)[]} items 
+      * @param {(String|Internal.ItemStack)[]} items 
       */
      hide: function(items) {
           common.alwaysArray(items).forEach(item => {

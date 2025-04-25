@@ -1,5 +1,6 @@
 StartupEvents.registry('block', (event) => {
     Mobsiege2Fabric.fabricTagFlammability(stacks.packId('carbonize/extra_flammability'), 5, 5)
+    Mobsiege2Fabric.fabricTagFlammability(stacks.packId('carbonize/extra_flammability_leaves'), 30, 60)
 
     var blocks = [
         {id: content.gravitium_block, sound: 'METAL', hardness: 5, resistance: 6, tagBlock: ['mineable/pickaxe', 'needs_diamond_tool']},

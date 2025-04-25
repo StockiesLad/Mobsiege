@@ -25,6 +25,11 @@ recipes((event, funcs) => {
     event.shapeless(content.medium_grade_charcoal, Item.of(content.low_grade_charcoal, 4))
     event.shapeless(content.good_grade_charcoal, Item.of(content.medium_grade_charcoal, 4))
     event.shapeless(content.high_grade_charcoal, Item.of(content.good_grade_charcoal, 4))
+
+    funcs.threeSquare('unearthed:lignite_briquettes', 'unearthed:lignite').vanilla()
+    funcs.slab('6x unearthed:lignite_slab', 'unearthed:lignite').vanilla()
+    funcs.stairs('4x unearthed:lignite_stairs', 'unearthed:lignite').vanilla()
+    funcs.wall('6x unearthed:lignite_wall', 'unearthed:lignite').vanilla()
 })
 
 lootTables((event, funcs) => {
@@ -101,6 +106,8 @@ itemTags((event, funcs) => {
 
 blockTags((event, funcs) => {
     event.remove('minecraft:mineable/pickaxe', 'betterend:charcoal_block')
+    event.add(stacks.packId('carbonize/extra_flammability'), ['unearthed:lignite_briquettes', 'betterend:charcoal_block', 'thermal:charcoal_block','minecraft:coal_block', 'thermal:coal_coke_block'])
+    event.add(stacks.packId('carbonize/extra_flammability_leaves'), ['unearthed:lignite', 'unearthed:lignite_slab', 'unearthed:lignite_stairs', 'unearthed:lignite_wall'])
     addEntriesRespectively(event, [
         ['carbonize:charcoal_block', ['minecraft:mineable/pickaxe']],
         ['minecraft:needs_stone_tool', [

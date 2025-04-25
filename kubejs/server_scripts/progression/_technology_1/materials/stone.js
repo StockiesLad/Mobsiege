@@ -52,8 +52,25 @@ ServerEvents.tags('item', event => {
         'twigs:schist',
         'twigs:rhyolite',
         'twigs:bloodstone',
+        'unearthed:cobbled_phyllite', 
+        'unearthed:cobbled_slate', 
+        'unearthed:cobbled_limestone', 
+        'unearthed:cobbled_beige_limestone', 
+        'unearthed:cobbled_grey_limestone',
+        'unearthed:granodiorite', 
+        'unearthed:rhyolite', 
+        'unearthed:white_granite', 
+        'unearthed:conglomerate', 
+        'unearthed:weathered_rhyolite', 
+        'unearthed:dolerite', 
+        'unearthed:schist', 
+        'unearthed:lignite', 
+        'unearthed:pillow_basalt', 
+        'unearthed:dacite',
         content.corpstone
     ])
+
+    event.add('forge:stone', ['minecraft:tuff', 'minecraft:basalt', 'minecraft:blackstone', 'minecraft:end_stone', 'alexscaves:galena', 'alexscaves:limestone', 'alexscaves:radrock', 'aether_redux:gilded_holystone', 'projectred_exploration:basalt', 'unearthed:phyllite', 'unearthed:slate', 'unearthed:cobbled_slate', 'unearthed:cobbled_phyllite', 'unearthed:granodiorite', 'unearthed:rhyolite', 'projectred_exploration:marble', 'unearthed:white_granite', 'unearthed:limestone', 'unearthed:cobbled_limestone', 'unearthed:beige_limestone', 'unearthed:grey_limestone', 'unearthed:cobbled_grey_limestone', 'unearthed:siltstone', 'unearthed:mudstone', 'unearthed:conglomerate', 'unearthed:quartzite', 'unearthed:weathered_rhyolite', 'unearthed:dolerite', 'unearthed:lignite', 'unearthed:schist', 'unearthed:pillow_basalt', 'unearthed:dacite', '#minecraft:stone_crafting_materials'])
 
     event.add('notreepunching:loose_rocks', ['twigs:pebble', 'spelunkers_charm:deepslate_rock', 'spelunkers_charm:rock', 'spelunkers_charm:dripstone_rock', 'spelunkers_charm:basalt_rock'])
     event.remove('notreepunching:loose_rocks', 'notreepunching:sandstone_loose_rock')
