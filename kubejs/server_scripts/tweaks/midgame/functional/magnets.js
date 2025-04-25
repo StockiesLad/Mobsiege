@@ -11,7 +11,7 @@ recipes((event, funcs) => {
 
      funcs.vanillaInsert(funcs.removeByOutput('simplemagnets:basicmagnet'), [
           ['#forge:ingots/gravitium_alloy', 4],
-          ['#forge:ingots/titanium', [0, 1, 3, 6, 7]],
+          ['#forge:ingots/invar', [0, 1, 3, 6, 7]],
           [`alexscaves:azure_neodymium_ingot`, 2],
           [`alexscaves:scarlet_neodymium_ingot`, 8]
      ])
