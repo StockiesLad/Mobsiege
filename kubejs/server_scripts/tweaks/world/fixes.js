@@ -45,7 +45,7 @@ recipes((event, funcs) => {
           {id: 'create_confectionery:white_chocolate_recipe_6'},
           {id: 'create_confectionery:ruby_chocolate_recipe_6'},
           {id: 'create_confectionery:black_chocolate_recipe_6'},
-          {id: 'ancient_aether:stripped_sakura_wood_wall'}
+          {id: 'ancient_aether:stripped_sakura_wood_wall'},
           /*
           //Why the hell aint this working?
           {id: 'deeperdarker:resonarium_helmet_smithing'},
@@ -57,6 +57,11 @@ recipes((event, funcs) => {
           {id: 'deeperdarker:resonarium_axe_smithing'},
           {id: 'deeperdarker:resonarium_shovel_smithing'},
           {id: 'deeperdarker:resonarium_hoe_smithing'}*/
+          {id: 'thermal:compat/tconstruct/press_tconstruct_blood_slime_2x2_unpacking'},
+          {id: 'thermal:compat/tconstruct/bottler_tconstruct_lavawood'},
+          {id: 'thermal:compat/tconstruct/press_tconstruct_blood_slime_3x3_packing'},
+          {id: 'thermal:compat/tconstruct/press_tconstruct_blood_slime_2x2_packing'},
+          {id: 'thermal:compat/tconstruct/press_tconstruct_blood_slime_3x3_unpacking'}
      ]).forEach((o) => event.remove(o))
 
      common.alwaysArray([
@@ -83,8 +88,13 @@ recipes((event, funcs) => {
      wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_hoe'), 'minecraft:iron_hoe', 'deeperdarker:resonarium_plate')
      */
 
+     event.replaceInput({input: '#forge:raw_materials/iron', output: 'minecraft:iron_ingot'}, '#forge:raw_materials/iron', 'minecraft:raw_iron')
+     event.replaceInput({input: '#forge:raw_materials/iron', output: 'minecraft:raw_iron_block'}, '#forge:raw_materials/iron', 'minecraft:raw_iron')
+
      funcs.wall('ancient_aether:stripped_sakura_wood_wall', 'ancient_aether:stripped_sakura_log').vanilla()
-     
+
+     funcs.threeSquare(funcs.removeInsurely({output: 'betternether:cincinnasite_block'}), 'betternether:cincinnasite').vanilla()
+     funcs.threeSquare(funcs.removeInsurely({output: 'betternether:cincinnasite_forged'}), 'betternether:cincinnasite_ingot').vanilla()
 })
 
 //Failed attempt at syncing recipes for the same concept (e.g. pulverising, crushing) between different mods.
@@ -126,6 +136,9 @@ ServerEvents.tags('item', event => {
      event.add('forge:storage_blocks/sulfur', 'cinderscapes:sulfur_block')
      event.add('forge:sandstone/venus_sandstone', ['ad_astra:venus_sandstone'])
      event.add('ad_astra:venus_sandstone', ['ad_astra:venus_sandstone'])
+     event.add('forge:storage_blocks/raw_iron', 'betternether:cincinnasite_forged_block')
+     event.add('forge:storage_blocks/iron', ['betterend:thallasium_block', 'betternether:cincinnasite_forged'])
+     event.add('forge:raw_materials/iron', ['betternether:cincinnasite', 'betterend:thallasium_raw'])
      addEntriesRespectively(event, [
           ['%plates/copper', 'primalstage:copper_plate'],
           ['%plates/iron', 'primalstage:iron_plate'],

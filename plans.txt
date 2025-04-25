@@ -91,10 +91,11 @@ add proper tech progression (tinkers construct & buildcraft -> create & immersiv
 progression structure {
 	complex alloys, basic components and quartz-variants are used to build basic machines/redstone - produces advanced components and deep resonance crystals (turrets & guns, basic jetpacks, mob grinding, elevators)
 	advanced components, hyper-complex alloys & chips are used to produce magic cubes and a ae2 me system (interdiction torches and portals, advanced jetpacks & ae2)
-
+fix coal input in ad astra steel smelting
+add a way to chop logs into split logs via machines
+make epic siege monsters specifically target machine blocks
 enable magnets are project red and foregoing
 incorporate clouds in crafting
-look into ranged pumps, pipez, flux networks and energy meter
 balance (deep resonance, industrial foregoing, thermal expansion, integrated dynamics, enderio, bigger reactors, rftools, solarflux, simply jetpacks, ad astra, systeams, mob grinding utils, ae2)
 use resources from (betterend, betternether, projecte, bedrockium & aether)
 integrate auto crafter deeply (consider buildcraft one too)
@@ -103,6 +104,7 @@ two player cannot be in same server ?
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+look into ranged pumps, pipez, flux networks and energy meter
 progression structure {
 	primal core 2 gets basic resources, albeit very primitive. (mining and survival)
 	buildcraft gets resources and lava to process resources en mass with tinkers construct (buckets)

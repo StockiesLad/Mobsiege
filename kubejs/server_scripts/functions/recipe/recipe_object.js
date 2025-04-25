@@ -390,12 +390,31 @@ RecipeObject.prototype = {
           this.bulkFreezing(result, ingredient)
      },
 
-     globalPressing: function(results, ingredients) {
-          //this.event.recipes.immersiveengineering.metal_press(results, ingredients, 'immersiveengineering:mold_plate')
-          this.event.recipes.create.pressing(results, ingredients)
-          this.event.recipes.thermal.press(results, ingredients)
-          if (Item.of(results).getId().includes('plate'))
-               this.event.recipes.immersiveengineering.metal_press(results, ingredients, 'immersiveengineering:mold_plate')
+     /**
+      * @param {string} type 
+      * @returns 
+      */
+     globalPressing: function(result, ingredient, type) {
+          if (type == null)
+               type = Item.of(result).getId()
+
+          if (type.includes('packing'))
+               this.event.recipes.create.compacting(result, ingredient)
+          else this.event.recipes.create.pressing(result, ingredient)
+          
+          if (type.includes('plate') || type.includes('brick')) {
+               this.event.recipes.thermal.press(result, ingredient)
+               this.event.recipes.immersiveengineering.metal_press(result, ingredient, 'immersiveengineering:mold_plate')
+          } else if (type.includes('rod')) {
+               this.event.recipes.immersiveengineering.metal_press(result, ingredient, 'immersiveengineering:mold_rod')
+          } else if (type.includes('packing_2x2')) {
+               this.event.recipes.thermal.press(result, common.alwaysArray(ingredient).concat(['thermal:press_packing_2x2_die']))
+               this.event.recipes.immersiveengineering.metal_press(result, ingredient, 'immersiveengineering:mold_packing_4')
+          } else {
+               this.event.recipes.thermal.press(result, ingredient)
+               this.event.recipes.immersiveengineering.metal_press(result, ingredient, 'createdieselgenerators:mold')
+          }
+
           return this
      },
 

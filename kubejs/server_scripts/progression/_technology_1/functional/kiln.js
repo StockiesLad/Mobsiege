@@ -7,8 +7,14 @@ recipes((event, funcs) => {
 
      funcs.vanillaInsert('primalstage:kiln', [
           ['primalstage:kiln_bricks', [6, 3, 1, 5, 8]],
+          [content.high_grade_charcoal, 4],
+          ['minecraft:soul_campfire', 7]
+     ])
+
+     funcs.vanillaInsert('primalstage:kiln', [
+          ['primalstage:kiln_bricks', [6, 3, 1, 5, 8]],
           ['aether:ambrosium_shard', 4],
-          ['minecraft:campfire', 7]
+          ['ancient_aether:ambrosium_campfire', 7]
      ])
 
      common.alwaysArray([

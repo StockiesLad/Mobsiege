@@ -22,21 +22,12 @@ recipes((event, funcs) => {
 
 
      event.forEachRecipe({type: 'minecraft:crafting_shaped', output: '#forge:gears'}, recipe => {
-          var ingredient
-          recipe.json.get('key').getAsJsonObject().entrySet().forEach(entry => {
-               if (ingredient == null || (!ingredient.includes('ingot') && (ingredient.includes('nugget') || ingredient.includes('gear')))) {
-                    var value = entry.getValue().getAsJsonObject()
-                    if (value.has('item'))
-                         ingredient = value.get('item').getAsString()
-                    else ingredient = '#' + value.get('tag').getAsString()          
-               }
-          })
-
+          var ingredient = '4x ' + getCraftingIngredients(recipe)[0]
 
           if (!thermalPressed.some(output => recipe.getOriginalRecipeResult().id === output))
-               event.recipes.thermal.press(recipe.getOriginalRecipeResult().id, ['4x ' + ingredient, 'thermal:press_gear_die'])
+               event.recipes.thermal.press(recipe.getOriginalRecipeResult().id, [ingredient, 'thermal:press_gear_die'])
           if (!immengPressed.some(output => recipe.getOriginalRecipeResult().id === output))
-               event.recipes.immersiveengineering.metal_press(recipe.getOriginalRecipeResult().id, '4x ' + ingredient, 'immersiveengineering:mold_gear')
+               event.recipes.immersiveengineering.metal_press(recipe.getOriginalRecipeResult().id, ingredient, 'immersiveengineering:mold_gear')
      })
 
      event.remove({type: 'minecraft:crafting_shaped', output: '#forge:gears'})

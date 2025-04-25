@@ -70,3 +70,18 @@ function filterBiasedly(expressions, preferredSource, regex) {
          return preferredExp
     else return matchedExpressions[0]
 }
+/**
+ * 
+ * @param {Internal.RecipeJS} recipe 
+ * @returns {string[]}
+ */
+function getCraftingIngredients(recipe) {
+    var ingredients = []
+    recipe.json.get('key').getAsJsonObject().entrySet().forEach(entry => {
+        var value = entry.getValue().getAsJsonObject()
+        if (value.has('item'))
+                ingredients.push(value.get('item').getAsString())
+        else ingredients.push('#' + value.get('tag').getAsString())
+    })
+    return ingredients
+}
