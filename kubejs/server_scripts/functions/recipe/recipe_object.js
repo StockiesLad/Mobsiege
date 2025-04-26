@@ -68,6 +68,25 @@ RecipeObject.prototype = {
           runnables.forEach(run => run())
      },
 
+     /**
+      * @callback BasicRecipeContext
+      * @param {Internal.RecipeJS} recipe
+      */
+     /**
+      * @param {Object} filter 
+      * @param {BasicRecipeContext} recipeCall 
+      */
+     removeRecipesRaw: function(filter, recipeCall) {
+          var runnables = []
+          this.event.forEachRecipe(filter, recipe => {
+               var id = recipe.getId()
+               runnables.push(() => this.removeById(id))
+               if (recipeCall != null)
+                    recipeCall(recipe)
+          })
+          runnables.forEach(run => run())
+     },
+
      removeByOutput: function(item) {
           return this.removeInsurely({output: item})
      },
@@ -325,6 +344,16 @@ RecipeObject.prototype = {
                fluid: fluidIngredient,
                result: result
              })
+     },
+
+     siliconAssemly: function(result, ingredients, requiredJoules) {
+          this.event.custom({
+               type: "buildcraftsilicon:assembly",
+               output: Item.of(result),
+               requiredMicroJoules: common.insure(requiredJoules, 10000) * 1000000,
+               requiredStacks: common.alwaysArray(ingredients).map(ingredient => InputItem.of(ingredient)),
+               subType: "BASIC"
+          })
      },
 
      //Global Recipes - this is to ensure compat between multiple mods in one spot.

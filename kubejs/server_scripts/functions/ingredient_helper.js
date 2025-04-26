@@ -23,7 +23,7 @@ function preferredItemId(tag) {
 }
 
 function preferredStack(tag) {
-    return AlmostUnified.getPreferredItemForTag(tag)
+    return AlmostUnified.getPreferredItemForTag(tag.replace('#', ''))
 }
 
 /**

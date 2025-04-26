@@ -71,12 +71,23 @@ themes {
 	exploration
 }
 
+1.1 {
+	Farmability and further customisation/improvements for magical utilities clouds
+}
+
 low priority {
 	aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
 	add more mining levels
 	make certain ores spawn in certain biomes
+	make surface seams indicating a large ore deposit
+	make food spawn in specific biomes and plants
+	convert all tools into tinkers construct
 	add functionality to anger random animals by fiddling with their interests (monkeys -> bananas) (scan in 10 block radius for respective animal on block break)
 	add support to start in 3 dimensions (aether, overworld, nether) and re document (ambrosium is picked because its soft)
+	Optimise Entities with behavioural LOD's, entity lookups instead of long-distance path-finding (code in mobsiege2Java) and refactor goal selection and ticking
+	optimise itemgroups to be lazily-loaded
+	unify (ingots, dusts, nuggets etc) in thermal style to make it look proper
+	rename sheets to plates to avoid confusion
 }
 
 AFTER THE FOLLOWING IS COMPLETED, WE ARE MOSTLY DONE
@@ -94,6 +105,7 @@ progression structure {
 fix enderium catch 22 with component assembly.
 get back to expanded storage 2/2 in later mechanical/electrical branches
 fix coal input in ad astra steel smelting
+speed up data (please!)
 add a way to chop logs into split logs via machines
 make epic siege monsters specifically target machine blocks
 enable magnets are project red and foregoing

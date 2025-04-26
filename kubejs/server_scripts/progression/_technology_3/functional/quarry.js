@@ -4,7 +4,7 @@ recipes((event, funcs) => {
           ['#forge:ender_pearls', 1],
           ['#forge:gears/diamond', [3, 5]],
           ['minecraft:iron_block', 4],
-          ['buildcraftsilicon:chipset_diamond', [6, 8]],
+          ['buildcraftsilicon:chipset_gold', [6, 8]],
           ['minecraft:diamond_pickaxe', 7]
      ])
 })
