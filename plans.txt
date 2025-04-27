@@ -96,6 +96,12 @@ complex recipes {
 	turrets
 }
 
+primitive easter eggs {
+	Slime Bomb (gunpowder + sap/slime): less explosion, higher yield; leaves behind charred sap that slows hostile mobs
+	Phosphorus Flares - (high grade charcoal + bonemeal (Phosphorus) + nickel dust): shoots fire in a given direction for a certain amount of time
+	Frag Explosive - (tnt + glass shards): primitive grenade shoots glass everywhere, doing high damage to mobs
+}
+
 unify ash
 maybe make more stages (earlygame, midgame, endgame) --> (primal, forgery, basic machines, advanced machines, magic, completion)
 add proper tech progression (tinkers construct & buildcraft -> create & immersive engineering -> projectred & industrial foregoing -> magic cubes & ae2)
@@ -111,7 +117,7 @@ make epic siege monsters specifically target machine blocks
 enable magnets are project red and foregoing
 incorporate clouds in crafting
 balance (deep resonance, industrial foregoing, thermal expansion, integrated dynamics, enderio, bigger reactors, rftools, solarflux, simply jetpacks, ad astra, systeams, mob grinding utils, ae2)
-use resources from (betterend, betternether, projecte, bedrockium & aether)
+use resources from (betterend, betternether, projecte, bedrockium & aether &  magical utilities)
 integrate auto crafter deeply (consider buildcraft one too)
 make mobs spawn with modded armor
 two player cannot be in same server ?
