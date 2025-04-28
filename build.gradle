@@ -58,17 +58,10 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    flatDir {
-        dir 'libs'
-    }
+    flatDir {dir 'libs'}
 
-    maven {
-        url "https://maven.su5ed.dev/releases/"
-    }
-
-    maven {
-        url "https://cursemaven.com"
-    }
+    maven {url "https://maven.su5ed.dev/releases/"}
+    maven {url "https://cursemaven.com"}
 }
 
 dependencies {
@@ -77,10 +70,10 @@ dependencies {
     annotationProcessor "io.github.llamalad7:mixinextras-fabric:${mixin_extras_version}"
     implementation "io.github.llamalad7:mixinextras-fabric:${mixin_extras_version}"
 
-    compileOnly"dev.su5ed.sinytra.fabric-api:fabric-api:${fabric_api_version}"
+    compileOnly "dev.su5ed.sinytra.fabric-api:fabric-api:${fabric_api_version}"
     compileOnly "dev.su5ed.sinytra:fabric-loader:2.7.4+0.15.3+1.20.1"
-
     compileOnly "net.jmb19905:carbonize:1.0.0+1.20.1"
+    implementation fg.deobf("buildcraft:buildcraft:7.99.24.9-1.20.1-2025-04-26-all")
     implementation fg.deobf("curse.maven:notreepunching-289043:4599926")
     implementation fg.deobf("curse.maven:tough-as-nails-246391:5815863")
     implementation fg.deobf("curse.maven:epic-mob-siege-nightmare-957414:5003615")

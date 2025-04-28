@@ -12,7 +12,7 @@ import static com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails.THERMOREGULATOR
 
 @Mixin(TemperatureHandler.class)
 public class TemperatureHandlerMixin {
-    @Redirect(method = "onPlayerTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;hasEffect(Lnet/minecraft/world/effect/MobEffect;)Z"), remap = false)
+    @Redirect(method = "onPlayerTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;hasEffect(Lnet/minecraft/world/effect/MobEffect;)Z"))
     private static boolean mobsiege$thermoregulate(Player instance, MobEffect mobEffect) {
         var original = instance.hasEffect(mobEffect);
         if (mobEffect.equals(TANEffects.CLIMATE_CLEMENCY)) return original || (THERMOREGULATOR != null && instance.getInventory().contains(THERMOREGULATOR));

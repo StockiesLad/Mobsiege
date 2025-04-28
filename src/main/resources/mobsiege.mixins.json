@@ -4,9 +4,12 @@
   "compatibilityLevel": "JAVA_16",
   "refmap": "mobsiege.mixins.refmap.json",
   "mixins": [
+    "AreaFillMixin",
     "FireStarterItemMixin",
     "ItemStackMixin",
+    "LevelRenderHandlerMixin",
     "NightmareMainMixin",
+    "TemperatureHandlerImplMixin",
     "TemperatureHandlerMixin",
     "WaterPurifierBlockEntityMixin"
   ],

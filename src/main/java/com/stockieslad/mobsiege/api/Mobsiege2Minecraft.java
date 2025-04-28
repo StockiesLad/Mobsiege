@@ -27,6 +27,10 @@ public class Mobsiege2Minecraft {
         return TagKey.create(Registries.BLOCK, identifier(string));
     }
 
+    public static boolean hasTag(BlockState state, TagKey<Block> tag) {
+        return state.is(tag);
+    }
+
     public static void damageItem(ItemStack itemStack, int damageAmount, LivingEntity entity, @Nullable InteractionHand hand) {
         var parsedHand = Objects.requireNonNullElse(hand, InteractionHand.MAIN_HAND);
         itemStack.hurtAndBreak(damageAmount, entity, (p_150686_) -> p_150686_.broadcastBreakEvent(parsedHand));
