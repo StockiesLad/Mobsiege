@@ -30,7 +30,11 @@ ClientEvents.lang('en_us', event => {
         ['carbonize:ash_layer', 'Enriched Ash Layer'],
         ['supplementaries:ash', 'Fine Ash'],
         ['cinderscapes:rose_quartz', 'Nether Rose Quartz'],
-        ['projectred_core:silicon', 'Unfired Silicon Wafer']
+        ['projectred_core:silicon', 'Unfired Silicon Wafer'],
+        ['projectred_core:electrotine_silicon', 'Electrotine Silicon Chip'],
+        ['projectred_core:energized_silicon', 'Energized Silicon Chip'],
+        ['projectred_core:infused_silicon', 'Infused Silicon Chip']
+
     ]
 
     rename = concatSeries(rename, [

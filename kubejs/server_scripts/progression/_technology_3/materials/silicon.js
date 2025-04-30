@@ -16,7 +16,8 @@ recipes((event, funcs) => {
      })
 
      funcs.removeRecipes({output: packTag('projectred/chips/elemental')}, (result, ingredients) => {
-          funcs.siliconAssemly(result, ingredients[0], 25000)
+          if (!Item.of(result).isEmpty())
+               funcs.siliconAssemly(result, ingredients[0], 25000)
      })
 })
 

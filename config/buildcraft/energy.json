@@ -1,0 +1,124 @@
+{
+  "events": {
+    "christmas_chocolate": {
+      "#Allowed Values": "DISABLED, DAY_ONLY, MONTH, ENABLED",
+      "#Comment": "christmas_chocolate",
+      "value": "DAY_ONLY"
+    }
+  },
+  "general": {
+    "oilIsDense": {
+      "#Comment": "Should oil be dense and drag entities down?",
+      "value": true
+    },
+    "enableRfEngine": {
+      "#Comment": "Enable the RF to MJ engine?",
+      "value": true
+    },
+    "enableMjDynamo": {
+      "#Comment": "Enable the MJ to RF dynamo / engine / generator?",
+      "value": true
+    }
+  },
+  "worldgen": {
+    "oil": {
+      "can_burn": {
+        "#Comment": "Can oil blocks burn?",
+        "value": true
+      },
+      "enable": {
+        "#Comment": "Should any oil spouts or lakes be generated at all?",
+        "value": true
+      },
+      "excessiveBiomes": {
+        "#Comment": "Biome registry names (e.g. \u0027minecraft:ocean\u0027,\u0027minecraft:plains\u0027) of biomes that should have GREATLY increased oil generation rates.",
+        "value": [
+          "buildcraftenergy:oil_desert",
+          "buildcraftenergy:oil_ocean"
+        ]
+      },
+      "excludedBiomes": {
+        "#Comment": "Biome registry names (e.g. \u0027minecraft:hell\u0027,\u0027minecraft:jungle\u0027) of biomes that should never generate oil.",
+        "value": [
+          "minecraft:hell",
+          "minecraft:sky"
+        ]
+      },
+      "excludedBiomesIsBlacklist": {
+        "#Comment": "If true then the excluded biomes list will be treated as a blacklist, otherwise it will be treated as a whitelist.",
+        "value": true
+      },
+      "excludedDimensions": {
+        "#Comment": "Dimension ID\u0027s (e.g. \u0027minecraft:the_nether\u0027 for the nether,\u0027minecraft:the_end\u0027 for the end) of dimensions that should never generate oil.",
+        "value": [
+          "minecraft:the_nether",
+          "minecraft:the_end"
+        ]
+      },
+      "excludedDimensionsIsBlacklist": {
+        "#Comment": "If true then the excluded dimenstions list will be treated as a blacklist, otherwise it will be treated as a whitelist.",
+        "value": true
+      },
+      "generationRate": {
+        "#Comment": "The rate of occurrence of oil wells.",
+        "#Range": "0.0 - 1.7976931348623157E308",
+        "value": 1.0
+      },
+      "oil_desert_biome": {
+        "#Comment": "Should Oil Desert biomes generate at all?",
+        "value": true
+      },
+      "oil_ocean_biome": {
+        "#Comment": "Should Oil Ocean biomes generate at all?",
+        "value": true
+      },
+      "spawn_probability": {
+        "large": {
+          "#Comment": "The percentage probability of a large oil spawn",
+          "#Range": "0.0 - 1.7976931348623157E308",
+          "value": 0.04
+        },
+        "medium": {
+          "#Comment": "The percentage probability of a medium oil spawn",
+          "#Range": "0.0 - 1.7976931348623157E308",
+          "value": 0.1
+        },
+        "small": {
+          "#Comment": "The percentage probability of a small oil spawn",
+          "#Range": "0.0 - 1.7976931348623157E308",
+          "value": 2.0
+        }
+      },
+      "spouts": {
+        "enable": {
+          "#Comment": "Whether oil spouts are generated or not. The oil spring at the bottom of large lakes will still exist.",
+          "value": true
+        },
+        "large_max_height": {
+          "#Comment": "The maximum height for large oil spouts",
+          "#Range": "0 - 2147483647",
+          "value": 20
+        },
+        "large_min_height": {
+          "#Comment": "The minimum height for large oil spouts",
+          "#Range": "0 - 2147483647",
+          "value": 10
+        },
+        "small_max_height": {
+          "#Comment": "The maximum height for small oil spouts",
+          "#Range": "0 - 2147483647",
+          "value": 12
+        },
+        "small_min_height": {
+          "#Comment": "The minimum height for small oil spouts",
+          "#Range": "0 - 2147483647",
+          "value": 6
+        }
+      },
+      "surfaceDepositBiomes": {
+        "#Comment": "Biome registry names (e.g. \u0027minecraft:ocean\u0027,\u0027minecraft:hills\u0027) of biomes that should have slightly increased oil generation rates.",
+        "value": []
+      }
+    }
+  }
+}

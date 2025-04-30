@@ -1,5 +1,5 @@
 
 [logbegone]
 	phrases = []
-	regex = ["Mob is looking at:"]
+	regex = ["Mob is looking at:", "[Block{aether:gravitite_ore}, Block{aether_overworld_ores:holystone_coal_ore}, Block{aether_overworld_ores:holystone_iron_ore}, Block{aether_overworld_ores:holystone_copper_ore}, Block{aether_overworld_ores:holystone_gold_ore}, Block{aether_overworld_ores:holystone_redstone_ore}, Block{aether_overworld_ores:holystone_emerald_ore}, Block{aether_overworld_ores:holystone_lapis_ore}, Block{aether_overworld_ores:holystone_diamond_ore}, Block{aether_overworld_ores:holystone_sulfur_ore}, Block{aether_overworld_ores:holystone_uranium_ore}, Block{aether_overworld_ores:holystone_zinc_ore}, Block{aether_overworld_ores:holystone_nickel_ore}, Block{aether_overworld_ores:holystone_silver_ore}, Block{aether_overworld_ores:holystone_lead_ore}, Block{aether_overworld_ores:holystone_tin_ore}]", "[worlds_together] Error for jar"]
 

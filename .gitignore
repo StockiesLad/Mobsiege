@@ -40,6 +40,11 @@
 !/config/cumulus_menus-client.toml
 !/config/tconstruct-common.toml
 !/config/carbonize.json5
+!/config/buildcraft
+/config/buildcraft/*
+!/config/buildcraft/silicon.json
+!/config/buildcraft/energy.json
+
 #Performance
 !/config/immediatelyfast.json
 !/config/forge-client.toml

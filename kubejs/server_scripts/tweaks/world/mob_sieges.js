@@ -15,7 +15,7 @@ const MOB_SIEGES = [
         name: 'Bliztic Barrage',
         type: 'Blaze',
         members: [
-            'create_dd:seething_ablaze',
+            //'create_dd:seething_ablaze',
             'minecraft:blaze',
             'thermal:basalz',
             'thermal:blitz',

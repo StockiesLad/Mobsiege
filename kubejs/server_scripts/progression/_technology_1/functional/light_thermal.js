@@ -93,6 +93,9 @@ blockTags((event, funcs) => {
           'minecraft:lantern', 
           'minecraft:torch',
           'supplementaries:fire_pit',
+          //'buildcraftcore:engine_wood',
+          'buildcraftcore:engine_stone',
+          'buildcraftcore:engine_iron'
      ]
 
      funcs.add('minecraft:wall_post_override', ['hardcore_torches:smoldering_torch', 'hardcore_torches:lit_torch'])
@@ -101,3 +104,26 @@ blockTags((event, funcs) => {
           .add('toughasnails:heating_blocks', heating)
           .add('primalstage:lit_blocks', ['#forge:campfires', 'minecraft:soul_campfire'])
 })
+
+//REFACTOR
+/**
+ * @param {Internal.Level} level 
+ * @param {BlockPos} pos 
+ * @param {Internal.BlockState} state 
+ * @returns 
+ */
+Mobsiege2ToughAsNails.checkBlockTemp = (level, pos, state) => {
+     if (!Mobsiege2Minecraft.hasTag(state, TanTags.Blocks.HEATING_BLOCKS))
+         return false
+
+     if (state.hasProperty(BlazeBurnerBlock.HEAT_LEVEL) && state.getValue(BlazeBurnerBlock.HEAT_LEVEL).ordinal() > 1)
+          return true
+
+     var entity = level.getBlockEntity(pos)
+     if (entity instanceof TileEngineBase_BC8) {
+         if (entity.isBurning())
+             return true
+     }
+
+     return false;
+}

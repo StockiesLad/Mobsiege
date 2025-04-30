@@ -478,6 +478,10 @@ RecipeObject.prototype = {
           return this.insert(this.removeByOutput(result), ingredientObjects, size)
      },
 
+     replaceCrafting: function(result, ingredientObjects, size) {
+          return this.replaceWithInsert(result, ingredientObjects, size).vanilla()
+     },
+
      /**
       * Checks the insertions to see if that have been registered as a recipe. Makes debugging missing recipes way easier!
       * Insertions will not default to vanilla but I'd rather the code be a little bit more verbose to be more explicit with recipe types.

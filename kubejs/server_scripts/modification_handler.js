@@ -17,6 +17,9 @@ const FabricFakePlayer = Java.loadClass('net.fabricmc.fabric.api.entity.FakePlay
 const PrimalStageItems = Java.loadClass('com.nanokulon.primalstage.init.ModItems')
 const NTPSounds = Java.loadClass('com.alcatrazescapee.notreepunching.client.ModSounds')
 const NTPConfig = Java.loadClass('com.alcatrazescapee.notreepunching.Config')
+const TileEngineBase_BC8 = Java.loadClass('buildcraft.lib.engine.TileEngineBase_BC8')
+const BlazeBurnerBlock = Java.loadClass('com.simibubi.create.content.processing.burner.BlazeBurnerBlock')
+const TanTags = Java.loadClass('toughasnails.init.ModTags')
 //Mobsiege
 const Mobsiege2Minecraft = Java.loadClass('com.stockieslad.mobsiege.api.Mobsiege2Minecraft')
 const Mobsiege2ToughAsNails = Java.loadClass('com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails')
