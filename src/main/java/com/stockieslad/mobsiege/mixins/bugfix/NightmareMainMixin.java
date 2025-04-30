@@ -1,4 +1,4 @@
-package com.stockieslad.mobsiege.mixins;
+package com.stockieslad.mobsiege.mixins.bugfix;
 
 import com.esm.nightmare.NightmareMain;
 import com.llamalad7.mixinextras.sugar.Local;

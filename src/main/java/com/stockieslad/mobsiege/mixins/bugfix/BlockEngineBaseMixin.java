@@ -1,4 +1,4 @@
-package com.stockieslad.mobsiege.mixins;
+package com.stockieslad.mobsiege.mixins.bugfix;
 
 import buildcraft.api.core.IEngineType;
 import buildcraft.lib.client.model.ModelHolderVariable;
