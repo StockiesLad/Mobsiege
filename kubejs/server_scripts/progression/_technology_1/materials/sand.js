@@ -9,8 +9,6 @@ recipes((event, funcs) => {
      funcs.twoSquare('aether:quicksoil', content.quicksoil_dust).vanilla()
      funcs.twoSquare('minecraft:sand', content.sand_dust).vanilla()
      funcs.twoSquare('minecraft:soul_sand', content.soulsand_dust).vanilla()
-
-     event.blasting('ae2:silicon', packTag('dusts/sand')).xp(0.05) // Needs to be super hot
 })
 
 itemTags((event, funcs) => {

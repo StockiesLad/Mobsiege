@@ -1,5 +1,6 @@
 recipes((event, funcs) => {
      funcs.nuke('betternether:blackstone_furnace')
+     funcs.nuke('quark:blackstone_furnace')
 
      funcs.removeById([
           'quark:building/crafting/furnaces/blackstone_blast_furnace',
@@ -9,13 +10,12 @@ recipes((event, funcs) => {
           'aether_genesis:holystone_blast_furnace'
      ])
 
+     funcs.planetAlt(funcs.removeByOutput('nethersdelight:blackstone_furnace'), ['minecraft:blackstone', content.fire_brick_block], 'primalstage:kiln').vanilla()
+     funcs.planetAlt(funcs.removeByOutput('minecraft:furnace'), ['#minecraft:stone_crafting_materials', content.fire_brick_block], 'primalstage:kiln').vanilla()
      event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', '#forge:furnaces')
-     event.replaceInput({output: 'minecraft:blast_furnace'}, 'primalstage:diamond_plate', preferredItemId('forge:plates/iron'))
      event.shapeless(packTag('primitive_furnaces'), packTag('primitive_furnaces'))
      funcs.removeRecipes({type: 'minecraft:crafting_shaped', output: packTag('primitive_furnaces')}, (result, ingredients) => {
-          //The places are switching to prevent potential overrides. It just makes more sense
-          if (result.is('minecraft:furnace')) funcs.planetAlt(result.withCount(1), [content.fire_brick_block, ingredients[0]], 'primalstage:kiln').vanilla()
-          else funcs.planetAlt(result.withCount(1), [ingredients[0], content.fire_brick_block], 'primalstage:kiln').vanilla()
+          funcs.planetAlt(result.withCount(1), [ingredients[0], content.fire_brick_block], 'primalstage:kiln').vanilla()
      })
 })
 
@@ -34,11 +34,12 @@ itemTags((event, funcs) => {
                'betternether:basalt_furnace', 
                'betternether:netherrack_furnace', 
                'betternether:blackstone_furnace',
-               'quark:deepslate_furnace',
+               'nethersdelight:blackstone_furnace',
                'quark:blackstone_furnace',
+               'quark:deepslate_furnace'
           ]], 
           ['|primitive_furnaces', [
-               'minecraft:furnace',
+               'aether_genesis:holystone_furnace',
                'betternether:basalt_furnace',
                'betternether:netherrack_furnace',
                'betterend:flavolite_furnace',
@@ -49,7 +50,8 @@ itemTags((event, funcs) => {
                'betterend:sandy_jadestone_furnace',
                'betterend:umbralith_furnace',
                'betterend:end_stone_furnace',
-               'aether_genesis:holystone_furnace',
+               'minecraft:furnace',
+               'nethersdelight:blackstone_furnace',
                'quark:blackstone_furnace',
                'quark:deepslate_furnace'
           ]]

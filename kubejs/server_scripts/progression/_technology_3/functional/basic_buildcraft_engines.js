@@ -1,3 +1,7 @@
+Mobsiege2BuildCraft.ENGINE_RELIEF_CHANCE = 0.1
+Mobsiege2BuildCraft.ENGINE_BASE_EXPLOSION = 4
+Mobsiege2BuildCraft.ENGINE_EXPLOSION_GROWTH = 4
+
 recipes((event, funcs) => {
      funcs.vanillaInsert(funcs.removeInsurely({output: 'buildcraftcore:engine_wood'}), [
           ['#minecraft:planks', [0, 1, 2]],

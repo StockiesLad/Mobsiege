@@ -33,6 +33,6 @@ ServerEvents.tags('item', event => {
           ['forge:ores/rose_quartz', 'cinderscapes:rose_quartz_ore'], 
 
           ['|quartz/elemental', ['#forge:gems/sulfur_quartz', '#forge:gems/smoky_quartz', '#forge:gems/rose_quartz']],
-          ['forge:quartz', packTag('quartz/elemental')]
+          ['forge:quartz', [packTag('quartz/elemental'), 'actuallyadditions:black_quartz']]
      ])
 })

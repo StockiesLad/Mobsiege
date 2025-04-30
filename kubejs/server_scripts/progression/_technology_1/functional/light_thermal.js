@@ -65,6 +65,7 @@ blockTags((event, funcs) => {
           'decorative_blocks:soul_brazier', 
           'decorative_blocks:soul_chandelier',
           'hardcore_torches:lit_soul_lantern', 
+          'hardcore_torches:lit_soul_torch',
           'minecraft:soul_lantern', 
           'minecraft:soul_torch',
           'supplementaries:sconce_soul',

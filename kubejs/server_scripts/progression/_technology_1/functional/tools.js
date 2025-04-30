@@ -28,7 +28,7 @@ itemTags((event, funcs) => {
           ['minecraft:clubs', 'primalstage:stone_club'],
           ['minecraft:shovels', 'notreepunching:flint_shovel'],
           ['notreepunching:weak_saws', '#minecraft:axes'],
-          ['minecraft:saws', ['#notreepunching:saws', '#cb_microblock:tools/saws']],
+          ['minecraft:saws', ['#notreepunching:saws', '#cb_microblock:tools/saw']],
           ['forge:tools/saws', '#minecraft:saws'],
           ['minecraft:trowels', 'notreepunching:clay_tool'],
           ['|breaks_randomly', [
