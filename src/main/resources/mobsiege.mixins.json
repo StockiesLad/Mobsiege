@@ -11,6 +11,7 @@
     "NightmareMainMixin",
     "TemperatureHandlerImplMixin",
     "TemperatureHandlerMixin",
+    "TileEngineBaseMixin",
     "WaterPurifierBlockEntityMixin"
   ],
   "client": [
