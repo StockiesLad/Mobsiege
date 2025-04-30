@@ -15,7 +15,8 @@ public class RenderLaserMixin {
     @Inject(method = "render*", at = @At("HEAD"), cancellable = true, remap = false)
     private void mobsiege$skipRenderIfAir(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, CallbackInfo ci) {
         BlockEntity blockEntity = (BlockEntity) (Object) this;
-        if (blockEntity.getLevel().getBlockState(blockEntity.getBlockPos()).isAir()) {
+        //if (blockEntity.getLevel().getBlockState(blockEntity.getBlockPos()).isAir()) {
+        if (blockEntity.getBlockState().isAir()) {
             ci.cancel();
         }
     }
