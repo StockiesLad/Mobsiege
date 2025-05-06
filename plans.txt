@@ -73,6 +73,7 @@ themes {
 
 1.1 {
 	Farmability and further customisation/improvements for magical utilities clouds
+	custom machines to synthesize exclusive clouds using the power of colour
 }
 
 1.(x + 10) {
@@ -93,6 +94,8 @@ low priority {
 	unify (ingots, dusts, nuggets etc) in thermal style to make it look proper
 	widen support for heating elements + a custom burner
 	rename sheets to plates to avoid confusion
+	add tag deconstruction for TAN temp tags
+	speed up data (please!)
 }
 
 AFTER THE FOLLOWING IS COMPLETED, WE ARE MOSTLY DONE
@@ -101,14 +104,13 @@ complex recipes {
 	turrets
 }
 
-primitive easter eggs {
+primitive fighting tools {
 	Slime Bomb (gunpowder + sap/slime): less explosion, higher yield; leaves behind charred sap that slows hostile mobs
 	Phosphorus Flares - (high grade charcoal + bonemeal (Phosphorus) + nickel dust): shoots fire in a given direction for a certain amount of time
 	Frag Explosive - (tnt + glass shards): primitive grenade shoots glass everywhere, doing high damage to mobs
-	speed up data (please!)
+	
 }
 
-add 
 unify ash
 maybe make more stages (earlygame, midgame, endgame) --> (primal, forgery, basic machines, advanced machines, magic, completion)
 add proper tech progression (tinkers construct & buildcraft -> create & immersive engineering -> projectred & industrial foregoing -> magic cubes & ae2)
@@ -128,8 +130,12 @@ use resources from (betterend, betternether, projecte, bedrockium & aether &  ma
 make mobs spawn with modded armor
 two player cannot be in same server ?
 
+for some reason stone is hidden (idk why)
+fix actually additions weird access
+
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+fix recipe printing
 fix buildcraft fake explosion
 lengthen explosion time to be exponential (raise a constant (1 + 1/x)^p - 1 (max 1))
 integrate auto crafter deeply (consider buildcraft one too)
