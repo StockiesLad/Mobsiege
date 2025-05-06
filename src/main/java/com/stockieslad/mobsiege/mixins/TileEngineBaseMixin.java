@@ -1,5 +1,6 @@
 package com.stockieslad.mobsiege.mixins;
 
+import buildcraft.core.tile.TileEngineCreative;
 import buildcraft.lib.engine.TileEngineBase_BC8;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -42,7 +43,7 @@ public abstract class TileEngineBaseMixin {
     private void mobsiege$explodeOnOverheat(CallbackInfo ci) {
         var self = (TileEngineBase_BC8)(Object)this;
 
-        if (self.cannotUpdate()) return;
+        if (self.cannotUpdate() || self instanceof TileEngineCreative) return;
 
         var stage = self.getPowerStage();
 

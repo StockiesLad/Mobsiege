@@ -18,7 +18,8 @@ public abstract class RenderLaserMixin {
             cancellable = true
     )
     private void mobsiege$skipRenderIfAir(TileLaser tile, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, CallbackInfo ci) {
-        if (tile.getBlockState().isAir())
+        var level = tile.getLevel();
+        if (level != null && level.getBlockState(tile.getBlockPos()).isAir())
             ci.cancel();
     }
 }
