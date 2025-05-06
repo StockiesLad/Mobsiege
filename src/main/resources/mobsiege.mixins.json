@@ -5,15 +5,16 @@
   "refmap": "mobsiege.mixins.refmap.json",
   "mixins": [
     "AreaFillMixin",
-    "bugfix.BlockEngineBaseMixin",
     "FireStarterItemMixin",
     "ItemStackMixin",
     "LevelRenderHandlerMixin",
-    "bugfix.NightmareMainMixin",
     "TemperatureHandlerImplMixin",
     "TemperatureHandlerMixin",
     "TileEngineBaseMixin",
-    "WaterPurifierBlockEntityMixin"
+    "WaterPurifierBlockEntityMixin",
+    "bugfix.BlockAtomicReconstructorMixin",
+    "bugfix.BlockEngineBaseMixin",
+    "bugfix.NightmareMainMixin"
   ],
   "client": [
     "bugfix.RenderLaserMixin"

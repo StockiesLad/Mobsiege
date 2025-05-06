@@ -1,6 +1,11 @@
 package com.stockieslad.mobsiege.api;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.TagKey;
@@ -17,6 +22,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 public class Mobsiege2Minecraft {
+    public static final RandomSource SAFE_CLIENT_RANDOM = RandomSource.create();
+
     public static Args onBreaksRandomly = null;
 
     public static ResourceLocation identifier(String string) {
@@ -40,6 +47,22 @@ public class Mobsiege2Minecraft {
 
     public static <T extends Comparable<T>> BlockState stateWith(BlockState state, Property<T> property, T value) {
         return state.trySetValue(property, value);
+    }
+
+    public static MutableComponent withStyle(MutableComponent text, Style style) {
+        return text.withStyle(style);
+    }
+
+    public static Style withClickEvent(Style style, ClickEvent clickEvent) {
+        return style.withClickEvent(clickEvent);
+    }
+
+    public static Style withColorFormat(Style style, ChatFormatting color) {
+        return style.withColor(color);
+    }
+
+    public static Style withColorText(Style style, TextColor color) {
+        return style.withColor(color);
     }
 
     public static void init() {}
