@@ -13,13 +13,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class RenderLaserMixin {
     @Inject(
             method = "render(Lbuildcraft/silicon/tile/TileLaser;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
-            at = @At(value = "INVOKE", target = "Lbuildcraft/silicon/client/render/RenderLaser;isPlayerWearingGoggles()Z"),
+            at = @At(value = "HEAD"),
             remap = false,
             cancellable = true
     )
     private void mobsiege$skipRenderIfAir(TileLaser tile, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, CallbackInfo ci) {
         var level = tile.getLevel();
-        if (level != null && level.getBlockState(tile.getBlockPos()).isAir())
+        if (tile.getBlockState().isAir() || (level != null && level.getBlockState(tile.getBlockPos()).isAir()))
             ci.cancel();
     }
 }
