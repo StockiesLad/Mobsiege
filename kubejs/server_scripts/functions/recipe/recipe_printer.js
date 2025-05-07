@@ -1,14 +1,3 @@
-const JavaString = Java.loadClass('java.lang.String');
-const JavaInteger = Java.loadClass('java.lang.Integer');
-const IntegerArgumentType = Java.loadClass('com.mojang.brigadier.arguments.IntegerArgumentType');
-const StringArgumentType = Java.loadClass('com.mojang.brigadier.arguments.StringArgumentType');
-const Component = Java.loadClass('net.minecraft.network.chat.Component');
-const ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegistries');
-const Commands = Java.loadClass('net.minecraft.commands.Commands');
-const Style = Java.loadClass('net.minecraft.network.chat.Style');
-const ClickEvent = Java.loadClass('net.minecraft.network.chat.ClickEvent');
-const ChatFormatting = Java.loadClass('net.minecraft.ChatFormatting');
-
 ServerEvents.commandRegistry(event => {
     event.register(Commands.literal('inventoryrecipe')
         .then(Commands.argument('x', IntegerArgumentType.integer())
@@ -77,12 +66,7 @@ function runCommand(ctx, sizeOverride) {
         var stack = be.getItem(i);
         if (!stack.isEmpty()) {
             var coords = maths.locateSquare(i, chestWidth)
-            console.info(coords)
-            coords.height++
-            console.info(coords)
-            console.info(recipeSize)
             var biggestAxis = coords.width > coords.height ? coords.width : coords.height
-            console.info(biggestAxis)
             if (biggestAxis > recipeSize)
                 recipeSize = biggestAxis
         }

@@ -128,13 +128,16 @@ incorporate clouds in crafting
 balance (deep resonance, industrial foregoing, thermal expansion, integrated dynamics, enderio, bigger reactors, rftools, solarflux, simply jetpacks, ad astra, systeams, mob grinding utils, ae2)
 use resources from (betterend, betternether, projecte, bedrockium & aether &  magical utilities)
 make mobs spawn with modded armor
-two player cannot be in same server ?
+make buildcraft 3/3 not 2/2 where 3/3 and create 3/3 (new age) can be the electric interfaces
+make more things demand chips such that there is an incentive to actually pursue kenesis pipes
 
+(bug)two player cannot be in same server ?
 for some reason stone is hidden (idk why)
-fix actually additions weird access
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+fix missing entries
+fix actually additions weird access
 fix recipe printing
 fix buildcraft fake explosion
 lengthen explosion time to be exponential (raise a constant (1 + 1/x)^p - 1 (max 1))

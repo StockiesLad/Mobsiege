@@ -10,7 +10,7 @@
 	// Priority 3: Sets the difficulty in any world to normal when enabled.
 	"forceNormal": false,
 	// Priority 4: Sets the difficulty in any world to hard when enabled.
-	"forceHard": false,
+	"forceHard": true,
 	// Whether the cheats option should be forced to be disabled on the initial world creation screen.
 	"forceCheatsDisabled": false,
 	// When enabled, locks the difficulty in any world so it cannot be changed.

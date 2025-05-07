@@ -29,12 +29,12 @@
 	/**
 	 * Whether normal search queries should include the tooltip.
 	 */
-	search-tooltip-by-default: false;
+	search-tooltip-by-default: true;
 
 	/**
 	 * Whether normal search queries should include the mod name.
 	 */
-	search-mod-name-by-default: true;
+	search-mod-name-by-default: false;
 
 	/**
 	 * Whether normal search queries should include the stack's tags.
@@ -46,7 +46,7 @@
 	/**
 	 * Which action should be performed when clicking the recipe book.
 	 */
-	recipe-book-action: default;
+	recipe-book-action: toggle-craftables;
 
 	/**
 	 * Where to display status effects in the inventory.
@@ -88,7 +88,7 @@
 	 * Whether to have the search bar in the center of the screen, instead of to the
 	 * side.
 	 */
-	center-search-bar: false;
+	center-search-bar: true;
 
 	/**
 	 * Which sidebar type to switch to when searching.
@@ -222,7 +222,7 @@
 	/**
 	 * Where to position the right sidebar
 	 */
-	right-sidebar-align: left, top;
+	right-sidebar-align: right, top;
 
 	/**
 	 * Whether to render the header buttons and page count for the right sidebar
@@ -257,7 +257,7 @@
 	/**
 	 * Where to position the top sidebar
 	 */
-	top-sidebar-align: right, center;
+	top-sidebar-align: center, center;
 
 	/**
 	 * Whether to render the header buttons and page count for the top sidebar
@@ -430,7 +430,7 @@
 	/**
 	 * Copies the hovered recipe's ID to the clipboard
 	 */
-	copy-recipe-id: "key.keyboard.c";
+	copy-recipe-id: "key.keyboard.unknown";
 
 	/**
 	 * In edit mode, hide the hovered stack
@@ -468,7 +468,7 @@
 	/**
 	 * Whether hovering the output of a recipe should show the recipe's EMI ID.
 	 */
-	show-recipe-ids: true;
+	show-recipe-ids: false;
 
 	/**
 	 * Whether to display additional widgets added to recipes from other mods.

@@ -184,7 +184,7 @@ CommonHelper.prototype = {
                     called = true
                     return calls[key]
                }                
-               if (!called && global.debug) console.info(`Function "${funcName}" is not present in "${calls}"`)
+               //if (!called && global.debug) console.info(`Function "${funcName}" is not present in "${calls}"`)
                return this.maybe({})
           }
      }

@@ -2,6 +2,8 @@
 const WrapperBoolean = Java.loadClass('java.lang.Boolean')
 const HashMap = Java.loadClass('java.util.HashMap')
 const LinkedList = Java.loadClass('java.util.LinkedList')
+const JavaString = Java.loadClass('java.lang.String');
+const JavaInteger = Java.loadClass('java.lang.Integer');
 //Minecraft
 const BlockPos = Java.loadClass('net.minecraft.core.BlockPos')
 const Containers = Java.loadClass('net.minecraft.world.Containers')
@@ -10,6 +12,14 @@ const Properties = Java.loadClass('net.minecraft.world.level.block.state.propert
 const ServerPlayer = Java.loadClass('net.minecraft.server.level.ServerPlayer')
 const SoundType = Java.loadClass('net.minecraft.world.level.block.SoundType')
 const SpawnType = Java.loadClass('net.minecraft.world.entity.SpawnPlacements$Type')
+const IntegerArgumentType = Java.loadClass('com.mojang.brigadier.arguments.IntegerArgumentType');
+const StringArgumentType = Java.loadClass('com.mojang.brigadier.arguments.StringArgumentType');
+const Component = Java.loadClass('net.minecraft.network.chat.Component');
+const ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegistries');
+const Commands = Java.loadClass('net.minecraft.commands.Commands');
+const Style = Java.loadClass('net.minecraft.network.chat.Style');
+const ClickEvent = Java.loadClass('net.minecraft.network.chat.ClickEvent');
+const ChatFormatting = Java.loadClass('net.minecraft.ChatFormatting');
 //Modloader
 const ForgeFakePlayer = Java.loadClass('net.minecraftforge.common.util.FakePlayer')
 const FabricFakePlayer = Java.loadClass('net.fabricmc.fabric.api.entity.FakePlayer')
