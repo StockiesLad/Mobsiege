@@ -15,10 +15,14 @@
     "WaterPurifierBlockEntityMixin",
     "bugfix.BlockAtomicReconstructorMixin",
     "bugfix.BlockEngineBaseMixin",
-    "bugfix.NightmareMainMixin"
+    "bugfix.NightmareMainMixin",
+    "bugfix.conversion_gears.TileDynamoMJMixin",
+    "bugfix.conversion_gears.TileEngineRFMixin"
   ],
   "client": [
-    "bugfix.RenderLaserMixin"
+    "bugfix.RenderLaserMixin",
+    "bugfix.conversion_gears.GuiDynamoMJMixin",
+    "bugfix.conversion_gears.GuiEngineRFMixin"
   ],
   "injectors": {
     "defaultRequire": 1

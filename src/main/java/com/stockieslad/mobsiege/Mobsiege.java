@@ -2,9 +2,7 @@ package com.stockieslad.mobsiege;
 
 import com.alcatrazescapee.notreepunching.common.blocks.LooseRockBlock;
 import com.mojang.logging.LogUtils;
-import com.stockieslad.mobsiege.api.Mobsiege2Fabric;
-import com.stockieslad.mobsiege.api.Mobsiege2Minecraft;
-import com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails;
+import com.stockieslad.mobsiege.api.*;
 import fuzs.puzzleslib.api.core.v1.ModConstructor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -48,10 +46,10 @@ public class Mobsiege {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        Mobsiege2BuildCraft.init();
         Mobsiege2Fabric.init();
         Mobsiege2Minecraft.init();
         Mobsiege2ToughAsNails.init();
-
     }
 
     @SubscribeEvent
