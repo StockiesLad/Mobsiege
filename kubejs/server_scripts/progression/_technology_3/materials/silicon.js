@@ -17,7 +17,7 @@ recipes((event, funcs) => {
      funcs.siliconAssemly(funcs.removeByOutput('buildcraftsilicon:chipset_iron'), ['buildcraftsilicon:chipset_redstone', '#forge:dusts/iron'], 20000)
      funcs.siliconAssemly(funcs.removeByOutput('buildcraftsilicon:chipset_gold'), ['buildcraftsilicon:chipset_redstone', '#forge:dusts/gold'], 30000)
 
-     funcs.siliconAssemly(funcs.removeByOutput('buildcraftsilicon:chipset_quartz'), ['buildcraftsilicon:chipset_redstone', '#forge:quartz'], 10000)
+     funcs.siliconAssemly(funcs.removeByOutput('buildcraftsilicon:chipset_quartz'), ['buildcraftsilicon:chipset_redstone', '#forge:dusts/quartz'], 10000)
      funcs.siliconAssemly(funcs.removeByOutput('buildcraftsilicon:chipset_diamond'), ['buildcraftsilicon:chipset_quartz', '#forge:dusts/diamond'], 50000)
      
      event.forEachRecipe({output: packTag('projectred/chips/raw_elemental')}, recipe => {
