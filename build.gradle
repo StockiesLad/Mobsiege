@@ -81,6 +81,7 @@ dependencies {
     implementation fg.deobf("curse.maven:new-thin-air-878379:5068247")
     implementation fg.deobf("curse.maven:puzzles-lib-495476:5904750")
     implementation fg.deobf("curse.maven:curios-309927:6058834")
+    implementation fg.deobf("curse.maven:cb-multipart-258426:5311521")
 }
 
 mixin {

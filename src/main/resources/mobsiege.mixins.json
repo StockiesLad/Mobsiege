@@ -5,6 +5,7 @@
   "refmap": "mobsiege.mixins.refmap.json",
   "mixins": [
     "AreaFillMixin",
+    "CBMicroBlockModContentMixin",
     "FireStarterItemMixin",
     "ItemStackMixin",
     "LevelRenderHandlerMixin",
