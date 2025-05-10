@@ -1,4 +1,4 @@
-const holystone = ['aether:holystone', 'aether_redux:gilded_holystone', 'aether_redux:blightmoss_holystone', 'aether:mossy_holystone', 'aether_genesis:blood_moss_holystone']
+const holystone = ['aether:holystone', 'aether_redux:gilded_holystone']
 
 recipes((event, funcs) => {
      event.recipes.create.crushing([
@@ -7,8 +7,8 @@ recipes((event, funcs) => {
           Item.of('aether:zanite_gemstone').withChance(0.025),
           Item.of('aether_redux:raw_veridium').withChance(0.015),
           Item.of('aether_redux:raw_gravitite').withChance(0.0025),
-          Item.of('deep_aether:skyjade').withChance(0.005),
-          Item.of('aether_genesis:continuum_orb').withChance(0.01)
+          Item.of('deep_aether:skyjade').withChance(0.005)
+          //Item.of('aether_genesis:continuum_orb').withChance(0.01)
      ], packTag('holystone'))
 
      funcs.globalCrushing([Item.of(content.holy_pebble, 2), 'minecraft:ice'], 'aether:icestone')
@@ -18,6 +18,10 @@ recipes((event, funcs) => {
 })
 
 ServerEvents.tags('item', event => {
+     event.add(pack('holystone'), holystone)
+})
+
+ServerEvents.tags('block', event => {
      event.add(pack('holystone'), holystone)
 })
 

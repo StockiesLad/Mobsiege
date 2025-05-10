@@ -130,12 +130,14 @@ use resources from (betterend, betternether, projecte, bedrockium & aether &  ma
 make mobs spawn with modded armor
 make buildcraft 3/3 not 2/2 where 3/3 and create 3/3 (new age) can be the electric interfaces
 make more things demand chips such that there is an incentive to actually pursue kenesis pipes
+ability to render lignite into a coal 
 
 (bug)two player cannot be in same server ?
-for some reason stone is hidden (idk why)
+
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+for some reason stone is hidden (idk why)
 fix missing entries
 fix actually additions weird access
 fix recipe printing

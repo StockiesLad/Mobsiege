@@ -136,6 +136,7 @@
   "blockTagInheritanceMode": "ALLOW",
   "blockTagInheritance": {},
   "ignoredTags": [
+    "forge:stone",
     "forge:coal",
     "forge:lapis",
     "forge:quartz",
