@@ -1,4 +1,4 @@
-package com.stockieslad.mobsiege.mixins;
+package com.stockieslad.mobsiege.mixins.custom_features.temperature;
 
 import com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails;
 import net.minecraft.world.level.Level;

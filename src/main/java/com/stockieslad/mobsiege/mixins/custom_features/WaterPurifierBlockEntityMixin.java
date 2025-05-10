@@ -1,4 +1,4 @@
-package com.stockieslad.mobsiege.mixins;
+package com.stockieslad.mobsiege.mixins.custom_features;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.world.item.Item;

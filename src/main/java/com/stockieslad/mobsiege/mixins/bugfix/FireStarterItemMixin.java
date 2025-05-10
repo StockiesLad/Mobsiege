@@ -1,4 +1,4 @@
-package com.stockieslad.mobsiege.mixins;
+package com.stockieslad.mobsiege.mixins.bugfix;
 
 import com.alcatrazescapee.notreepunching.common.items.FireStarterItem;
 import com.llamalad7.mixinextras.sugar.Local;

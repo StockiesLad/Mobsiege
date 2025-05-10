@@ -1,4 +1,4 @@
-package com.stockieslad.mobsiege.mixins;
+package com.stockieslad.mobsiege.mixins.optimisation;
 
 import codechicken.microblock.init.CBMicroblockModContent;
 import net.minecraftforge.registries.RegisterEvent;

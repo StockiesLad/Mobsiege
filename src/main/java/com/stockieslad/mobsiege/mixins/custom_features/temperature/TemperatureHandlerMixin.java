@@ -1,4 +1,4 @@
-package com.stockieslad.mobsiege.mixins;
+package com.stockieslad.mobsiege.mixins.custom_features.temperature;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.player.Player;

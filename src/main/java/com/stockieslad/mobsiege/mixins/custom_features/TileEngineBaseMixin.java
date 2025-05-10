@@ -1,4 +1,4 @@
-package com.stockieslad.mobsiege.mixins;
+package com.stockieslad.mobsiege.mixins.custom_features;
 
 import buildcraft.core.tile.TileEngineCreative;
 import buildcraft.lib.engine.TileEngineBase_BC8;

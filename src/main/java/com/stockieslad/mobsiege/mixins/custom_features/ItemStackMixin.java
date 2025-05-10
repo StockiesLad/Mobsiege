@@ -1,4 +1,4 @@
-package com.stockieslad.mobsiege.mixins;
+package com.stockieslad.mobsiege.mixins.custom_features;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
