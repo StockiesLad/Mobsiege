@@ -3,6 +3,7 @@ package com.stockieslad.mobsiege.mixins.bugfix.conversion_gears;
 import buildcraft.energy.tile.TileEngineRF;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,7 +20,10 @@ import static com.stockieslad.mobsiege.api.Mobsiege2BuildCraft.CONVERSION_UPGRAD
 public class TileEngineRFMixin {
     @Inject(method = "isValidUpgrade", at = @At("HEAD"), cancellable = true, remap = false)
     private void mobsiege$validateWithTags(int slot, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(CONVERSION_UPGRADES.keySet().stream().anyMatch(stack::is));
+        var bool = CONVERSION_UPGRADES.keySet().stream().anyMatch(stack::is);
+        //noinspection DataFlowIssue
+        System.out.println(ForgeRegistries.ITEMS.getKey(stack.getItem()).toString() + " -> passed: " + bool);
+        cir.setReturnValue(bool);
     }
 
     @Redirect(method = "getMjPerTick", at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;findFirst()Ljava/util/Optional;"), remap = false)
