@@ -1,10 +1,11 @@
 var defaultSand = []
 
 recipes((event, funcs) => {
+     funcs.removeById('betterend:charcoal_from_block')
      //event.shapeless('4x primalstage:sand_dust', '#forge:sand')
      event.replaceInput({input: 'minecraft:sand'}, 'minecraft:sand', '#forge:sand')
      funcs.twoSquare(funcs.removeByOutput('blockus:redstone_sand'), 'minecraft:redstone').vanilla()
-     funcs.twoSquare(funcs.removeByOutput('betterend:charcoal_block'), content.medium_grade_charcoal).vanilla()
+     funcs.planet(funcs.removeByOutput('betterend:charcoal_block'), '#forge:sand', content.medium_grade_charcoal).vanilla()
      funcs.twoSquare('betterend:endstone_dust', content.end_dust).vanilla()
      funcs.twoSquare('aether:quicksoil', content.quicksoil_dust).vanilla()
      funcs.twoSquare('minecraft:sand', content.sand_dust).vanilla()
