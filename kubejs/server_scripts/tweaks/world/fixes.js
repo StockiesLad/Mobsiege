@@ -95,6 +95,13 @@ recipes((event, funcs) => {
 
      funcs.threeSquare(funcs.removeInsurely({output: 'betternether:cincinnasite_block'}), 'betternether:cincinnasite').vanilla()
      funcs.threeSquare(funcs.removeInsurely({output: 'betternether:cincinnasite_forged'}), 'betternether:cincinnasite_ingot').vanilla()
+
+     funcs.forEachRemovedRecipe({output: packTag('valhesia_curtains')}, recipe => {
+          funcs.vanillaInsert(recipe.getOriginalRecipeResult(), [
+               ['#forge:rods/wooden', [0, 1]],
+               [getCraftingIngredients(recipe, false)[0], [3, 4, 6, 7]]
+          ])
+     })
 })
 
 //Failed attempt at syncing recipes for the same concept (e.g. pulverising, crushing) between different mods.
@@ -145,6 +152,7 @@ ServerEvents.tags('item', event => {
           ['%plates/diamond', 'primalstage:diamond_plate'],
           ['%storage_blocks/raw_elementium', 'mythicbotany:raw_elementium_block']
      ])
+     event.add(pack('valhesia_curtains'), ['valhelsia_furniture:white_curtain', 'valhelsia_furniture:orange_curtain', 'valhelsia_furniture:magenta_curtain', 'valhelsia_furniture:light_blue_curtain', 'valhelsia_furniture:yellow_curtain', 'valhelsia_furniture:lime_curtain', 'valhelsia_furniture:pink_curtain', 'valhelsia_furniture:gray_curtain', 'valhelsia_furniture:light_gray_curtain', 'valhelsia_furniture:cyan_curtain', 'valhelsia_furniture:purple_curtain', 'valhelsia_furniture:blue_curtain', 'valhelsia_furniture:brown_curtain', 'valhelsia_furniture:green_curtain', 'valhelsia_furniture:red_curtain', 'valhelsia_furniture:black_curtain'])
 })
 
 ServerEvents.tags('block', event => {

@@ -76,7 +76,7 @@ RecipeObject.prototype = {
       * @param {Object} filter 
       * @param {BasicRecipeContext} recipeCall 
       */
-     removeRecipesRaw: function(filter, recipeCall) {
+     forEachRemovedRecipe: function(filter, recipeCall) {
           var runnables = []
           this.event.forEachRecipe(filter, recipe => {
                var id = recipe.getId()

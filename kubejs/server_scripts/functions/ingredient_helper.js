@@ -75,13 +75,18 @@ function filterBiasedly(expressions, preferredSource, regex) {
  * @param {Internal.RecipeJS} recipe 
  * @returns {string[]}
  */
-function getCraftingIngredients(recipe) {
+function getCraftingIngredients(recipe, logErrors) {
+    logErrors = common.insure(logErrors, true)
     var ingredients = []
     recipe.json.get('key').getAsJsonObject().entrySet().forEach(entry => {
         var value = entry.getValue().getAsJsonObject()
         if (value.has('item'))
                 ingredients.push(value.get('item').getAsString())
-        else ingredients.push('#' + value.get('tag').getAsString())
+        else {
+            if (value.has('tag'))
+                ingredients.push('#' + value.get('tag').getAsString())
+            else if (logErrors) console.error(`[ingredient_helper.js#87] Cannot find ingredient in jsonObject(${value})`)
+        }
     })
     return ingredients
 }
