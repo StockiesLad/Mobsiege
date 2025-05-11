@@ -95,12 +95,7 @@ MathHelper.prototype = {
       * @param {Number} size 
       */
      locateSquare: function(point, size) {
-          var height = 0
-          while (point >= size) {
-               height++
-               point -= size
-          }
-          return {width: point, height: height}
+          return {width: point % size, height: Math.floor(point/size)}
      },
 
      /**

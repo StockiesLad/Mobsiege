@@ -1,0 +1,3 @@
+commonTags((event, funcs) => {
+     event.add('forge:ores_in_ground/end_stone', ['beo:end_nickel_ore', 'beo:end_copper_ore', 'beo:end_aluminum_ore', 'beo:end_tin_ore', 'beo:end_osmium_ore', 'beo:end_uranium_ore', 'beo:end_zinc_ore', 'beo:end_lead_ore', 'beo:end_iron_ore', 'beo:end_silver_ore', 'beo:end_coal_ore', 'beo:end_lapis_ore', 'beo:end_redstone_ore', 'beo:end_gold_ore', 'beo:end_diamond_ore', 'beo:end_emerald_ore'])
+})

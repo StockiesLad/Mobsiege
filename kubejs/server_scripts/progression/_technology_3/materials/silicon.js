@@ -1,6 +1,6 @@
 recipes((event, funcs) => {
      funcs.nuke('tinyredstone:silicon_compound')
-     funcs.removeById('enderio:smelting/tinyredstone/silicon')
+     funcs.removeById(['enderio:smelting/tinyredstone/silicon', 'projectred_core:silicon'])
 
      funcs.remove({output: 'projectred_core:boule', type: 'minecraft:smelting'})
      event.blasting('projectred_core:boule', 'projectred_core:sand_coal_comp').xp(0.5)
