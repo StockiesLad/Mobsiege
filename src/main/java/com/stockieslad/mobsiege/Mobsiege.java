@@ -2,8 +2,12 @@ package com.stockieslad.mobsiege;
 
 import com.alcatrazescapee.notreepunching.common.blocks.LooseRockBlock;
 import com.mojang.logging.LogUtils;
-import com.stockieslad.mobsiege.api.*;
+import com.stockieslad.mobsiege.api.Mobsiege2BuildCraft;
+import com.stockieslad.mobsiege.api.Mobsiege2Fabric;
+import com.stockieslad.mobsiege.api.Mobsiege2Minecraft;
+import com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails;
 import fuzs.puzzleslib.api.core.v1.ModConstructor;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -37,6 +41,8 @@ public class Mobsiege {
             HOLYSILT_BRICK_SLAB = registerBlockAndItem("holysilt_brick_slab", new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F))),
             HOLYSILT_BRICK_WALL = registerBlockAndItem("holysilt_brick_wall", new WallBlock(BlockBehaviour.Properties.copy(BRICKS).forceSolidOn())),
             HOLY_PEBBLE = registerBlockAndItem("holy_pebble", new LooseRockBlock());
+
+    public static final SoundEvent NETHER_SCREAMS = RegistryHelper.registerSoundEvent("ambient.nether.screams");
 
     public Mobsiege(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
