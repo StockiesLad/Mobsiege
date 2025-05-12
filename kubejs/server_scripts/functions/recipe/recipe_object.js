@@ -369,6 +369,10 @@ RecipeObject.prototype = {
           return this
      },
 
+     /**
+      * @param {Array<String | Internal.Item>} results 
+      * @param {Array<String | Internal.Item>} ingredients 
+      */
      globalCrushing: function (results, ingredients) {
           this.event.recipes.createCrushing(results, ingredients)
           this.event.recipes.thermal.pulverizer(results, ingredients)
@@ -649,7 +653,7 @@ RecipeObject.prototype = {
       * @returns {RecipeInsertion}
       */
      box: function(result, input) {
-          return this.insert(result, [input, [4, 8]])
+          return this.insert(result, [input, 4, 8])
      },
 
      /**

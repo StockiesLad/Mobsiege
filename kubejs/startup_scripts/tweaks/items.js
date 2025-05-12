@@ -49,7 +49,14 @@ StartupEvents.registry('item', event => {
           {id: content.cement_compound},
           {id: content.wet_cement_brick},
           {id: content.dry_cement_brick},
-          {id: content.fire_brick}
+          {id: content.fire_brick},
+
+          {id: content.glowstone_chipset},
+          {id: content.infernal_chipset},
+          {id: content.pulsating_chipset},
+          {id: content.lapis_lazuli_chipset},
+          {id: content.emerald_chipset},
+          {id: content.netherite_chipset}
      ]
 
      items.forEach(item => {

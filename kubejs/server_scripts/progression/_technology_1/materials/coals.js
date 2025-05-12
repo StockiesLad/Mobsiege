@@ -102,6 +102,9 @@ itemTags((event, funcs) => {
     event.remove('forge:storage_block/charcoal', 'betterend:charcoal_block')
     event.add('forge:storage_blocks/charcoal', ['carbonize:charcoal_block','quark:charcoal_block','blockus:charcoal_block',])
     event.add(pack('storage_blocks/coals'), event.get('forge:coal').getObjectIds().map(entry => preferredItemId('forge:storage_blocks/' + entry.toString().split(':')[1])))
+    event.add('forge:tiny/coal', ['utilitix:tiny_coal', 'actuallyadditions:tiny_coal'])
+    event.add('forge:tiny/charcoal', ['utilitix:tiny_charcoal', 'actuallyadditions:tiny_charcoal'])
+
 })
 
 blockTags((event, funcs) => {

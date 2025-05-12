@@ -82,7 +82,14 @@ global.content = addModpackId({
     fire_brick_block: 'fire_bricks',
 
     corpstone: 'corpstone',
-    decapitated_debris: 'decapitated_debris'
+    decapitated_debris: 'decapitated_debris',
+
+    glowstone_chipset: 'glowstone_chipset',
+    infernal_chipset: 'infernal_chipset',
+    pulsating_chipset: 'pulsating_chipset',
+    lapis_lazuli_chipset: 'lapis_lazuli_chipset',
+    emerald_chipset: 'emerald_chipset',
+    netherite_chipset: 'netherite_chipset',
 })
 
 /**

@@ -12,4 +12,6 @@ ItemEvents.tooltip(event => {
      ]).forEach(item => event.add(item, Text.darkRed('Unreliable')))
 
      event.add('primalstage:stone_club', Text.green('Breaks sand & gravel into their composite materials'))
+
+     event.add('buildcraftbuilders:replacer', Text.darkRed('This machine does not work!'))
 })
