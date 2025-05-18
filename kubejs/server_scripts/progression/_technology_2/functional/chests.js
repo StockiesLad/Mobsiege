@@ -46,9 +46,9 @@ ServerEvents.tags('item', event => {
 })
 
 function iterateESChest(toRecipe) {
-     common.alwaysArray(['gold', 'diamond', 'obsidian', 'netherite']).forEach((mat, i, arr) => {
+     common.alwaysArray(['diamond', 'obsidian', 'netherite']).forEach((mat, i, arr) => {
           var matBefore = arr[i - 1]
-          matBefore = matBefore != null ? matBefore : 'iron'
+          matBefore = matBefore != null ? matBefore : 'gold'
           var type = mat === 'diamond' ? 'gems/' : mat === 'obsidian' ? '' : 'ingots/'
           toRecipe(mat, `#forge:${type}${mat}`, matBefore)
      })

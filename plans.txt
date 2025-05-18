@@ -132,6 +132,10 @@ make buildcraft 3/3 not 2/2 where 3/3 and create 3/3 (new age) can be the electr
 make more things demand chips such that there is an incentive to actually pursue kenesis pipes
 fix uranium based recipes for alexscaves into normal uranium
 add osmium on earth
+fix alchemical transmutation
+consider mobz inside mobsieges
+check sulfur
+add machine work for magical utilities cloud
 
 (bug)two player cannot be in same server ?
 

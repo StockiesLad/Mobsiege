@@ -26,6 +26,7 @@ recipes((event, funcs) => {
      funcs.siliconAssemly(funcs.removeByOutput('buildcraftsilicon:chipset_diamond'), ['buildcraftsilicon:chipset_quartz', '#forge:dusts/diamond'], 50000)
      funcs.siliconAssemly(content.emerald_chipset, [content.pulsating_chipset, '#forge:dusts/emerald'], 50000)
      funcs.siliconAssemly(content.netherite_chipset, [content.pulsating_chipset, '#forge:dusts/netherite'], 100000)
+     funcs.siliconAssemly(funcs.removeByOutput('buildcraftsilicon:redstone_crystal'), 'appflux:redstone_crystal', 250000)
      
      event.forEachRecipe({output: packTag('projectred/chips/raw_elemental')}, recipe => {
           recipe.replaceInput('#forge:silicon', 'projectred_fabrication:rough_silicon_wafer')

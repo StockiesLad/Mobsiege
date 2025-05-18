@@ -33,7 +33,8 @@ ClientEvents.lang('en_us', event => {
         ['projectred_core:silicon', 'Unfired Silicon Wafer'],
         ['projectred_core:electrotine_silicon', 'Electrotine Silicon Chip'],
         ['projectred_core:energized_silicon', 'Energized Silicon Chip'],
-        ['projectred_core:infused_silicon', 'Infused Silicon Chip']
+        ['projectred_core:infused_silicon', 'Infused Silicon Chip'],
+        ['appflux:redstone_crystal', 'Inert Redstone Crystal']
 
     ]
 
@@ -58,9 +59,9 @@ ClientEvents.lang('en_us', event => {
             ['marble_brick_small', 'small_beige_marble_bricks'],
             ['marble_paver', 'beige_marble_paver']
         ]),*/
-        getStandardStoneCategory('what_is_stone', 'dacite', 'grey_dacite'),
-        getStandardStoneCategory('what_is_stone', 'schist', 'dark_schist'),
-        getStandardStoneCategory('what_is_stone', 'rhyolite', 'light_rhyolite'),
+        //getStandardStoneCategory('what_is_stone', 'dacite', 'grey_dacite'),
+        //getStandardStoneCategory('what_is_stone', 'schist', 'dark_schist'),
+        //getStandardStoneCategory('what_is_stone', 'rhyolite', 'light_rhyolite'),
         getStandardStoneCategory('alexscaves', 'limestone', 'old_beige_limestone', [
             ['limestone_chiseled', 'chiseled_old_beige_limestone'],
             ['smooth_limestone', 'smooth_old_beige_limestone'],

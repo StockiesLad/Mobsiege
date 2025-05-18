@@ -19,6 +19,7 @@ recipes((event, funcs) => {
 
 ServerEvents.tags('item', event => {
      event.add(pack('holystone'), holystone)
+     event.add('forge:dusts/gravitite', 'aether_redux:gravitite_ingot')
 })
 
 ServerEvents.tags('block', event => {
