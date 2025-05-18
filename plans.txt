@@ -100,15 +100,19 @@ low priority {
 
 AFTER THE FOLLOWING IS COMPLETED, WE ARE MOSTLY DONE
 
+Create high level recipes {
+	superheated recipes
+	sequenced assembly
+}
+
 complex recipes {
 	turrets
 }
 
 primitive fighting tools {
 	Slime Bomb (gunpowder + sap/slime): less explosion, higher yield; leaves behind charred sap that slows hostile mobs
-	Phosphorus Flares - (high grade charcoal + bonemeal (Phosphorus) + nickel dust): shoots fire in a given direction for a certain amount of time
+	Phosphorus Flares - (high grade charcoal + bonemeal (Phosphorus) + flint): shoots fire in a given direction for a certain amount of time
 	Frag Explosive - (tnt + glass shards): primitive grenade shoots glass everywhere, doing high damage to mobs
-	
 }
 
 unify ash
@@ -142,6 +146,7 @@ add machine work for magical utilities cloud
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+add proper tags to aether materials and betterx
 ability to render lignite into a coal 
 for some reason stone is hidden (idk why)
 fix missing entries

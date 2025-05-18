@@ -415,6 +415,21 @@ RecipeObject.prototype = {
           return this
      },
 
+     /**
+      * Try to only use a max of 3 ingredients.
+      * @param {Internal.ItemStack} results 
+      * @param {Array<Internal.ItemStack>} ingredients 
+      * @returns 
+      */
+     globalAlloyBlasting: function(results, ingredients) {
+          var r = this.event.recipes
+          r.enderio.alloy_smelting(results, ingredients)
+          r.thermal.smelter(results, ingredients)
+          r.create.mixing(results, ingredients).superheated()
+          Array.isArray(ingredients) && ingredients.length > 1 ? r.immersiveengineering.arc_furnace(results, ingredients.pop(), ingredients) : r.immersiveengineering.arc_furnace(results, ingredients)
+          return this
+     },
+
      globalFluidMixing: function(results, ingredients) {
           this.fluidMixing(results, ingredients)
           return this
