@@ -71,31 +71,222 @@ themes {
 	exploration
 }
 
-1.1 {
-	Farmability and further customisation/improvements for magical utilities clouds
-	custom machines to synthesize exclusive clouds using the power of colour
+-----------------UPDATES---------------------
+
+Over ~~powered~~ stressed {
+	Custom stress limits for create (only I/O)
+	    cogs
+	    shafts
+	rethink balance
 }
 
-1.(x + 10) {
-	Custom create stress limits for cogwheels n stuff
+Original Overworld {
+    add more mining levels
+    make certain ores spawn in certain biomes
+    make surface seams indicating a large ore deposit
+    make food spawn in specific biomes and plants
+    add functionality to anger random animals by fiddling with their interests (monkeys -> bananas)
+        scan in 10 block radius for respective animal on block break
 }
+
+Cosmetic and Optimisation {
+    REFER TO "biome mod management solutions" conversation
+    aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
+    Optimise Entities with behavioural LOD's, entity lookups instead of long-distance path-finding (code in mobsiege2Java) and refactor goal selection and ticking
+    optimise item groups to be lazily-loaded
+    speed up data (please!)
+}
+
+Fastidious Fire {
+    Stoker - 3 stone rods and two bricks (50 hits)
+        Smother - Turns off temp fires (fireblocks, torches, campfires, etc)
+        Debug - Prints in chat data (usually burn times, if kiln is heated, etc)
+        Collect - Collects the exact state of temp fires (1% success for fireball from fire)
+        Repair - Using medium-grade charcoal, a burnt torch can be repaired
+    Make dehydrating give seasoned wood (using carbonize wood mimic) to char for better, higher quality coal.
+    Make primitive retort. Weak fire dehydrates. Strong fire carbonises - seasoned wood gives better charcoal
+    Using heated compacting (create) some immeng recipe / thermal dehydrator to season wood.
+    Reverse charcoal grades where low grade gives more creosote (including seasoned wood NOT UNSEASONED) while higher quality gives more ash.
+    Add potash lye (from ash clay) and some uses.
+    Make sure unseasoned wood produces bad charcoal only so that good charcoal is a little more immersive (and not rng)
+    Add specific pyrolysis compat in thermal, immeng, and create (superheated). (machine method to effectively make high-grade charcoal and creosote oil)
+    Add creosote oil support for create and other mods.
+    Integrate BC Distillation for Oils.
+    Centralise oil into one mod.
+    Add other oil derivatives like kerosene, naphthalene, etc
+    Add sub bituminous coal (common)
+        anthracite ores (rare)
+        graphite (very rare).
+    Incorporate unearthed lignite for coal.
+    Rename coal bituminous coal.
+    Add block spawns of all coals (incl graphite)
+    Add large oil and coal deposits in mesa biomes:
+        spawns in oil spring
+        Layered ellipse (outside to core) of coal blocks: lignite, sub-bituminous, bituminous, anthracite & graphite
+
+    Crushing coal-blocks of bituminous and anthracite to create crude and porous graphite respectively
+    After long-blasting, crude and porous graphite creates nuggets and chunks of crystalline graphite (pure)
+    9x nuggets, 4x chunks = 1 ingot of crystalline graphite
+    (graphite) Creates lubricant (for machines), electrolytic cells, Graphite Rods, Plasma Torch, Crucibles & Diamond synthesis
+    (graphite) Can be used for fuel ONLY in a super smelter (custom) to smelt ores fast early-game.
+    Different qualities of graphite have their respective burn times for the super smelter (uses chunks)
+    Add possible process for creating synthetic diamonds from graphite
+
+    Add a redstone fire that burns redstone blocks and in exchange it reenergizes things (make this buildcraft style).
+        Ash turns into charcoal,
+        sugar water (or some carbohydrate) turns into oil,
+        potash lye turns into just lye.
+        explodes living entities if in redstone fire.
+    Redstone is made by first lighting redstone block then throwing in soul flux.
+
+    widen support for heating elements + a custom burner
+    	add tag deconstruction for TAN temp tags
+}
+
+Magic Materials {
+    REFER TO MAGICAL UTILITIES TODOS
+    REFER TO "crystal worldgen design tips" conversation
+    Clouds
+        Farmability and further customisation/improvements for magical utilities clouds
+        custom machines to synthesize exclusive clouds using the power of colour
+        add machine work for magical utilities cloud
+        Add ability to make a certain cloud by surrounding it with certain stuff:
+            E.g. strike cloud with lightning for storm cloud (using lightning rod or trident)
+            Surround cloud with leaves for nature cloud
+    Add 12 or 16 different colour crystals that spawn in caves (like old quark) but as a biome.
+        They can grow over time only in water.
+        They spawn in a gradient (think rainbow oak tree in twilight forest)
+        Specific ores spawn behind their colour respective crystals
+        Sometimes at the tip of a crystal, it is charged, and zaps between them and entities (the spark traverses air and nonfull blocks)
+        It will zap you but only do damage if not present with a tesla coil bauble. It gives the “shocked” effect which paralyses you temporarily. (A couple seconds)
+        Uses thaumcraft- style models for clusters
+        Crystals are NOT full, the art should represent a 3d fractal.
+        Crystal Fragments can be thrown in water with Certus Quartz to occasionally duplicate.
+        When superheated (either in water or crystal growth chamber), it can provide certain materials of its colour:
+            E.g. green gives emeralds.
+            If a water block is touching an ionised crystal. The water will eventually turn a cloud of that specific colour.
+
+    For crystalised temporaz:
+        when entities die in a temporaz fluid, their items get sucked in the past. They have to “rotate” in the fourth dimension travel to the nether to get back in the past.
+        Since every block is 7 in the overworld, the coords get translated as such: 7, 14, 21 -> 2, 3, 1
+        When they place the liquid, a luminant white block will appear. It is not mineable.
+        The player will have 15 seconds to grab everything.
+        Although some items will be distorted as reversed space time - where space and time flipped places.
+        Reversed space time can be used to turn water into more liquid temporaz or speed things up.
+}
+
+Satan's Sorrow {
+    Burnt Books
+        present in ruined nether portals
+        contains content such as "soil that feeds" or "carnivorous soil"
+            “The red land feeds. I saw it breathe.”
+            “Soil that swallows. Flesh that remembers.”
+            “The key... we left it near the gate. Don’t listen to the growling.”
+            “They say it eats the soul, but gives power in return.”
+        Guilt lore:
+            “The land needs to feed. That’s all. You’re just helping. You’re not doing anything wrong.”
+            “The screams are normal. It’s how it says thank you.”
+            “Don’t stop. Not yet. You’re close.”
+            “It will let you go. Eventually.”
+            "Satan isn't one person. It's us!"
+
+    Corpstone
+        poisonous and has slowdowns and debuffs.
+        Soul fades out of enterosoil when becoming corpstone. Plays bassy death sound
+
+    Enterosoil
+        present in visceral heap
+        quicksand-like behaviour that disables flying and consumes living entities.
+        Occasionally spits out xp (stores and sends to pipes if tamed) and loot
+            sometimes loot is swapped with bloody pulp and bones
+        Has timeout. If too much is consumed, it is converted to corpstone.
+        All soil works as a multiblock (similar to our carbonise system) and actions affect all blocks at once
+        On top of corpstone.
+        Sometimes "burps" after eating.
+        Can be created by giving a visceral meal (flesh + soulite) to corpstone
+        Has a tendency to move around in other directions (only switching with flesh blocks)
+        Spawns in rings, not circles.
+        Enterosoil will not eat unless stepped on for a while.
+        Disguises as flesh blocks.
+        When stuck in the ring. The entersoil will try to eat you immediately and grapple you with its tongue
+        Occasionally whispers, stomach growls
+        Tendency to scream/growl (or vomit very poisonous hydrochloric acid) if eating near its threshold
+            very rarely, it might grow and increase its reach.
+        upon first interaction, awards acheivement "You shouldn't be here"
+        When eating a certain type of mob over and over, it gets more efficient.
+        After consuming over 25 non-nether entities, it has a small chance of doubling xp (Mature enterosoil) but reducing loot
+        Mature entersoil can be used for a soul digestor that converts flesh, bloody pulp, etc into pure XP
+        Even without the crown of satan, manually feeding enterosoil visceral meals can "tame" them only if
+            matured first. However, if too hungry it'll get angry and not be tame anymore.
+            Will thank you after tamed and every time you feed it.
+            When feeding a TAMED enterosoil enough times, you will get an achievement "Satan's Servant"
+        BEST ONE: Before 5 minutes of its most recent death, it might mimic its victims hurt sounds. It's still eating...
+        SUPER RARE: Chunk of Viscera. Baseline 0.01% chance of dropping when enterosoil is eating (untamed, unmatured).
+            Increased by giving better entities (like wither skeletons)
+            Requires the consumption of nether entities.
+            Has an acheivement "The arbiter of injustice"
+
+    Whispering core:
+        Only acheived by sacrificing humans (villagers, pillagers, piglins)
+
+    Soul-glue:
+        Combined Latex with soulite to create a glue that is binded with souls as opposed to material bonds.
+
+    Chunk of Viscera can go on tinkers construct tools (or merged with a book for enchantment)
+        to have a rare chance to banish people into enterosoil with regeneration and resistance to suffer eternally.
+        Has an acheivement “Feed What Feeds You” “The throne is always hungry.”
+
+        Slight life steal (1–2% of damage done).
+        Occasionally causes enemies to scream instead of normal hurt sounds.
+
+    Crown of Blood (Viscera):
+        Requires netherite piece, whispering core, soul glue and chunk of viscera
+        Enterosoil is automatically tamed as you walk past any.
+        Enterosoil will greet you with "Hello Master!"
+        Actively assists in retrieving nearby drops and jumping using its tongue.
+        Enterosoil will actively try to heal with what wouldve been xp and damage to entities (10%)
+
+    Wearing crown of blood causes iron golems to start to perceive you as an enemy.
+    Wearing more pieces of armor causes the iron golem to have an "adrenaline surge" of
+        strength, resistance, speed and regeneration to kill you.
+
+    Crown of Satan
+        Requires Blocks of Viscera (made from chunks) binded with some blazing alloy (and gold)
+        Requires a soul singularity forged in super heated mixing with soulite and blocks of enderium
+        Enterosoil purrs and is actively relaxed with you nearby.
+        Requires Crown of Blood.
+        High chances that a nether entity is passive toward you.
+        Requires constant killing (or bonuses from enterosoil, which now help you in every way, all the time) to not
+            erode over time.
+        Wither skeletons appear when damaged.
+        Can link (and see as xray) with other enterosoil which form a network to strengthen you.
+        You finally behold to power to pick up the enterosoil without it eating you (damaging).
+        You can spawn an enterosoil every 5 min when sneaking over an air block (must have enterosoil in inventory).
+        Persistent stength and speed.
+        Immune to Fire and lava but hurts from water and ice.
+        Nether is now "default" temp, overworld and aether freeze you very quickly.
+        You can possess and convert mobs to nether soldiers which will fight for you.
+        Curse of binding. When die, it goes away. "King of the Nether" acheivement.
+        In overworld. Golems and "friendly" mobs will actively attack you. They will get more coordindated, attack
+            bigger groups, have buffs and better gear. The longer you stay,
+            the stronger everybody gets. If you stay too long, angels will start to come and delibrately wreck
+            portals so you cannot get back. They can phase through walls. They will try to build a cross
+            which if successful will lead to god smiting you with so much lightning that you are destroyed.
+        In the aether. All the aforementioned buffs will apply but on a much faster timeline. NO BOSSFIGHT.
+            Unlike the overworld, every single mob will automatically be aggro from any distance. Default
+            damage is taken and going near temples increases it. The sun god is so strong that his presence
+            alone will even burn you (SATAN) to death. He will spawn endless tirades of angels to destroy you
+            if you make the mistake of getting too close.
+        Default buffs when in the nether.
+}
+
+----------------------------------------------------------
 
 low priority {
-	aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
-	add more mining levels
-	make certain ores spawn in certain biomes
-	make surface seams indicating a large ore deposit
-	make food spawn in specific biomes and plants
 	convert all tools into tinkers construct
-	add functionality to anger random animals by fiddling with their interests (monkeys -> bananas) (scan in 10 block radius for respective animal on block break)
 	add support to start in 3 dimensions (aether, overworld, nether) and re document (ambrosium is picked because its soft)
-	Optimise Entities with behavioural LOD's, entity lookups instead of long-distance path-finding (code in mobsiege2Java) and refactor goal selection and ticking
-	optimise itemgroups to be lazily-loaded
 	unify (ingots, dusts, nuggets etc) in thermal style to make it look proper
-	widen support for heating elements + a custom burner
 	rename sheets to plates to avoid confusion
-	add tag deconstruction for TAN temp tags
-	speed up data (please!)
 }
 
 AFTER THE FOLLOWING IS COMPLETED, WE ARE MOSTLY DONE
@@ -127,7 +318,7 @@ fix coal input in ad astra steel smelting
 add a way to chop logs into split logs via machines
 add more heating sources
 make epic siege monsters specifically target machine blocks
-enable magnets are project red and foregoing
+enable magnets in project red and foregoing
 incorporate clouds in crafting
 balance (deep resonance, industrial foregoing, thermal expansion, integrated dynamics, enderio, bigger reactors, rftools, solarflux, simply jetpacks, ad astra, systeams, mob grinding utils, ae2)
 use resources from (betterend, betternether, projecte, bedrockium & aether &  magical utilities)
@@ -135,12 +326,19 @@ make mobs spawn with modded armor
 make buildcraft 3/3 not 2/2 where 3/3 and create 3/3 (new age) can be the electric interfaces
 make more things demand chips such that there is an incentive to actually pursue kenesis pipes
 fix uranium based recipes for alexscaves into normal uranium
-add osmium on earth
 fix alchemical transmutation
 consider mobz inside mobsieges
 check sulfur
-add machine work for magical utilities cloud
+Add a way to process nether ruby into normal ruby
+Make it so campfires dont use a grill
+Add back hardcore torches recipe to smother (why remove extra features)
+Use existing soul sand dust
+Use aether clay
+Tinkers construct electrotine upgrade (boost mining level)
+Make custom silicon boule texture
+Fix storm cloud to only work when seesky is true
 
+add osmium on earth (why did I add this?)
 (bug)two player cannot be in same server ?
 
 
