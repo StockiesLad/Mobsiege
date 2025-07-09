@@ -35,5 +35,3 @@ function coveredStone(step) {
         SoundEvents.STONE_FALL
     )
 }
-
-var content = global.content

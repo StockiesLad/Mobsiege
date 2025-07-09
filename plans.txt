@@ -1,76 +1,3 @@
-presentation {
-	Main Menu
-	Name
-	Icon
-}
-
-acheivements {
-	Successfully get into spatial storage and leave without dying
-	Beat every planet
-	craft an orb of regulation
-	craft a defence turret
-	create electricity out of mechanical energy
-	fend off a slime swarm without taking damage
-	explore every biome in the overworld
-	explore every biome in the end
-	explore every biome in the nether
-	explore every biome in the aether
-	get to the aether without using a portal
-	get to the eden ring without using a portal
-	create an ME system
-	create an enderium machine
-	create charcoal
-	create a gun
-	wirelessly access an ME system
-	create a Nuclear Bomb
-	survive a Nuclear Explosion 1 block away
-	successfully transport materials using a ender storage
-	wirelessly transport power
-	kill every type of creeper
-	kill every type of enderman
-	beat the twilight forest
-	build a self-defending base
-	acheive a million bytes of storage in an ME system
-	acheive a billion byte of storage in an ME system
-	build a self sustaining machine
-	build a contraption using machines from every tech mod
-	capture a hydrogen jellyfish without it exploding
-	fall from the aether without dying
-	create a farm consisting of every type of tree
-	create a netherite chest
-	create a netherite furnace
-	create an extreme reactor
-	successfully start in the overworld/nether/end/aether/edenring from scratch without any transported materials
-	use clouds to transfer items
-	use a circuit board to simply a redstone contraption
-	create a pogostick
-	hurt a mob using a bee nest helmet
-	create every type of bee
-	catch a mob
-	produce electricity from mechanical energy
-	get a blitz and a blaze to fight each other
-	create a mob farm
-	use a gun to fight back against the blitz in the aether
-	acquire every type of aercloud
-	use aerclouds to make a create contraption more efficient
-	how to get beds
-	use an interdiction torch to prevent a mobsiege (protected chunks)
-	get a piece of alchemical coal by mining raw charcoal blocks
-}
-
-dim spawn mods {
-	ultimate spawn
-	spawn dimension setter
-	initial dimension
-}
-
-themes {
-	hardcore,
-	primitive,
-	strict progression,
-	exploration
-}
-
 -----------------UPDATES---------------------
 
 Over ~~powered~~ stressed {
@@ -83,18 +10,50 @@ Over ~~powered~~ stressed {
 Original Overworld {
     add more mining levels
     make certain ores spawn in certain biomes
-    make surface seams indicating a large ore deposit
+    split ores amongst different dimensions
+    add multi-ores (iron ore veins can have nickel-iron ore which could yield more iron or nickel)
+    make surface ore seams indicating a large ore deposit
+        make the outside have a 50% chance of being gravel
+    remove individual gravel ore seams and replace with proper ore seams
+    Make different rocks yield different (on a low chance) some mineral/metal
     make food spawn in specific biomes and plants
     add functionality to anger random animals by fiddling with their interests (monkeys -> bananas)
         scan in 10 block radius for respective animal on block break
+    
+    add alternate coal generation (where it generates as layers of blocks vs ores, odd vs even y level)
+    like coal, do that to other metals (like hematite for iron)
+
+    completely revamp smelting procedures. Make kilns far more limited and use flux (like fluorite) to smelt materials
+    Make innovative way to create steel (using tungsten, graphite, magnesium & iron)- no more coal + iron.
+    Make other forms of steel (cast iron, galvanised steel)
+    Make other forms of EXISTING alloys (like adding magnesium to aluminium for proper strength)
+
+    add proper salt processing (niter around salt caves, pink salt blocks can give enriched salt that is only processable in machines)
+    add salt deposits like the surface seams
+
+    add rock processing to turn specific rocks into other useful minerals
+
+    Add tungsten (for heating, light, and alloys)
+    add fluorite (for smelting high-level materials)
+    add other metals/minerals
+
+    add ore regeneration
+        in specific stone (according to initial generation): A vein can regrow after 100-+25 minecraft days, slowly.
+        Slowly runs out over time and the bottom most 25 layers (above -59 bedrock level) slowly convert to bedrock
+        during conversion, bedrock forms a 'pyramid' and spills into other chunks.
+        Requires scanners to read how much energy a chunk has.
+        power(x, 1.5) the fill layer, is a layer of which a default fire tick takes place.
+        Use flare system to handle damage.
+        Make bedrock glow when level is above 5
 }
 
-Cosmetic and Optimisation {
+Shine & Refine {
     REFER TO "biome mod management solutions" conversation
     aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
     Optimise Entities with behavioural LOD's, entity lookups instead of long-distance path-finding (code in mobsiege2Java) and refactor goal selection and ticking
+    unify (ingots, dusts, nuggets etc) in thermal style to make it look proper
     optimise item groups to be lazily-loaded
-    speed up data (please!)
+    speed up data by caching it
 }
 
 Fastidious Fire {
@@ -124,6 +83,13 @@ Fastidious Fire {
         spawns in oil spring
         Layered ellipse (outside to core) of coal blocks: lignite, sub-bituminous, bituminous, anthracite & graphite
 
+    Tweak all burn times of wood to burn differents AND DOCUMENT IT
+        Example: eucalyptus burns more than birch by a lot.
+        Modify carbonize to dynamically adjust qualities based off burn times.
+            Use an enum to categorise to quality into (low, medium, high) and store as blockstate in charcoal block
+    
+    According to real world strength, adjust mining speed (and even level if extreme enough) of wood
+
     Crushing coal-blocks of bituminous and anthracite to create crude and porous graphite respectively
     After long-blasting, crude and porous graphite creates nuggets and chunks of crystalline graphite (pure)
     9x nuggets, 4x chunks = 1 ingot of crystalline graphite
@@ -143,9 +109,12 @@ Fastidious Fire {
     	add tag deconstruction for TAN temp tags
 }
 
-Magic Materials {
+Magical Minerals {
     REFER TO MAGICAL UTILITIES TODOS
     REFER TO "crystal worldgen design tips" conversation
+    Add Cloud Condenser that preserves the activation state of a cloud when picking up.
+    Limit cloud activation-deactivation to a random chance of fading away
+        make different reaction to fading (e.g. energised cloud could explode)
     Clouds
         Farmability and further customisation/improvements for magical utilities clouds
         custom machines to synthesize exclusive clouds using the power of colour
@@ -175,7 +144,7 @@ Magic Materials {
         Reversed space time can be used to turn water into more liquid temporaz or speed things up.
 }
 
-Satan's Sorrow {
+Butchering Bloom {
     Burnt Books
         present in ruined nether portals
         contains content such as "soil that feeds" or "carnivorous soil"
@@ -280,13 +249,17 @@ Satan's Sorrow {
         Default buffs when in the nether.
 }
 
+(De)void {}
+
 ----------------------------------------------------------
 
 low priority {
 	convert all tools into tinkers construct
-	add support to start in 3 dimensions (aether, overworld, nether) and re document (ambrosium is picked because its soft)
-	unify (ingots, dusts, nuggets etc) in thermal style to make it look proper
+	add support to start in 3 dimensions (aether, overworld, nether) and re document (ambrosium is picked (not mined) because its soft)
 	rename sheets to plates to avoid confusion
+    fix textures (all of them, the current ones are terrible)
+    Do up main menu, icon and shit
+    add custom acheivements using the normal mc system
 }
 
 AFTER THE FOLLOWING IS COMPLETED, WE ARE MOSTLY DONE
@@ -302,7 +275,6 @@ complex recipes {
 
 primitive fighting tools {
 	Slime Bomb (gunpowder + sap/slime): less explosion, higher yield; leaves behind charred sap that slows hostile mobs
-	Phosphorus Flares - (high grade charcoal + bonemeal (Phosphorus) + flint): shoots fire in a given direction for a certain amount of time
 	Frag Explosive - (tnt + glass shards): primitive grenade shoots glass everywhere, doing high damage to mobs
 }
 
@@ -323,7 +295,6 @@ incorporate clouds in crafting
 balance (deep resonance, industrial foregoing, thermal expansion, integrated dynamics, enderio, bigger reactors, rftools, solarflux, simply jetpacks, ad astra, systeams, mob grinding utils, ae2)
 use resources from (betterend, betternether, projecte, bedrockium & aether &  magical utilities)
 make mobs spawn with modded armor
-make buildcraft 3/3 not 2/2 where 3/3 and create 3/3 (new age) can be the electric interfaces
 make more things demand chips such that there is an incentive to actually pursue kenesis pipes
 fix uranium based recipes for alexscaves into normal uranium
 fix alchemical transmutation
@@ -331,19 +302,53 @@ consider mobz inside mobsieges
 check sulfur
 Add a way to process nether ruby into normal ruby
 Make it so campfires dont use a grill
-Add back hardcore torches recipe to smother (why remove extra features)
-Use existing soul sand dust
+
+add recipes to pulverise other sands
 Use aether clay
 Tinkers construct electrotine upgrade (boost mining level)
 Make custom silicon boule texture
+    change sandy coal texture
+    add ability to smelt charcoal sand into 4 boules following raw block burntime bonuses (4 instead of 9 efficiency)
+    make charcoal sand require atleast high grade coals
+    rename charcoal sand to carbon sand
+
+make obsidian pipe require heavy obsidian
 Fix storm cloud to only work when seesky is true
+add Heavy Obsidian (Osmium + grains of infinity + Obsidian)
+add osmium on earth (Strong alloys (for any high pressure use cases like create press + uranium containment)
 
-add osmium on earth (why did I add this?)
+require graphite lubricant for create machines
+
+add aether ores
+reduce copper yield
+tune gravel ore yield
+create cannons + create radars???
+valkyrie clay support for brick making (might replace aether clay as its found in lakes near silver dungeons)
+add proper nether brick creation (using lava)
+add better clay production (make a process to crush gravel into dust, etc)
+add better names for gravity gravel rocks (holystone should have its own)
+Add actually additions crystals to aether
+fix buildcraft facade item group missing display item
+fix uranium to process pure uranium into ingots better
+Add osmium and cobalt ore generation
+
+script all data & assets into kjs. Make sure that there is a system to automatically do it for blocks made in the java interface
+migrate all tags to forge for simplicity
+
 (bug)two player cannot be in same server ?
-
 
 # FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
 
+Primitive fighting tools {
+    Phosphorus Flares - (high grade charcoal + bonemeal (Phosphorus) + flint): shoots fire in a given direction for a certain amount of time
+}
+
+CHANGE OSMIUM ORES IN BNO AND BEO.
+RENAME LOCATIONAL ORES ORE SYSTEMATICALLY DO IT. (mobsiege:tconstruct\end_cobalt_ore -> "End Cobalt Ore" NOT "Tconstruct/end Cobalt Ore")
+FIX THE MOBSIEGE2JAVA REFS BEING REGISTERED BY KJS
+make buildcraft 3/3 not 2/2 where 3/3 and create 3/3 (new age) can be the electric interfaces
+Add back hardcore torches recipe to smother (why remove extra features)
+Use existing soul sand dust
 add proper tags to aether materials and betterx
 ability to render lignite into a coal 
 for some reason stone is hidden (idk why)

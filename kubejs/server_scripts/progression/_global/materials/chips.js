@@ -10,7 +10,8 @@ itemTags((event, funcs) => {
           content.pulsating_chipset,
           content.lapis_lazuli_chipset,
           content.emerald_chipset,
-          content.netherite_chipset
+          content.netherite_chipset,
+          content.void_chipset
      ])
 
      event.add(pack('chips/projectred'), [

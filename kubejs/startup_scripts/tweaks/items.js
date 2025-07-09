@@ -1,76 +1,19 @@
 StartupEvents.registry('item', event => {
      Mobsiege2ToughAsNails.addThermoregulators(stacks.packId('thermoregulators'))
 
-     var items = [
-          {id: content.thermoregulator, unstackable: true},
-
-          {id: content.gravitium},
-
-          {id: content.pointed_flint},
-          {id: content.flint_sword, type: 'sword', maxDamage: 50, tag: 'forge:tools/swords'},
-          {id: content.flint_saw, type: 'axe', maxDamage: 30, tag: 'notreepunching:saws'}, //Make this weaker because KubeJS doesn't support tiers or custom tools yet.
-
-          {id: content.poor_grade_charcoal, burnTime: 400},
-          {id: content.low_grade_charcoal, burnTime: 800},
-          {id: content.good_grade_charcoal, burnTime: 3200},
-          {id: content.high_grade_charcoal, burnTime: 6400},
-
-          {id: content.end_dust},
-          {id: content.quicksoil_dust},
-          {id: content.soulsand_dust},
-
-          {id: content.mud_ball},
-          {id: content.wet_mud_brick},
-          {id: content.dry_mud_brick},
-          {id: content.mud_brick},
-
-          {id: content.aether_mud_ball},
-          {id: content.wet_aether_mud_brick},
-          {id: content.dry_aether_mud_brick},
-          {id: content.aether_mud_brick},
-
-          {id: content.ash_clay_ball}, 
-          {id: content.wet_ash_clay_brick},
-          {id: content.dry_ash_clay_brick},
-
-          {id: content.dry_clay_brick}, 
-
-          {id: content.wet_silt_brick},
-          {id: content.dry_silt_brick},
-
-          {id: content.holysilt_ball},
-          {id: content.wet_holysilt_brick},
-          {id: content.dry_holysilt_brick},
-          {id: content.holysilt_brick},
-
-          {id: content.wet_mortar_brick},
-          {id: content.dry_mortar_brick},
-
-          {id: content.cement_compound},
-          {id: content.wet_cement_brick},
-          {id: content.dry_cement_brick},
-          {id: content.fire_brick},
-
-          {id: content.glowstone_chipset},
-          {id: content.infernal_chipset},
-          {id: content.pulsating_chipset},
-          {id: content.lapis_lazuli_chipset},
-          {id: content.emerald_chipset},
-          {id: content.netherite_chipset}
-     ]
-
-     items.forEach(item => {
-          if (item['type'] != null) {
-               event.create(item.id, item.type)
-                    .unstackable()
-                    .maxDamage(item.maxDamage)
-                    .tag(item.tag)
-          } else if (item['unstackable'])
-               event.create(item.id).unstackable()
-          else if (item['burnTime'] != null)
-               event.create(item.id).burnTime(item.burnTime)
-          else event.create(item.id)
-     })
+     typedContent.filter(c => c.registerable && c.type === 'item').forEach(item => {
+          if (item.toolType) {
+               var reg = event.create(item.id, item.toolType).unstackable();
+               if (item.maxDamage != null) reg.maxDamage(item.maxDamage);
+               if (item.tags) reg.tag(item.tags[0]);
+          } else if (item.unstackable) {
+               event.create(item.id).unstackable();
+          } else if (item.burnTime != null) {
+               event.create(item.id).burnTime(item.burnTime);
+          } else {
+               event.create(item.id);
+          }
+     });
 
 })
 

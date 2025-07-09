@@ -6,6 +6,33 @@ function CommonHelper() {
      return this
 }
 
+/**
+ * @template {Record<string, any>} T
+ * @typedef {T & {
+ *   forEach: (fn: (value: T[keyof T], key: keyof T) => void) => void,
+ *   map: <R>(fn: (value: T[keyof T], key: keyof T) => R) => FunctionalObject<Record<keyof T, R>>,
+ *   filter: (fn: (value: T[keyof T], key: keyof T) => boolean) => FunctionalObject<Partial<T>>,
+ *   reduce: <R>(fn: (acc: R, value: T[keyof T], key: keyof T) => R, initial: R) => R,
+ *   find: (fn: (value: T[keyof T], key: keyof T) => boolean) => T[keyof T] | undefined
+ * }} FunctionalObject
+ */
+
+/**
+ * @template T, R
+ * @callback MapConsumer
+ * @param {T[keyof T]} value
+ * @param {keyof T} key
+ * @returns {R}
+ */
+
+/**
+ * @template T
+ * @callback MapPredicate
+ * @param {T[keyof T]} value
+ * @param {keyof T} key
+ * @returns {boolean}
+ */
+
 CommonHelper.prototype = {
      //Imports
      /**
@@ -89,22 +116,45 @@ CommonHelper.prototype = {
           return struct
      },
 
+
      /**
-      * @template T
-      * @param {T} structs 
-      * @param {Function} handle 
-      * @returns {T} A new object with different values
+      * @template {Record<string, any>} T
+      * @template R
+      * @param {T} struct
+      * @param {(value: T[keyof T], key: keyof T) => R} handle
+      * @returns {{ [K in keyof T]: R }}
       */
      mapProperties: function(struct, handle) {
-          var parent = {}
-          if (struct != null) {
-               for (var key in struct) {
+          const parent = {};
+          if (struct != null)
+               for (var key in struct)
                     if (key != null)
-                         parent[key] = handle(struct[key])
-                    else if (global.debug) console.info(`Unable to define property: parent=${parent}, object=${struct}, key=${key}, value=${oldValue}`)
-               }
-          } else if (global.debug) console.info(`Unable to access property: parent=${parent}, object=${struct}`)
-          return parent
+                         parent[key] = handle(struct[key], key);
+                    else if (global.debug)
+                         console.info(`Unable to define property: parent=${parent}, object=${struct}, key=${key}`);
+          else if (global.debug)
+               console.info(`Unable to access property: parent=${parent}, object=${struct}`);
+          return parent;
+     },
+
+     /**
+      * @template {Record<string, any>} T
+      * @param {T} struct
+      * @param {(value: T[keyof T], key: keyof T) => boolean} handle
+      * @returns {Partial<T>}
+      */
+     filterProperties: function(struct, handle) {
+          const parent = {};
+          if (struct != null) 
+               for (var key in struct)
+                    if (key != null) {
+                         if (handle(struct[key], key))
+                         parent[key] = struct[key];
+                    } else if (global.debug)
+                         console.info(`Skipping property: parent=${parent}, object=${struct}, key=${key}`);
+          else if (global.debug)
+               console.info(`Unable to access property: parent=${parent}, object=${struct}`);
+          return parent;
      },
 
      /**
@@ -187,6 +237,57 @@ CommonHelper.prototype = {
                //if (!called && global.debug) console.info(`Function "${funcName}" is not present in "${calls}"`)
                return this.maybe({})
           }
-     }
+     },
 
+     /**
+      * @template {Record<string, any>} T
+      * @param {T} obj
+      * @returns {FunctionalObject<T> & T}
+      */
+     functionalObject: function functionalObject(obj) {
+          var self = this;
+          Object.defineProperty(obj, 'forEach', {
+               value(fn) {
+                    for (const [k, v] of Object.entries(obj)) fn(v, k);
+               },
+               enumerable: false
+          });
+
+          Object.defineProperty(obj, 'map', {
+               value(fn) {
+                    return functionalObject(self.mapProperties(obj, fn));
+               },
+               enumerable: false
+          });
+
+          Object.defineProperty(obj, 'filter', {
+               value(fn) {
+                    return functionalObject(self.filterProperties(obj, fn));
+               },
+               enumerable: false
+          });
+
+          Object.defineProperty(obj, 'reduce', {
+               value(fn, initial) {
+                    let result = initial;
+                    for (const [k, v] of Object.entries(obj))
+                         if (typeof v !== 'function')
+                              result = fn(result, v, k);
+                    return result;
+               },
+               enumerable: false
+          });
+
+          Object.defineProperty(obj, 'find', {
+               value(fn) {
+                    for (const [k, v] of Object.entries(obj))
+                         if (typeof v !== 'function' && fn(v, k))
+                              return v;
+                    return undefined;
+               },
+               enumerable: false
+          });
+
+          return obj;
+     }
 }

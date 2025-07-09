@@ -3,6 +3,7 @@ recipes((event, funcs) => {
      
      funcs.removeById([
           'hardcore_torches:lit_torch',
+          'hardcore_torches:smother_torch_damage_item',
           'hardcore_torches:light_torch_free_item'
      ])
 
