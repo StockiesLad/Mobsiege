@@ -1,10 +1,10 @@
 ServerEvents.tags('item', event => {
-     event.add('forge:dusts/sulfur', '#forge:sulfurs')
+     event.add(data + 'dusts/sulfur', dataTag + 'sulfurs')
 })
 
 commonTags((event, funcs) => {
-     //event.add('forge:storage_blocks/sulfur', 'cinderscapes:sulfur_block')
-     event.add('forge:storage_blocks/sulfur', [
+     //event.add(data+ 'storage_blocks/sulfur', 'cinderscapes:sulfur_block')
+     event.add(data + 'storage_blocks/sulfur', [
           'cinderscapes:sulfur_block', 
           'alexscaves:sulfur'
       ])
@@ -14,7 +14,7 @@ commonTags((event, funcs) => {
 
 basicLootTables((event, funcs) => {
      funcs.replaceBasiclt(funcs.createBasicLt(
-          () => preferredItemId('forge:gems/sulfur'), 
+          () => preferredItemId(data + 'gems/sulfur'), 
           [funcFortune(formulaUniformBonus(1)), funcExplosionDecay()], 
           [
               funcs.blockEntry({functions: countSet(countUniform(3, 4), false)}, 'alexscaves:sulfur_cluster'),
@@ -30,7 +30,7 @@ lootTables((event, funcs) => {
      function crystalDrop(block, min, max) {
           event.addBlockLootModifier(block).removeLoot(Ingredient.all).addAlternativesLoot(
                LootEntry.of(block).when(c => c.customCondition(conditionSilkTouch())),
-               LootEntry.of(preferredStack('forge:gems/sulfur')).customFunction(funcFortune(formulaUniformBonus(1))).customFunction(funcExplosionDecay())
+               LootEntry.of(preferredStack(data + 'gems/sulfur')).customFunction(funcFortune(formulaUniformBonus(1))).customFunction(funcExplosionDecay())
                .customFunction(setCount(countUniform(min, max), false))
           )
      }

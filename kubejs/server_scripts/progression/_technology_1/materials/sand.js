@@ -2,10 +2,10 @@ var defaultSand = []
 
 recipes((event, funcs) => {
      funcs.removeById('betterend:charcoal_from_block')
-     //event.shapeless('4x primalstage:sand_dust', '#forge:sand')
-     event.replaceInput({input: 'minecraft:sand'}, 'minecraft:sand', '#forge:sand')
+     //event.shapeless('4x primalstage:sand_dust', dataTag + 'sand')
+     event.replaceInput({input: 'minecraft:sand'}, 'minecraft:sand', dataTag + 'sand')
      funcs.twoSquare(funcs.removeByOutput('blockus:redstone_sand'), 'minecraft:redstone').vanilla()
-     funcs.planet(funcs.removeByOutput('betterend:charcoal_block'), '#forge:sand', content.medium_grade_charcoal).vanilla()
+     funcs.planet(funcs.removeByOutput('betterend:charcoal_block'), dataTag + 'sand', content.medium_grade_charcoal).vanilla()
      funcs.twoSquare('betterend:endstone_dust', content.end_dust).vanilla()
      funcs.twoSquare('aether:quicksoil', content.quicksoil_dust).vanilla()
      funcs.twoSquare('minecraft:sand', content.sand_dust).vanilla()
@@ -13,28 +13,28 @@ recipes((event, funcs) => {
 })
 
 itemTags((event, funcs) => {
-     event.add(pack('dusts/sand'), [content.sand_dust, 'minecraft:redstone', content.quicksoil_dust, content.end_dust, content.soulsand_dust])
+     event.add(data + 'dusts/sand', [content.sand_dust, 'minecraft:redstone', content.quicksoil_dust, content.end_dust, content.soulsand_dust])
 })
 
 commonTags((event, funcs) => {
-     event.add('forge:sand', '#minecraft:sand')
+     event.add(data+ 'sand', '#minecraft:sand')
 
-     defaultSand = funcs.getIdsOfTags('forge:sand')
+     defaultSand = funcs.getIdsOfTags(data+ 'sand')
 
-     event.add('forge:sand', [
+     event.add(data+ 'sand', [
           'blockus:redstone_sand',
           'aether:quicksoil', 
           'betterend:endstone_dust', 
           'carbonize:ash_block', 
           'minecraft:soul_sand', 
-          '#forge:storage_blocks/ash',
+          dataTag + 'storage_blocks/ash',
           content.packed_ash
      ])
 })
 
 blockTags((event, funcs) => {
-     event.add('notreepunching:always_breakable', '#forge:sand')
-     event.add('notreepunching:always_drops', '#forge:sand')
+     event.add('notreepunching:always_breakable', dataTag + 'sand')
+     event.add('notreepunching:always_drops', dataTag + 'sand')
 })
 
 lootTables((event, funcs) => {
@@ -90,7 +90,7 @@ BlockEvents.rightClicked(event => {
      var isCharcoalSand = state.is('betterend:charcoal_block')
      var isEndSand = state.is('betterend:endstone_dust')
 
-     if (item.hasTag('forge:tools/shovels') && (isCharcoalSand || isEndSand)) {
+     if (item.hasTag(data+ 'tools/shovels') && (isCharcoalSand || isEndSand)) {
           var level = event.getLevel()
           var random = level.getRandom()
           var pos = block.getPos()

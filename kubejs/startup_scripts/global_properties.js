@@ -1,6 +1,7 @@
 global.debug = true
 global.modpackId = 'mobsiege'
 global.hiddenItems = []
+global.data_namespace = 'forge';
 
 const maths = new MathHelper()
 const common = new CommonHelper()

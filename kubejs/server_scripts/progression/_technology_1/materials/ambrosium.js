@@ -1,6 +1,6 @@
 BlockEvents.rightClicked('aether:ambrosium_ore', event => {
      var item = event.getItem()
-     if (!item.hasTag('forge:tools/knives')) return 
+     if (!item.hasTag(data + 'tools/knives')) return 
      
      var level = event.getLevel()
      var random = level.getRandom()

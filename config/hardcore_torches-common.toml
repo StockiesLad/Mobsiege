@@ -16,6 +16,8 @@
 	#How much exp points should a bottle of enchanting count as. This is multiplied by soulExpRatio. The wiki says 7 is the average.
 	#Range: > 1
 	bottleExpAmount = 7
+	#If true, replace torches, lanterns, etc. in loot tables with unlit versions.
+	replaceInLootTables = true
 
 #Oil Can Settings
 [oil_can]
@@ -71,6 +73,13 @@
 	#How long a soul torch can last without being refilled, in ticks.
 	#Range: > 1
 	defaultSoulTorchFuel = 48000
+	#0: Right-click torches to pick them up
+	#1: Right-click torches while sneaking to pick them up
+	#2: Torches cannot be picked up by right-clicking
+	#Range: 0 ~ 2
+	takeTorchMode = 2
+	#When a torch burns out it will become unlit, and when you light a torch, it will be fully refueled.
+	relightTorches = false
 
 #Lantern Settings
 [lantern]
@@ -95,6 +104,8 @@
 	startingLanternFuel = 0
 	#Allow the player to pick up lanterns with sneak-clicking.
 	pickUpLanterns = true
+	#When a lantern is lit, it will be fully refueled. Recommended that you disable oil can recipes and set startingLanternFuel if you use this.
+	relightLanterns = false
 
 #Fire Starter Settings
 [fire_starter]
@@ -112,7 +123,7 @@
 
 #Campfire Settings
 [campfire]
-	#Whether campfires should be crafted as unlit/hardcore. Set this to false and use the placeHardcoreCampfire option instead if you need campfires for crafting recipes.
+	#Whether campfires should be crafted as unlit/hardcore.
 	craftHardcoreCampfire = true
 	#Max fuel that can be added to a campfire
 	#Range: > 0

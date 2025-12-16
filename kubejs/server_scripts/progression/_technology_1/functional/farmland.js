@@ -1,5 +1,5 @@
 commonTags(event => {
-     event.add('forge:farmland', [
+     event.add(data + 'farmland', [
           'aether:aether_farmland',
           'biomemakeover:peat_farmland',
           'farmersdelight:rich_soil_farmland',

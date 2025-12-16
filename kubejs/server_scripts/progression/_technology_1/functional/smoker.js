@@ -1,3 +1,3 @@
 recipes((event, funcs) => {
-     funcs.planet(funcs.removeByOutput('minecraft:smoker'), '#forge:campfires', '#forge:stone').vanilla()
+     funcs.planet(funcs.removeByOutput('minecraft:smoker'), dataTag + 'campfires', dataTag + 'stone').vanilla()
 })

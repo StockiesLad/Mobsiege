@@ -1,18 +1,18 @@
 recipes((event, funcs) => {
      funcs.vanillaInsert('3x carbonize:ash_layer', ['carbonize:ash_block', [0, 1]])
      funcs.twoSquare('carbonize:ash_block', 'carbonize:ash').vanilla()
-     event.shapeless('carbonize:ash', ['#forge:ash', '#forge:ash'])
-     funcs.threeSquare(content.packed_ash, '#forge:ash').vanilla()
+     event.shapeless('carbonize:ash', [dataTag + 'ash', dataTag + 'ash'])
+     funcs.threeSquare(content.packed_ash, dataTag + 'ash').vanilla()
 })
 
 itemTags((event, funcs) => {
-     event.add('forge:ash', ['carbonize:ash', 'cinderscapes:ash_pile', 'supplementaries:ash'])
-     event.add('forge:storage_blocks/ash', ['carbonize:ash_block', 'cinderscapes:ash_block'])
-     event.add('forge:fertilizer', 'carbonize:ash')
+     event.add(data + 'ash', ['carbonize:ash', 'cinderscapes:ash_pile', 'supplementaries:ash'])
+     event.add(data + 'storage_blocks/ash', ['carbonize:ash_block', 'cinderscapes:ash_block'])
+     event.add(data + 'fertilizer', 'carbonize:ash')
 })
 
 commonTags((event, funcs) => {
-     event.add('minecraft:sand', '#forge:storage_blocks/ash')
+     event.add('minecraft:sand', dataTag + 'storage_blocks/ash')
 })
 
 lootTables((event, funcs) => {

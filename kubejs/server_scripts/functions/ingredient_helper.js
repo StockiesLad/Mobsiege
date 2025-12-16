@@ -1,30 +1,73 @@
-function tag(id) {
-    return '#' + id
-}
+/////////////// Id ///////////////
 
+/**
+ * @param {string} path 
+ */
 function def(path) {
+    if (path.includes('|') || path.includes('&'))
+        console.warn(`Server path resolution '${path}' is using modpack name! Please use common namespaces '%' instead.`)
     return stacks.autoId(path)
 }
 
-function defTag(path) {
-    return tag(def(path))
-}
-
+/**
+ * @param {string} path 
+ */
 function pack(path) {
-    return stacks.packId(path)
+    return def(path)
 }
 
-function packTag(path) {
-    return tag(pack(path))
+/**
+ * @param {string} path 
+ */
+function com(path) {
+    return def('%' + path)
 }
 
+/**
+ * @param {string} tag 
+ */
+function preferredStack(tag) {
+    return AlmostUnified.getPreferredItemForTag(tag.replace('#', ''))
+}
+
+/**
+ * @param {string} tag 
+ */
 function preferredItemId(tag) {
     return preferredStack(tag).getIdLocation().toString()
 }
 
-function preferredStack(tag) {
-    return AlmostUnified.getPreferredItemForTag(tag.replace('#', ''))
+/////////////// Tag ///////////////
+
+/**
+ * @param {string} path 
+ */
+function tag(path) {
+    return '#' + path
 }
+
+/**
+ * @param {string} path 
+ */
+function defTag(path) {
+    return tag(def(path))
+}
+
+/**
+ * @param {string} path 
+ */
+function packTag(path) {
+    return tag(pack(path))
+}
+
+/**
+ * @param {string} path 
+ */
+function comTag(path) {
+    return tag(com(path))
+}
+
+/////////////// Wtf ///////////////
 
 /**
  * @param {String} fluid 

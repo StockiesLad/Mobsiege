@@ -11,26 +11,31 @@ recipes((event, funcs) => {
      ])
 
      event.replaceInput({output: 'notreepunching:flint_shovel'}, 'notreepunching:flint_shard', content.pointed_flint)
-     funcs.vanillaInsert(funcs.removeByOutput('hardcore_torches:fire_starter'), [[packTag('primitive_string'), 0], ['#forge:rods/wooden', [1, 2]]])
-     funcs.vanillaInsert(funcs.removeByOutput('notreepunching:fire_starter'), [[packTag('primitive_string'), 0], ['hardcore_torches:fire_starter', [1, 2]], ['notreepunching:flint_shard', 3]])
-     funcs.vanillaInsert(funcs.removeByOutput('notreepunching:flint_knife'), [[content.pointed_flint, 1], ['#forge:rods/wooden', 2], [packTag('primitive_string'), 0]])
-     funcs.vanillaInsert(content.flint_sword, [['notreepunching:flint_shard', [1, 3, 5, 7]], ['#forge:rods/wooden', 6], ['#forge:string', 4], [content.pointed_flint, 2]])
-     funcs.vanillaInsert(content.flint_saw, [['minecraft:flint', [1, 4]], ['#forge:rods/wooden', [0, 3, 6]], ['#forge:string', 7]])
+     funcs.vanillaInsert(funcs.removeByOutput('hardcore_torches:fire_starter'), [[tags.string_primitive, 0], [dataTag + 'rods/wooden', [1, 2]]])
+     funcs.vanillaInsert(funcs.removeByOutput('notreepunching:fire_starter'), [[tags.string_primitive, 0], ['hardcore_torches:fire_starter', [1, 2]], ['notreepunching:flint_shard', 3]])
+     funcs.vanillaInsert(funcs.removeByOutput('notreepunching:flint_knife'), [[content.pointed_flint, 1], [dataTag + 'rods/wooden', 2], [tags.string_primitive, 0]])
+     funcs.vanillaInsert(content.flint_sword, [['notreepunching:flint_shard', [1, 3, 5, 7]], [dataTag + 'rods/wooden', 6], [dataTag + 'string', 4], [content.pointed_flint, 2]])
+     funcs.vanillaInsert(content.flint_saw, [['minecraft:flint', [1, 4]], [dataTag + 'rods/wooden', [0, 3, 6]], [dataTag + 'string', 7]])
 
-     funcs.vanillaInsert(funcs.removeByOutput('primalstage:flint_hatchet'), [['notreepunching:flint_shard', 1], [content.pointed_flint, 0], ['#forge:rods/wooden', 3], [packTag('primitive_string'), 2]])
-     funcs.vanillaInsert(funcs.removeByOutput('notreepunching:flint_axe'), [['#forge:string', 0], ['#forge:rods/wooden', [3, 6]], [content.pointed_flint, [2]], ['notreepunching:flint_shard', [1, 4]]])
-     funcs.vanillaInsert(funcs.removeByOutput('notreepunching:flint_pickaxe'), [['notreepunching:flint_shard', [0, 2]], ['#forge:string', 1], [content.pointed_flint, [3, 5]], ['#forge:rods/wooden', [4, 7]]])
+     funcs.vanillaInsert(funcs.removeByOutput('primalstage:flint_hatchet'), [['notreepunching:flint_shard', 1], [content.pointed_flint, 0], [dataTag + 'rods/wooden', 3], [tags.string_primitive, 2]])
+     funcs.vanillaInsert(funcs.removeByOutput('notreepunching:flint_axe'), [[dataTag + 'string', 0], [dataTag + 'rods/wooden', [3, 6]], [content.pointed_flint, [2]], ['notreepunching:flint_shard', [1, 4]]])
+     funcs.vanillaInsert(funcs.removeByOutput('notreepunching:flint_pickaxe'), [['notreepunching:flint_shard', [0, 2]], [dataTag + 'string', 1], [content.pointed_flint, [3, 5]], [dataTag + 'rods/wooden', [4, 7]]])
 })
 
 itemTags((event, funcs) => {
      funcs.addEntriesRespectively([
           ['minecraft:axes', ['notreepunching:flint_axe', 'primalstage:flint_hatchet']],
+          ['%axes', '#minecraft:axes'],
           ['minecraft:clubs', 'primalstage:stone_club'],
+          ['%clubs', '#minecraft:clubs'],
           ['minecraft:shovels', 'notreepunching:flint_shovel'],
+          ['%shovels', '#minecraft:shovels'],
           ['notreepunching:weak_saws', '#minecraft:axes'],
           ['minecraft:saws', ['#notreepunching:saws', '#cb_microblock:tools/saw']],
-          ['forge:tools/saws', '#minecraft:saws'],
+          ['%saws', '#minecraft:saws'],
+          [data + 'tools/saws', '#minecraft:saws'],
           ['minecraft:trowels', 'notreepunching:clay_tool'],
+          ['%trowels', '#minecraft:trowels'],
           ['|breaks_randomly', [
                'primalstage:flint_hatchet',
                'primalstage:flint_mallet',
@@ -42,8 +47,8 @@ itemTags((event, funcs) => {
                'notreepunching:flint_pickaxe',
                'notreepunching:flint_axe'
           ]],
-          ['forge:tools/knives', ['#notreepunching:knives', '#tconstruct:modifiable/melee/parry']],
-          ['forge:tools/hammers', [
+          [data + 'tools/knives', ['#notreepunching:knives', '#tconstruct:modifiable/melee/parry']],
+          [data + 'tools/hammers', [
                '#primalstage:mallets',
                'thermal_extra:signalum_hammer',
                'thermal_extra:lumium_hammer',
@@ -58,7 +63,7 @@ itemTags((event, funcs) => {
 })
 
 Mobsiege2Minecraft.onBreaksRandomly = (itemStack, damage, random) => {
-     if (itemStack != null && itemStack.hasTag(pack('breaks_randomly')) && random.nextInt(5) == 0) {
+     if (itemStack != null && itemStack.hasTag(ids.breaks_randomly) && random.nextInt(5) == 0) {
           return Math.min(damage + random.nextInt(5), itemStack.getMaxDamage())
      } else return damage
 }

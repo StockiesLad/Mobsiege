@@ -5,7 +5,7 @@ recipes((event, funcs) => {
     funcs.nuke('supplementaries:gravel_bricks')
     funcs.removeRecipes({input: '#notreepunching:loose_rocks', type: 'minecraft:crafting_shaped'})
     event.replaceInput({input: 'twigs:pebble'}, 'twigs:pebble', 'minecraft:gravel')
-    event.replaceInput({input: 'minecraft:cobblestone', output: 'projecte:low_covalence_dust'}, 'minecraft:cobblestone', '#forge:cobblestone')
+    event.replaceInput({input: 'minecraft:cobblestone', output: 'projecte:low_covalence_dust'}, 'minecraft:cobblestone', dataTag + 'cobblestone')
     funcs.threeSquare(funcs.removeByOutput('9x twigs:gravel_bricks'), 'minecraft:gravel').vanilla()
     funcs.twoSquare('minecraft:end_stone', 'betterend:endstone_dust').vanilla()
     funcs.twoSquare('minecraft:cobblestone', 'minecraft:gravel').vanilla()
@@ -16,7 +16,7 @@ recipes((event, funcs) => {
 })
 
 ServerEvents.tags('item', event => {
-	event.add(pack('limestone'), [
+	event.add(data + 'limestone', [
 		'alexscaves:limestone', 
 		'blockus:limestone', 
 		'create:limestone', 
@@ -29,9 +29,9 @@ ServerEvents.tags('item', event => {
         'unearthed:cobbled_grey_limestone'
 	])
 	
-	limestones = getIdsOfTags(event, pack('limestone'))
+	limestones = getIdsOfTags(event, dataTag  + 'limestone')
 	
-	event.add('forge:cobblestone', [
+	event.add(data + 'cobblestone', [
 		'unearthed:cobbled_phyllite', 
         'unearthed:cobbled_slate', 
         'unearthed:cobbled_limestone', 
@@ -39,16 +39,16 @@ ServerEvents.tags('item', event => {
         'unearthed:cobbled_grey_limestone',
 	])
 
-    event.add('forge:cobblestone/mossy', [
+    event.add(data + 'cobblestone/mossy', [
         'minecraft:mossy_cobblestone', 
         'terrestria:mossy_basalt_cobblestone', 
         'unearthed:mossy_cobbled_slate', 
         'unearthed:mossy_cobbled_phyllite',
     ])
 
-    event.add(pack('stone/mossy'), ['aether:mossy_holystone', 'biomeswevegone:mossy_stone'])
+    event.add(data + 'stone/mossy', ['aether:mossy_holystone', 'biomeswevegone:mossy_stone'])
 	
-	event.add(pack('weak_stones'), [
+	event.add(data + 'weak_stones', [
         'minecraft:netherrack',
         content.corpstone,
 		'unearthed:siltstone', 
@@ -57,8 +57,8 @@ ServerEvents.tags('item', event => {
 	])
 	
     event.add('minecraft:stone_crafting_materials', [
-		packTag('limestone'),
-	    '#forge:cobblestone',
+		dataTag + 'limestone',
+	    dataTag + 'cobblestone',
 		'alexscaves:galena', 
 		'alexscaves:radrock', 
         'blockus:marble', 
@@ -112,18 +112,18 @@ ServerEvents.tags('item', event => {
 
     event.add('notreepunching:loose_rocks', ['twigs:pebble', 'spelunkers_charm:deepslate_rock', 'spelunkers_charm:rock', 'spelunkers_charm:dripstone_rock', 'spelunkers_charm:basalt_rock'])
     event.remove('notreepunching:loose_rocks', 'notreepunching:sandstone_loose_rock')
-    event.add(pack('overworld_rocks'), getIdsOfTags(event, 'notreepunching:loose_rocks'))
-    event.add(pack('aether_rocks'), content.holy_pebble)
+    event.add(tags.overworld_rocks, getIdsOfTags(event, 'notreepunching:loose_rocks'))
+    event.add(tags.aether_rocks, content.holy_pebble)
     event.add('notreepunching:loose_rocks', content.holy_pebble)
     
-    stones = getIdsOfTags(event, 'minecraft:stone_crafting_materials').concat(getIdsOfTags(event, pack('weak_stones')))
+    stones = getIdsOfTags(event, 'minecraft:stone_crafting_materials').concat(getIdsOfTags(event, data + 'weak_stones'))
 })
 
 
 ServerEvents.tags('block', event => {
-    //event.add('notreepunching:loose_rock_placeable_on', ['#forge:terrain', '#forge:sand', '#forge:stone','#aether:aether_dirt', '#aether:holystone','#minecraft:dirt'])
-    event.add(pack('stone'), stones.concat(['#forge:stone', packTag('holystone')]))
-    event.add(pack('limestone'), limestones)
+    //event.add('notreepunching:loose_rock_placeable_on', [dataTag + 'terrain', dataTag + 'sand', dataTag + 'stone','#aether:aether_dirt', '#aether:holystone','#minecraft:dirt'])
+    event.add(data + 'stone', stones.concat([dataTag + 'stone', data + 'holystone']))
+    event.add(data + 'limestone', limestones)
     stones = []
 	limestones = []
 })
@@ -131,7 +131,7 @@ ServerEvents.tags('block', event => {
 BlockEvents.rightClicked(event => {
     var item = event.getItem()
     var block = event.block
-    if (item.hasTag('forge:tools/hammers') && block.hasTag(pack('stone'))) {
+    if (item.hasTag(data + 'tools/hammers') && block.hasTag(data + 'stone')) {
         var level = event.getLevel()
         var random = level.getRandom()
         var pos = block.getPos()
@@ -141,8 +141,8 @@ BlockEvents.rightClicked(event => {
             level.destroyBlock(pos, false)
             var pebble = block.getId().includes('aether') ? content.holy_pebble : 'twigs:pebble'
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of(pebble).withCount(2 + random.nextInt(3)))
-            if (block.hasTag(pack('limestone')) && random.nextInt(4) == 0)
-                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of(AlmostUnified.getPreferredItemForTag('forge:gems/sulfur').getIdLocation().toString()).withCount(2 + random.nextInt(2)))
+            if (block.hasTag(data + 'limestone') && random.nextInt(4) == 0)
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Item.of(AlmostUnified.getPreferredItemForTag(data + 'gems/sulfur').getIdLocation().toString()).withCount(2 + random.nextInt(2)))
         } 
     }
 })

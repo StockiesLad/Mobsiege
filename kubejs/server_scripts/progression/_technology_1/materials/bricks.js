@@ -16,7 +16,7 @@ recipes((event, funcs) => {
      funcs.nuke('notreepunching:ceramic_water_bucket')
      funcs.nuke('immersivegeology:raw_fire_clay')
 
-     funcs.twoSquareAlt(content.campfire_rock, ['#forge:ingots/brick', '#notreepunching:loose_rocks']).vanilla()
+     funcs.twoSquareAlt(content.campfire_rock, [dataTag + 'ingots/brick', '#notreepunching:loose_rocks']).vanilla()
      funcs.twoSquare(content.fire_brick_block, content.fire_brick).vanilla()
 
      funcs.globalPrimitiveDrying(content.dry_clay_brick, 'notreepunching:clay_brick')
@@ -65,8 +65,8 @@ recipes((event, funcs) => {
 
 itemTags((event, funcs) => {
      event.add('notreepunching:ceramics', 'ceramicbucket:ceramic_bucket')
-     event.add('forge:ingots/brick', ['twigs:silt_brick', 'primalstage:kiln_brick', content.fire_brick, 'minecraft:nether_brick', content.mud_brick, content.holysilt_brick, content.aether_mud_brick, 'immersivegeology:refractory_brick'])
-     event.add('forge:bricks', [content.holysilt_bricks, 'minecraft:bricks'])
+     event.add(data + 'ingots/brick', ['twigs:silt_brick', 'primalstage:kiln_brick', content.fire_brick, 'minecraft:nether_brick', content.mud_brick, content.holysilt_brick, content.aether_mud_brick, 'immersivegeology:refractory_brick'])
+     event.add(data + 'bricks', [content.holysilt_bricks, 'minecraft:bricks'])
      event.add('supplementaries:throwable_bricks', [
           'notreepunching:clay_brick',
           content.wet_ash_clay_brick,

@@ -4,6 +4,6 @@ recipes((event, funcs) => {
           ['buildcraftfactory:tank', [1, 3, 5]],
           ['#buildcraft:pipe/fluids_iron', 4],
           ['buildcraftsilicon:chipset_redstone', 7],
-          ['#forge:gears/invar', [6, 8]]
+          [dataTag + 'gears/invar', [6, 8]]
      ])
 })

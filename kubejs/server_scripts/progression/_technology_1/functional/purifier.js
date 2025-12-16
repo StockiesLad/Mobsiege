@@ -1,10 +1,10 @@
 Mobsiege2ToughAsNails.PURIFIER_FILTER_ADD_MAP = new HashMap();
 Mobsiege2ToughAsNails.PURIFIER_FILTER_REMOVE_LIST = new LinkedList();
 
-Mobsiege2ToughAsNails.removePurifyingFilterStack(Item.of('minecraft:charcoal'))
+Mobsiege2ToughAsNails.removePurifyingFilterStack(Item.of(content.medium_grade_charcoal))
 Mobsiege2ToughAsNails.addPurifyingFilterStack(Item.of(content.poor_grade_charcoal), 400)
 Mobsiege2ToughAsNails.addPurifyingFilterStack(Item.of(content.low_grade_charcoal), 600)
-Mobsiege2ToughAsNails.addPurifyingFilterStack(Item.of('minecraft:charcoal'), 800)
+Mobsiege2ToughAsNails.addPurifyingFilterStack(Item.of(content.medium_grade_charcoal), 800)
 Mobsiege2ToughAsNails.addPurifyingFilterStack(Item.of(content.good_grade_charcoal), 1200)
 Mobsiege2ToughAsNails.addPurifyingFilterStack(Item.of(content.high_grade_charcoal), 1800)
 

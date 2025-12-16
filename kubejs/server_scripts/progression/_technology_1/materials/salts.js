@@ -1,13 +1,13 @@
 ServerEvents.tags('item', event => {
-     event.add('forge:dusts/salt', ['primalstage:salt', 'ingredientsdelight:salt'])
-     event.add('forge:salt', '#forge:dusts/salt')
-     event.add('forge:dusts/niter', 'immersiveengineering:dust_saltpeter')
-     event.remove('forge:dusts/saltpeter', 'immersiveengineering:dust_saltpeter')
+     event.add(data + 'dusts/salt', ['primalstage:salt', 'ingredientsdelight:salt'])
+     event.add(data + 'salt', dataTag + 'dusts/salt')
+     event.add(data + 'dusts/niter', 'immersiveengineering:dust_saltpeter')
+     event.remove(data + 'dusts/saltpeter', 'immersiveengineering:dust_saltpeter')
 })
 
 commonTags((event, funcs) => {
-     event.add('forge:storage_blocks/salt', 'mekanism:block_salt')
-     event.add('forge:ores/salt', 'primalstage:salt_block')
+     event.add(data + 'storage_blocks/salt', 'mekanism:block_salt')
+     event.add(data + 'ores/salt', 'primalstage:salt_block')
 })
 
 lootTables((event, funcs) => {
@@ -16,8 +16,8 @@ lootTables((event, funcs) => {
           .removeLoot('primalstage:salt')
           .addAlternativesLoot(
                LootEntry.of('primalstage:salt_block').when(c => c.customCondition(conditionSilkTouch())),
-               LootEntry.of('primalstage:salt_block').when(c => c.customCondition(conditionMatchTool('minecraft:trowels'))),
-               LootEntry.of(preferredItemId('forge:dusts/salt'))
+               LootEntry.of('primalstage:salt_block').when(c => c.customCondition(conditionMatchTool(data + 'trowels'))),
+               LootEntry.of(preferredItemId(data + 'dusts/salt'))
                     .customFunction(setCount(countUniform(4, 8), false))
                     .customFunction(funcFortune(formulaUniformBonus(1)))
           )

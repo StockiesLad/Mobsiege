@@ -34,15 +34,15 @@ recipes((event, funcs) => {
           'expandedstorage:diamond_to_netherite_conversion_kit'
      ]).forEach(o => funcs.nuke(o))
 
-     event.replaceInput({output: 'expandedstorage:copper_barrel'}, '#forge:ingots/copper', '#forge:storage_blocks/copper')
-     funcs.planet(funcs.removeByOutput('expandedstorage:iron_barrel'), 'expandedstorage:copper_barrel', '#forge:ingots/iron').vanilla()
+     event.replaceInput({output: 'expandedstorage:copper_barrel'}, dataTag + 'ingots/copper', dataTag + 'storage_blocks/copper')
+     funcs.planet(funcs.removeByOutput('expandedstorage:iron_barrel'), 'expandedstorage:copper_barrel', dataTag + 'ingots/iron').vanilla()
 
      funcs.globalSmelting('ae2:smooth_sky_stone_chest', 'ae2:sky_stone_chest', 0.2)
-     funcs.planet(funcs.removeByOutput('expandedstorage:iron_chest'), 'ae2:smooth_sky_stone_chest', '#forge:ingots/iron').vanilla()
+     funcs.planet(funcs.removeByOutput('expandedstorage:iron_chest'), 'ae2:smooth_sky_stone_chest', dataTag + 'ingots/iron').vanilla()
 })
 
 ServerEvents.tags('item', event => {
-     event.add('forge:chests/wooden', 'expandedstorage:wooden_chests')
+     event.add(data + 'chests/wooden', 'expandedstorage:wooden_chests')
 })
 
 function iterateESChest(toRecipe) {

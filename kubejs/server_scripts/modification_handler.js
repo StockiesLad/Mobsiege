@@ -35,11 +35,14 @@ const Mobsiege2BuildCraft = Java.loadClass('com.stockieslad.mobsiege.api.Mobsieg
 const Mobsiege2Minecraft = Java.loadClass('com.stockieslad.mobsiege.api.Mobsiege2Minecraft')
 const Mobsiege2ToughAsNails = Java.loadClass('com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails')
 
-const modpackId = global.modpackId
-const maths = global.mathHelper
-const common = global.commonHelper
-const stacks = global.stackHelper
-const content = global.content
+const modpackId = global.modpackId;
+const maths = global.mathHelper;
+const common = global.commonHelper;
+const stacks = global.stackHelper;
+const content = global.content;
+const data = global.data_namespace + ':';
+const dataTag = tag(data);
+const main = global.data_namespace
 
 /** @type {Array<String|Internal.ItemStack>} */ global.hiddenItems = []
 

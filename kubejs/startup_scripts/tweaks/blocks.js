@@ -3,13 +3,7 @@ StartupEvents.registry('block', (event) => {
     Mobsiege2Fabric.fabricTagFlammability(stacks.packId('carbonize/extra_flammability_leaves'), 30, 60)
 
     typedContent.filter(c => c.registerable && c.type === 'block').forEach(block => {
-        var displayName = block.id
-            .split(':').pop()
-            .split('/').pop()
-            .replace(/[-]/g, '_')
-            .split('_')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
+        var displayName = stacks.toLang(block.id)
 
         if (block['box'] != null) {
             var box = block.box

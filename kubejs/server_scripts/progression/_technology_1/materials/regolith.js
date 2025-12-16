@@ -1,9 +1,9 @@
 recipes((event, funcs) => {
-     funcs.threeSquare('2x minecraft:gravel', '#forge:regolith').vanilla()
+     funcs.threeSquare('2x minecraft:gravel', dataTag + 'regolith').vanilla()
 })
 
 commonTags(event => {
-     event.add('forge:regolith', [
+     event.add(data + 'regolith', [
           'unearthed:phyllite_regolith',
           'unearthed:slate_regolith',
           'unearthed:gabbro_regolith',

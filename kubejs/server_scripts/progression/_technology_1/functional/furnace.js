@@ -12,9 +12,9 @@ recipes((event, funcs) => {
 
      funcs.planetAlt(funcs.removeByOutput('nethersdelight:blackstone_furnace'), ['minecraft:blackstone', content.fire_brick_block], 'primalstage:kiln').vanilla()
      funcs.planetAlt(funcs.removeByOutput('minecraft:furnace'), ['#minecraft:stone_crafting_materials', content.fire_brick_block], 'primalstage:kiln').vanilla()
-     event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', '#forge:furnaces')
-     event.shapeless(packTag('primitive_furnaces'), packTag('primitive_furnaces'))
-     funcs.removeRecipes({type: 'minecraft:crafting_shaped', output: packTag('primitive_furnaces')}, (result, ingredients) => {
+     event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', dataTag + 'furnaces')
+     event.shapeless(tags.primitive_furnaces, tags.primitive_furnaces)
+     funcs.removeRecipes({type: 'minecraft:crafting_shaped', output: tags.primitive_furnaces}, (result, ingredients) => {
           funcs.planetAlt(result.withCount(1), [ingredients[0], content.fire_brick_block], 'primalstage:kiln').vanilla()
      })
 })
@@ -38,7 +38,7 @@ itemTags((event, funcs) => {
                'quark:blackstone_furnace',
                'quark:deepslate_furnace'
           ]], 
-          ['|primitive_furnaces', [
+          [ids.primitive_furnaces, [
                'aether_genesis:holystone_furnace',
                'betternether:basalt_furnace',
                'betternether:netherrack_furnace',

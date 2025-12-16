@@ -1,7 +1,7 @@
 var campfires = [
-     {type: 'minecraft:campfire', torch: '#minecraft:torches/temp', fuel: content.high_grade_charcoal, logs: '#minecraft:logs', sticks: 'minecraft:stick'},
-     {type: 'minecraft:soul_campfire', torch: packTag('soul_torches'), fuel: 'minecraft:soul_soil', logs: '#minecraft:logs', sticks: 'minecraft:stick'},
-     {type: 'ancient_aether:ambrosium_campfire', torch: 'aether:ambrosium_torch', fuel: 'aether:ambrosium_shard', logs: packTag('aether_logs'), sticks: 'aether:skyroot_stick'}
+     {type: 'minecraft:campfire', torch:  tags.temp_torches, fuel: content.high_grade_charcoal, logs: '#minecraft:logs', sticks: 'minecraft:stick'},
+     {type: 'minecraft:soul_campfire', torch: tags.soul_torches, fuel: 'minecraft:soul_soil', logs: '#minecraft:logs', sticks: 'minecraft:stick'},
+     {type: 'ancient_aether:ambrosium_campfire', torch: 'aether:ambrosium_torch', fuel: 'aether:ambrosium_shard', logs: tags.aether_logs, sticks: 'aether:skyroot_stick'}
 ]
 
 recipes((event, funcs) => {
@@ -31,7 +31,7 @@ lootTables((event, funcs) => {
 })
 
 commonTags((event, funcs) => {
-     event.add('forge:campfires', 'ancient_aether:ambrosium_campfire')
+     event.add(data + 'campfires', 'ancient_aether:ambrosium_campfire')
 })
 
 BlockEvents.rightClicked('ancient_aether:ambrosium_campfire', event => {

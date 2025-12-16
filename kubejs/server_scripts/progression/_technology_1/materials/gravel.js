@@ -1,24 +1,24 @@
 var gravel_drops = [
-     {type: 'minecraft:gravel', common_drop: 'notreepunching:stone_loose_rock', ingredient: packTag('overworld_rocks')},
-     {type: 'ancient_aether:gravity_gravel', common_drop: content.holy_pebble, ingredient: packTag('aether_rocks')},
-     {type: 'immersiveengineering:slag_gravel', common_drop: preferredItemId('forge:slag'), ingredient: '#forge:slag'}
+     {type: 'minecraft:gravel', common_drop: 'notreepunching:stone_loose_rock', ingredient: tags.overworld_rocks},
+     {type: 'ancient_aether:gravity_gravel', common_drop: content.holy_pebble, ingredient: tags.aether_rocks},
+     {type: 'immersiveengineering:slag_gravel', common_drop: preferredItemId(data + 'slag'), ingredient: dataTag + 'slag'}
 ]
 
 recipes((event, funcs) => {
-     event.replaceInput({input: 'minecraft:gravel'}, 'minecraft:gravel', '#forge:gravel')
-     event.replaceInput({input: '#forge:slag', output: 'thermal:slag_block'}, '#forge:slag', 'immersiveengineering:slag_gravel')
+     event.replaceInput({input: 'minecraft:gravel'}, 'minecraft:gravel', dataTag + 'gravel')
+     event.replaceInput({input: dataTag + 'slag', output: 'thermal:slag_block'}, dataTag + 'slag', 'immersiveengineering:slag_gravel')
      gravel_drops.forEach(gravel => {
           funcs.twoSquare(gravel.type, gravel.ingredient).vanilla()
      })
 })
 
 blockTags((event, funcs) => {
-     event.add('notreepunching:always_breakable', '#forge:gravel')
-     event.add('notreepunching:always_drops', '#forge:gravel')
+     event.add('notreepunching:always_breakable', dataTag + 'gravel')
+     event.add('notreepunching:always_drops', dataTag + 'gravel')
 })
 
 commonTags((event, funcs) => {
-     event.add('forge:gravel', 'ancient_aether:gravity_gravel')
+     event.add(data + 'gravel', 'ancient_aether:gravity_gravel')
 })
 
 lootTables((event, funcs) => {
@@ -55,7 +55,7 @@ lootTables((event, funcs) => {
 BlockEvents.rightClicked(event => {
      var item = event.getItem()
      var block = event.block
-     if (item.hasTag('forge:tools/hammers') && block.hasTag('forge:gravel')) {
+     if (item.hasTag(data + 'tools/hammers') && block.hasTag(data + 'gravel')) {
           var level = event.getLevel()
           var random = level.getRandom()
           var pos = block.getPos()
