@@ -1,8 +1,8 @@
 recipes((event, funcs) => {
      funcs.vanillaInsert('3x carbonize:ash_layer', ['carbonize:ash_block', [0, 1]])
      funcs.twoSquare('carbonize:ash_block', 'carbonize:ash').vanilla()
-     event.shapeless('carbonize:ash', [dataTag + 'ash', dataTag + 'ash'])
-     funcs.threeSquare(content.packed_ash, dataTag + 'ash').vanilla()
+     event.shapeless('carbonize:ash', `2x #${main}:ash`)
+     funcs.threeSquare(content.packed_ash, `#${main}:ash`).vanilla()
 })
 
 itemTags((event, funcs) => {

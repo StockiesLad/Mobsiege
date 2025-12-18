@@ -219,7 +219,7 @@ RecipeObject.prototype = {
                type: "thermal_extra:endothermic_dehydrator",
                energy: common.insure(energy, 4000),
                ingredients: [Ingredient.of(ingredient)],
-               result: [Item.of(result)]
+               result: [Item.of(result), ofFluid('minecraft:water', 50)]
           })
           return this
      },

@@ -4,6 +4,6 @@
 	"charcoalPile": true,
 	"charcoalPileMinimumCount": 8,
 	"burnCrafting": true,
-	"createAsh": false,
+	"createAsh": true,
 	"increasedFireSpreadRange": true
 }
