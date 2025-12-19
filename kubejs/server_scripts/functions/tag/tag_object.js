@@ -84,7 +84,7 @@ function removeTagHash(tag) {
  * Adds to tags like normal but deletes the critical character, '#' from the entry to simplify formats
  */
 function addToTag(event, tag, entries) {
-     return event.add(removeTagHash(tag), entries);
+     return event.add(removeTagHash(stacks.autoId(tag)), entries);
  }
  
  /**
@@ -94,7 +94,7 @@ function addToTag(event, tag, entries) {
  * Removes from tags like normal but deletes the critical character, '#' from the entry to simplify formats
  */
 function removeFromTag(event, tag, entries) {
-     return event.remove(removeTagHash(tag), entries);
+     return event.remove(removeTagHash(stacks.autoId(tag)), entries);
  }
 
 /**
@@ -103,7 +103,7 @@ function removeFromTag(event, tag, entries) {
  */
 function getEntriesOfTags(event, tags) {
      var entries = []
-     common.alwaysArray(tags).forEach(tag => entries = entries.concat(event.get(removeTagHash(tag)).getObjectIds().toArray()))
+     common.alwaysArray(tags).forEach(tag => entries = entries.concat(event.get(removeTagHash(stacks.autoId(tag))).getObjectIds().toArray()))
      return entries
  }
  

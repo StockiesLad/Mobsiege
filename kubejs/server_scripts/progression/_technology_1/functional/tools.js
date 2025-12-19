@@ -63,7 +63,7 @@ itemTags((event, funcs) => {
 })
 
 Mobsiege2Minecraft.onBreaksRandomly = (itemStack, damage, random) => {
-     if (itemStack != null && itemStack.hasTag(tags.breaks_randomly) && random.nextInt(5) == 0) {
+     if (itemStack != null && itemStack.hasTag(tags.breaks_randomly.replace('#', '')) && random.nextInt(5) == 0) {
           return Math.min(damage + random.nextInt(5), itemStack.getMaxDamage())
      } else return damage
 }

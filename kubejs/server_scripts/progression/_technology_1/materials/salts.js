@@ -1,4 +1,5 @@
 //Refer to progression:global
+//Refer to progression:mechanical_1
 
 lootTables((event, funcs) => {
      event.addBlockLootModifier('primalstage:salt_block')

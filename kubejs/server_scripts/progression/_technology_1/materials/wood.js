@@ -218,7 +218,7 @@ BlockEvents.rightClicked(event => {
      var level = event.getLevel()
      var random = level.getRandom()
      var pos = block.getPos()
-     if (item.hasTag(data + 'tools/saws') && block.hasTag(tags.stripped_logs)) {
+     if (item.hasTag(data + 'tools/saws') && block.hasTag(tags.stripped_logs).replace('#', '')) {
           item.hurtAndBreak(1, event.getEntity(), (entity) => level.broadcastEntityEvent(entity, event.getHand().name() == 'MAIN_HAND' ? 47 : 48))
           level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.bamboo.hit", "blocks", 0.25, 0.5)
           if (random.nextInt(4) == 0) {
