@@ -78,6 +78,15 @@ const typedContent = formatContent({
     wet_clay_brick: 'notreepunching:clay_brick',
     dry_clay_brick: 'dry_clay_brick',
 
+    wet_valkyrie_brick: '',
+    dry_valkyrie_brick: '',
+
+    blazing_fireclay: simpleBlock('', 'GRAVEL', 1.6, 1.6, ['mineable/shovel', 'needs_iron_tool']),
+    blazing_fireclay_brick: '',
+    fireclay_brick: '',
+
+    porous_nether_brick: '',
+
     silt_ball: 'twigs:silt_ball',
     wet_silt_brick: 'wet_silt_brick',
     dry_silt_brick: 'dry_silt_brick',

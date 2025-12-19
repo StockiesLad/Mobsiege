@@ -6,7 +6,10 @@ recipes((event, funcs) => {
           {input: 'notreepunching:clay_brick'},
           {output: 'twigs:silt_brick'},
           {output: 'supplementaries:ash_brick'},
-          {id: 'enderio:smelting/minecraft/cook_refractory_brick'}
+          {id: 'enderio:smelting/minecraft/cook_refractory_brick'},
+          {output: 'ancient_aether:valkyrie_brick'},
+          {output: 'tfmg:fireproof_brick'},
+          {output: 'minecraft:nether_brick'}
      ])
 
      event.replaceOutput({output: 'notreepunching:ceramic_bucket'}, 'notreepunching:ceramic_bucket', 'ceramicbucket:ceramic_bucket')
@@ -22,6 +25,16 @@ recipes((event, funcs) => {
      funcs.globalPrimitiveDrying(content.dry_clay_brick, 'notreepunching:clay_brick')
      funcs.globalPrimitiveCooking('minecraft:brick', content.dry_clay_brick, 0.1)
      funcs.globalSmelting('minecraft:brick', content.dry_clay_brick, 0.1)
+
+     funcs.globalPrimitiveDrying(content.dry_valkyrie_brick, content.wet_valkyrie_brick)
+     funcs.globalPrimitiveCooking('ancient_aether:valkyrie_brick', content.dry_valkyrie_brick, 0.1)
+     funcs.globalSmelting('ancient_aether:valkyrie_brick', content.dry_valkyrie_brick, 0.1)
+
+     funcs.planet(content.blazing_fireclay, 'tfmg:fireclay', 'minecraft:blaze_powder').vanilla()
+     funcs.globalSmelting('tfmg:fireproof_brick', content.blazing_fireclay_brick, 0.25)
+
+     funcs.globalPressing(content.porous_nether_brick, 'minecraft:netherrack', 'brick');
+     funcs.globalAlloySmelting('minecraft:nether_brick', ['2x ' + content.porous_nether_brick, 'minecraft:blackstone'])
 
      funcs.globalPrimitiveDrying(content.dry_ash_clay_brick, content.wet_ash_clay_brick)
      funcs.globalPrimitiveCooking('supplementaries:ash_brick', content.dry_ash_clay_brick, 0.1)
@@ -111,6 +124,8 @@ lootTables((event, funcs) => {
 })
 
 addBrickDrop('minecraft:clay', 'notreepunching:clay_brick')
+addBrickDrop('ancient_aether:valkyrie_clay', content.wet_valkyrie_brick)
+addBrickDrop(content.blazing_fireclay, content.blazing_fireclay_brick);
 addBrickDrop(content.ash_clay, content.wet_ash_clay_brick)
 addBrickDrop('twigs:silt', content.wet_silt_brick)
 addBrickDrop('aether_redux:holysilt', content.wet_holysilt_brick)

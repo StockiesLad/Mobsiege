@@ -12,8 +12,6 @@ itemTags((event, funcs) => {
      funcs.remove(`${main}:niter`, 'tfmg:nitrate_dust')
      funcs.switchTagsUniformly('immersiveengineering:dust_saltpeter', `${main}:dusts/saltpeter`, `${main}:dusts/niter`)
      funcs.add('%niter', [`#${main}:dusts/niter`, `#${main}:gems/niter`])
-     funcs.remove('%dusts/niter', 'thermal:niter_dust')
-
 })
 
 commonTags((event, funcs) => {

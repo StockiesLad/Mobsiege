@@ -42,12 +42,12 @@ itemTags((event, funcs) => {
      ]
 
      funcs.addEntriesRespectively([
-          [tags.consumable_igniters, ['hardcore_torches:fire_starter']],
+          [tags.consumable_igniters, ['hardcore_torches:fire_starter', '#hardcore_torches:free_torch_light_items']],
           [tags.damageable_igniters, 'notreepunching:fire_starter', 'minecraft:flint_and_steel'],
 
           ['hardcore_torches:consume_torch_light_items', tags.consumable_igniters],
           ['hardcore_torches:consume_lantern_light_items', tags.consumable_igniters],
-          ['carbonize:consume_igniters', [tags.consumable_igniters, '#hardcore_torches:free_torch_light_items']],
+          ['carbonize:consume_igniters', tags.consumable_igniters],
           ['hardcore_torches:damage_torch_light_items', tags.damageable_igniters],
           ['hardcore_torches:damage_lantern_light_items', tags.damageable_igniters],
           ['carbonize:damage_igniters',  tags.damageable_igniters],
