@@ -66,6 +66,14 @@ StackHelper.prototype = {
      },
 
      /**
+      * @param {string} path 
+      * Checks if the path contains characters like '@', '%', or '&'
+      */
+     isInAutoForm: function(path) {
+          return !path.includes(':') && (path.includes('@') || path.includes('%') || path.includes('&'))
+     },
+
+     /**
       * @param {String} path 
       * @returns {String}
       */

@@ -36,7 +36,7 @@ itemTags((event, funcs) => {
           [data + 'tools/saws', '#minecraft:saws'],
           ['minecraft:trowels', 'notreepunching:clay_tool'],
           ['%trowels', '#minecraft:trowels'],
-          ['|breaks_randomly', [
+          ['@breaks_randomly', [
                'primalstage:flint_hatchet',
                'primalstage:flint_mallet',
                content.flint_sword,
@@ -63,7 +63,7 @@ itemTags((event, funcs) => {
 })
 
 Mobsiege2Minecraft.onBreaksRandomly = (itemStack, damage, random) => {
-     if (itemStack != null && itemStack.hasTag(ids.breaks_randomly) && random.nextInt(5) == 0) {
+     if (itemStack != null && itemStack.hasTag(tags.breaks_randomly) && random.nextInt(5) == 0) {
           return Math.min(damage + random.nextInt(5), itemStack.getMaxDamage())
      } else return damage
 }

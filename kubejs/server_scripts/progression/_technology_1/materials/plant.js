@@ -9,7 +9,7 @@ recipes((event, funcs) => {
           {id: 'notreepunching:plant_fiber_from_leaves_with_knife'}
      ])
 
-     event.replaceInput({input: 'primalstage:plant_twine'}, 'primalstage:plant_twine', ids.string_primitive)
+     event.replaceInput({input: 'primalstage:plant_twine'}, 'primalstage:plant_twine', tags.string_primitive)
 
      event.shapeless(funcs.removeByOutput('notreepunching:plant_string'), Item.of('primalstage:plant_twine').withCount(3))
      event.shapeless('primalstage:plant_twine', Item.of('notreepunching:plant_fiber').withCount(2))
@@ -25,7 +25,7 @@ itemTags((event, funcs) => {
           ['notreepunching:h/string', 'notreepunching:plant_string']
      ])
 
-	event.add(ids.string_primitive, ['notreepunching:plant_string', dataTag + 'string'])
+	funcs.add(tags.string_primitive, ['notreepunching:plant_string', dataTag + 'string'])
 
 	var subtractPartialOrganic = getIdsOfTags(event, 'quark:hedges', 'blockus:small_hedges', data + 'seed', data + 'seeds').concat(['betterend:umbrella_tree_membrane', 'betternether:nether_cactus', 'betternether:wart_seed', 'betternether:egg_plant', 'betternether:stalagnate_stem', 'betterend:cave_bush', 'betternether:hook_mushroom', 'minecraft:bamboo', 'betternether:agave', 'betternether:barrel_cactus', 'betternether:mushroom_fir_stem'])
 	
@@ -177,8 +177,8 @@ commonTags((event) => {
 blockTags((event, funcs) => {
 	funcs.addEntriesRespectively([
           ['twilightforest:portal/decoration', 'cinderscapes:umbral_fungus'],
-		[ids.partial_organic, partialOrganic],
-          [ids.partial_organic, wholeOrganic],
+		[tags.partial_organic, partialOrganic],
+          [tags.partial_organic, wholeOrganic],
           ['notreepunching:always_breaks', partialOrganic],
           ['notreepunching:always_drops', partialOrganic],
           ['minecraft:mineable/hoe', 'betterend:glowing_pillar_luminophor'],

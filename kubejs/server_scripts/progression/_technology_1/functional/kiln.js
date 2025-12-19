@@ -28,8 +28,8 @@ recipes((event, funcs) => {
           "uranium",
           "zinc"
      ]).forEach(material => {
-          var smelted = AlmostUnified.getPreferredItemForTag(dataTag + `storage_blocks/${material}`).getIdLocation().toString()
-          var raw = AlmostUnified.getPreferredItemForTag(dataTag + `storage_blocks/raw_${material}`).getIdLocation().toString()
+          var smelted = AlmostUnified.getPreferredItemForTag(`${main}:storage_blocks/${material}`).getIdLocation().toString()
+          var raw = AlmostUnified.getPreferredItemForTag(`${main}:storage_blocks/raw_${material}`).getIdLocation().toString()
           funcs.kilnSmelting(smelted, raw)
      })
 })

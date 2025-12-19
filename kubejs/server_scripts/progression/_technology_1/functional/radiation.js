@@ -42,8 +42,8 @@ itemTags((event, funcs) => {
      ]
 
      funcs.addEntriesRespectively([
-          [ids.consumable_igniters, ['hardcore_torches:fire_starter']],
-          [ids.damageable_igniters, 'notreepunching:fire_starter', 'minecraft:flint_and_steel'],
+          [tags.consumable_igniters, ['hardcore_torches:fire_starter']],
+          [tags.damageable_igniters, 'notreepunching:fire_starter', 'minecraft:flint_and_steel'],
 
           ['hardcore_torches:consume_torch_light_items', tags.consumable_igniters],
           ['hardcore_torches:consume_lantern_light_items', tags.consumable_igniters],
@@ -52,9 +52,9 @@ itemTags((event, funcs) => {
           ['hardcore_torches:damage_lantern_light_items', tags.damageable_igniters],
           ['carbonize:damage_igniters',  tags.damageable_igniters],
 
-          [ids.temp_torches, ['hardcore_torches:unlit_torch', 'hardcore_torches:lit_torch']],
+          [tags.temp_torches, ['hardcore_torches:unlit_torch', 'hardcore_torches:lit_torch']],
           ['ad_astra:destroyed_in_space', '#hardcore_torches:torches/temp'],
-          [ids.soul_torches, ['minecraft:soul_torch', 'framedblocks:framed_soul_torch']],
+          [tags.soul_torches, ['minecraft:soul_torch', 'framedblocks:framed_soul_torch']],
           ['toughasnails:cooling_held_items', cooling],
           ['toughasnails:heating_held_items', heating]
      ])

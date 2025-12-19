@@ -86,32 +86,32 @@ lootTables((event, funcs) => {
 itemTags((event, funcs) => {
     var coal_coke = event.get(data + 'coal_coke').getObjectIds()
 
-    event.add(ids.poor_grade_coal, content.poor_grade_charcoal)
-    event.add(ids.low_grade_coal, content.low_grade_charcoal)
-    event.add(ids.medium_grade_coal, event.get(data + 'coal').getObjectIds().filter(id => !coal_coke.contains(id)).concat(content.medium_grade_charcoal))
-    event.add(ids.good_grade_coal, [dataTag + 'coal_coke', content.good_grade_charcoal])
-    event.add(ids.good_grade_coal, [content.high_grade_charcoal])
+    funcs.add(tags.poor_grade_coal, content.poor_grade_charcoal)
+    funcs.add(tags.low_grade_coal, content.low_grade_charcoal)
+    funcs.add(tags.medium_grade_coal, event.get(data + 'coal').getObjectIds().filter(id => !coal_coke.contains(id)).concat(content.medium_grade_charcoal))
+    funcs.add(tags.good_grade_coal, [dataTag + 'coal_coke', content.good_grade_charcoal])
+    funcs.add(tags.good_grade_coal, [content.high_grade_charcoal])
 
-    event.add(ids.atleast_good_grade_coal, [tags.good_grade_coal, tags.high_grade_coal])
-    event.add(ids.at_most_low_grade_coal, [tags.poor_grade_coal, tags.low_grade_coal])
+    funcs.add(tags.atleast_good_grade_coal, [tags.good_grade_coal, tags.high_grade_coal])
+    funcs.add(tags.at_most_low_grade_coal, [tags.poor_grade_coal, tags.low_grade_coal])
 
-    event.add(ids.all_coal, [tags.at_most_low_grade_coal, tags.medium_grade_coal, tags.atleast_good_grade_coal])
+    funcs.add(tags.all_coal, [tags.at_most_low_grade_coal, tags.medium_grade_coal, tags.atleast_good_grade_coal])
 
-    event.add(data + 'coal', [tags.medium_grade_coal, tags.atleast_good_grade_coal])
+    funcs.add(data + 'coal', [tags.medium_grade_coal, tags.atleast_good_grade_coal])
 
-    event.remove(data + 'storage_block/charcoal', 'betterend:charcoal_block')
-    event.add(data + 'storage_blocks/charcoal', ['carbonize:charcoal_block','quark:charcoal_block','blockus:charcoal_block',])
-    event.add(data + 'storage_blocks/coals', event.get(data + 'coal').getObjectIds().map(entry => preferredItemId(data + 'storage_blocks/' + entry.toString().split(':')[1])))
-    event.add(data + 'tiny/coal', ['utilitix:tiny_coal', 'actuallyadditions:tiny_coal'])
-    event.add(data + 'tiny/charcoal', ['utilitix:tiny_charcoal', 'actuallyadditions:tiny_charcoal'])
+    funcs.remove(data + 'storage_block/charcoal', 'betterend:charcoal_block')
+    funcs.add(data + 'storage_blocks/charcoal', ['carbonize:charcoal_block','quark:charcoal_block','blockus:charcoal_block',])
+    funcs.add(data + 'storage_blocks/coals', event.get(data + 'coal').getObjectIds().map(entry => preferredItemId(data + 'storage_blocks/' + entry.toString().split(':')[1])))
+    funcs.add(data + 'tiny/coal', ['utilitix:tiny_coal', 'actuallyadditions:tiny_coal'])
+    funcs.add(data + 'tiny/charcoal', ['utilitix:tiny_charcoal', 'actuallyadditions:tiny_charcoal'])
 
 })
 
 blockTags((event, funcs) => {
     event.remove('minecraft:mineable/pickaxe', 'betterend:charcoal_block')
-    event.add(tags.extra_flammability, ['unearthed:lignite_briquettes', 'betterend:charcoal_block', 'thermal:charcoal_block','minecraft:coal_block', 'thermal:coal_coke_block'])
-    event.add(tags.leaves_extra_flammability, ['unearthed:lignite', 'unearthed:lignite_slab', 'unearthed:lignite_stairs', 'unearthed:lignite_wall'])
-    addEntriesRespectively(event, [
+    funcs.add(tags.extra_flammability, ['unearthed:lignite_briquettes', 'betterend:charcoal_block', 'thermal:charcoal_block','minecraft:coal_block', 'thermal:coal_coke_block'])
+    funcs.add(tags.leaves_extra_flammability, ['unearthed:lignite', 'unearthed:lignite_slab', 'unearthed:lignite_stairs', 'unearthed:lignite_wall'])
+    funcs.addEntriesRespectively([
         ['carbonize:charcoal_block', ['minecraft:mineable/pickaxe']],
         ['minecraft:needs_stone_tool', [
             'carbonize:charcoal_block', 

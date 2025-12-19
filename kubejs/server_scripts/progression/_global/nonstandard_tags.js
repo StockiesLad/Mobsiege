@@ -1,9 +1,7 @@
-// ALWAYS WRAP IN "tag()" WHEN NEEDED.
-
-const ids = {
-     breaks_randomly: def('breaks_randomly'),
-     extra_flammability: def('carbonize/extra_flammability'),
-     leaves_extra_flammability: def('carbonize/extra_flammability_leaves'),
+const tags = convert2tag({
+     breaks_randomly: 'breaks_randomly',
+     extra_flammability: 'carbonize/extra_flammability',
+     leaves_extra_flammability: 'carbonize/extra_flammability_leaves',
 
      primitive_furnaces: '',
      soul_torches: '',
@@ -14,6 +12,10 @@ const ids = {
 
      string_primitive: 'string/primitive',
 
+     planks : '&',
+     fences : '&',
+     walls: '&',
+     
      bark: '',
      raw_logs: '',
      stripped_logs: '',
@@ -36,27 +38,17 @@ const ids = {
      overworld_rocks: 'rocks/overworld',
      aether_rocks: 'rocks/aether',
      crying_obsidian: 'obsidian/crying',
+
      partial_organic: '',
-     whole_organic: ''
-}
+     whole_organic: '',
+     weak_stones: '%',
+     mossy_stone: '%stone/mossy',
+     mossy_cobblestone: '%cobblestone/mossy',
 
-const tags = convert2tag(ids);
+});
 
-/**
- * @template T
- * @param {T} ids 
- * @return {T}
- */
-function formatIds(ids) {
-     for (var key in ids) {
-          var val = ids[key];
-          if (typeof(val) === 'string' && val.includes(':'))
-               continue;
-          ids[key] = typeof(val) !== 'string' ? comTag(key) : val === '' ? comTag(key) : comTag(val);
-     }
-     return ids;
-          
-}
+if (global.debug)
+     console.info(tags)
 
 /**
  * @template T
@@ -65,9 +57,13 @@ function formatIds(ids) {
  */
 function convert2tag(ids) {
      var tags = {}
-     for (var key in ids)
-          tags[key] = tag(ids[key])
-     return tags
+     for (var key in ids) {
+          /** @type {string} */ let id = ids[key];
+          id = id === '' ? key : id;
+
+          tags[key] = tag(stacks.autoId(stacks.isInAutoForm(id) ? (id.length === 1 ? id + key : id) : `@${id}`));
+     }
+     return tags;
 }
 
 

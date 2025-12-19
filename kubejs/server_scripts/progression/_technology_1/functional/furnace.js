@@ -38,7 +38,7 @@ itemTags((event, funcs) => {
                'quark:blackstone_furnace',
                'quark:deepslate_furnace'
           ]], 
-          [ids.primitive_furnaces, [
+          [tags.primitive_furnaces, [
                'aether_genesis:holystone_furnace',
                'betternether:basalt_furnace',
                'betternether:netherrack_furnace',

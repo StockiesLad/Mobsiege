@@ -42,11 +42,11 @@ const stacks = global.stackHelper;
 const content = global.content;
 const data = global.data_namespace + ':';
 const dataTag = tag(data);
-const main = global.data_namespace
+const main = global.data_namespace //Copy-use `${main}:`
 
 /** @type {Array<String|Internal.ItemStack>} */ global.hiddenItems = []
 
-//It's very important that we always cache the event extensions. This is far more performant
+//It's very important that we always cache the event extensions. This is more performant
 
 //Tags
     /**

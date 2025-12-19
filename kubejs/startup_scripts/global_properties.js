@@ -1,7 +1,7 @@
 global.debug = true
 global.modpackId = 'mobsiege'
 global.hiddenItems = []
-global.data_namespace = 'forge';
+global.data_namespace = 'forge'; //Primary namespace, this is 'common' in neoforge and fabric
 
 const maths = new MathHelper()
 const common = new CommonHelper()

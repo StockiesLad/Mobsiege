@@ -19,12 +19,12 @@ TagObject.prototype = {
      },
 
      add: function(tag, entries) {
-          this.event.add(tag, entries)
+          addToTag(this.event, tag, entries)
           return this
      },
 
      remove: function(tag, entries) {
-          this.event.remove(tag, entries)
+          removeFromTag(this.event, tag, entries)
           return this
      },
 
@@ -70,12 +70,40 @@ TagObject.prototype = {
 ////////REQUIRES EVENT////////
 
 /**
+ * 
+ * @param {string} tag
+ */
+function removeTagHash(tag) {
+     return typeof(tag) === 'string' ? tag.replace('#', '') : tag
+}
+
+/**
+ * @param {Internal.TagEventJS} event 
+ * @param {String | Internal.ResourceLocation} tag
+ * @param {(ResourceLocation | String)[]} entries
+ * Adds to tags like normal but deletes the critical character, '#' from the entry to simplify formats
+ */
+function addToTag(event, tag, entries) {
+     return event.add(removeTagHash(tag), entries);
+ }
+ 
+ /**
+ * @param {Internal.TagEventJS} event 
+ * @param {String |Internal.ResourceLocation} tag
+ * @param {(ResourceLocation | String)[]} entries
+ * Removes from tags like normal but deletes the critical character, '#' from the entry to simplify formats
+ */
+function removeFromTag(event, tag, entries) {
+     return event.remove(removeTagHash(tag), entries);
+ }
+
+/**
  * @param {Internal.TagEventJS} event 
  * @param {(String, Internal.ResourceLocation)[]} tags 
  */
 function getEntriesOfTags(event, tags) {
      var entries = []
-     common.alwaysArray(tags).forEach(tag => entries = entries.concat(event.get(tag).getObjectIds().toArray()))
+     common.alwaysArray(tags).forEach(tag => entries = entries.concat(event.get(removeTagHash(tag)).getObjectIds().toArray()))
      return entries
  }
  
@@ -97,8 +125,8 @@ function getIdsOfTags(event, tags) {
  */
 function switchTagsUniformly(event, entries, oldTags, newTags) {
      common.alwaysArray(entries).forEach(entry => {
-         common.alwaysArray(oldTags).forEach(oldTag => event.remove(oldTag, entry))
-         common.alwaysArray(newTags).forEach(newTag => event.remove(newTag, entry))
+         common.alwaysArray(oldTags).forEach(oldTag => removeFromTag(event, oldTag, entry))
+         common.alwaysArray(newTags).forEach(newTag => removeFromTag(event, newTag, entry))
      })
 }
 
@@ -110,8 +138,8 @@ function switchTagsUniformly(event, entries, oldTags, newTags) {
  */
 function modifyTagsUniformly(event, tags, oldEntries, newEntries) {
      common.alwaysArray(tags).forEach(tag => {
-         event.remove(tag, oldEntries)
-         event.add(tag, newEntries)
+         removeFromTag(event, tag, oldEntries)
+         addToTag(event, tag, newEntries)
      })
 }
 
@@ -120,7 +148,7 @@ function modifyTagsUniformly(event, tags, oldEntries, newEntries) {
  * @param {Object[][]} compressedParams 
  */
 function addEntriesRespectively(event, compressedParams) {
-     common.alwaysArray(compressedParams).forEach(params => event.add(def(params[0]), params[1]))
+     common.alwaysArray(compressedParams).forEach(params => addToTag(event, def(params[0]), params[1]))
 }
 
 /**
@@ -128,7 +156,7 @@ function addEntriesRespectively(event, compressedParams) {
  * @param {Object[][]} compressedParams 
  */
 function removeEntriesRespectively(event, compressedParams) {
-     common.alwaysArray(compressedParams).forEach(params => event.remove(def(params[0]), params[1]))
+     common.alwaysArray(compressedParams).forEach(params => removeFromTag(event, def(params[0]), params[1]))
 }
 
 /**

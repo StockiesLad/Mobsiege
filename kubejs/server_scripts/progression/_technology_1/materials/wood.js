@@ -108,8 +108,8 @@ recipes((event, funcs) => {
 })
 
 //Fucking shitty mods can't tag their blocks properly
-ServerEvents.tags('item', event => {
-     event.add(ids.bark, ['farmersdelight:tree_bark', 'primalstage:spruce_bark'])
+itemTags((event, funcs) => {
+     funcs.add(tags.bark, ['farmersdelight:tree_bark', 'primalstage:spruce_bark'])
 
      event.add('missingwilds:fallen_logs', ['missingwilds:fallen_birch_log', 'missingwilds:fallen_spruce_log', 'missingwilds:fallen_jungle_log', 'missingwilds:fallen_dark_oak_log', 'missingwilds:fallen_acacia_log',  'missingwilds:fallen_mangrove_log', 'missingwilds:fallen_crimson_stem', 'missingwilds:fallen_warped_stem', 'missingwilds:fallen_cherry_log'])
 
@@ -122,10 +122,10 @@ ServerEvents.tags('item', event => {
 
      //This is truly the peak of human intelligence. Just break mod pack why dont ya
      event.add('minecraft:planks', getIdsOfTags(event, 'aether:planks_crafting'))
-     event.add(ids.bark, ['#missingwilds:fallen_logs', '#quark:hollow_logs', '#twilightforest:hollow_logs'])
+     funcs.add(tags.bark, ['#missingwilds:fallen_logs', '#quark:hollow_logs', '#twilightforest:hollow_logs'])
 
      planks = getIdsOfTags(event, 'minecraft:planks')
-     hollow_logs = getIdsOfTags(event, ids.bark)
+     hollow_logs = getIdsOfTags(event, tags.bark)
      quark_posts = getIdsOfTags(event, 'quark:posts')
 
      var aether_planks = []
@@ -135,12 +135,12 @@ ServerEvents.tags('item', event => {
           return false
      })
 
-     event.add(ids.aether_planks, aether_planks)
-     event.add(ids.non_aether_planks, non_aether_planks)
+     funcs.add(tags.aether_planks, aether_planks)
+     funcs.add(tags.non_aether_planks, non_aether_planks)
 })
 
-ServerEvents.tags('block', event => {
-     event.add(pack('carbonize/extra_flammability'), [dataTag + 'chests/wooden', dataTag + 'workbench'])
+blockTags((event, funcs) => {
+     funcs.add(tags.extra_flammability, [`${main}:chests/wooden`, `${main}:workbench`])
      event.add('minecraft:needs_stone_tool', '#minecraft:logs')
      event.add('minecraft:planks', ['#aether:planks_crafting', '#c:planks_that_burn'])
      event.add('notreepunching:always_breaks', 'supplementaries:stick')
@@ -197,10 +197,10 @@ commonTags((event, funcs) => {
           return false
      })
 
-     event.add(ids.aether_logs,aether_logs)
-     event.add(ids.non_aether_logs, non_aether_logs)
-     event.add(ids.stripped_logs, stripped_logs.concat(funcs.getIdsOfTags(data + 'logs/stripped')))
-     event.add(ids.raw_logs, raw_logs)
+     funcs.add(tags.aether_logs,aether_logs)
+     funcs.add(tags.non_aether_logs, non_aether_logs)
+     funcs.add(tags.stripped_logs, stripped_logs.concat(funcs.getIdsOfTags(data + 'logs/stripped')))
+     funcs.add(tags.raw_logs, raw_logs)
 })
 
 LootJS.modifiers(event => {
@@ -218,7 +218,7 @@ BlockEvents.rightClicked(event => {
      var level = event.getLevel()
      var random = level.getRandom()
      var pos = block.getPos()
-     if (item.hasTag(data + 'tools/saws') && block.hasTag(ids.stripped_logs)) {
+     if (item.hasTag(data + 'tools/saws') && block.hasTag(tags.stripped_logs)) {
           item.hurtAndBreak(1, event.getEntity(), (entity) => level.broadcastEntityEvent(entity, event.getHand().name() == 'MAIN_HAND' ? 47 : 48))
           level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), "minecraft:block.bamboo.hit", "blocks", 0.25, 0.5)
           if (random.nextInt(4) == 0) {

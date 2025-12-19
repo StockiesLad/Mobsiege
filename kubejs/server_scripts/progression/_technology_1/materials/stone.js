@@ -15,7 +15,7 @@ recipes((event, funcs) => {
     event.shapeless('2x notreepunching:stone_loose_rock', 'minecraft:gravel')
 })
 
-ServerEvents.tags('item', event => {
+itemTags((event, funcs) => {
 	event.add(data + 'limestone', [
 		'alexscaves:limestone', 
 		'blockus:limestone', 
@@ -46,9 +46,9 @@ ServerEvents.tags('item', event => {
         'unearthed:mossy_cobbled_phyllite',
     ])
 
-    event.add(data + 'stone/mossy', ['aether:mossy_holystone', 'biomeswevegone:mossy_stone'])
+    funcs.add(tags.mossy_stone, ['aether:mossy_holystone', 'biomeswevegone:mossy_stone'])
 	
-	event.add(data + 'weak_stones', [
+	funcs.add(tags.weak_stones, [
         'minecraft:netherrack',
         content.corpstone,
 		'unearthed:siltstone', 
@@ -112,15 +112,15 @@ ServerEvents.tags('item', event => {
 
     event.add('notreepunching:loose_rocks', ['twigs:pebble', 'spelunkers_charm:deepslate_rock', 'spelunkers_charm:rock', 'spelunkers_charm:dripstone_rock', 'spelunkers_charm:basalt_rock'])
     event.remove('notreepunching:loose_rocks', 'notreepunching:sandstone_loose_rock')
-    event.add(tags.overworld_rocks, getIdsOfTags(event, 'notreepunching:loose_rocks'))
-    event.add(tags.aether_rocks, content.holy_pebble)
+    funcs.add(tags.overworld_rocks, getIdsOfTags(event, 'notreepunching:loose_rocks'))
+    funcs.add(tags.aether_rocks, content.holy_pebble)
     event.add('notreepunching:loose_rocks', content.holy_pebble)
     
-    stones = getIdsOfTags(event, 'minecraft:stone_crafting_materials').concat(getIdsOfTags(event, data + 'weak_stones'))
+    stones = funcs.getIdsOfTags('minecraft:stone_crafting_materials').concat(funcs.getIdsOfTags(tags.weak_stones))
 })
 
 
-ServerEvents.tags('block', event => {
+blockTags((event, funcs) => {
     //event.add('notreepunching:loose_rock_placeable_on', [dataTag + 'terrain', dataTag + 'sand', dataTag + 'stone','#aether:aether_dirt', '#aether:holystone','#minecraft:dirt'])
     event.add(data + 'stone', stones.concat([dataTag + 'stone', data + 'holystone']))
     event.add(data + 'limestone', limestones)

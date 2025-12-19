@@ -1,14 +1,4 @@
-ServerEvents.tags('item', event => {
-     event.add(data + 'dusts/salt', ['primalstage:salt', 'ingredientsdelight:salt'])
-     event.add(data + 'salt', dataTag + 'dusts/salt')
-     event.add(data + 'dusts/niter', 'immersiveengineering:dust_saltpeter')
-     event.remove(data + 'dusts/saltpeter', 'immersiveengineering:dust_saltpeter')
-})
-
-commonTags((event, funcs) => {
-     event.add(data + 'storage_blocks/salt', 'mekanism:block_salt')
-     event.add(data + 'ores/salt', 'primalstage:salt_block')
-})
+//Refer to progression:global
 
 lootTables((event, funcs) => {
      event.addBlockLootModifier('primalstage:salt_block')

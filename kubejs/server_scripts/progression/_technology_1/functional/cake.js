@@ -1,5 +1,5 @@
 commonTags(event => {
-     event.add(dataTag + 'cake', [
+     event.add(`${main}:cake`, [
           'minecraft:cake', 
           'tconstruct:magma_cake', 
           'tconstruct:blood_cake', 

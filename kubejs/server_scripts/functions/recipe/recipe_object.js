@@ -166,6 +166,13 @@ RecipeObject.prototype = {
           return this
      },
 
+     /**
+      * 
+      * @param {*} result 
+      * @param {*} ingredient 
+      * @param {*} cookingTime 
+      * Does not support tag I/O.
+      */
      kilnSmelting: function(result, ingredient, cookingTime) {
           this.event.custom({
                type: "primalstage:kiln",
