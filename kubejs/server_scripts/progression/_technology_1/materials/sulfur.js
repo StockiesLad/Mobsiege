@@ -1,10 +1,13 @@
-ServerEvents.tags('item', event => {
-     event.add(data + 'dusts/sulfur', dataTag + 'sulfurs')
+itemTags((event, funcs) => {
+     event.add(`${main}:dusts/sulfur`, dataTag + 'sulfurs');
+     funcs.add('%sulfur', [`#${main}dusts/sulfur`, `#${main}:gems/sulfur`]);
+     funcs.remove('%gems/sulfur', 'cinderscapes:sulfur');
+
 })
 
 commonTags((event, funcs) => {
      //event.add(data+ 'storage_blocks/sulfur', 'cinderscapes:sulfur_block')
-     event.add(data + 'storage_blocks/sulfur', [
+     event.add(`${main}storage_blocks/sulfur`, [
           'cinderscapes:sulfur_block', 
           'alexscaves:sulfur'
       ])

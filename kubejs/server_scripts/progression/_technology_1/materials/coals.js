@@ -88,7 +88,7 @@ itemTags((event, funcs) => {
 
     funcs.add(tags.poor_grade_coal, content.poor_grade_charcoal)
     funcs.add(tags.low_grade_coal, content.low_grade_charcoal)
-    funcs.add(tags.medium_grade_coal, event.get(data + 'coal').getObjectIds().filter(id => !coal_coke.contains(id)).concat(content.medium_grade_charcoal))
+    funcs.add(tags.medium_grade_coal, common.unifyArrays([event.get(data + 'coal').getObjectIds().filter(id => !coal_coke.contains(id)), [content.medium_grade_charcoal]]))
     funcs.add(tags.good_grade_coal, [dataTag + 'coal_coke', content.good_grade_charcoal])
     funcs.add(tags.good_grade_coal, [content.high_grade_charcoal])
 
@@ -101,7 +101,7 @@ itemTags((event, funcs) => {
 
     funcs.remove(data + 'storage_block/charcoal', 'betterend:charcoal_block')
     funcs.add(data + 'storage_blocks/charcoal', ['carbonize:charcoal_block','quark:charcoal_block','blockus:charcoal_block',])
-    funcs.add(data + 'storage_blocks/coals', event.get(data + 'coal').getObjectIds().map(entry => preferredItemId(data + 'storage_blocks/' + entry.toString().split(':')[1])))
+    //funcs.add(data + 'storage_blocks/coals', event.get(data + 'coal').getObjectIds().map(entry => preferredItemId(data + 'storage_blocks/' + entry.toString().split(':')[1]))) //Wtf is this?
     funcs.add(data + 'tiny/coal', ['utilitix:tiny_coal', 'actuallyadditions:tiny_coal'])
     funcs.add(data + 'tiny/charcoal', ['utilitix:tiny_charcoal', 'actuallyadditions:tiny_charcoal'])
 

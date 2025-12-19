@@ -41,9 +41,14 @@ const tags = convert2tag({
 
      partial_organic: '',
      whole_organic: '',
+
+     cobblestone: '%cobblestone',
+     mossy_cobblestone: '%cobblestone/mossy',
+     stone: '%',
      weak_stones: '%',
      mossy_stone: '%stone/mossy',
-     mossy_cobblestone: '%cobblestone/mossy',
+     limestone: '%stone/lime',
+     holystone: '%stone/holy',
 
 });
 

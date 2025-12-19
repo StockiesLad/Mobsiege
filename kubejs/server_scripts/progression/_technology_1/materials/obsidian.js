@@ -1,6 +1,6 @@
 recipes((event, funcs) => {
      event.replaceInput({input: 'minecraft:crying_obsidian'}, 'minecraft:crying_obsidian', tags.crying_obsidian)
-     event.replaceInput({input: 'minecraft:obsidian'}, 'minecraft:obsidian', `${mains}:obsidian`)
+     event.replaceInput({input: 'minecraft:obsidian'}, 'minecraft:obsidian', `${main}:obsidian`)
 })
 
 itemTags((event, funcs) => {
