@@ -6,11 +6,11 @@ recipes((event, funcs) => {
           recipe.replaceIngredient(dataTag + 'ingots/iron', dataTag + 'plates/iron')
      })*/
 
-     event.replaceInput('minecraft:blast_furnace', dataTag + 'ingots/iron', dataTag + 'plates/iron')
-     event.replaceInput('nethersdelight:blackstone_blast_furnace', dataTag + 'ingots/iron', dataTag + 'plates/iron')
+     event.replaceInput('minecraft:blast_furnace', `#${main}:ingots/iron`, `#${main}:plates/iron`)
+     event.replaceInput('nethersdelight:blackstone_blast_furnace', `#${main}:/iron`, `#${main}:plates/iron`)
 
 })
 
 itemTags((event, funcs) => {
-     event.add(data + 'blast_furnaces', ['minecraft:blast_furnace', 'nethersdelight:blackstone_blast_furnace'])
+     event.add(`${main}:blast_furnaces`, ['minecraft:blast_furnace', 'nethersdelight:blackstone_blast_furnace'])
 })

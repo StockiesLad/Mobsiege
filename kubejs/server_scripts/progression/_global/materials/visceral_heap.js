@@ -3,10 +3,10 @@ ServerEvents.tags('block', event => {
 })
 
 commonTags((event, funcs) => {
-     event.add('forge:soil/grass', content.corpstone)
-     event.add('forge:terrain/nether', content.corpstone)
-     event.add('forge:stones/nether', content.corpstone)
-     event.add('forge:netherrack', content.corpstone)
+     funcs.add(tags.grass, content.corpstone)
+     funcs.add(tags.nether_terrain, content.corpstone)
+     funcs.add(tags.nether_stone, content.corpstone)
+     funcs.add(tags.netherrack, content.corpstone)
 })
 
 lootTables((event, funcs) => {

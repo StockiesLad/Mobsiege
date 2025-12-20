@@ -1,3 +1,5 @@
+//Magic 1
+
 recipes((event, funcs) => {
      funcs.nuke([
           'aether:skyroot_sword', 'aether:skyroot_pickaxe', 'aether:skyroot_axe', 'aether:skyroot_shovel', 'aether:skyroot_hoe',

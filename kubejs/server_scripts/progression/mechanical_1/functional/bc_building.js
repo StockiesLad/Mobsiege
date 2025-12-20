@@ -1,8 +1,8 @@
 recipes((event, funcs) => {
      var create = event.recipes.create
 
-     create.compacting(funcs.removeByOutput('buildcraftbuilders:snapshot_blueprint'), ['4x minecraft:paper', '2x #forge:dyes/blue'])
-     create.compacting(funcs.removeByOutput('buildcraftbuilders:snapshot_template'), ['4x minecraft:paper', '2x #forge:dyes/black'])
+     create.compacting(funcs.removeByOutput('buildcraftbuilders:snapshot_blueprint'), ['4x minecraft:paper', `2x #${main}:dyes/blue`])
+     create.compacting(funcs.removeByOutput('buildcraftbuilders:snapshot_template'), ['4x minecraft:paper', `2x #${main}:dyes/black`])
 
      funcs.replaceCrafting('buildcraftbuilders:library', [
           ['immersiveengineering:sheetmetal_iron', [0, 2, 6, 8]],

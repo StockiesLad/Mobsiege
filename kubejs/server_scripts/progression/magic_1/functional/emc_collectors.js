@@ -1,8 +1,8 @@
 recipes((event, funcs) => {
      funcs.toolDamagingInsert(funcs.removeByOutput('projecte:collector_mk1'), [
-          ['#forge:storage_blocks/glowstone', [0, 2, 6, 8]],
+          [`#${main}:storage_blocks/glowstone`, [0, 2, 6, 8]],
           ['bedrockium_awaken:awakened_bedrockium_ingot', [1, 7]],
-          ['#forge:storage_blocks/enderium', [3, 5]],
+          [`#${main}:storage_blocks/enderium`, [3, 5]],
           ['projecte:philosophers_stone', 4]
      ])
 

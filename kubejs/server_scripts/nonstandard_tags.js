@@ -3,6 +3,7 @@ const tags = convert2tag({
      extra_flammability: 'carbonize/extra_flammability',
      leaves_extra_flammability: 'carbonize/extra_flammability_leaves',
 
+     furnaces: '%',
      primitive_furnaces: '',
      soul_torches: '',
      temp_torches: 'torches/temp',
@@ -31,6 +32,7 @@ const tags = convert2tag({
      good_grade_coal: 'coal/good_grade',
      high_grade_coal: 'coal/high_grade',
      
+     coals: '%',
      all_coal: 'coal/all',
      atleast_good_grade_coal: 'coal/atleast_good_grade',
      at_most_low_grade_coal: 'coal/at_most_low_grade',
@@ -49,6 +51,17 @@ const tags = convert2tag({
      mossy_stone: '%stone/mossy',
      limestone: '%stone/lime',
      holystone: '%stone/holy',
+     nether_stone: '%stone/nether',
+     netherrack: '%netherrack',
+
+     chips: '%',
+     chips_bc: '%chips/buildcraft',
+     chips_pr: '%chips/projectred',
+
+     grass: `%soil/grass`,
+     nether_terrain: '%terrain/nether',
+
+     thermoregulators: `%`,
 
 });
 

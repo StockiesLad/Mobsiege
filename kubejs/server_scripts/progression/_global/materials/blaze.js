@@ -1,3 +1,3 @@
 itemTags((event, funcs) => {
-     event.add('forge:dusts/blaze', 'minecraft:blaze_powder')
+     funcs.add(`${main}:dusts/blaze`, 'minecraft:blaze_powder')
 })

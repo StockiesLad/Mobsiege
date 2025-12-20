@@ -7,6 +7,6 @@ recipes((event, funcs) => {
      funcs.globalLiquefaction(ofFluid('thermal:creosote', 250), 'supplementaries:ash', content.good_grade_charcoal)
      funcs.globalLiquefaction(ofFluid('thermal:creosote', 400), 'supplementaries:ash', content.high_grade_charcoal)
 
-     funcs.globalFluidMixing(ofFluid('createdieselgenerators:crude_oil', 150), [ofFluid('#forge:creosote', 100), ofFluid('#forge:ethanol', 50)])
-     funcs.advancedFluidRefining([ofFluid('createdieselgenerators:diesel', 275), ofFluid('createdieselgenerators:gasoline', 175), ofFluid('createdieselgenerators:ethanol', 50)], ofFluid('#forge:crude_oil', 500))
+     funcs.globalFluidMixing(ofFluid('createdieselgenerators:crude_oil', 150), [ofFluid(`#${main}:creosote`, 100), ofFluid(`#${main}:ethanol`, 50)])
+     funcs.advancedFluidRefining([ofFluid('createdieselgenerators:diesel', 275), ofFluid('createdieselgenerators:gasoline', 175), ofFluid('createdieselgenerators:ethanol', 50)], ofFluid(`#${main}:crude_oil`, 500))
 })

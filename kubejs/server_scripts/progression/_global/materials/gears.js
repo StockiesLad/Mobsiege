@@ -13,17 +13,17 @@ recipes((event, funcs) => {
      let thermalPressed = []
      let immengPressed = []
 
-     event.forEachRecipe({type: 'thermal:press', output: '#forge:gears'}, recipe => {
+     event.forEachRecipe({type: 'thermal:press', output: `#${main}:gears`}, recipe => {
           thermalPressed.push(recipe.json.get('result').getAsJsonArray().get(0).getAsJsonObject().get('item').getAsString())
      })
 
-     event.forEachRecipe({type: 'immersiveengineering:metal_press', output: '#forge:gears'}, recipe => {
+     event.forEachRecipe({type: 'immersiveengineering:metal_press', output: `#${main}:gears`}, recipe => {
           immengPressed.push(recipe.json.get('result').getAsJsonObject().get('item').getAsString())
      })
 
      let removed = []
 
-     event.forEachRecipe({type: 'minecraft:crafting_shaped', output: '#forge:gears'}, recipe => {
+     event.forEachRecipe({type: 'minecraft:crafting_shaped', output: `#${main}:gears`}, recipe => {
           var ingredient = '4x ' + getCraftingIngredients(recipe)[0]
 
           if (ingredient.includes('wood') || ingredient.includes('stone')) return
@@ -37,11 +37,11 @@ recipes((event, funcs) => {
      })
 
      funcs.removeById(removed)
-     funcs.box(preferredStack('forge:gears/wood'), '#forge:rods/wooden').vanilla()
-     //event.remove({type: 'minecraft:crafting_shaped', output: '#forge:gears'})
+     funcs.box(preferredStack(`${main}:gears/wood`), `#${main}:rods/wooden`).vanilla()
+     //event.remove({type: 'minecraft:crafting_shaped', output: `#${main}:gears`})
 })
 
 itemTags(event => {
-     event.add('forge:gears/wood', 'hammerlib:gears/wooden')
-     event.add('forge:gears', ['redstone_arsenal:flux_gear', 'thermalendergy:prismalium_gear', 'thermalendergy:melodium_gear', 'thermalendergy:stellarium_gear'])
+     event.add(`${main}:gears/wood`, 'hammerlib:gears/wooden')
+     event.add(`${main}:gears`, ['redstone_arsenal:flux_gear', 'thermalendergy:prismalium_gear', 'thermalendergy:melodium_gear', 'thermalendergy:stellarium_gear'])
 })

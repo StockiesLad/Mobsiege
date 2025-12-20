@@ -12,8 +12,8 @@ recipes((event, funcs) => {
 
      funcs.planetAlt(funcs.removeByOutput('nethersdelight:blackstone_furnace'), ['minecraft:blackstone', content.fire_brick_block], 'primalstage:kiln').vanilla()
      funcs.planetAlt(funcs.removeByOutput('minecraft:furnace'), ['#minecraft:stone_crafting_materials', content.fire_brick_block], 'primalstage:kiln').vanilla()
-     event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', dataTag + 'furnaces')
-     event.shapeless(tags.primitive_furnaces, tags.primitive_furnaces)
+     event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', `#${main}:furnaces`)
+     event.shapeless('minecraft:furnace', tags.primitive_furnaces)
      funcs.removeRecipes({type: 'minecraft:crafting_shaped', output: tags.primitive_furnaces}, (result, ingredients) => {
           funcs.planetAlt(result.withCount(1), [ingredients[0], content.fire_brick_block], 'primalstage:kiln').vanilla()
      })
@@ -21,7 +21,7 @@ recipes((event, funcs) => {
 
 itemTags((event, funcs) => {
      funcs.addEntriesRespectively([
-          ['%furnaces', [
+          [tags.furnaces, [
                'aether_genesis:holystone_furnace',
                'betterend:sulphuric_rock_furnace', 
                'betterend:sandy_jadestone_furnace', 

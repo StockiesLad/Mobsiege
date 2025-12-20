@@ -88,8 +88,8 @@ recipes((event, funcs) => {
      wardenSmithing(funcs.removeByOutput('deeperdarker:resonarium_hoe'), 'minecraft:iron_hoe', 'deeperdarker:resonarium_plate')
      */
 
-     event.replaceInput({input: '#forge:raw_materials/iron', output: 'minecraft:iron_ingot'}, '#forge:raw_materials/iron', 'minecraft:raw_iron')
-     event.replaceInput({input: '#forge:raw_materials/iron', output: 'minecraft:raw_iron_block'}, '#forge:raw_materials/iron', 'minecraft:raw_iron')
+     event.replaceInput({input: `#${main}:raw_materials/iron`, output: 'minecraft:iron_ingot'}, `#${main}:raw_materials/iron`, 'minecraft:raw_iron')
+     event.replaceInput({input: `#${main}:raw_materials/iron`, output: 'minecraft:raw_iron_block'}, `#${main}:raw_materials/iron`, 'minecraft:raw_iron')
 
      funcs.wall('ancient_aether:stripped_sakura_wood_wall', 'ancient_aether:stripped_sakura_log').vanilla()
 
@@ -98,7 +98,7 @@ recipes((event, funcs) => {
 
      funcs.forEachRemovedRecipe({output: packTag('valhesia_curtains')}, recipe => {
           funcs.vanillaInsert(recipe.getOriginalRecipeResult(), [
-               ['#forge:rods/wooden', [0, 1]],
+               [`#${main}:rods/wooden`, [0, 1]],
                [getCraftingIngredients(recipe, false)[0], [3, 4, 6, 7]]
           ])
      })
@@ -140,12 +140,12 @@ ServerEvents.recipes(event => {
 })*/
 
 ServerEvents.tags('item', event => {
-     event.add('forge:storage_blocks/sulfur', 'cinderscapes:sulfur_block')
-     event.add('forge:sandstone/venus_sandstone', ['ad_astra:venus_sandstone'])
+     event.add(`${main}:storage_blocks/sulfur`, 'cinderscapes:sulfur_block')
+     event.add(`${main}:sandstone/venus_sandstone`, ['ad_astra:venus_sandstone'])
      event.add('ad_astra:venus_sandstone', ['ad_astra:venus_sandstone'])
-     event.add('forge:storage_blocks/raw_iron', 'betternether:cincinnasite_forged_block')
-     event.add('forge:storage_blocks/iron', ['betterend:thallasium_block', 'betternether:cincinnasite_forged'])
-     event.add('forge:raw_materials/iron', ['betternether:cincinnasite', 'betterend:thallasium_raw'])
+     event.add(`${main}:storage_blocks/raw_iron`, 'betternether:cincinnasite_forged_block')
+     event.add(`${main}:storage_blocks/iron`, ['betterend:thallasium_block', 'betternether:cincinnasite_forged'])
+     event.add(`${main}:raw_materials/iron`, ['betternether:cincinnasite', 'betterend:thallasium_raw'])
      addEntriesRespectively(event, [
           ['%plates/copper', 'primalstage:copper_plate'],
           ['%plates/iron', 'primalstage:iron_plate'],

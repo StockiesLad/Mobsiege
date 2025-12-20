@@ -7,6 +7,6 @@ recipes((event, funcs) => {
 
      recipes.forEach(recipe => {
           event.replaceInput(recipe, 'minecraft:ender_eye', 'enderstorage:ender_chest')
-          event.replaceInput(recipe, 'minecraft:ender_pearl', preferredItemId('forge:ingots/enderium'))
+          event.replaceInput(recipe, 'minecraft:ender_pearl', preferredItemId(`#${main}:ingots/enderium`))
      })
 })

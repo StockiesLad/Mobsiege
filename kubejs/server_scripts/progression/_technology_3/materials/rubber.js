@@ -1,4 +1,4 @@
 itemTags((event, funcs) => {
-     event.add(data + 'raw_rubber', 'thermal:rubber')
-     event.add(data + 'rubber', ['thermal:cured_rubber', 'industrialforegoing:dryrubber'])
+     funcs.add(`#${main}:raw_rubber`, 'thermal:rubber')
+     funcs.add(`#${main}:rubber`, ['thermal:cured_rubber', 'industrialforegoing:dryrubber'])
 })

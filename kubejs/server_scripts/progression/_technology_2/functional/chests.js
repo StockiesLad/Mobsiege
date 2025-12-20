@@ -1,3 +1,6 @@
+//Electrical 3
+//Mechanical 2
+
 recipes((event, funcs) => {
      common.alwaysArray([
           'expandedstorage:old_wood_chest', 
@@ -34,15 +37,15 @@ recipes((event, funcs) => {
           'expandedstorage:diamond_to_netherite_conversion_kit'
      ]).forEach(o => funcs.nuke(o))
 
-     event.replaceInput({output: 'expandedstorage:copper_barrel'}, dataTag + 'ingots/copper', dataTag + 'storage_blocks/copper')
-     funcs.planet(funcs.removeByOutput('expandedstorage:iron_barrel'), 'expandedstorage:copper_barrel', dataTag + 'ingots/iron').vanilla()
+     event.replaceInput({output: 'expandedstorage:copper_barrel'}, `#${main}:ingots/copper`, `#${main}:storage_blocks/copper`)
+     funcs.planet(funcs.removeByOutput('expandedstorage:iron_barrel'), 'expandedstorage:copper_barrel', `#${main}:ingots/iron`).vanilla()
 
      funcs.globalSmelting('ae2:smooth_sky_stone_chest', 'ae2:sky_stone_chest', 0.2)
-     funcs.planet(funcs.removeByOutput('expandedstorage:iron_chest'), 'ae2:smooth_sky_stone_chest', dataTag + 'ingots/iron').vanilla()
+     funcs.planet(funcs.removeByOutput('expandedstorage:iron_chest'), 'ae2:smooth_sky_stone_chest', `#${main}:ingots/iron`).vanilla()
 })
 
 ServerEvents.tags('item', event => {
-     event.add(data + 'chests/wooden', 'expandedstorage:wooden_chests')
+     event.add(`${main}:chests/wooden`, 'expandedstorage:wooden_chests')
 })
 
 function iterateESChest(toRecipe) {
@@ -50,6 +53,6 @@ function iterateESChest(toRecipe) {
           var matBefore = arr[i - 1]
           matBefore = matBefore != null ? matBefore : 'gold'
           var type = mat === 'diamond' ? 'gems/' : mat === 'obsidian' ? '' : 'ingots/'
-          toRecipe(mat, `#forge:${type}${mat}`, matBefore)
+          toRecipe(mat, `#${main}:${type}${mat}`, matBefore)
      })
 }

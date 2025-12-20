@@ -1,5 +1,5 @@
 itemTags((event, funcs) => {
-     event.add(pack('chips/buildcraft'), [
+     funcs.add(tags.chips_bc, [
           'buildcraftsilicon:chipset_redstone', 
           'buildcraftsilicon:chipset_iron', 
           'buildcraftsilicon:chipset_gold', 
@@ -14,11 +14,11 @@ itemTags((event, funcs) => {
           content.void_chipset
      ])
 
-     event.add(pack('chips/projectred'), [
+     funcs.add(tags.chips_pr, [
           'projectred_core:electrotine_silicon', 
           'projectred_core:infused_silicon', 
           'projectred_core:energized_silicon'
      ])
 
-     event.add(pack('chips'), [[packTag('chips/projectred'), packTag('chips/buildcraft')]])
+     funcs.add(tags.chips, [[tags.chips_pr, tags.chips_bc]])
 })

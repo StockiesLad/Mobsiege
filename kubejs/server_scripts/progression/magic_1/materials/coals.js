@@ -5,10 +5,10 @@ recipes((event, funcs) => {
           event.remove({output: oldIngredient, input: result})
           funcs.planet(funcs.removeInsurely({output: result, input: oldIngredient}), oldIngredient, 'projecte:philosophers_stone').toolDamaging()
      }
-     funcs.toolDamagingShapeless('2x aether:ambrosium_shard', [packTag('charcoal/grade/atleast_good'), 'projecte:philosophers_stone'])
+     funcs.toolDamagingShapeless('2x aether:ambrosium_shard', [tags.atleast_good_grade_coal, 'projecte:philosophers_stone'])
      funcs.toolDamagingShapeless('projecte:alchemical_coal', [Item.of(content.high_grade_charcoal, 2), 'projecte:philosophers_stone'])
 
-     fuelRecipe('projecte:alchemical_coal', packTag('coal/grade/good'))
+     fuelRecipe('projecte:alchemical_coal', tags.atleast_good_grade_coal)
      fuelRecipe('projecte:mobius_fuel', 'projecte:alchemical_coal')
      fuelRecipe('projecte:aeternalis_fuel', 'projecte:mobius_fuel')
 })

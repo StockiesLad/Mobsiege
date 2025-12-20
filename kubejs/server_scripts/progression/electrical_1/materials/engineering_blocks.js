@@ -9,6 +9,6 @@ recipes((event, funcs) => {
           ['immersiveengineering:sheetmetal_iron', [0, 2, 6, 8]],
           ['buildcraftsilicon:chipset_gold', [1, 7]],
           ['immersiveengineering:component_steel', [3, 5]],
-          ['#forge:storage_blocks/electrum', 4]
+          [`#${main}:storage_blocks/electrum`, 4]
      ])
 })

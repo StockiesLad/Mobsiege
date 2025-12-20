@@ -1,3 +1,6 @@
+//Electrical 3
+//Technology 2
+
 recipes((event, funcs) => {
      iterateESChest((mat, ingr, matBefore) => {
           event.recipes.create.compacting(funcs.removeByOutput(`expandedstorage:${mat}_barrel`), ['8x ' + ingr, `expandedstorage:${matBefore}_barrel`])
