@@ -84,6 +84,7 @@ dependencies {
     implementation fg.deobf("curse.maven:cb-multipart-258426:5311521")
     implementation fg.deobf("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
     implementation fg.deobf("curse.maven:cofh-core-69162:5374122")
+    implementation fg.deobf("curse.maven:decorative-blocks-362528:5089406")
 }
 
 mixin {

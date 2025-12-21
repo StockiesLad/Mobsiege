@@ -7,6 +7,7 @@ import com.stockieslad.mobsiege.api.Mobsiege2Fabric;
 import com.stockieslad.mobsiege.api.Mobsiege2Minecraft;
 import com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails;
 import fuzs.puzzleslib.api.core.v1.ModConstructor;
+import lilypuree.decorative_blocks.blocks.LatticeBlock;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -38,9 +39,10 @@ public class Mobsiege {
             ASH_CLAY = registerBlockAndItem("ash_clay", new Block(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.FLUTE).strength(0.6f).sound(SoundType.GRAVEL))),
             PACKED_ASH = registerBlockAndItem("packed_ash", new ConcretePowderBlock(ASH_CLAY, BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.SNARE).strength(0.75f).sound(SoundType.SAND))),
             HOLYSILT_BRICK_STAIRS = registerBlockAndItem("holysilt_brick_stairs", new StairBlock(BRICKS::defaultBlockState, BlockBehaviour.Properties.copy(BRICKS))),
-            HOLYSILT_BRICK_SLAB = registerBlockAndItem("holysilt_brick_slab", new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F))),
+            HOLYSILT_BRICK_SLAB = registerBlockAndItem("holysilt_brick_slab", new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F))),
             HOLYSILT_BRICK_WALL = registerBlockAndItem("holysilt_brick_wall", new WallBlock(BlockBehaviour.Properties.copy(BRICKS).forceSolidOn())),
-            HOLY_PEBBLE = registerBlockAndItem("holy_pebble", new LooseRockBlock());
+            HOLY_PEBBLE = registerBlockAndItem("holy_pebble", new LooseRockBlock()),
+            STONE_LATTICE = registerBlockAndItem("stone_lattice", new LatticeBlock(BlockBehaviour.Properties.of().sound(SoundType.STONE).strength(2f, 6f).mapColor(MapColor.STONE).noOcclusion()));
 
     public static final SoundEvent NETHER_SCREAMS = RegistryHelper.registerSoundEvent("ambient.nether.screams");
 
