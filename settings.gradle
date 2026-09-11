@@ -5,9 +5,25 @@ pluginManagement {
             name = 'MinecraftForge'
             url = 'https://maven.minecraftforge.net/'
         }
+        maven {
+            name = 'sponge'
+            url = 'https://repo.spongepowered.org/maven'
+        }
     }
 }
 
 plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.7.0'
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+    id("com.possible-triangle.packwiz") version "1.4.+"
 }
+
+packwiz {
+    packs.named("default") {
+        from = file("pack") // Points to the root project directory
+        strategy = com.possible_triangle.gradle.packwiz.ErrorStrategy.WARN
+    }
+}
+
+rootProject.name = 'mobsiege'
+
+include 'mixin-bootstrap'

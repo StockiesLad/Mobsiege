@@ -27,7 +27,7 @@ public class Mobsiege2Minecraft {
     public static Args onBreaksRandomly = null;
 
     public static ResourceLocation identifier(String string) {
-        return new ResourceLocation(string);
+        return ResourceLocation.parse(string);
     }
 
     public static TagKey<Block> createBlockTag(String string) {

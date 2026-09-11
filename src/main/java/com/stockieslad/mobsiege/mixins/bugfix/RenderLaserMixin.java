@@ -3,12 +3,15 @@ package com.stockieslad.mobsiege.mixins.bugfix;
 import buildcraft.silicon.client.render.RenderLaser;
 import buildcraft.silicon.tile.TileLaser;
 import com.mojang.blaze3d.vertex.PoseStack;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.client.renderer.MultiBufferSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@Restriction(require = @Condition("buildcraft"))
 @Mixin(RenderLaser.class)
 public abstract class RenderLaserMixin {
     @Inject(

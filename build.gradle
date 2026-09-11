@@ -1,95 +1,135 @@
 plugins {
     id 'eclipse'
     id 'idea'
+    id 'java'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'org.spongepowered.mixin' version '0.7.+'
+    id 'net.neoforged.moddev.legacyforge' version '2.0.144'
 }
 
 version = mod_version
 group = mod_group_id
 
-base {
-    archivesName = mod_id
-}
-
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-minecraft {
-    mappings channel: mapping_channel, version: mapping_version
-    copyIdeResources = true
-    runs {
-        configureEach {
-            //noinspection GroovyAssignabilityCheck
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
+legacyForge {
+    version = "${minecraft_version}-${forge_version}"
 
-            mods {
-                "${mod_id}" {
-                    //noinspection GroovyAssignabilityCheck
-                    source sourceSets.main
-                }
-            }
+    validateAccessTransformers = true
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
         }
+    }
 
+    runs {
         client {
-            property 'forge.enabledGameTestNamespaces', mod_id
+            client()
         }
 
         server {
-            property 'forge.enabledGameTestNamespaces', mod_id
-            args '--nogui'
-        }
-
-        gameTestServer {
-            property 'forge.enabledGameTestNamespaces', mod_id
+            server()
         }
 
         data {
-            //noinspection GroovyAssignabilityCheck
-            workingDirectory project.file('run-data')
-            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            data()
+        }
+
+        configureEach {
+            // 2. Pass the mixin config via JVM System Property so Mixin loads it globally
+            jvmArgument "-Dmixin.config=mixins.mobsiege.json"
+
+            // 3. Force Connector's underlying Fabric Loader to scan your exploded build directory for fabric.mod.json
+            jvmArgument "-Dfabric.addMods=${file('build/resources/main').absolutePath}"
         }
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
 repositories {
+    mavenCentral()
     flatDir {dir 'libs'}
+    flatDir {dir 'pack/mods'}
 
-    maven {url "https://maven.su5ed.dev/releases/"}
-    maven {url "https://cursemaven.com"}
+    maven { url 'https://maven.fallenbreath.me/releases' }
+
+    maven {
+        url = 'https://api.modrinth.com/maven'
+        content { includeGroup 'maven.modrinth' }
+    }
+
+    maven {
+        url = 'https://curse.cleanroommc.com'
+        content { includeGroup 'curse.maven' }
+    }
+
+    maven {
+        url = "https://maven.su5ed.dev/releases/"
+    }
+
+    maven {
+        url "https://cursemaven.com"
+    }
+
+    maven {
+        url = 'https://maven.fabricmc.net/'
+    }
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
-    annotationProcessor "io.github.llamalad7:mixinextras-fabric:${mixin_extras_version}"
-    implementation "io.github.llamalad7:mixinextras-fabric:${mixin_extras_version}"
+    //annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
+    annotationProcessor("org.sinytra:sponge-mixin:${mixin_version}")
+    //annotationProcessor(group = "org.sinytra", name = "sponge-mixin", version = mixin_version)
+    //compileOnly(group = "org.sinytra", name = "sponge-mixin", version = mixin_version)
+    compileOnly("org.sinytra:sponge-mixin:${mixin_version}")
+    clientAdditionalRuntimeClasspath project(':mixin-bootstrap')
 
-    compileOnly "dev.su5ed.sinytra.fabric-api:fabric-api:${fabric_api_version}"
-    compileOnly "dev.su5ed.sinytra:fabric-loader:2.7.4+0.15.3+1.20.1"
-    compileOnly "net.jmb19905:carbonize:1.0.0+1.20.1"
-    implementation fg.deobf("curse.maven:actually-subtractions-1083685:6223947")
-    implementation fg.deobf("buildcraft:buildcraft:7.99.24.9-1.20.1-2025-04-26-all")
-    implementation fg.deobf("curse.maven:notreepunching-289043:4599926")
-    implementation fg.deobf("curse.maven:tough-as-nails-246391:5815863")
-    implementation fg.deobf("curse.maven:epic-mob-siege-nightmare-957414:5003615")
-    implementation fg.deobf("curse.maven:new-thin-air-878379:5068247")
-    implementation fg.deobf("curse.maven:puzzles-lib-495476:5904750")
-    implementation fg.deobf("curse.maven:curios-309927:6058834")
-    implementation fg.deobf("curse.maven:cb-multipart-258426:5311521")
-    implementation fg.deobf("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
-    implementation fg.deobf("curse.maven:cofh-core-69162:5374122")
-    implementation fg.deobf("curse.maven:decorative-blocks-362528:5089406")
+    implementation(jarJar "me.fallenbreath:conditional-mixin-forge:${mixin_conditional}")
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}"))
+
+    modImplementation("curse.maven:actually-subtractions-1083685:6223947")
+    modImplementation "buildcraft:buildcraft:7.99.24.9-1.20.1-2025-04-26-all"
+    modImplementation("curse.maven:epic-mob-siege-nightmare-957414:5003615")
+    modImplementation("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
+    modImplementation("curse.maven:cofh-core-69162:5374122")
+    modImplementation("curse.maven:decorative-blocks-362528:5089406")
+
+    if (providers.gradleProperty("enable_libraries").getOrElse("false").toBoolean()) {
+        modImplementation("curse.maven:cb-multipart-258426:5311521")
+        // modImplementation(pack.curseforge.cb.multipart)
+        modRuntimeOnly(pack.curseforge.codechicken.lib.'1'.'8')
+        modRuntimeOnly(pack.modrinth.kubejs)
+        modRuntimeOnly(pack.modrinth.rhino)
+        modRuntimeOnly(pack.modrinth.architectury.api)
+        modRuntimeOnly(pack.modrinth.aether)
+        modRuntimeOnly(pack.curseforge.owo.lib)
+        modRuntimeOnly(pack.curseforge.cloth.config)
+        modRuntimeOnly(pack.modrinth.glitchcore)
+        modRuntimeOnly(pack.curseforge.sinytra.connector)
+        //modImplementation "dev.su5ed.sinytra:fabric-loader:2.7.4+0.15.3+1.20.1"
+        //compileOnly "dev.su5ed.sinytra.fabric-api:fabric-api:${fabric_api_version}"
+        compileOnly "dev.su5ed.sinytra.fabric-api:fabric-api:${fabric_api_version}"
+        modRuntimeOnly(pack.curseforge.forgified.fabric.api)
+    }
+
+    if (providers.gradleProperty("enable_primitive_technology_1").getOrElse("false").toBoolean()) {
+        modImplementation("net.jmb19905:carbonize:1.0.0+1.20.1")
+        modImplementation(pack.curseforge.tough.as.nails)
+        modImplementation(pack.curseforge.no.tree.punching)
+        modRuntimeOnly(pack.curseforge.treechop)
+        modRuntimeOnly(pack.curseforge.primal.stage)
+        modRuntimeOnly(pack.curseforge.hardcore.torches.forge)
+    } else {
+        modCompileOnly(pack.curseforge.no.tree.punching)
+        modCompileOnly(pack.curseforge.tough.as.nails)
+        modCompileOnly "net.jmb19905:carbonize:1.0.0+1.20.1"
+    }
 }
 
 mixin {
-    add sourceSets.main, 'mobsiege.mixins.refmap.json'
-    config 'mobsiege.mixins.json'
+    add sourceSets.main, "mixins.${mod_id}.refmap.json"
+    config "mixins.${mod_id}.json"
 }
 
 tasks.named('processResources', ProcessResources).configure {
@@ -113,20 +153,17 @@ tasks.named('processResources', ProcessResources).configure {
     }
 }
 
-tasks.named('jar', Jar).configure {
-    manifest {
-        attributes([
-                'Specification-Title'     : mod_id,
-                'Specification-Vendor'    : mod_authors,
-                'Specification-Version'   : '1', // We are version 1 of ourselves
-                'Implementation-Title'    : project.name,
-                'Implementation-Version'  : project.jar.archiveVersion,
-                'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-
-    finalizedBy 'reobfJar'
+jar {
+    manifest.attributes([
+            'Specification-Title'     : mod_id,
+            'Specification-Vendor'    : mod_authors,
+            'Specification-Version'   : '1',
+            'Implementation-Title'    : project.name,
+            'Implementation-Version'  : project.jar.archiveVersion,
+            'Implementation-Vendor'   : mod_authors,
+            'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+            'MixinConfigs'            : "mixins.${mod_id}.json",
+    ])
 }
 
 publishing {
@@ -142,6 +179,7 @@ publishing {
     }
 }
 
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
-}
+providers.exec {
+    workingDir layout.projectDirectory.dir("pack")
+    commandLine 'bash', '-lc', 'packwiz refresh'
+}.standardOutput.asText.get()

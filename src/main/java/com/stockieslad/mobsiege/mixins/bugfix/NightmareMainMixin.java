@@ -2,6 +2,8 @@ package com.stockieslad.mobsiege.mixins.bugfix;
 
 import com.esm.nightmare.NightmareMain;
 import com.llamalad7.mixinextras.sugar.Local;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import org.spongepowered.asm.mixin.Mixin;
@@ -9,6 +11,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+@Restriction(require = @Condition("epicsiege_nightmare"))
 @Mixin(value = NightmareMain.class, remap = false)
 public abstract class NightmareMainMixin {
     @Shadow abstract boolean ShouldDuplicate();

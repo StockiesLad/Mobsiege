@@ -2,12 +2,18 @@ package com.stockieslad.mobsiege.mixins.bugfix.conversion_gears;
 
 import buildcraft.energy.client.gui.GuiDynamoMJ;
 import cofh.thermal.core.ThermalCore;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+@Restriction(require = {
+        @Condition("thermal"),
+        @Condition("buildcraft")
+})
 @Mixin(GuiDynamoMJ.class)
 public class GuiDynamoMJMixin {
     @Redirect(method = "drawBackgroundLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;renderItem(Lnet/minecraft/world/item/ItemStack;II)V", ordinal = 0))

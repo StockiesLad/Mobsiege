@@ -20,8 +20,8 @@ public class Mobsiege2BuildCraft {
     public static final Map<TagKey<Item>, Long> CONVERSION_UPGRADES = new LinkedHashMap<>();
 
     public static final TagKey<Item>
-            IRON_GEARS = TagKey.create(Registries.ITEM, new ResourceLocation("forge:gears/iron")),
-            GOLD_GEARS = TagKey.create(Registries.ITEM, new ResourceLocation("forge:gears/gold"));
+            IRON_GEARS = TagKey.create(Registries.ITEM, ResourceLocation.parse("forge:gears/iron")),
+            GOLD_GEARS = TagKey.create(Registries.ITEM, ResourceLocation.parse("forge:gears/gold"));
 
     static {
         CONVERSION_UPGRADES.put(IRON_GEARS, MjAPI.MJ * 2L);

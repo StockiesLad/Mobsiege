@@ -1,0 +1,38 @@
+{
+  "required": true,
+  "package": "com.stockieslad.mobsiege.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "mixins.mobsiege.refmap.json",
+  "plugin": "com.stockieslad.mobsiege.plugin.MixinPlugin",
+  "mixins": [
+    "Test",
+    "bugfix.BlockAtomicReconstructorMixin",
+    "bugfix.BlockEngineBaseMixin",
+    "bugfix.FireStarterItemMixin",
+    "bugfix.NightmareMainMixin",
+    "bugfix.conversion_gears.TileDynamoMJMixin",
+    "bugfix.conversion_gears.TileEngineRFMixin",
+    "custom_features.IPropertiesMixin",
+    "custom_features.ItemStackMixin",
+    "custom_features.LatticeBlockMixin",
+    "custom_features.TileEngineBaseMixin",
+    "custom_features.WaterPurifierBlockEntityMixin",
+    "custom_features.temperature.AreaFillMixin",
+    "custom_features.temperature.LevelRenderHandlerMixin",
+    "custom_features.temperature.TemperatureHandlerImplMixin",
+    "custom_features.temperature.TemperatureHandlerMixin",
+    "optimisation.CBMicroBlockModContentMixin"
+  ],
+  "client": [
+    "bugfix.RenderLaserMixin",
+    "bugfix.conversion_gears.GuiDynamoMJMixin",
+    "bugfix.conversion_gears.GuiEngineRFMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8.5",
+  "mixinextras": {
+    "minVersion": "0.4.1"
+  }
+}

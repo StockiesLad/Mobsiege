@@ -6,6 +6,8 @@ import buildcraft.lib.client.model.MutableQuad;
 import buildcraft.lib.engine.BlockEngineBase_BC8;
 import buildcraft.lib.misc.SpriteUtil;
 import com.llamalad7.mixinextras.sugar.Local;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.core.Direction;
 import net.minecraft.util.LazyLoadedValue;
 import org.spongepowered.asm.mixin.Final;
@@ -19,6 +21,7 @@ import java.util.function.Function;
 
 import static com.stockieslad.mobsiege.Mobsiege.LOGGER;
 
+@Restriction(require = @Condition("buildcraft"))
 @Mixin(BlockEngineBase_BC8.class)
 public class BlockEngineBaseMixin {
     @Shadow(remap = false) @Final public static Map<IEngineType, ModelHolderVariable> engineModels;

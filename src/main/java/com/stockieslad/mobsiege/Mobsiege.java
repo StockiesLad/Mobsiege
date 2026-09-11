@@ -6,7 +6,6 @@ import com.stockieslad.mobsiege.api.Mobsiege2BuildCraft;
 import com.stockieslad.mobsiege.api.Mobsiege2Fabric;
 import com.stockieslad.mobsiege.api.Mobsiege2Minecraft;
 import com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails;
-import fuzs.puzzleslib.api.core.v1.ModConstructor;
 import lilypuree.decorative_blocks.blocks.LatticeBlock;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.*;
@@ -19,7 +18,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
@@ -58,11 +56,6 @@ public class Mobsiege {
         Mobsiege2Fabric.init();
         Mobsiege2Minecraft.init();
         Mobsiege2ToughAsNails.init();
-    }
-
-    @SubscribeEvent
-    public void onConstructMod(FMLConstructModEvent event) {
-        ModConstructor.construct(MODID, () -> new ModConstructor() {});
     }
 
     @SubscribeEvent

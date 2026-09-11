@@ -2,6 +2,8 @@ package com.stockieslad.mobsiege.mixins.bugfix;
 
 import com.alcatrazescapee.notreepunching.common.items.FireStarterItem;
 import com.llamalad7.mixinextras.sugar.Local;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -15,7 +17,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+
 //Fixes bug where a fire block does not perform the AbstractFireBlock#canPlace Check
+@Restriction(require = @Condition("no_tree_punching"))
 @Mixin(FireStarterItem.class)
 public class FireStarterItemMixin {
     @Redirect(method = "finishUsingItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"))

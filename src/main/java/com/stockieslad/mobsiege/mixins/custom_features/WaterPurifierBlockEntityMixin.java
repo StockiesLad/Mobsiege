@@ -1,6 +1,8 @@
 package com.stockieslad.mobsiege.mixins.custom_features;
 
 import com.google.common.collect.ImmutableMap;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,6 +15,7 @@ import java.util.HashMap;
 import static com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails.PURIFIER_FILTER_ADD_MAP;
 import static com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails.PURIFIER_FILTER_REMOVE_LIST;
 
+@Restriction(require = @Condition("tough_as_nails"))
 @Mixin(WaterPurifierBlockEntity.class)
 public class WaterPurifierBlockEntityMixin {
 

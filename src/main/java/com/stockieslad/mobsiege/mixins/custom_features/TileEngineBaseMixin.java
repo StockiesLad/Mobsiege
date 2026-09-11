@@ -2,6 +2,8 @@ package com.stockieslad.mobsiege.mixins.custom_features;
 
 import buildcraft.core.tile.TileEngineCreative;
 import buildcraft.lib.engine.TileEngineBase_BC8;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundExplodePacket;
@@ -22,6 +24,7 @@ import java.util.Collections;
 
 import static com.stockieslad.mobsiege.api.Mobsiege2BuildCraft.*;
 
+@Restriction(require = @Condition("buildcraft"))
 @Mixin(TileEngineBase_BC8.class)
 public abstract class TileEngineBaseMixin {
 
@@ -30,7 +33,7 @@ public abstract class TileEngineBaseMixin {
     @Unique
     private int mobsiege$ticksOverheated = 0;
 
-    @SuppressWarnings({"DataFlowIssue", "SpellCheckingInspection"})
+    @SuppressWarnings({"DataFlowIssue"})
     @Inject(
             method = "update",
             at = @At(

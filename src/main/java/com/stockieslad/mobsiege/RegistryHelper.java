@@ -13,7 +13,7 @@ import static com.stockieslad.mobsiege.Mobsiege.MODID;
 
 public class RegistryHelper {
     public static ResourceLocation of(String path) {
-        return new ResourceLocation(MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 
     public static Block registerBlockAndItem(String path, Block block) {
@@ -30,7 +30,7 @@ public class RegistryHelper {
     }
 
     public static SoundEvent registerSoundEvent(String path) {
-        var location = new ResourceLocation(MODID, path);
+        var location = ResourceLocation.fromNamespaceAndPath(MODID, path);
         return Registry.register(BuiltInRegistries.SOUND_EVENT, location, SoundEvent.createVariableRangeEvent(location));
     }
 }

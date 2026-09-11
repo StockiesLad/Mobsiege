@@ -1,0 +1,13 @@
+name = "Primal Stage"
+filename = "primalstage-1.2.6.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "37c76c17564de01759afe7b0d96c04578fda394f"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4942501
+project-id = 857671

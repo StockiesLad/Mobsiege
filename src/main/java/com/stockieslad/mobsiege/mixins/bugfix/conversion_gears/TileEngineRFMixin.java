@@ -2,6 +2,8 @@ package com.stockieslad.mobsiege.mixins.bugfix.conversion_gears;
 
 import buildcraft.energy.tile.TileEngineRF;
 import com.llamalad7.mixinextras.sugar.Local;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,6 +18,7 @@ import java.util.stream.Stream;
 
 import static com.stockieslad.mobsiege.api.Mobsiege2BuildCraft.CONVERSION_UPGRADES;
 
+@Restriction(require = @Condition("buildcraft"))
 @Mixin(TileEngineRF.class)
 public class TileEngineRFMixin {
     @Inject(method = "isValidUpgrade", at = @At("HEAD"), cancellable = true, remap = false)

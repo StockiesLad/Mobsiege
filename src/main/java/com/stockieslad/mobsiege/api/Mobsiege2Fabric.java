@@ -10,7 +10,7 @@ public class Mobsiege2Fabric {
     private static final FlammableBlockRegistry FLAMMABLE_BLOCK_REGISTRY_INSTANCE = FlammableBlockRegistry.getDefaultInstance();
 
     public static void fabricBlockFlammability(String string, int burn, int spread) {
-        FLAMMABLE_BLOCK_REGISTRY_INSTANCE.add(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(string)), burn, spread);
+        FLAMMABLE_BLOCK_REGISTRY_INSTANCE.add(ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse(string)), burn, spread);
     }
 
     public static void fabricTagFlammability(String string, int burn, int spread) {
