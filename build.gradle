@@ -1,4 +1,5 @@
 import com.electronwill.nightconfig.core.file.FileConfig
+
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 
@@ -33,6 +34,7 @@ legacyForge {
 
     mods {
         "${mod_id}" {
+            //noinspection GroovyAssignabilityCheck
             sourceSet sourceSets.main
         }
     }
@@ -189,7 +191,7 @@ tasks.register('backupPack') {
     if (providers.gradleProperty("backupPack").getOrElse("false").toBoolean()) {
         doLast {
             def timestamp = new Date().format('yyyyMMdd-HHmmss')
-            def backupDir = file("$buildDir/pack-backups/$timestamp")
+            def backupDir = file("${layout.buildDirectory.get()}/pack-backups/$timestamp")
 
             copy {
                 from('pack')
@@ -207,7 +209,7 @@ tasks.register('backupRun') {
     if (providers.gradleProperty("backupRun").getOrElse("false").toBoolean()) {
         doLast {
             def timestamp = new Date().format('yyyyMMdd-HHmmss')
-            def backupDir = file("$buildDir/run-backups/$timestamp")
+            def backupDir = file("${layout.buildDirectory.get()}/run-backups/$timestamp")
 
             copy {
                 from('run')
@@ -218,20 +220,6 @@ tasks.register('backupRun') {
         }
     } else doLast {
         println("Skipped '/run/' backup.")
-    }
-}
-
-tasks.register('processDynamicAssets') {
-    dependsOn('backupPack')
-    dependsOn('backupRun')
-
-    doLast {
-        dynamicAssetFolders.split(',').each { dir ->
-            sync {
-                it.from("run/${dir}")
-                it.into("pack/${dir}")
-            }
-        }
     }
 }
 
@@ -253,9 +241,21 @@ tasks.register('processStaticAssets', Copy) {
     }
 }
 
-tasks.register('packwizExport', Exec) {
-    dependsOn('processDynamicAssets')
-    workingDir layout.projectDirectory.dir("pack")
+tasks.register('processDynamicAssets') {
+    dependsOn('backupPack')
+    dependsOn('backupRun')
+
+    doLast {
+        dynamicAssetFolders.split(',').each { dir ->
+            sync {
+                it.from("run/${dir}")
+                it.into("pack/${dir}")
+            }
+        }
+    }
+}
+
+tasks.register('updatePackToml') {
     def packFile = file(layout.projectDirectory.dir("pack/pack.toml"))
     def packToml = FileConfig.of(packFile)
     packToml.load()
@@ -263,19 +263,78 @@ tasks.register('packwizExport', Exec) {
     packToml.set('name', mod_name)
     packToml.save()
     println("Updated pack.toml with current values")
+}
+
+tasks.register('refreshPackwiz', Exec) {
+    dependsOn('updatePackToml')
+    workingDir layout.projectDirectory.dir("pack")
     commandLine 'packwiz', 'refresh'
-    commandLine 'packwiz', 'curseforge', 'export'
+
     doLast {
-        def zip = file(layout.projectDirectory.file("pack/${mod_name}-${modpack_version}.zip"))
-        def destination = layout.buildDirectory.dir("packwiz").get().asFile
-        destination.mkdirs()
-        Files.move(
-                zip.toPath(),
-                destination.toPath().resolve(zip.name),
+        def packFile = file(layout.projectDirectory.dir("pack/pack.toml"))
+        def packToml = FileConfig.of(packFile)
+        packToml.load()
+        packToml.set('version', modpack_version)
+        packToml.set('name', mod_name)
+        packToml.save()
+        println("Updated pack.toml with current values")
+    }
+}
+
+tasks.register('compilePackwiz') {
+    dependsOn('backupPack', 'backupRun', 'refreshPackwiz', 'build')
+
+    doLast {
+        sync {
+            it.from layout.projectDirectory.dir("pack")
+            it.into layout.buildDirectory.dir("packwiz/compiled")
+        }
+        println('Added packwiz files...')
+        dynamicAssetFolders.split(',').each { dir ->
+            copy {
+                it.from"run/${dir}"
+                it.into layout.buildDirectory.dir("packwiz/compiled/${dir}")
+            }
+        }
+        println('Added dynamic asset folders...')
+        def modJar = layout.buildDirectory
+                .file("libs/${mod_id}-${mod_version}.jar")
+                .get()
+                .asFile
+        def modCompilationDir = layout.buildDirectory.dir("packwiz/compiled/mods").get().asFile
+        modCompilationDir.mkdirs()
+        Files.copy(
+                modJar.toPath(),
+                modCompilationDir.toPath().resolve(modJar.name),
                 StandardCopyOption.REPLACE_EXISTING
         )
-        println("Moved ${mod_name}-${modpack_version}.zip to build/packwiz")
+        println('Added mod jar...')
     }
+}
+
+tasks.register('packwizCurseforgeExport', Exec) {
+    dependsOn('compilePackwiz')
+    workingDir layout.buildDirectory.dir("packwiz/compiled")
+    commandLine 'packwiz', 'curseforge', 'export'
+}
+
+tasks.register('migratePackwizBuildArtifact') {
+    dependsOn('packwizCurseforgeExport')
+    doLast {
+        def buildArtifact = file(layout.buildDirectory.file("packwiz/compiled/${mod_name}-${modpack_version}.zip"))
+        def buildDir = layout.buildDirectory.dir("packwiz/artifacts").get().asFile
+        buildDir.mkdirs()
+        Files.move(
+                buildArtifact.toPath(),
+                buildDir.toPath().resolve(buildArtifact.name),
+                StandardCopyOption.REPLACE_EXISTING
+        )
+        println("Migrated ${mod_name}-${modpack_version}.zip to artifacts..")
+    }
+}
+
+tasks.register('packwizExport') {
+    dependsOn('migratePackwizBuildArtifact')
 }
 
 providers.exec {
