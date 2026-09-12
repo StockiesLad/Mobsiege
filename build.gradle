@@ -336,3 +336,9 @@ tasks.register('migratePackwizBuildArtifact') {
 tasks.register('packwizExport') {
     dependsOn('migratePackwizBuildArtifact')
 }
+
+
+//providers.exec {
+//    workingDir layout.projectDirectory.dir("pack")
+//    commandLine 'bash', '-lc', 'packwiz refresh'
+//}.standardOutput.asText.get()
