@@ -5,7 +5,7 @@
   "refmap": "mixins.mobsiege.refmap.json",
   "plugin": "com.stockieslad.mobsiege.plugin.MixinPlugin",
   "mixins": [
-    "Test",
+    "MinecraftMixin",
     "bugfix.BlockAtomicReconstructorMixin",
     "bugfix.BlockEngineBaseMixin",
     "bugfix.FireStarterItemMixin",

@@ -2,6 +2,7 @@
 // Connector doesn't parse the mixin config java arguments (which MDG uses)
 // This is a replacement to boot the mixin config.
 // You can ignore "Completely ignored arguments: [--mixin.config, mixins.mobsiege.json]"
+// Search 'MIXIN_WORKING' in run logs to see if mixin is working.
 
 plugins {
     id 'java'
@@ -60,3 +61,4 @@ dependencies {
     compileOnly 'cpw.mods:modlauncher:10.0.9'
     compileOnly 'org.spongepowered:mixin:0.8.5'
 }
+

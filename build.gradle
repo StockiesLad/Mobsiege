@@ -1,3 +1,17 @@
+import com.electronwill.nightconfig.core.file.FileConfig
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.electronwill.night-config:toml:3.9.0'
+    }
+}
+
 plugins {
     id 'eclipse'
     id 'idea'
@@ -34,14 +48,6 @@ legacyForge {
 
         data {
             data()
-        }
-
-        configureEach {
-            // 2. Pass the mixin config via JVM System Property so Mixin loads it globally
-            jvmArgument "-Dmixin.config=mixins.mobsiege.json"
-
-            // 3. Force Connector's underlying Fabric Loader to scan your exploded build directory for fabric.mod.json
-            jvmArgument "-Dfabric.addMods=${file('build/resources/main').absolutePath}"
         }
     }
 }
@@ -176,6 +182,99 @@ publishing {
         maven {
             url "file://${project.projectDir}/mcmodsrepo"
         }
+    }
+}
+
+tasks.register('backupPack') {
+    if (providers.gradleProperty("backupPack").getOrElse("false").toBoolean()) {
+        doLast {
+            def timestamp = new Date().format('yyyyMMdd-HHmmss')
+            def backupDir = file("$buildDir/pack-backups/$timestamp")
+
+            copy {
+                from('pack')
+                into(backupDir)
+            }
+
+            println("Backed up /pack/ to ${backupDir}")
+        }
+    } else doLast {
+        println("Skipped '/pack/' backup.")
+    }
+}
+
+tasks.register('backupRun') {
+    if (providers.gradleProperty("backupRun").getOrElse("false").toBoolean()) {
+        doLast {
+            def timestamp = new Date().format('yyyyMMdd-HHmmss')
+            def backupDir = file("$buildDir/run-backups/$timestamp")
+
+            copy {
+                from('run')
+                into(backupDir)
+            }
+
+            println("Backed up /pack/ to ${backupDir}")
+        }
+    } else doLast {
+        println("Skipped '/run/' backup.")
+    }
+}
+
+tasks.register('processDynamicAssets') {
+    dependsOn('backupPack')
+    dependsOn('backupRun')
+
+    doLast {
+        dynamicAssetFolders.split(',').each { dir ->
+            sync {
+                it.from("run/${dir}")
+                it.into("pack/${dir}")
+            }
+        }
+    }
+}
+
+tasks.register('processStaticAssets', Copy) {
+    dependsOn('backupPack')
+    dependsOn('backupRun')
+    into('run')
+
+    staticAssetFolders.split(',').each { dir ->
+        from("pack/${dir}") {
+            into(dir)
+        }
+    }
+}
+
+['runClient', 'runServer', 'runData'].each { name ->
+    tasks.named(name) {
+        dependsOn('processStaticAssets')
+    }
+}
+
+tasks.register('packwizExport', Exec) {
+    dependsOn('processDynamicAssets')
+    workingDir layout.projectDirectory.dir("pack")
+    def packFile = file(layout.projectDirectory.dir("pack/pack.toml"))
+    def packToml = FileConfig.of(packFile)
+    packToml.load()
+    packToml.set('version', modpack_version)
+    packToml.set('name', mod_name)
+    packToml.save()
+    println("Updated pack.toml with current values")
+    commandLine 'packwiz', 'refresh'
+    commandLine 'packwiz', 'curseforge', 'export'
+    doLast {
+        def zip = file(layout.projectDirectory.file("pack/${mod_name}-${modpack_version}.zip"))
+        def destination = layout.buildDirectory.dir("packwiz").get().asFile
+        destination.mkdirs()
+        Files.move(
+                zip.toPath(),
+                destination.toPath().resolve(zip.name),
+                StandardCopyOption.REPLACE_EXISTING
+        )
+        println("Moved ${mod_name}-${modpack_version}.zip to build/packwiz")
     }
 }
 

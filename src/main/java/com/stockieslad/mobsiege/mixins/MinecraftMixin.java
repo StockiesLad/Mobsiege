@@ -10,13 +10,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
-public class Test {
+public class MinecraftMixin {
     @Shadow
     @Final
     private static Logger LOGGER;
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void thing(CallbackInfo ci) {
-        LOGGER.error("johnny");
+        LOGGER.info("[Mobsiege]: Mixin is definitely working. Regex: MIXIN_WORKING");
     }
 }

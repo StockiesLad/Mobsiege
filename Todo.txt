@@ -1,1 +1,0 @@
-Add copying KubeJS and other-like assets to the /pack/ folder

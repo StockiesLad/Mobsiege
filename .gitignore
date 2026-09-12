@@ -19,7 +19,10 @@ build
 
 # other
 eclipse
-run
+run/*
+
+# Unignore 'dynamicAssetFolders'
+!run/kubejs
 
 # Files from Forge MDK
 forge*changelog.txt
