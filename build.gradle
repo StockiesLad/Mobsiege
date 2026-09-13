@@ -103,7 +103,7 @@ dependencies {
     modCompileOnly(pack.curseforge.cofh.core)
     modCompileOnly(pack.curseforge.actually.subtractions)
     modCompileOnly(pack.curseforge.decorative.blocks)
-    modCompileOnly("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
+    modImplementation("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24") // TODO: CHANGE ME
 
     def modCategories = (Map<String, List<String>>) new JsonSlurper().parse(file("src/main/resources/META-INF/mod_categories.json"))
 
@@ -128,8 +128,12 @@ dependencies {
             modRuntimeOnly(pack.curseforge.sinytra.connector)
         if (isModEnabled(modCategories, "owo"))
             modRuntimeOnly(pack.curseforge.owo.lib)
-    if (isModEnabled(modCategories, "cloth_config"))
-        modRuntimeOnly(pack.curseforge.cloth.config)
+        if (isModEnabled(modCategories, "cloth_config"))
+            modRuntimeOnly(pack.curseforge.cloth.config)
+        if (isModEnabled(modCategories, "glitchcore"))
+            modRuntimeOnly(pack.curseforge.glitchcore)
+        if (isModEnabled(modCategories, "cofh_core"))
+            modRuntimeOnly(pack.curseforge.cofh.core)
     // Entity
     if (isModEnabled(modCategories, "epicsiegemod"))
         modRuntimeOnly(pack.curseforge.epic.siege.mod)
@@ -158,8 +162,6 @@ dependencies {
     // World
     if (isModEnabled(modCategories, "aether"))
         modRuntimeOnly(pack.curseforge.aether)
-    if (isModEnabled(modCategories, "glitchcore"))
-        modRuntimeOnly(pack.curseforge.glitchcore)
 }
 
 mixin {

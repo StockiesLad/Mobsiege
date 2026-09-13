@@ -14,19 +14,25 @@
     "connectormod",
     "fabric_api",
     "cb_multipart",
+    "cofh_core",
     "codechickenlib",
     "architectury",
     "owo",
+    "rhino",
     "cloth_config",
     "glitchcore"
   ],
   "[optional]:kubejs": [
+    "rhino",
     "kubejs"
   ],
   "[optional]:entity": [
     "epicsiegemod"
   ],
   "[optional]:primitive_technology_1": [
+    "connectormod",
+    "fabric_api",
+
     "decorative_blocks",
     "carbonize",
     "toughasnails",
