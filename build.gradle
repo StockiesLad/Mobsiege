@@ -379,8 +379,12 @@ void validateModCategories(Map<String, List<String>> modCategories) {
     // Check to see if mod category is in correct format
     modCategories.entrySet().stream().forEach {entry ->
         var keylist = entry.key.split(':')
-        if (entry.key.contains(" ") || keylist.length != 2 || !(keylist[0] == "[optional]" || keylist[0] == "[required]"))
-            throw new RuntimeException("Mod category '${entry.key}' is not named correctly! It must contain '[optional]', or '[required]'")
+        if (    entry.key != entry.key.toLowerCase() ||
+                entry.key.contains(" ") ||
+                keylist.length != 2 ||
+                !(keylist[0] == "[optional]" || keylist[0] == "[required]")
+        )
+            throw new RuntimeException("Mod category '${entry.key}' is does not obey naming convention!")
         if (!providers.gradleProperty("enable_${getCategoryName entry.key}").present)
             println("Category '${entry.key}' has no gradle properties definition. This will be assumed to be false.")
     }
