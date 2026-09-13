@@ -12,5 +12,5 @@ version = "0.1"
 
 [index]
 	hash-format = "sha256"
-	hash = "c9096a7d1233f5d0548cedd920e542be0c0743e9b8f0e658047e91f80fc31c71"
+	hash = "2d612cd01aafb8ac0c77b72d87c0d8fc80a6d39c2a8ae6c92a19ddaafffb639d"
 	file = "index.toml"

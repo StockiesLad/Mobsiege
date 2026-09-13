@@ -1,0 +1,63 @@
+{
+  "[required]:fabric": [
+    "connectormod",
+    "fabric_api"
+  ],
+  "[required]:building": [
+    "decorative_blocks"
+  ],
+  "[required]:world": [
+    "aether"
+  ],
+
+  "[optional]:libraries": [
+    "connectormod",
+    "fabric_api",
+    "cb_multipart",
+    "codechickenlib",
+    "architectury",
+    "owo",
+    "cloth_config",
+    "glitchcore"
+  ],
+  "[optional]:kubejs": [
+    "kubejs"
+  ],
+  "[optional]:entity": [
+    "epicsiegemod"
+  ],
+  "[optional]:primitive_technology_1": [
+    "decorative_blocks",
+    "carbonize",
+    "toughasnails",
+    "notreepunching",
+    "treechop",
+    "primalstage",
+    "hardcore_torches"
+  ],
+  "[optional]:primitive_technology_2": [
+
+  ],
+  "[optional]:technology_3": [
+    "buildcraftcore"
+  ],
+  "[optional]:electrical_technology_1": [
+    "aether",
+    "actuallyadditions"
+  ],
+  "[optional]:mechanical_technology_1": [
+    "buildcraftcore"
+  ],
+  "[optional]:electrical_technology_2": [
+  ],
+  "[optional]:mechanical_technology_2": [
+
+  ],
+  "[optional]:electrical_technology_3": [
+    "aether",
+    "actuallyadditions"
+  ],
+  "[optional]:mechanical_technology_3": [
+    "buildcraftcore"
+  ]
+}

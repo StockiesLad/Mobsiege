@@ -28,6 +28,8 @@ _**Experimental**_
 This is an experimental modpack development project. It uses a custom gradle script, based on _Possible Triangle's Packwiz Gradle Plugin_. Some features are:
 - Packwiz-controlled gradle dependencies
 - Toggleable mods (Compile & Runtime)
+- Mod categories (Can turn reduce pack runtime to a subset of mods)
+- KubeJS-Java bridges
 - Easy asset management (configs, kubejs, ...) with custom gradle tasks.
 - Inbuilt java mod development for custom patches - automatically exports inside packwiz via gradle task.
 - Gradle controlled pack.toml metadata.

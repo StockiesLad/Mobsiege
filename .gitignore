@@ -1,4 +1,4 @@
-# eclipse
+# Eclipse
 bin
 *.launch
 .settings
@@ -6,23 +6,26 @@ bin
 .classpath
 .project
 
-# idea
+# Intellij IDEA
 out
 *.ipr
 *.iws
 *.iml
 .idea
+eclipse
 
-# gradle
+# Visual Studio Code
+.vscode
+
+# Gradle
 build
 .gradle
 
-# other
-eclipse
-run/*
-
 # Unignore 'dynamicAssetFolders'
+run/*
 !run/kubejs
+!run/patchouli_books
 
 # Files from Forge MDK
 forge*changelog.txt
+

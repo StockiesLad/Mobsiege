@@ -1,0 +1,3 @@
+add configs, patchouli & kubejs.
+check mod categories to see if each mod actually works (implement debugging)
+fix weird mixin config problem

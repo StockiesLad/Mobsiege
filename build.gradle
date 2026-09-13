@@ -2,6 +2,7 @@ import com.electronwill.nightconfig.core.file.FileConfig
 
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
+import groovy.json.JsonSlurper
 
 buildscript {
     repositories {
@@ -85,54 +86,80 @@ repositories {
 }
 
 dependencies {
-    //annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
     annotationProcessor("org.sinytra:sponge-mixin:${mixin_version}")
-    //annotationProcessor(group = "org.sinytra", name = "sponge-mixin", version = mixin_version)
-    //compileOnly(group = "org.sinytra", name = "sponge-mixin", version = mixin_version)
     compileOnly("org.sinytra:sponge-mixin:${mixin_version}")
     clientAdditionalRuntimeClasspath project(':mixin-bootstrap')
-
     implementation(jarJar "me.fallenbreath:conditional-mixin-forge:${mixin_conditional}")
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}"))
 
-    modImplementation("curse.maven:actually-subtractions-1083685:6223947")
-    modImplementation "buildcraft:buildcraft:7.99.24.9-1.20.1-2025-04-26-all"
-    modImplementation("curse.maven:epic-mob-siege-nightmare-957414:5003615")
-    modImplementation("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
-    modImplementation("curse.maven:cofh-core-69162:5374122")
-    modImplementation("curse.maven:decorative-blocks-362528:5089406")
+    compileOnly "dev.su5ed.sinytra.fabric-api:fabric-api:${fabric_api_version}"
+    modCompileOnly("curse.maven:epic-mob-siege-nightmare-957414:5003615")
+    modCompileOnly "net.jmb19905:carbonize:1.0.0+1.20.1"
+    modCompileOnly(pack.curseforge.cb.multipart)
+    modCompileOnly(pack.curseforge.no.tree.punching)
+    modCompileOnly(pack.curseforge.tough.as.nails)
+    modCompileOnly "buildcraft:buildcraft:7.99.24.9-1.20.1-2025-04-26-all"
+    modCompileOnly(pack.curseforge.cofh.core)
+    modCompileOnly(pack.curseforge.actually.subtractions)
+    modCompileOnly(pack.curseforge.decorative.blocks)
+    modCompileOnly("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
 
-    if (providers.gradleProperty("enable_libraries").getOrElse("false").toBoolean()) {
-        modImplementation("curse.maven:cb-multipart-258426:5311521")
-        // modImplementation(pack.curseforge.cb.multipart)
-        modRuntimeOnly(pack.curseforge.codechicken.lib.'1'.'8')
-        modRuntimeOnly(pack.modrinth.kubejs)
-        modRuntimeOnly(pack.modrinth.rhino)
-        modRuntimeOnly(pack.modrinth.architectury.api)
-        modRuntimeOnly(pack.modrinth.aether)
-        modRuntimeOnly(pack.curseforge.owo.lib)
+    def modCategories = (Map<String, List<String>>) new JsonSlurper().parse(file("src/main/resources/META-INF/mod_categories.json"))
+
+    validateModCategories(modCategories)
+
+    // Libraries
+        // Fabric
+        if (isModEnabled(modCategories, "fabric_api"))
+            modRuntimeOnly(pack.curseforge.forgified.fabric.api)
+        // Forge
+        if (isModEnabled(modCategories, "architectury"))
+            modRuntimeOnly(pack.curseforge.architectury.api)
+        if (isModEnabled(modCategories, "cb_multipart"))
+            modRuntimeOnly(pack.curseforge.cb.multipart)
+        if (isModEnabled(modCategories, "codechickenlib"))
+            modRuntimeOnly(pack.curseforge.codechicken.lib.'1'.'8')
+        if (isModEnabled(modCategories, "kubejs"))
+            modRuntimeOnly(pack.curseforge.kubejs)
+        if (isModEnabled(modCategories, "rhino"))
+            modRuntimeOnly(pack.curseforge.rhino)
+        if (isModEnabled(modCategories, "connectormod"))
+            modRuntimeOnly(pack.curseforge.sinytra.connector)
+        if (isModEnabled(modCategories, "owo"))
+            modRuntimeOnly(pack.curseforge.owo.lib)
+    if (isModEnabled(modCategories, "cloth_config"))
         modRuntimeOnly(pack.curseforge.cloth.config)
-        modRuntimeOnly(pack.modrinth.glitchcore)
-        modRuntimeOnly(pack.curseforge.sinytra.connector)
-        //modImplementation "dev.su5ed.sinytra:fabric-loader:2.7.4+0.15.3+1.20.1"
-        //compileOnly "dev.su5ed.sinytra.fabric-api:fabric-api:${fabric_api_version}"
-        compileOnly "dev.su5ed.sinytra.fabric-api:fabric-api:${fabric_api_version}"
-        modRuntimeOnly(pack.curseforge.forgified.fabric.api)
-    }
+    // Entity
+    if (isModEnabled(modCategories, "epicsiegemod"))
+        modRuntimeOnly(pack.curseforge.epic.siege.mod)
+    // Building
+    if (isModEnabled(modCategories, "decorative_blocks"))
+        modRuntimeOnly(pack.curseforge.decorative.blocks)
+    // Technology
+    if (isModEnabled(modCategories, "carbonize"))
+        modRuntimeOnly("net.jmb19905:carbonize:1.0.0+1.20.1")
+    if (isModEnabled(modCategories, "actuallyadditions"))
+        modRuntimeOnly(pack.curseforge.actually.subtractions)
+    if (isModEnabled(modCategories, "buildcraftcore"))
+        modRuntimeOnly "buildcraft:buildcraft:7.99.24.9-1.20.1-2025-04-26-all"
+        // Primitive Technology 1
+        if (isModEnabled(modCategories, "toughasnails"))
+            modRuntimeOnly(pack.curseforge.tough.as.nails)
+        if (isModEnabled(modCategories, "notreepunching"))
+            modRuntimeOnly(pack.curseforge.no.tree.punching)
+        if (isModEnabled(modCategories, "treechop"))
+            modRuntimeOnly(pack.curseforge.treechop)
+        if (isModEnabled(modCategories, "primalstage"))
+            modRuntimeOnly(pack.curseforge.primal.stage)
+        if (isModEnabled(modCategories, "hardcore_torches"))
+            modRuntimeOnly(pack.curseforge.hardcore.torches.forge)
 
-    if (providers.gradleProperty("enable_primitive_technology_1").getOrElse("false").toBoolean()) {
-        modImplementation("net.jmb19905:carbonize:1.0.0+1.20.1")
-        modImplementation(pack.curseforge.tough.as.nails)
-        modImplementation(pack.curseforge.no.tree.punching)
-        modRuntimeOnly(pack.curseforge.treechop)
-        modRuntimeOnly(pack.curseforge.primal.stage)
-        modRuntimeOnly(pack.curseforge.hardcore.torches.forge)
-    } else {
-        modCompileOnly(pack.curseforge.no.tree.punching)
-        modCompileOnly(pack.curseforge.tough.as.nails)
-        modCompileOnly "net.jmb19905:carbonize:1.0.0+1.20.1"
-    }
+    // World
+    if (isModEnabled(modCategories, "aether"))
+        modRuntimeOnly(pack.curseforge.aether)
+    if (isModEnabled(modCategories, "glitchcore"))
+        modRuntimeOnly(pack.curseforge.glitchcore)
 }
 
 mixin {
@@ -229,6 +256,7 @@ tasks.register('processStaticAssets', Copy) {
     into('run')
 
     staticAssetFolders.split(',').each { dir ->
+        dir = dir.trim()
         from("pack/${dir}") {
             into(dir)
         }
@@ -247,6 +275,7 @@ tasks.register('processDynamicAssets') {
 
     doLast {
         dynamicAssetFolders.split(',').each { dir ->
+            dir = dir.trim()
             sync {
                 it.from("run/${dir}")
                 it.into("pack/${dir}")
@@ -291,6 +320,7 @@ tasks.register('compilePackwiz') {
         }
         println('Added packwiz files...')
         dynamicAssetFolders.split(',').each { dir ->
+            dir = dir.trim()
             copy {
                 it.from"run/${dir}"
                 it.into layout.buildDirectory.dir("packwiz/compiled/${dir}")
@@ -342,3 +372,37 @@ tasks.register('packwizExport') {
 //    workingDir layout.projectDirectory.dir("pack")
 //    commandLine 'bash', '-lc', 'packwiz refresh'
 //}.standardOutput.asText.get()
+
+void validateModCategories(Map<String, List<String>> modCategories) {
+    // Check to see if mod category is in correct format
+    modCategories.entrySet().stream().forEach {entry ->
+        var keylist = entry.key.split(':')
+        if (entry.key.contains(" ") || keylist.length != 2 || !(keylist[0] == "[optional]" || keylist[0] == "[required]"))
+            throw new RuntimeException("Mod category '${entry.key}' is not named correctly! It must contain '[optional]', or '[required]'")
+        if (!providers.gradleProperty("enable_${getCategoryName entry.key}").present)
+            println("Category '${entry.key}' has no gradle properties definition. This will be assumed to be false.")
+    }
+}
+
+static String getCategoryName(String rawCategoryName) {
+    return rawCategoryName.trim().split(":")[1]
+}
+
+// Do not make this static
+// Function: Has no unfulfilled requirements & atleast one option
+boolean isModEnabled(Map<String, List<String>> modCategories, String mod) {
+    //Check required categories
+    boolean allRequirementsSatisfied = modCategories.entrySet().stream()
+            .filter{entry -> entry.key.contains("[required]")}
+            .filter {entry -> entry.value.stream().anyMatch {modElement -> (mod == modElement) }}.allMatch { entry ->
+                providers.gradleProperty("enable_${getCategoryName entry.key}").getOrElse("false").toBoolean()}
+    if (!allRequirementsSatisfied)
+        return false
+    //Check optional categories
+    return modCategories.entrySet().stream()
+            .filter{entry -> entry.key.contains("[optional]")}
+            .filter { entry ->
+                providers.gradleProperty("enable_${getCategoryName entry.key}").getOrElse("false").toBoolean()}
+            .flatMap{entry -> entry.value.stream()}
+            .anyMatch{modElement -> (mod == modElement) }
+}

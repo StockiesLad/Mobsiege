@@ -1,0 +1,682 @@
+-----------------UPDATES---------------------
+
+Over ~~powered~~ stressed {
+	Custom stress limits for create (only I/O)
+	    cogs
+	    shafts
+	rethink balance
+}
+
+Original Overworld {
+    add more mining levels
+    make certain ores spawn in certain biomes
+    split ores amongst different dimensions
+    add multi-ores (iron ore veins can have nickel-iron ore which could yield more iron or nickel)
+    make surface ore seams indicating a large ore deposit
+        make the outside have a 50% chance of being gravel
+    remove individual gravel ore seams and replace with proper ore seams
+    Make different rocks yield different (on a low chance) some mineral/metal
+    make food spawn in specific biomes and plants
+    add functionality to anger random animals by fiddling with their interests (monkeys -> bananas)
+        scan in 10 block radius for respective animal on block break
+    
+    add alternate coal generation (where it generates as layers of blocks vs ores, odd vs even y level)
+    like coal, do that to other metals (like hematite for iron)
+
+    completely revamp smelting procedures. Make kilns far more limited and use flux (like fluorite) to smelt materials
+    Make innovative way to create steel (using tungsten, graphite, magnesium & iron)- no more coal + iron.
+    Make other forms of steel (cast iron, galvanised steel)
+    Make other forms of EXISTING alloys (like adding magnesium to aluminium for proper strength)
+
+    add proper salt processing (niter around salt caves, pink salt blocks can give enriched salt that is only processable in machines)
+    add salt deposits like the surface seams
+
+    add rock processing to turn specific rocks into other useful minerals
+
+    Add tungsten (for heating, light, and alloys)
+    add fluorite (for smelting high-level materials)
+    add other metals/minerals
+
+    add ore regeneration
+        in specific stone (according to initial generation): A vein can regrow after 100-+25 minecraft days, slowly.
+        Slowly runs out over time and the bottom most 25 layers (above -59 bedrock level) slowly convert to bedrock
+        during conversion, bedrock forms a 'pyramid' and spills into other chunks.
+        Requires scanners to read how much energy a chunk has.
+        power(x, 1.5) the fill layer, is a layer of which a default fire tick takes place.
+        Use flare system to handle damage.
+        Make bedrock glow when level is above 5
+}
+
+Shine & Refine {
+    REFER TO "biome mod management solutions" conversation
+    aether genesis  + promenade + primalstage  + integrated dynamics + thermal expansion + support in euphoria patches (BOP rainbow birch)
+    Optimise Entities with behavioural LOD's, entity lookups instead of long-distance path-finding (code in mobsiege2Java) and refactor goal selection and ticking
+    unify (ingots, dusts, nuggets etc) in thermal style to make it look proper
+    optimise item groups to be lazily-loaded
+    speed up data by caching it
+}
+
+Fastidious Fire {
+    Stoker - 3 stone rods and two bricks (50 hits)
+        Smother - Turns off temp fires (fireblocks, torches, campfires, etc)
+        Debug - Prints in chat data (usually burn times, if kiln is heated, etc)
+        Collect - Collects the exact state of temp fires (1% success for fireball from fire)
+        Repair - Using medium-grade charcoal, a burnt torch can be repaired
+    Make dehydrating give seasoned wood (using carbonize wood mimic) to char for better, higher quality coal.
+    Make primitive retort. Weak fire dehydrates. Strong fire carbonises - seasoned wood gives better charcoal
+    Using heated compacting (create) some immeng recipe / thermal dehydrator to season wood.
+    Reverse charcoal grades where low grade gives more creosote (including seasoned wood NOT UNSEASONED) while higher quality gives more ash.
+    Add potash lye (from ash clay) and some uses.
+    Make sure unseasoned wood produces bad charcoal only so that good charcoal is a little more immersive (and not rng)
+    Add specific pyrolysis compat in thermal, immeng, and create (superheated). (machine method to effectively make high-grade charcoal and creosote oil)
+    Add creosote oil support for create and other mods.
+    Integrate BC Distillation for Oils.
+    Centralise oil into one mod.
+    Add other oil derivatives like kerosene, naphthalene, etc
+    Add sub bituminous coal (common)
+        anthracite ores (rare)
+        graphite (very rare).
+    Incorporate unearthed lignite for coal.
+    Rename coal bituminous coal.
+    Add block spawns of all coals (incl graphite)
+    Add large oil and coal deposits in mesa biomes:
+        spawns in oil spring
+        Layered ellipse (outside to core) of coal blocks: lignite, sub-bituminous, bituminous, anthracite & graphite
+
+    Tweak all burn times of wood to burn differents AND DOCUMENT IT
+        Example: eucalyptus burns more than birch by a lot.
+        Modify carbonize to dynamically adjust qualities based off burn times.
+            Use an enum to categorise to quality into (low, medium, high) and store as blockstate in charcoal block
+    
+    According to real world strength, adjust mining speed (and even level if extreme enough) of wood
+
+    Crushing coal-blocks of bituminous and anthracite to create crude and porous graphite respectively
+    After long-blasting, crude and porous graphite creates nuggets and chunks of crystalline graphite (pure)
+    9x nuggets, 4x chunks = 1 ingot of crystalline graphite
+    (graphite) Creates lubricant (for machines), electrolytic cells, Graphite Rods, Plasma Torch, Crucibles & Diamond synthesis
+    (graphite) Can be used for fuel ONLY in a super smelter (custom) to smelt ores fast early-game.
+    Different qualities of graphite have their respective burn times for the super smelter (uses chunks)
+    Add possible process for creating synthetic diamonds from graphite
+
+    Add a redstone fire that burns redstone blocks and in exchange it reenergizes things (make this buildcraft style).
+        Ash turns into charcoal,
+        sugar water (or some carbohydrate) turns into oil,
+        potash lye turns into just lye.
+        explodes living entities if in redstone fire.
+    Redstone is made by first lighting redstone block then throwing in soul flux.
+
+    widen support for heating elements + a custom burner
+    	add tag deconstruction for TAN temp tags
+}
+
+Magical Minerals {
+    REFER TO MAGICAL UTILITIES TODOS
+    REFER TO "crystal worldgen design tips" conversation
+    Add Cloud Condenser that preserves the activation state of a cloud when picking up.
+    Limit cloud activation-deactivation to a random chance of fading away
+        make different reaction to fading (e.g. energised cloud could explode)
+    Clouds
+        Farmability and further customisation/improvements for magical utilities clouds
+        custom machines to synthesize exclusive clouds using the power of colour
+        add machine work for magical utilities cloud
+        Add ability to make a certain cloud by surrounding it with certain stuff:
+            E.g. strike cloud with lightning for storm cloud (using lightning rod or trident)
+            Surround cloud with leaves for nature cloud
+    Add 12 or 16 different colour crystals that spawn in caves (like old quark) but as a biome.
+        They can grow over time only in water.
+        They spawn in a gradient (think rainbow oak tree in twilight forest)
+        Specific ores spawn behind their colour respective crystals
+        Sometimes at the tip of a crystal, it is charged, and zaps between them and entities (the spark traverses air and nonfull blocks)
+        It will zap you but only do damage if not present with a tesla coil bauble. It gives the “shocked” effect which paralyses you temporarily. (A couple seconds)
+        Uses thaumcraft- style models for clusters
+        Crystals are NOT full, the art should represent a 3d fractal.
+        Crystal Fragments can be thrown in water with Certus Quartz to occasionally duplicate.
+        When superheated (either in water or crystal growth chamber), it can provide certain materials of its colour:
+            E.g. green gives emeralds.
+            If a water block is touching an ionised crystal. The water will eventually turn a cloud of that specific colour.
+
+    For crystalised temporaz:
+        when entities die in a temporaz fluid, their items get sucked in the past. They have to “rotate” in the fourth dimension travel to the nether to get back in the past.
+        Since every block is 7 in the overworld, the coords get translated as such: 7, 14, 21 -> 2, 3, 1
+        When they place the liquid, a luminant white block will appear. It is not mineable.
+        The player will have 15 seconds to grab everything.
+        Although some items will be distorted as reversed space time - where space and time flipped places.
+        Reversed space time can be used to turn water into more liquid temporaz or speed things up.
+}
+
+Butchering Bloom {
+    Burnt Books
+        present in ruined nether portals
+        contains content such as "soil that feeds" or "carnivorous soil"
+            “The red land feeds. I saw it breathe.”
+            “Soil that swallows. Flesh that remembers.”
+            “The key... we left it near the gate. Don’t listen to the growling.”
+            “They say it eats the soul, but gives power in return.”
+        Guilt lore:
+            “The land needs to feed. That’s all. You’re just helping. You’re not doing anything wrong.”
+            “The screams are normal. It’s how it says thank you.”
+            “Don’t stop. Not yet. You’re close.”
+            “It will let you go. Eventually.”
+            "Satan isn't one person. It's us!"
+
+    Corpstone
+        poisonous and has slowdowns and debuffs.
+        Soul fades out of enterosoil when becoming corpstone. Plays bassy death sound
+
+    Enterosoil
+        present in visceral heap
+        quicksand-like behaviour that disables flying and consumes living entities.
+        Occasionally spits out xp (stores and sends to pipes if tamed) and loot
+            sometimes loot is swapped with bloody pulp and bones
+        Has timeout. If too much is consumed, it is converted to corpstone.
+        All soil works as a multiblock (similar to our carbonise system) and actions affect all blocks at once
+        On top of corpstone.
+        Sometimes "burps" after eating.
+        Can be created by giving a visceral meal (flesh + soulite) to corpstone
+        Has a tendency to move around in other directions (only switching with flesh blocks)
+        Spawns in rings, not circles.
+        Enterosoil will not eat unless stepped on for a while.
+        Disguises as flesh blocks.
+        When stuck in the ring. The entersoil will try to eat you immediately and grapple you with its tongue
+        Occasionally whispers, stomach growls
+        Tendency to scream/growl (or vomit very poisonous hydrochloric acid) if eating near its threshold
+            very rarely, it might grow and increase its reach.
+        upon first interaction, awards acheivement "You shouldn't be here"
+        When eating a certain type of mob over and over, it gets more efficient.
+        After consuming over 25 non-nether entities, it has a small chance of doubling xp (Mature enterosoil) but reducing loot
+        Mature entersoil can be used for a soul digestor that converts flesh, bloody pulp, etc into pure XP
+        Even without the crown of satan, manually feeding enterosoil visceral meals can "tame" them only if
+            matured first. However, if too hungry it'll get angry and not be tame anymore.
+            Will thank you after tamed and every time you feed it.
+            When feeding a TAMED enterosoil enough times, you will get an achievement "Satan's Servant"
+        BEST ONE: Before 5 minutes of its most recent death, it might mimic its victims hurt sounds. It's still eating...
+        SUPER RARE: Chunk of Viscera. Baseline 0.01% chance of dropping when enterosoil is eating (untamed, unmatured).
+            Increased by giving better entities (like wither skeletons)
+            Requires the consumption of nether entities.
+            Has an acheivement "The arbiter of injustice"
+
+    Whispering core:
+        Only acheived by sacrificing humans (villagers, pillagers, piglins)
+
+    Soul-glue:
+        Combined Latex with soulite to create a glue that is binded with souls as opposed to material bonds.
+
+    Chunk of Viscera can go on tinkers construct tools (or merged with a book for enchantment)
+        to have a rare chance to banish people into enterosoil with regeneration and resistance to suffer eternally.
+        Has an acheivement “Feed What Feeds You” “The throne is always hungry.”
+
+        Slight life steal (1–2% of damage done).
+        Occasionally causes enemies to scream instead of normal hurt sounds.
+
+    Crown of Blood (Viscera):
+        Requires netherite piece, whispering core, soul glue and chunk of viscera
+        Enterosoil is automatically tamed as you walk past any.
+        Enterosoil will greet you with "Hello Master!"
+        Actively assists in retrieving nearby drops and jumping using its tongue.
+        Enterosoil will actively try to heal with what wouldve been xp and damage to entities (10%)
+
+    Wearing crown of blood causes iron golems to start to perceive you as an enemy.
+    Wearing more pieces of armor causes the iron golem to have an "adrenaline surge" of
+        strength, resistance, speed and regeneration to kill you.
+
+    Crown of Satan
+        Requires Blocks of Viscera (made from chunks) binded with some blazing alloy (and gold)
+        Requires a soul singularity forged in super heated mixing with soulite and blocks of enderium
+        Enterosoil purrs and is actively relaxed with you nearby.
+        Requires Crown of Blood.
+        High chances that a nether entity is passive toward you.
+        Requires constant killing (or bonuses from enterosoil, which now help you in every way, all the time) to not
+            erode over time.
+        Wither skeletons appear when damaged.
+        Can link (and see as xray) with other enterosoil which form a network to strengthen you.
+        You finally behold to power to pick up the enterosoil without it eating you (damaging).
+        You can spawn an enterosoil every 5 min when sneaking over an air block (must have enterosoil in inventory).
+        Persistent stength and speed.
+        Immune to Fire and lava but hurts from water and ice.
+        Nether is now "default" temp, overworld and aether freeze you very quickly.
+        You can possess and convert mobs to nether soldiers which will fight for you.
+        Curse of binding. When die, it goes away. "King of the Nether" acheivement.
+        In overworld. Golems and "friendly" mobs will actively attack you. They will get more coordindated, attack
+            bigger groups, have buffs and better gear. The longer you stay,
+            the stronger everybody gets. If you stay too long, angels will start to come and delibrately wreck
+            portals so you cannot get back. They can phase through walls. They will try to build a cross
+            which if successful will lead to god smiting you with so much lightning that you are destroyed.
+        In the aether. All the aforementioned buffs will apply but on a much faster timeline. NO BOSSFIGHT.
+            Unlike the overworld, every single mob will automatically be aggro from any distance. Default
+            damage is taken and going near temples increases it. The sun god is so strong that his presence
+            alone will even burn you (SATAN) to death. He will spawn endless tirades of angels to destroy you
+            if you make the mistake of getting too close.
+        Default buffs when in the nether.
+}
+
+(De)void {}
+
+----------------------------------------------------------
+
+low priority {
+	convert all tools into tinkers construct
+	add support to start in 3 dimensions (aether, overworld, nether) and re document (ambrosium is picked (not mined) because its soft)
+	rename sheets to plates to avoid confusion
+    fix textures (all of them, the current ones are terrible)
+    Do up main menu, icon and shit
+    add custom acheivements using the normal mc system
+}
+
+AFTER THE FOLLOWING IS COMPLETED, WE ARE MOSTLY DONE
+
+Create high level recipes {
+	superheated recipes
+	sequenced assembly
+}
+
+complex recipes {
+	turrets
+}
+
+primitive fighting tools {
+	Slime Bomb (gunpowder + sap/slime): less explosion, higher yield; leaves behind charred sap that slows hostile mobs
+	Frag Explosive - (tnt + glass shards): primitive grenade shoots glass everywhere, doing high damage to mobs
+}
+
+unify ash
+maybe make more stages (earlygame, midgame, endgame) --> (primal, forgery, basic machines, advanced machines, magic, completion)
+add proper tech progression (tinkers construct & buildcraft -> create & immersive engineering -> projectred & industrial foregoing -> magic cubes & ae2)
+progression structure {
+	complex alloys, basic components and quartz-variants are used to build basic machines/redstone - produces advanced components and deep resonance crystals (turrets & guns, basic jetpacks, mob grinding, elevators)
+	advanced components, hyper-complex alloys & chips are used to produce magic cubes and a ae2 me system (interdiction torches and portals, advanced jetpacks & ae2)
+fix enderium catch 22 with component assembly.
+get back to expanded storage 2/2 in later mechanical/electrical branches
+fix coal input in ad astra steel smelting
+add a way to chop logs into split logs via machines
+add more heating sources
+make epic siege monsters specifically target machine blocks
+enable magnets in project red and foregoing
+incorporate clouds in crafting
+balance (deep resonance, industrial foregoing, thermal expansion, integrated dynamics, enderio, bigger reactors, rftools, solarflux, simply jetpacks, ad astra, systeams, mob grinding utils, ae2)
+use resources from (betterend, betternether, projecte, bedrockium & aether &  magical utilities)
+make mobs spawn with modded armor
+make more things demand chips such that there is an incentive to actually pursue kenesis pipes
+fix uranium based recipes for alexscaves into normal uranium
+fix alchemical transmutation
+consider mobz inside mobsieges
+check sulfur
+Add a way to process nether ruby into normal ruby
+Make it so campfires dont use a grill
+
+add recipes to pulverise other sands
+Use aether clay
+Tinkers construct electrotine upgrade (boost mining level)
+Make custom silicon boule texture
+    change sandy coal texture
+    add ability to smelt charcoal sand into 4 boules following raw block burntime bonuses (4 instead of 9 efficiency)
+    make charcoal sand require atleast high grade coals
+    rename charcoal sand to carbon sand
+
+make obsidian pipe require heavy obsidian
+Fix storm cloud to only work when seesky is true
+add Heavy Obsidian (Osmium + grains of infinity + Obsidian)
+add osmium on earth (Strong alloys (for any high pressure use cases like create press + uranium containment)
+
+require graphite lubricant for create machines
+
+add aether ores
+reduce copper yield
+tune gravel ore yield
+create cannons + create radars???
+valkyrie clay support for brick making (might replace aether clay as its found in lakes near silver dungeons)
+add proper nether brick creation (using lava)
+add better clay production (make a process to crush gravel into dust, etc)
+add better names for gravity gravel rocks (holystone should have its own)
+Add actually additions crystals to aether
+fix buildcraft facade item group missing display item
+fix uranium to process pure uranium into ingots better
+Add osmium and cobalt ore generation
+
+script all data & assets into kjs. Make sure that there is a system to automatically do it for blocks made in the java interface
+migrate all tags to forge for simplicity
+
+(bug)two player cannot be in same server ?
+
+# FINISHED TASKS! ---------------------------------------------------------------- FINISHED TASKS!
+
+Primitive fighting tools {
+    Phosphorus Flares - (high grade charcoal + bonemeal (Phosphorus) + flint): shoots fire in a given direction for a certain amount of time
+}
+
+CHANGE OSMIUM ORES IN BNO AND BEO.
+RENAME LOCATIONAL ORES ORE SYSTEMATICALLY DO IT. (mobsiege:tconstruct\end_cobalt_ore -> "End Cobalt Ore" NOT "Tconstruct/end Cobalt Ore")
+FIX THE MOBSIEGE2JAVA REFS BEING REGISTERED BY KJS
+make buildcraft 3/3 not 2/2 where 3/3 and create 3/3 (new age) can be the electric interfaces
+Add back hardcore torches recipe to smother (why remove extra features)
+Use existing soul sand dust
+add proper tags to aether materials and betterx
+ability to render lignite into a coal 
+for some reason stone is hidden (idk why)
+fix missing entries
+fix actually additions weird access
+fix recipe printing
+fix buildcraft fake explosion
+lengthen explosion time to be exponential (raise a constant (1 + 1/x)^p - 1 (max 1))
+integrate auto crafter deeply (consider buildcraft one too)
+look into ranged pumps, pipez, flux networks and energy meter
+progression structure {
+	primal core 2 gets basic resources, albeit very primitive. (mining and survival)
+	buildcraft gets resources and lava to process resources en mass with tinkers construct (buckets)
+	alloys are used for building immersive engineering and create components via crafting and casting - creates basic components (automation)
+}
+fix carbonize
+supa important aether ores (this needs to be a thing if aether is to be a viable starting dimension) or creatively use tinkers construct to make it more interesting (I like this better)
+change from esm config to epicsiegemod config
+add all chests (I have tags for this), all furnaces and workbenches to epic siege
+Make hostile mobs faster (including angered passive mobs) and super dangerous
+fix weird issue where u sometimes cant use creative mode flying properly
+fix random cme (shit makes no sense) (its tinkers construct being weird)
+fix weird issue where a restart is required for plant fiber to drop properly
+replace fork of ESM with a mixin instead (fixes licensing)
+fix alchemical coal burntimes being clamped for being too high. Lower it pls
+test all loot tables (fix charcoal loot tables)
+make a way to get glowstone, and to "freeze" that into icestone for some eventual logic for making farmable aether blocks.
+rewrite comfuncs & commaths - completing the refactor
+brick block consistency (gravel, nether, slag, etc)
+remove block variant duplicates
+fix multiple tag sources in almost unified
+more intercompatibility (gravel, sand, obsidian, ender pearls)
+make create ender transmission harder to make
+water rain collector harder to make
+add difficulty scaling for mobsieges
+fix grout recipe
+add better way to process pelt into leather (add support for machine automation too)
+clean flesh into pelt
+add melee/parry to knives
+port basic loot tables to complex (even if its still in JSON)
+(later on) add recipe chaining (funcs return output)
+fix old inputs for: weapon_printer.js, power_matter
+account for ablaze
+add gravel, flint, clay & pebble support for aether  (u already have a tag for holystone)
+make no tree punching - like pebbles for nether & end maybe???
+add soulsoil dust for nether
+make holy pebble spawn like no tree punchings's one (work on this next)
+fix insertions
+need textures for holy pebble and quicksoil dust
+disable aether redux menu
+fix twigs and notreepunching rock duplicates
+add group pool for loot tables (we want to port any JSON-exclusive shit to LootJS)
+refactor recipes and loot tables (especially fucking loot tables)
+replace leather from aether cows with animal pelt
+2 bamboo leaves to 1 plant fiber
+fix fire bow
+mekanism ---> biggerreactors (uranium)
+remove quark vertical slabs
+remove also; unstable tools bygone nether, pineapple delight
+get rid of some unbalanced and shitty mods like mekanism
+revamp cement, niter and ash brick production use powdered concrete block instances
+fix recipes and tags (this is last)
+Document primitive states (flint tools, stone grill, brick campfire, mortar kiln, cement furnace)
+fix vines not breaking
+fix lilypads not being in partial organic
+fix pointed flint direction
+charcoal liquefaction
+Add generic bark support https://github.com/nanokulonq/PrimalStage/blob/master/src/main/java/com/nanokulon/primalstage/mixin/UseOnBlockMixin.java#L31
+migrate knives
+Primalcore 2 {
+	Slats (decorativeblocks:lattices) out of wood to combat scarcity
+	Make wood less efficient in general
+	Make wood harder to get
+	Make Flint Tools much weaker
+	Make Flint Tools unreliable (break randomly)
+	Harder knife
+	Plant fiber -> plant twine -> Primitive String
+	4 gravel to one flint
+	Flaking flint shards gives flint pebbles
+	different way to make a crafting table
+	Use lattices for crafting table
+	Implement more complex claying
+	More advanced charcoal production (use chopped logs in charcoal interaction recipe)
+	Use primalstage drying rack for bricks
+	Check no tree punching pebbles
+	Farmers delight integration 
+	Make chance of getting fiber and sticks far lower
+	Way to get bow early on (wool blocks + knife = feathers)
+	More explicit tiers (flint, stone, brick, mortar, cement)
+	add campfire rock
+	Utilise Grill for food, 
+	add machine compat for brick making
+	make campfire require bricks and grill (maybe stone)
+
+}
+
+presentation {
+	Window Title
+}
+custom settings {
+	resourcepacks,
+}
+fix broken status effects on world reload (vanilla)
+starting items
+patchouli {
+	overworld start (making basic tools, charcoal, clay, firestarters, hardcore torches)
+	interdiction torch for mobsieges
+}
+make sleeping stage (https://discord.com/channels/303440391124942858/1047320998199955458/threads/1140745855293460570) && https://discord.com/channels/303440391124942858/1047320998199955458/threads/1221818425681248286
+totem of undying replacement with recipe
+coal explosion + hardcore torches compat (tags)
+difficulty locking
+mandatory hardcore darkness
+almostunified compat with immersive engineering & productive bees
+duplication recipes (tome of alkahestry) (gravilite)
+fix ridiculously slow data
+holystone into ores
+magnetic caves and magnetite usages
+unify tech mods (and cull redundant ones)
+incompat between immersive engineering and fancymenu (try packmenu maybe) (reported, just disable edit mode to fix)
+(allow for content management in curseforge to avoid datapack/resourcepack and shaderpack license infringements)
+recipes {
+	orb_of_thermoregulation
+	philosopher's stone (zivicio) master infusion crystal
+	interdiction torch (somewhat expensive)
+	aeternalis fuel uses coal/charcoal blocks
+	dark matter requires gravitite, sculk, netherite, thallasium & aeternalis fuel
+	unstable ingots
+	bedrockium
+	redstone alloy => red alloy, silicon, electrotine alloy
+	ae2 shit
+	construction wand
+	magnets
+	add fluid crafting for thermal like the good ol days
+	guns from machines
+	uncrafting table
+	water canteens
+	transmutation table (make this extremely expensive)
+	emc collector (extremely expensive)
+	nukes (+ alexscaves utilisation),
+	elytra
+}
+make plant fiber easily accessible (low priority)
+twigs and this rocks compat
+revert weird wart textures (jadens nether exp maybe?)
+ensure all wart is added to tag
+systematic modifications {
+	materials (input/output)
+	crafting tables
+	furnaces
+	sticks
+	planks
+	vines to sticks
+	worldgen unification
+	oregen unification
+}
+silents gems and better nether compat
+rename to: Mobsiege
+removed biomes {
+	traverse {
+		fir {
+			coniferous_forest
+			snowy_coniferous_forest
+		}
+	},
+	biomeswevegone {
+		cypress {
+			cypress_swamplands
+		},
+		mahogany {
+			tropical_rainforest
+		},
+		fir {
+			coniferous_forest
+			snowy_coniferous_forest
+		}
+		prairie grass {
+			prairie
+		}
+	},
+	biomesoplenty {
+		redwood {
+			redwood_forest
+		}
+	}
+}
+unify all resources
+find better furnace components that falls in line with progression
+fix bwg imbued enchant log texture (bwg)
+maybe remove minecraft block variant duplicates
+gunpowder recipe fix
+unify all ores
+recipe to split sulfur quartz (all quartz)
+multimod machine recipes {
+	crushing: create, thermal, immmersive engineering, ad_astra
+}
+split tweak categories into files in a folder (e.g.  earlgame.js => earlygame/[charcoal.js, kiln.js, etc])
+maybe use unified call to save time
+ash (carbonize + supplementary or the other one)
+change removal to include REI hiding
+iron furnaces standard progression
+add better shaped recipe system to avoid making a billion functions
+test the insertion recipe
+fix crafting table duplicate recipe
+refactor loot tables and tags
+split early game progression
+fix furnace, blast furnace and crafting table recipes
+refactor shitty tag system
+migrate all important functions to global
+fix global recipe functions (they are broken for some reason)
+fix deadlock caused by rotatingSquare recipe
+make blaze sometimes spawn with a lava monster
+remove mccreator {
+    unusual end
+    spelunkers charm
+}
+ad astra ore compat with almost unified
+remove duplicate ores
+review modernfix config (low priority)
+space ore compat (mekanism and thermal)
+unhide alexs caves uranium
+fix recipe problem (silentgear)
+fix gravel ores output & uranium drops of basic ores
+fix this fucking ore drop system bc it aint fucking working
+promenade cancel duck spawn if config doesnt work
+find source of world loading crash
+test metallurgy
+fix world time not ticking
+use kubejs to set gamerules if global gamerules keeps breaking
+forge:ores/sulfur                        => cinderscapes:sulfur_ore, thermal:deepslate_sulfur_ore, thermal:sulfur_ore, thermal_and_space:glacio_sulfur_ore, thermal_and_space:mars_sulfur_ore, thermal_and_space:mercury_sulfur_ore, thermal_and_space:moon_sulfur_ore, thermal_and_space:venus_sulfur_ore
+forge:ores/zinc                          => beo:end_zinc_ore, bluepower:zinc_deepslate, bluepower:zinc_ore, bno:nether_zinc_ore, create:deepslate_zinc_ore, create:zinc_ore
+forge:ores/peridot                       => projectred_exploration:deepslate_peridot_ore, projectred_exploration:peridot_ore, silentgems:deepslate_peridot_ore, silentgems:peridot_end_ore, silentgems:peridot_nether_ore, silentgems:peridot_ore
+forge:ores/uranium                       => beo:end_uranium_ore, biggerreactors:deepslate_uranium_ore, biggerreactors:uranium_ore, bno:nether_uranium_ore, immersiveengineering:deepslate_ore_uranium, immersiveengineering:ore_uranium, mekanism:deepslate_uranium_ore, mekanism:uranium_ore, mekanismaaa:glacio_uranium_ore, mekanismaaa:mars_uranium_ore, mekanismaaa:mercury_uranium_ore, mekanismaaa:venus_uranium_ore
+forge:ores/tin                           => beo:end_tin_ore, bno:nether_tin_ore, mekanism:deepslate_tin_ore, mekanism:tin_ore, mekanismaaa:glacio_tin_ore, mekanismaaa:mars_tin_ore, mekanismaaa:moon_tin_ore, projectred_exploration:deepslate_tin_ore, projectred_exploration:tin_ore, thermal:deepslate_tin_ore, thermal:tin_ore, thermal_and_space:glacio_tin_ore, thermal_and_space:mars_tin_ore, thermal_and_space:mercury_tin_ore, thermal_and_space:moon_tin_ore, thermal_and_space:venus_tin_ore
+forge:ores/silver                        => beo:end_silver_ore, bluepower:silver_deepslate, bluepower:silver_ore, bno:nether_silver_ore, galosphere:deepslate_silver_ore, galosphere:silver_ore, immersiveengineering:deepslate_ore_silver, immersiveengineering:ore_silver, projectred_exploration:deepslate_silver_ore, projectred_exploration:silver_ore, silentgems:deepslate_silver_ore, silentgems:raw_silver, silentgems:silver_ore, thermal:deepslate_silver_ore, thermal:silver_ore, thermal_and_space:glacio_silver_ore, thermal_and_space:mars_silver_ore, thermal_and_space:mercury_silver_ore, thermal_and_space:moon_silver_ore, thermal_and_space:venus_silver_ore
+forge:ores/sapphire                      => bluepower:sapphire_deepslate, bluepower:sapphire_ore, projectred_exploration:deepslate_sapphire_ore, projectred_exploration:sapphire_ore, silentgems:deepslate_sapphire_ore, silentgems:sapphire_end_ore, silentgems:sapphire_nether_ore, silentgems:sapphire_ore, thermal:deepslate_sapphire_ore, thermal:sapphire_ore, thermal_and_space:glacio_sapphire_ore, thermal_and_space:mars_sapphire_ore, thermal_and_space:mercury_sapphire_ore, thermal_and_space:moon_sapphire_ore, thermal_and_space:venus_sapphire_ore
+forge:ores/ruby                          => bluepower:ruby_deepslate, bluepower:ruby_ore, projectred_exploration:deepslate_ruby_ore, projectred_exploration:ruby_ore, silentgems:deepslate_ruby_ore, silentgems:ruby_end_ore, silentgems:ruby_nether_ore, silentgems:ruby_ore, thermal:deepslate_ruby_ore, thermal:ruby_ore, thermal_and_space:glacio_ruby_ore, thermal_and_space:mars_ruby_ore, thermal_and_space:mercury_ruby_ore, thermal_and_space:moon_ruby_ore, thermal_and_space:venus_ruby_ore
+forge:ores/nickel                        => beo:end_nickel_ore, bno:nether_nickel_ore, immersiveengineering:deepslate_ore_nickel, immersiveengineering:ore_nickel, thermal:deepslate_nickel_ore, thermal:nickel_ore, thermal_and_space:glacio_nickel_ore, thermal_and_space:mars_nickel_ore, thermal_and_space:mercury_nickel_ore, thermal_and_space:moon_nickel_ore, thermal_and_space:venus_nickel_ore
+forge:ores/lead                          => beo:end_lead_ore, bno:nether_lead_ore, immersiveengineering:deepslate_ore_lead, immersiveengineering:ore_lead, mekanism:deepslate_lead_ore, mekanism:lead_ore, mekanismaaa:glacio_lead_ore, mekanismaaa:mercury_lead_ore, mekanismaaa:venus_lead_ore, thermal:deepslate_lead_ore, thermal:lead_ore, thermal_and_space:glacio_lead_ore, thermal_and_space:mars_lead_ore, thermal_and_space:mercury_lead_ore, thermal_and_space:moon_lead_ore, thermal_and_space:venus_lead_ore
+
+dornum and afterdark and deeperndarker test
+hide blockpos in f3
+provide better surface checking for mob siege events
+check for some sort of artifical lighting to stop mob sieges occuring in play built structures (seesky check)
+mob seige events {
+	slime swarm
+	bliztic barrage
+	splosive strike / creeper contention
+}
+balance breeze and blitz spawns in the aether
+test ballistix (removed)
+test more gems (removed)
+vics point blank vs timeless and classics zero (tacz removed)
+maybe remove oreganized
+remove waystones (replaced by custom portals)
+fix workbench and furnace crafting duplicates
+fix workbench and furnace recipe inputs
+do chest progression
+test litematica (and with shaders) (removed)
+spawn blitz in aether
+remove pylons (OP) 
+modify c2me config to require more memory
+promenade blue berry bushes fix
+blockswap replacement? (removed)
+remove what is stone && ddepths out of concern for typical MCCreator quality 
+fix duplicate lapis and redstone nether ores
+remove powah
+fix basic ores output
+see if JEI hiding is working (it is)
+fix rock duplicates
+what_is_stone:marble -> blockus:marble
+what_is_stone:scoria -> create:scoria
+what_is_stone:rhyolite -> light_rhyolite
+what_is_stone:schist -> dark schist
+what_is_stone:dacite -> grey dacite 
+geologic_expansion:limestone -> rocky limestone 
+create:limestone -> smooth limestone 
+quark:limestone -> hardened limestone 
+blockus:limestone -> warm limestone 
+alexscaves:limestone -> blockus:limestone 
+fix common tags (sand, dirt, etc) 
+remove alexscaves gunpowder from sulfur 
+blackstone furnace duplicate (quark + betternether) 
+fix vanilla furnace duplicate recipe 
+organise tag system (created) 
+fix blockus and quark charcoal block duplicate 
+fix stick recipes 
+test recipes using new compileObject 
+biomeswevegone:fir => dark fir 
+organise sound step system (one has been created, use it) 
+fix presence footsteps bugging out wtf (mossy stone, overgrown stone) 
+blue berry duplicate (between BWG and Promenade) 
+please for gods sake re organise the code base there is too much fukn mess now 
+add tags for both items and blocks (any mc or forge tags go in defaults) 
+fix overgrown stone bwg (overgrown everythang) 
+biomeswevegone:rainbow_eucalyptus => gloomy eucalyptus
+change biomeswevegone magic logs to old textures (bc better) 
+biomeswevegone:willow => dark willow 
+promenade:palm => tropical palm (done
+biomeswevegone:palm => dry palm 
+ancient_aether:sakura => aether sakura 
+biomeswevegone:orchard => Old Growth Orchard 
+biomesoplenty:pine -> dark pine 
+biomesoplenty:jacaranda => white jacaranda 
+biomeswevegone:sakura => red sakura 
+translate promenade maple to white maple
+terrestria:sakura => dark sakura 
+translate bwg maple to dark maple 
+fix fortune function in carbonize and alexscaves loot tables 
+modify alex's caves sulfur 
+betterx crafting table integration (using similar tactic for vines) 
+try combine vine registry (maybe use polymorph to circumvent tag overlap) 
+fix furnace, crafting table and dynamic log to wood recipes (fucking done)
+ensure recipe integrity before adding mods (WOOHOO I WAITED SO LONG) 
+check if there is possible lang files for kubejs (maybe via addJson on client) 
+rare nucleeper spawn 
+carbonize ash recipes 
+carbonize charcoal sounds for immersion 
+Carbonize compat 
+codify loot tables 
+remove duplicate recipes for things like gunpowder, betterend sulfur and such 
+make it difficult eternally -_- 
+stack edenring on top of aether 
+playerRespawnPercentage = 0 as a default value 
+check furnace recipe for aether and edenring 
+fix edenring start 
+fix nether start 
+fix better end sounds 
+fix betternether:nether_mycelium soundType 
+look into water changing opacity glitch 
+world chunks deadlock (was Epic Seige: Nightmare) 
