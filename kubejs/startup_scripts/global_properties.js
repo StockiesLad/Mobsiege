@@ -123,6 +123,8 @@ const typedContent = formatContent({
     netherite_chipset: 'netherite_chipset',
     void_chipset: 'void_chipset',
 
+    stone_lattice: unregistered('stone_lattice'),
+
     //Add aether ores here
 
     heavy_obsidian_ingot: '',

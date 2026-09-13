@@ -2,19 +2,19 @@ recipes((event, funcs) => {
      funcs.vanillaInsert(funcs.removeByOutput('primalstage:kiln'), [
           ['primalstage:kiln_bricks', [6, 3, 1, 5, 8]],
           [content.high_grade_charcoal, 4],
-          ['minecraft:campfire', 7]
+          [content.stone_lattice, 7]
      ])
 
      funcs.vanillaInsert('primalstage:kiln', [
           ['primalstage:kiln_bricks', [6, 3, 1, 5, 8]],
           [content.high_grade_charcoal, 4],
-          ['minecraft:soul_campfire', 7]
+          [content.stone_lattice, 7]
      ])
 
      funcs.vanillaInsert('primalstage:kiln', [
           ['primalstage:kiln_bricks', [6, 3, 1, 5, 8]],
           ['aether:ambrosium_shard', 4],
-          ['ancient_aether:ambrosium_campfire', 7]
+          [content.stone_lattice, 7]
      ])
 
      common.alwaysArray([

@@ -34,7 +34,8 @@ ClientEvents.lang('en_us', event => {
         ['projectred_core:electrotine_silicon', 'Electrotine Silicon Chip'],
         ['projectred_core:energized_silicon', 'Energized Silicon Chip'],
         ['projectred_core:infused_silicon', 'Infused Silicon Chip'],
-        ['appflux:redstone_crystal', 'Inert Redstone Crystal']
+        ['appflux:redstone_crystal', 'Inert Redstone Crystal'],
+        ['decorative_blocks:lattice', 'Wooden Lattice'], 
 
     ]
 

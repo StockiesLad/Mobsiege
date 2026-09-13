@@ -12,6 +12,8 @@ recipes((event, funcs) => {
     event.shapeless('primalstage:stone_pebble', ['#notreepunching:loose_rocks', '#notreepunching:loose_rocks'])
     event.shapeless('notreepunching:stone_loose_rock', 'primalstage:stone_pebble')
     event.shapeless('2x notreepunching:stone_loose_rock', 'minecraft:gravel')
+    funcs.planet(content.stone_lattice, tags.slime, tags.stone_rod).vanilla()
+    event.shapeless(funcs.removeByOutput('cb_microblock:stone_rod'), `2x ${tags.rocks}`)
 })
 
 commonTags((event, funcs) => {
@@ -56,7 +58,7 @@ itemTags((event, funcs) => {
 		'unearthed:conglomerate'
 	])
 	
-    event.add('minecraft:stone_crafting_materials', [
+    funcs.add('minecraft:stone_crafting_materials', [
 	    tags.cobblestone,
         tags.mossy_cobblestone,
 		'alexscaves:galena', 
@@ -110,11 +112,11 @@ itemTags((event, funcs) => {
     ])
 	
 
-    event.add('notreepunching:loose_rocks', ['twigs:pebble', 'spelunkers_charm:deepslate_rock', 'spelunkers_charm:rock', 'spelunkers_charm:dripstone_rock', 'spelunkers_charm:basalt_rock'])
-    event.remove('notreepunching:loose_rocks', 'notreepunching:sandstone_loose_rock')
-    funcs.add(tags.overworld_rocks, funcs.getIdsOfTags('notreepunching:loose_rocks'))
+    funcs.add(tags.rocks, ['twigs:pebble', 'spelunkers_charm:deepslate_rock', 'spelunkers_charm:rock', 'spelunkers_charm:dripstone_rock', 'spelunkers_charm:basalt_rock'])
+    funcs.remove(tags.rocks, 'notreepunching:sandstone_loose_rock')
+    funcs.add(tags.overworld_rocks, funcs.getIdsOfTags(tags.rocks))
     funcs.add(tags.aether_rocks, content.holy_pebble)
-    event.add('notreepunching:loose_rocks', content.holy_pebble)
+    funcs.add(tags.rocks, content.holy_pebble)
     
     stones = funcs.getIdsOfTags('minecraft:stone_crafting_materials').concat(funcs.getIdsOfTags(tags.weak_stones))
 })

@@ -1,7 +1,7 @@
 recipes((event, funcs) => {
      var excepted = [
           'minecraft:brick',
-          'minecraft:charcoal',
+          content.medium_grade_charcoal,
           'minecraft:flower_pot',
           'notreepunching:ceramic_small_vessel',
           'notreepunching:ceramic_large_vessel',
@@ -17,5 +17,9 @@ recipes((event, funcs) => {
           }
      })
 
-     event.replaceInput({output: 'primalstage:grill'}, 'minecraft:cobblestone', '#minecraft:stone_crafting_materials')
+     funcs.replaceWithInsert('primalstage:primitive_grill', [
+          [tags.stone_crafting, [0, 2, 6, 8]],
+          ['primalstage:stone_pebble', [3, 5, 1, 7]],
+          [content.stone_lattice, 4]
+     ]).vanilla()
 })

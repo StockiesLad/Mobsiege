@@ -103,7 +103,7 @@ function removeFromTag(event, tag, entries) {
  */
 function getEntriesOfTags(event, tags) {
      var entries = []
-     common.alwaysArray(tags).forEach(tag => common.unifyArrays([entries, event.get(removeTagHash(stacks.autoId(tag))).getObjectIds().toArray()]))
+     common.alwaysArray(tags).forEach(tag => entries = common.unifyArrays([entries, event.get(removeTagHash(stacks.autoId(tag))).getObjectIds().toArray()]))
      return entries
  }
  

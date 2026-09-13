@@ -1,6 +1,6 @@
 var campfires = [
-     {type: 'minecraft:campfire', torch:  tags.temp_torches, fuel: content.high_grade_charcoal, logs: '#minecraft:logs', sticks: 'minecraft:stick'},
-     {type: 'minecraft:soul_campfire', torch: tags.soul_torches, fuel: 'minecraft:soul_soil', logs: '#minecraft:logs', sticks: 'minecraft:stick'},
+     {type: 'minecraft:campfire', torch:  tags.temp_torches, fuel: content.high_grade_charcoal, logs: tags.logs, sticks: 'minecraft:stick'},
+     {type: 'minecraft:soul_campfire', torch: tags.soul_torches, fuel: 'minecraft:soul_soil', logs: tags.logs, sticks: 'minecraft:stick'},
      {type: 'ancient_aether:ambrosium_campfire', torch: 'aether:ambrosium_torch', fuel: 'aether:ambrosium_shard', logs: tags.aether_logs, sticks: 'aether:skyroot_stick'}
 ]
 
@@ -10,7 +10,7 @@ recipes((event, funcs) => {
      campfires.forEach(campfire => {
           funcs.vanillaInsert(funcs.removeByOutput(campfire.type), [
                [campfire.torch, [3, 5]],
-               ['primalstage:primitive_grill', 4],  
+               [content.stone_lattice, 4],  
                [campfire.fuel, 1], 
                [content.campfire_rock, 7],
                [campfire.logs, [6, 8]] 
@@ -23,7 +23,7 @@ lootTables((event, funcs) => {
           event.addBlockLootModifier(campfire.type).removeLoot(Ingredient.all)
           .addLoot(
                LootEntry.of(campfire.type).when(c => c.customCondition(conditionSilkTouch())),
-               LootEntry.of('primalstage:primitive_grill').when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
+               LootEntry.of(content.stone_lattice).when(c => c.customCondition(conditionInverted(conditionSilkTouch()))),
                LootEntry.of(campfire.fuel).when(c => c.randomChance(0.2).customCondition(conditionInverted(conditionSilkTouch()))),
                LootEntry.of(campfire.sticks).customFunction(setCount(countUniform(1, 3), false)).when(c => c.customCondition(conditionInverted(conditionSilkTouch())))
           )

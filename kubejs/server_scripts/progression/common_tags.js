@@ -18,11 +18,14 @@ const tags = convert2tag({
      walls: '&',
      
      bark: '',
+     sticks: '%rods/wooden',
+     logs: '&',
      raw_logs: '',
-     stripped_logs: '',
+     stripped_logs: '%logs/stripped',
      hollow_logs: '',
+     fallen_logs: '',
      aether_logs: '',
-     aether_planks: '',
+     aether_planks: 'aether:planks_crafting',
      non_aether_logs: '',
      non_aether_planks: '',
 
@@ -39,12 +42,15 @@ const tags = convert2tag({
 
      overworld_rocks: 'rocks/overworld',
      aether_rocks: 'rocks/aether',
+     rocks: 'notreepunching:loose_rocks',
      crying_obsidian: 'obsidian/crying',
 
      partial_organic: '',
      whole_organic: '',
 
+     stone_rod: '%rods/stone',
      cobblestone: '%cobblestone',
+     stone_crafting: '&stone_crafting_materials',
      mossy_cobblestone: '%cobblestone/mossy',
      stone: '%',
      weak_stones: '%',
@@ -63,6 +69,8 @@ const tags = convert2tag({
 
      thermoregulators: `%`,
 
+     slime: '%slimeballs',
+
 });
 
 if (global.debug)
@@ -79,7 +87,7 @@ function convert2tag(ids) {
           /** @type {string} */ let id = ids[key];
           id = id === '' ? key : id;
 
-          tags[key] = tag(stacks.autoId(stacks.isInAutoForm(id) ? (id.length === 1 ? id + key : id) : `@${id}`));
+          tags[key] = tag(stacks.autoId(stacks.isInAutoForm(id) ? (id.length === 1 ? id + key : id) : (id.includes(':') ? id : `@${id}`)));
      }
      return tags;
 }

@@ -10,12 +10,12 @@ recipes((event, funcs) => {
           'aether_genesis:holystone_blast_furnace'
      ])
 
-     funcs.planetAlt(funcs.removeByOutput('nethersdelight:blackstone_furnace'), ['minecraft:blackstone', content.fire_brick_block], 'primalstage:kiln').vanilla()
-     funcs.planetAlt(funcs.removeByOutput('minecraft:furnace'), ['#minecraft:stone_crafting_materials', content.fire_brick_block], 'primalstage:kiln').vanilla()
+     funcs.planetAlt(funcs.removeByOutput('nethersdelight:blackstone_furnace'), ['minecraft:blackstone', content.fire_brick_block], `#${main}:storage_blocks/copper`).vanilla()
+     funcs.planetAlt(funcs.removeByOutput('minecraft:furnace'), ['#minecraft:stone_crafting_materials', content.fire_brick_block], `#${main}:storage_blocks/copper`).vanilla()
      event.replaceInput({input: 'minecraft:furnace'}, 'minecraft:furnace', `#${main}:furnaces`)
      event.shapeless('minecraft:furnace', tags.primitive_furnaces)
      funcs.removeRecipes({type: 'minecraft:crafting_shaped', output: tags.primitive_furnaces}, (result, ingredients) => {
-          funcs.planetAlt(result.withCount(1), [ingredients[0], content.fire_brick_block], 'primalstage:kiln').vanilla()
+          funcs.planetAlt(result.withCount(1), [ingredients[0], content.fire_brick_block], `#${main}:storage_blocks/copper`).vanilla()
      })
 })
 
