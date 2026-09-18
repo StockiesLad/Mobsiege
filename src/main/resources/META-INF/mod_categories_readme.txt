@@ -1,5 +1,4 @@
-            Each entry should have the format:
-
+Each entry should have the format:
     {
         "[required/optional]:lowercase_category_name": [
             // Required Libraries

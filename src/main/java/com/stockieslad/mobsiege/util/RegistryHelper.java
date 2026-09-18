@@ -1,4 +1,4 @@
-package com.stockieslad.mobsiege;
+package com.stockieslad.mobsiege.util;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;

@@ -1,3 +1,2 @@
 add configs, patchouli & kubejs.
-check mod categories to see if each mod actually works (implement debugging)
-refactor Mobsiege.java since the blocks registered depend on Decorative Blocks & No Tree Punching
+check mod categories to see if each mod actually works

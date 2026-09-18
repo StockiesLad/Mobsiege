@@ -3,6 +3,7 @@ import com.electronwill.nightconfig.core.file.FileConfig
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
 
 buildscript {
     repositories {
@@ -103,11 +104,15 @@ dependencies {
     modCompileOnly(pack.curseforge.cofh.core)
     modCompileOnly(pack.curseforge.actually.subtractions)
     modCompileOnly(pack.curseforge.decorative.blocks)
-    modImplementation("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24") // TODO: CHANGE ME
+    modCompileOnly("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
 
     def modCategories = (Map<String, List<String>>) new JsonSlurper().parse(file("src/main/resources/META-INF/mod_categories.json"))
 
     validateModCategories(modCategories)
+    modCategories = applySubCategories(modCategories)
+
+    if (providers.gradleProperty("dump_parsed_json").getOrElse("false").toBoolean())
+        println JsonOutput.prettyPrint(JsonOutput.toJson(modCategories))
 
     // Libraries
         // Fabric
@@ -134,7 +139,7 @@ dependencies {
             modRuntimeOnly(pack.curseforge.glitchcore)
         if (isModEnabled(modCategories, "cofh_core"))
             modRuntimeOnly(pack.curseforge.cofh.core)
-    // Entity
+    // Lifecycle
     if (isModEnabled(modCategories, "epicsiegemod"))
         modRuntimeOnly(pack.curseforge.epic.siege.mod)
     // Building
@@ -158,6 +163,10 @@ dependencies {
             modRuntimeOnly(pack.curseforge.primal.stage)
         if (isModEnabled(modCategories, "hardcore_torches"))
             modRuntimeOnly(pack.curseforge.hardcore.torches.forge)
+        // Electrical 2
+        if (isModEnabled(modCategories, "thermal_foundation"))
+            modRuntimeOnly(pack.curseforge.thermal.foundation)
+            //modRuntimeOnly("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
 
     // World
     if (isModEnabled(modCategories, "aether"))
@@ -369,12 +378,6 @@ tasks.register('packwizExport') {
     dependsOn('migratePackwizBuildArtifact')
 }
 
-
-//providers.exec {
-//    workingDir layout.projectDirectory.dir("pack")
-//    commandLine 'bash', '-lc', 'packwiz refresh'
-//}.standardOutput.asText.get()
-
 void validateModCategories(Map<String, List<String>> modCategories) {
     // Check to see if mod category is in correct format
     modCategories.entrySet().stream().forEach {entry ->
@@ -390,25 +393,70 @@ void validateModCategories(Map<String, List<String>> modCategories) {
     }
 }
 
+Map<String, Set<String>> applySubCategories(Map<String, List<String>> modCategories) {
+    Map<String, Set<String>> newModCategories = new HashMap<>()
+    modCategories.forEach {category, entries ->
+        newModCategories.put(category, applySubCategory(modCategories, category, new ArrayList<String>()))}
+    return newModCategories
+}
+
+Set<String> applySubCategory(Map<String, List<String>> modCategories, String workingCategory, List<String> iteratedCategories) {
+    // Check if there are cyclic dependencies on mod categories
+    if (iteratedCategories.stream().anyMatch {category -> (category == workingCategory) })
+        throw new RuntimeException("[ERROR]: Cyclic category dependencies:  ${iteratedCategories}!")
+    // Check that the working category actually exists
+    if (modCategories.containsKey("[optional]:" + workingCategory))
+        workingCategory = "[optional]:" + workingCategory
+    else if (modCategories.containsKey("[required]:" + workingCategory))
+        workingCategory = "[required]:" + workingCategory
+    else if (!(workingCategory.contains("[optional]:") && modCategories.containsKey(workingCategory)) &&
+            !(workingCategory.contains("[required]:") && modCategories.containsKey(workingCategory)))
+        throw new RuntimeException("[ERROR]: Category \"${workingCategory}\" does not exist in ${modCategories}!")
+    // Add working category
+    iteratedCategories.add(workingCategory)
+    // Iterate for entries
+    Set<String> filledEntries = new HashSet<>()
+    modCategories.get(workingCategory).forEach {entry ->
+        // If entry is non-existent, remove
+        if (entry == null || entry.isEmpty())
+            return
+        // Add normally if it's a regular modid entry
+        if (!entry.contains("#"))
+            filledEntries.add(entry)
+        // Apply subcategories for entry
+        else filledEntries.addAll(applySubCategory(modCategories, entry.replace("#", ""), iteratedCategories))
+    }
+    // Remove working category: Avoids sibling branches duplicating entries in iterated categories
+    iteratedCategories.remove(workingCategory)
+    return filledEntries
+}
+
 static String getCategoryName(String rawCategoryName) {
     return rawCategoryName.trim().split(":")[1]
 }
 
 // Do not make this static
 // Function: Has no unfulfilled requirements & atleast one option
-boolean isModEnabled(Map<String, List<String>> modCategories, String mod) {
+boolean isModEnabled(Map<String, Set<String>> modCategories, String modid) {
     //Check required categories
     boolean allRequirementsSatisfied = modCategories.entrySet().stream()
+            // Get requirements
             .filter{entry -> entry.key.contains("[required]")}
-            .filter {entry -> entry.value.stream().anyMatch {modElement -> (mod == modElement) }}.allMatch { entry ->
-                providers.gradleProperty("enable_${getCategoryName entry.key}").getOrElse("false").toBoolean()}
+            // Remove categories that are not a requirement of mod
+            .filter {entry -> entry.value.stream().anyMatch {categoryModId -> (modid == categoryModId) }}
+            // Test all categories to see if they are all enabled
+            .allMatch { entry -> providers.gradleProperty("enable_${getCategoryName entry.key}").getOrElse("false").toBoolean()}
     if (!allRequirementsSatisfied)
         return false
     //Check optional categories
     return modCategories.entrySet().stream()
+            // Get options
             .filter{entry -> entry.key.contains("[optional]")}
+            // Remove options that are disabled
             .filter { entry ->
                 providers.gradleProperty("enable_${getCategoryName entry.key}").getOrElse("false").toBoolean()}
+            // Combine all enabled options' modids
             .flatMap{entry -> entry.value.stream()}
-            .anyMatch{modElement -> (mod == modElement) }
+            // Test all categories to see if any are enabled
+            .anyMatch{modElement -> (modid == modElement) }
 }

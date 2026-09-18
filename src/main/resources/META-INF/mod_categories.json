@@ -1,37 +1,46 @@
 {
   "[required]:fabric": [
     "connectormod",
-    "fabric_api"
+    "fabric_api",
+    "owo",
+
+    "decorative_blocks",
+    "carbonize",
+    "primalstage"
   ],
   "[required]:building": [
     "decorative_blocks"
   ],
   "[required]:world": [
-    "aether"
+    "#aether"
+  ],
+  "[required]:tweaks": [
+    "rhino",
+    "kubejs"
   ],
 
+  "[optional]:aether": [
+    "aether"
+  ],
   "[optional]:libraries": [
     "connectormod",
     "fabric_api",
+    "owo",
+
     "cb_multipart",
     "cofh_core",
     "codechickenlib",
     "architectury",
-    "owo",
     "rhino",
     "cloth_config",
     "glitchcore"
   ],
-  "[optional]:kubejs": [
-    "rhino",
-    "kubejs"
-  ],
-  "[optional]:entity": [
+  "[optional]:lifecycle": [
     "epicsiegemod"
   ],
   "[optional]:primitive_technology_1": [
-    "connectormod",
-    "fabric_api",
+    "#libraries",
+    "#tweaks",
 
     "decorative_blocks",
     "carbonize",
@@ -42,28 +51,50 @@
     "hardcore_torches"
   ],
   "[optional]:primitive_technology_2": [
-
+    "#libraries",
+    "#tweaks"
   ],
   "[optional]:technology_3": [
+    "#libraries",
+    "#tweaks",
+
     "buildcraftcore"
   ],
   "[optional]:electrical_technology_1": [
-    "aether",
+    "#libraries",
+    "#tweaks",
+
+    "#aether",
     "actuallyadditions"
   ],
   "[optional]:mechanical_technology_1": [
+    "#libraries",
+    "#tweaks",
+
     "buildcraftcore"
   ],
   "[optional]:electrical_technology_2": [
+    "#libraries",
+    "#tweaks",
+
+    "thermal_foundation"
   ],
   "[optional]:mechanical_technology_2": [
-
+    "#libraries",
+    "#tweaks"
   ],
   "[optional]:electrical_technology_3": [
-    "aether",
-    "actuallyadditions"
+    "#libraries",
+    "#tweaks",
+
+    "#aether",
+    "actuallyadditions",
+    "thermal_foundation"
   ],
   "[optional]:mechanical_technology_3": [
+    "#libraries",
+    "#tweaks",
+
     "buildcraftcore"
   ]
 }
