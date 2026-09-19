@@ -166,7 +166,6 @@ dependencies {
         // Electrical 2
         if (isModEnabled(modCategories, "thermal_foundation"))
             modRuntimeOnly(pack.curseforge.thermal.foundation)
-            //modRuntimeOnly("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
 
     // World
     if (isModEnabled(modCategories, "aether"))

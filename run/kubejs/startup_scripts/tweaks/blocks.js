@@ -1,6 +1,9 @@
 StartupEvents.registry('block', (event) => {
-    Modpack2Fabric.fabricTagFlammability(stacks.packId('carbonize/extra_flammability'), 5, 5)
-    Modpack2Fabric.fabricTagFlammability(stacks.packId('carbonize/extra_flammability_leaves'), 30, 60)
+    if (Modpack2Gradle.isModEnabled("fabric_api")) {
+        Modpack2Fabric.fabricTagFlammability(stacks.packId('carbonize/extra_flammability'), 5, 5)
+        Modpack2Fabric.fabricTagFlammability(stacks.packId('carbonize/extra_flammability_leaves'), 30, 60)
+    } else console.warn("Fabric Api not enabled! Flammability registration skipped...")
+    
 
     typedContent.filter(c => c.registerable && c.type === 'block').forEach(block => {
         var displayName = stacks.toLang(block.id)

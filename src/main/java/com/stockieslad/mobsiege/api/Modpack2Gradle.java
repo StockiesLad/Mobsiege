@@ -16,7 +16,7 @@ import java.util.*;
 public class Modpack2Gradle {
     // Optional Categories
     private static final Map<String, Set<String>> MOD_CATEGORIES;
-    private static final Set<String>
+    public static final Set<String>
             LIFECYCLE,
             PRIMITIVE_TECHNOLOGY_1;
     //...[insert other categories]
@@ -91,7 +91,7 @@ public class Modpack2Gradle {
     public static boolean areDependenciesEnabled(List<String> dependencies) {
         if (dependencies != null) {
             dependencies.forEach(dependency -> {
-            if (!dependency.contains("[ModList]:") || !dependency.contains("[ModCategory]:") || dependency.split(":").length != 2)
+            if (!(dependency.contains("[ModList]:") || dependency.contains("[ModCategory]:")) || dependency.split(":").length != 2)
                 throw new RuntimeException(dependency + " is a malformed name. Must have format \"[ModList]:modid\" or \"[ModCategory]:modid\"");
             });
 

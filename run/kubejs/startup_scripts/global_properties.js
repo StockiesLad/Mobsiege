@@ -1,3 +1,6 @@
+// priority: 900
+Platform.mods.kubejs.name = 'Mobsiege'
+
 global.debug = true
 global.modpackId = 'mobsiege'
 global.hiddenItems = []
@@ -6,6 +9,10 @@ global.data_namespace = 'forge'; //Primary namespace, this is 'common' in neofor
 /** @type {MathHelper} */ const maths = new MathHelper()
 /** @type {MathHelper} */ const common = new CommonHelper()
 /** @type {MathHelper} */ const stacks = new StackHelper()
+
+const Modpack2Gradle = common.loadLocal('Modpack2Gradle')
+const Modpack2Fabric = Modpack2Gradle.isModEnabled("fabric_api") ? common.loadLocal('Modpack2Fabric') : null;
+const Modpack2ToughAsNails = Modpack2Gradle.isModEnabled("toughasnails") ? common.loadLocal('Modpack2ToughAsNails') : null
 
 global.mathHelper = maths
 global.commonHelper = common

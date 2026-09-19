@@ -1,3 +1,4 @@
+// priority: 1000
 /**
  * @typedef {Object} Rotations
  * @property {Number} size

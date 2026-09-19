@@ -1,3 +1,4 @@
+// priority: 1000
 /**
  * @class StackHelper
  * @constructor

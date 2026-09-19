@@ -9,8 +9,12 @@ if (Modpack2Gradle.isCategoryEnabled(Modpack2Gradle.LIFECYCLE)) {
                 return overworldArgs(entityType, levelAccessor, spawntype, blockPos, randomSource)
             } else return false
         })
-        handle(TrialsMobs.BREEZE.get(), (entityType, levelAccessor, spawntype, blockPos, randomSource) => Monster.checkMonsterSpawnRules(entityType, levelAccessor, spawntype, blockPos, randomSource))
-        handle(ThermalCoreEntities.BLITZ.get(), (entityType, levelAccessor, spawntype, blockPos, randomSource) => Blitz.canSpawn(entityType, levelAccessor, spawntype, blockPos, randomSource))
+        if (Modpack2Gradle.isModEnabled("trials"))
+            handle(TrialsMobs.BREEZE.get(), (entityType, levelAccessor, spawntype, blockPos, randomSource) => Monster.checkMonsterSpawnRules(entityType, levelAccessor, spawntype, blockPos, randomSource))
+        else console.warn("Trials & Chambers not enabled! Breeze spawn registration skipped...")
+        if (Modpack2Gradle.isModEnabled("thermal_foundation"))
+            handle(ThermalCoreEntities.BLITZ.get(), (entityType, levelAccessor, spawntype, blockPos, randomSource) => Blitz.canSpawn(entityType, levelAccessor, spawntype, blockPos, randomSource))
+        else console.warn("Thermal Foundation not enabled! Breeze spawn registration skipped...")
     })
 }
 

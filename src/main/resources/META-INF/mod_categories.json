@@ -15,7 +15,6 @@
     "#aether"
   ],
   "[required]:tweaks": [
-    "rhino",
     "kubejs"
   ],
 
@@ -36,7 +35,8 @@
     "glitchcore"
   ],
   "[optional]:lifecycle": [
-    "cofh_core",
+    "#tweaks",
+    "#libraries",
 
     "epicsiegemod",
     "thermal_foundation"

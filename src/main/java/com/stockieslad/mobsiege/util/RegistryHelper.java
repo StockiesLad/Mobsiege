@@ -1,7 +1,5 @@
 package com.stockieslad.mobsiege.util;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.BlockItem;
@@ -31,6 +29,8 @@ public class RegistryHelper {
 
     public static SoundEvent registerSoundEvent(String path) {
         var location = ResourceLocation.fromNamespaceAndPath(MODID, path);
-        return Registry.register(BuiltInRegistries.SOUND_EVENT, location, SoundEvent.createVariableRangeEvent(location));
+        var soundEvent = SoundEvent.createVariableRangeEvent(location);
+        ForgeRegistries.SOUND_EVENTS.register(location, soundEvent);
+        return soundEvent;
     }
 }
