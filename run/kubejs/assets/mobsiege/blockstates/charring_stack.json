@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "mobsiege:block/charring_stack"
+      },
+      {
+        "model": "mobsiege:block/charring_stack",
+        "y": 90
+      },
+      {
+        "model": "mobsiege:block/charring_stack",
+        "y": 180
+      },
+      {
+        "model": "mobsiege:block/charring_stack",
+        "y": 270
+      }
+    ]
+  }
+}

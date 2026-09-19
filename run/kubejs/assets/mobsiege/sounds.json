@@ -1,0 +1,11 @@
+{
+  "ambient.nether.screams": {
+     "sounds": [
+               {"name": "mobsiege:nether/scream_0", "stream": false, "weight": 1, "attenuation_distance": 128},
+               {"name": "mobsiege:nether/scream_1", "stream": false, "weight": 1, "attenuation_distance": 128},
+               {"name": "mobsiege:nether/scream_2", "stream": false, "weight": 1, "attenuation_distance": 128},
+               {"name": "mobsiege:nether/scream_3", "stream": false, "weight": 1, "attenuation_distance": 128},
+               {"name": "mobsiege:nether/scream_4", "stream": false, "weight": 1, "attenuation_distance": 128}
+          ]
+     }
+}

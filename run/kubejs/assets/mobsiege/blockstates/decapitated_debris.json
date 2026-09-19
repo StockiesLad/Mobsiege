@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "mobsiege:block/decapitated_debris"
+      },
+      {
+        "model": "mobsiege:block/decapitated_debris",
+        "y": 90
+      },
+      {
+        "model": "mobsiege:block/decapitated_debris",
+        "y": 180
+      },
+      {
+        "model": "mobsiege:block/decapitated_debris",
+        "y": 270
+      }
+    ]
+  }
+}
