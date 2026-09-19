@@ -1,0 +1,17 @@
+type = customizablemenus
+
+net.minecraft.client.gui.screens.OptionsScreen {
+}
+
+de.keksuccino.drippyloadingscreen.customization.DrippyOverlayScreen {
+}
+
+net.minecraft.client.gui.screens.SoundOptionsScreen {
+}
+
+net.minecraft.client.gui.screens.TitleScreen {
+}
+
+net.irisshaders.iris.gui.screen.ShaderPackScreen {
+}
+

@@ -1,0 +1,34 @@
+{
+  "display": {
+    "differStatesOfNoteBlockForFacade": {
+      "#Comment": "If different textures in resource packs are used for different instruments and notes, or whether powered, please set this [true]",
+      "value": false
+    },
+    "renderLaserBeams": {
+      "#Comment": "When false laser beams will not be visible while transmitting power without wearing Goggles",
+      "value": true
+    },
+    "facadeBlockIdFilterType": {
+      "#Comment": "The type of facadeBlockIdFilter",
+      "#Allowed Values": "BLACK_LIST, WHITE_LIST",
+      "value": "BLACK_LIST"
+    },
+    "facadeBlockNamespaceFilterType": {
+      "#Comment": "The type of facadeBlockNamespaceFilter",
+      "#Allowed Values": "BLACK_LIST, WHITE_LIST",
+      "value": "WHITE_LIST"
+    },
+    "facadeBlockIdFilter": {
+      "#Comment": "The block id(ResourceLocation) filter for blocks to create facades to display in CreativeModTab. Id filter has higher priority than namespace filter. [Warn: blocks allowed here may be disallowed by in-code rules.] [stone, oak_planks and oak_log are forced enabled.] Example value: minecraft:dirt",
+      "value": []
+    },
+    "facadeBlockNamespaceFilter": {
+      "#Comment": "The block namespace filter for blocks to create facades to display in CreativeModTab. Namespace filter has lower priority than id filter. [Warn: blocks allowed here may be disallowed by in-code rules.] Example value: minecraft",
+      "value": []
+    },
+    "facadesNotInCreativeModTabCanBeCrafted": {
+      "#Comment": "Whether facades not in the facade tab can be crafted by facade assembly recipes",
+      "value": true
+    }
+  }
+}

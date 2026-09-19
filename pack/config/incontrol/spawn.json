@@ -1,0 +1,56 @@
+[
+    {
+        "phase": "grace_period",
+        "when": "onjoin",
+        "hostile": true,
+        "mincount": { 
+            "amount": 5, 
+            "hostile": true 
+        },
+        "result": "deny"
+    },
+    {
+        "mob": ["thermal:blitz", "trials:breeze"],
+        "dimension": "aether:the_aether",
+        "block": "aether:cold_aercloud",
+        "result": "allow"
+    },
+    {
+        "mob": ["thermal:blitz", "trials:breeze"],
+        "dimension": "aether:the_aether",
+        "seesky": true,
+        "random": 0.2,
+        "result": "allow"
+    },
+    {
+        "mob": ["thermal:blitz", "trials:breeze"],
+        "dimension": "aether:the_aether",
+        "seesky": false,
+        "random": 0.05,
+        "result": "allow"
+    },
+    {
+        "mob": ["thermal:blitz", "trials:breeze"],
+        "dimension": "aether:the_aether",
+        "result": "deny"
+    },
+    {
+        "dimension": "aether:the_aether",
+	    "block": "aether:cold_aercloud",
+        "result": "deny"
+    },
+    {
+        "mob": "minecraft:zombie",
+        "when": "onjoin",
+        "minlight": 5,
+        "result": "deny"
+    },
+    {
+        "hostile": true,
+        "when": "onjoin",
+        "result": "allow",
+        "healthmultiply": 1.5,
+        "damagemultiply": 1.25,
+        "speedmultiply": 1.15
+    }
+]

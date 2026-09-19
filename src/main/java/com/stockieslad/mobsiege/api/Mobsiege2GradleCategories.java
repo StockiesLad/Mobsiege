@@ -12,7 +12,7 @@ import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.*;
 
-// Required categories are not implemented yet KubeJS doesn't need them.
+// Required categories are not implemented as KubeJS doesn't need them.
 public class Mobsiege2GradleCategories {
     // Optional Categories
     private static final Map<String, Set<String>> MOD_CATEGORIES;
