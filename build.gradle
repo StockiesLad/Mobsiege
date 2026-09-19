@@ -20,7 +20,7 @@ plugins {
     id 'idea'
     id 'java'
     id 'maven-publish'
-    id 'net.neoforged.moddev.legacyforge' version '2.0.144'
+    id 'net.neoforged.moddev.legacyforge' version '2.+'
 }
 
 version = mod_version
@@ -89,7 +89,7 @@ repositories {
 dependencies {
     annotationProcessor("org.sinytra:sponge-mixin:${mixin_version}")
     compileOnly("org.sinytra:sponge-mixin:${mixin_version}")
-    clientAdditionalRuntimeClasspath project(':mixin-bootstrap')
+    //clientAdditionalRuntimeClasspath project(':mixin-bootstrap') // Do not remove me!
     implementation(jarJar "me.fallenbreath:conditional-mixin-forge:${mixin_conditional}")
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}"))
@@ -129,8 +129,11 @@ dependencies {
             modRuntimeOnly(pack.curseforge.kubejs)
         if (isModEnabled(modCategories, "rhino"))
             modRuntimeOnly(pack.curseforge.rhino)
-        if (isModEnabled(modCategories, "connectormod"))
-            modRuntimeOnly(pack.curseforge.sinytra.connector)
+        if (isModEnabled(modCategories, "connectormod")) {
+            runtimeOnly("org.sinytra.connector:Connector-1.0.0-beta.50+1.20.1")
+            //modRuntimeOnly(pack.curseforge.sinytra.connector)
+            //clientAdditionalRuntimeClasspath project(':mixin-bootstrap') // Do not remove me!
+        }
         if (isModEnabled(modCategories, "owo"))
             modRuntimeOnly(pack.curseforge.owo.lib)
         if (isModEnabled(modCategories, "cloth_config"))
