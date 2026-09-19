@@ -1,0 +1,6 @@
+{
+     "type": "forge:add_features", 
+     "biomes": "biomesoplenty:field",
+     "features": "minecraft:rare_spruce",
+     "step": "vegetal_decoration"
+   }
