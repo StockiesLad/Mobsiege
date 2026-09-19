@@ -13,18 +13,17 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 // Required categories are not implemented as KubeJS doesn't need them.
-public class Mobsiege2GradleCategories {
+public class Modpack2Gradle {
     // Optional Categories
     private static final Map<String, Set<String>> MOD_CATEGORIES;
     private static final Set<String>
-            LIBRARIES,
             LIFECYCLE,
             PRIMITIVE_TECHNOLOGY_1;
     //...[insert other categories]
 
     static  {
         Map<String, List<String>> modCategories;
-        try (InputStream inputStream = Mobsiege2GradleCategories.class.getClassLoader().getResourceAsStream("META-INF/mod_categories.json")) {
+        try (InputStream inputStream = Modpack2Gradle.class.getClassLoader().getResourceAsStream("META-INF/mod_categories.json")) {
             assert inputStream != null;
             try (Reader reader = new InputStreamReader(inputStream)) {
                     Gson gson = new Gson();
@@ -37,7 +36,6 @@ public class Mobsiege2GradleCategories {
 
         MOD_CATEGORIES = applySubCategories(modCategories);
 
-        LIBRARIES = getCategory("libraries");
         LIFECYCLE = getCategory("lifecycle");
         PRIMITIVE_TECHNOLOGY_1 = getCategory("primitive_technology_1");
     }
@@ -90,12 +88,39 @@ public class Mobsiege2GradleCategories {
         return MOD_CATEGORIES.get(category);
     }
 
-    private static boolean isCategoryEnabled(Set<String> category) {
+    public static boolean areDependenciesEnabled(List<String> dependencies) {
+        if (dependencies != null) {
+            dependencies.forEach(dependency -> {
+            if (!dependency.contains("[ModList]:") || !dependency.contains("[ModCategory]:") || dependency.split(":").length != 2)
+                throw new RuntimeException(dependency + " is a malformed name. Must have format \"[ModList]:modid\" or \"[ModCategory]:modid\"");
+            });
+
+            return dependencies.stream().allMatch(dependency -> {
+                var args = dependency.split(":");
+                var dependencyType = args[0];
+                var dependencyKey = args[1];
+                if (dependencyType.equals("[ModList]")) return isModEnabled(dependencyKey);
+                else if (dependencyType.equals("[ModCategory]")) return isCategoryEnabled(getCategory(dependencyKey));
+                // For extra safety...
+                else throw new RuntimeException(dependency + " is a malformed name. Must have format \"[ModList]:modid\" or \"[ModCategory]:modid\"");
+            });
+        }
+
+        return false;
+    }
+
+    /**
+     * Must take in a set and not a string to centralise all categories here.
+     *  Leaves less room for mistakes/errors.
+     * @param category One of the defined categories in this class
+     * @return Whether the given category is enabled
+     */
+    public static boolean isCategoryEnabled(Set<String> category) {
         return category.stream().allMatch(mod -> ModList.get().isLoaded(mod));
     }
 
-    public static boolean librariesEnabled() {
-        return isCategoryEnabled(LIBRARIES);
+    public static boolean isModEnabled(String modid) {
+        return ModList.get().isLoaded(modid);
     }
 
     public static boolean lifecycleEnabled() {

@@ -24,6 +24,13 @@ build
 # Unignore 'dynamicAssetFolders'
 run/*
 !run/kubejs
+run/kubejs/*
+!run/kubejs/assets
+!run/kubejs/client_scripts
+!run/kubejs/config
+!run/kubejs/data
+!run/kubejs/server_scripts
+!run/kubejs/startup_scripts
 !run/patchouli_books
 
 # Files from Forge MDK

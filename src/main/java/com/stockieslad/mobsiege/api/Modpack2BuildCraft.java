@@ -9,7 +9,7 @@ import net.minecraft.world.item.Item;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Mobsiege2BuildCraft {
+public class Modpack2BuildCraft {
     public static float ENGINE_RELIEF_TIME_TICKS = 0;
     public static float ENGINE_RELIEF_CHANCE = 0.25f;
     public static float ENGINE_BASE_EXPLOSION = 2.0F;

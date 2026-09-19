@@ -16,8 +16,8 @@ import toughasnails.temperature.AreaFill;
 
 import java.util.Set;
 
-import static com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails.TEMP_CHECK_CTX;
-import static com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails.TanTempCheckContext;
+import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.TEMP_CHECK_CTX;
+import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.TanTempCheckContext;
 
 @Mixin(LevelRenderHandler.class)
 public class LevelRenderHandlerMixin {

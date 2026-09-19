@@ -6,7 +6,7 @@
  */
 
 /**
- * A helper containing functions that are either unpresent in {@link Math} or done more effeciently. Notably, simple 90 degree point rotation.
+ * A helper containing functions that are either unpresent in {@link Math}. Notably, simple 90 degree point rotation.
  * @class StackHelper
  * @constructor
  */
@@ -152,6 +152,7 @@ MathHelper.prototype = {
           return this.place(this.flipLine(height, size), width, size)
      },
 
+     // Wtf is this?
      /**
       * Rotates a collection of given points given a certain square with respect to the anchor. 
       * Ensure that you use the right size or you will get an `ArrayIndexOutOfBoundsException`

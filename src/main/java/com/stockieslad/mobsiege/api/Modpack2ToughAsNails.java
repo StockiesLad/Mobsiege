@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Mobsiege2ToughAsNails {
+public class Modpack2ToughAsNails {
     public static void init() {}
 
     public static final ThreadLocal<TanTempCheckContext> TEMP_CHECK_CTX = new ThreadLocal<>();
@@ -40,7 +40,7 @@ public class Mobsiege2ToughAsNails {
 
     public static TagKey<Item> THERMOREGULATOR = null;
     public static void addThermoregulators(String id) {
-        THERMOREGULATOR = TagKey.create(Registries.ITEM, Mobsiege2Minecraft.identifier(id));
+        THERMOREGULATOR = TagKey.create(Registries.ITEM, Modpack2Minecraft.identifier(id));
     }
 
     public static HashMap<Item, Integer> PURIFIER_FILTER_ADD_MAP = new HashMap<>();

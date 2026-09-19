@@ -1,15 +1,15 @@
 global.debug = true
 global.modpackId = 'mobsiege'
 global.hiddenItems = []
-global.data_namespace = 'forge'; //Primary namespace, this is 'common' in neoforge and fabric
+global.data_namespace = 'forge'; //Primary namespace, this is 'common' in neoforge and fabric in later Minecraft versions
 
-const maths = new MathHelper()
-const common = new CommonHelper()
-const stacks = new StackHelper()
+/** @type {MathHelper} */ const maths = new MathHelper()
+/** @type {MathHelper} */ const common = new CommonHelper()
+/** @type {MathHelper} */ const stacks = new StackHelper()
 
-/** @type {MathHelper} */ global.mathHelper = maths
-/** @type {CommonHelper} */ global.commonHelper = common
-/** @type {StackHelper} */ global.stackHelper = stacks
+global.mathHelper = maths
+global.commonHelper = common
+global.stackHelper = stacks
 
 /**
  * @typedef {Object} TypedEntry
@@ -24,6 +24,7 @@ const stacks = new StackHelper()
  * @property {string} [toolType]
  * @property {string} [sound]
  * @property {string[]} [tags]
+ * @property {string[]} [dependencies]
  * 
  * @property {any} [extra]
  */
@@ -31,16 +32,21 @@ const stacks = new StackHelper()
 const ITEM = '{ITEM}';
 const BLOCK = '{BLOCK}';
 
+/*
+ * When id is empty or null, the json key becomes the id.
+ */
 const typedContent = formatContent({
-    thermoregulator: {id: 'orb_of_thermoregulation', unstackable: true},
+    thermoregulator: {id: 'orb_of_thermoregulation', unstackable: true, dependencies: ['[ModList]:toughasnails']},
     gravitium: 'gravitium_alloy',
-    gravitium_block: simpleBlock('gravitium_alloy_block', 'METAL', 5, 6, ['mineable/pickaxe', 'needs_diamond_tool']),
+    gravitium_block: typedId({id: 'gravitium_alloy_block', sound: 'METAL', hardness: 5, resistance: 6, 
+        tags: ['mineable/pickaxe', 'needs_diamond_tool']}, 'block'),
 
     pointed_flint: 'pointed_flint',
     flint_sword: {toolType: 'sword', maxDamage: 50, tags: 'forge:tools/swords'},
     flint_saw: {toolType: 'axe', maxDamage: 30, tags: 'notreepunching:saws'},
 
-    campfire_rock: simpleBlock('', 'STONE', 1, 1, ['mineable/pickaxe', 'needs_stone_tool']),
+    campfire_rock: typedId({id: '', sound: 'STONE', hardness: 1, resistance: 1, 
+        tags: ['mineable/pickaxe', 'needs_stone_tool']}, 'block'),
 
     fine_ash: 'supplementaries:ash',
     poor_grade_charcoal: {burnTime: 400},
@@ -81,7 +87,8 @@ const typedContent = formatContent({
     wet_valkyrie_brick: '',
     dry_valkyrie_brick: '',
 
-    blazing_fireclay: simpleBlock('', 'GRAVEL', 1.6, 1.6, ['mineable/shovel', 'needs_iron_tool']),
+    blazing_fireclay: typedId({id: '', sound: 'GRAVEL', hardness: 1.6, resistance: 1.6, 
+        tags: ['mineable/shovel', 'needs_iron_tool']}, 'block'),
     blazing_fireclay_brick: '',
     fireclay_brick: '',
 
@@ -95,25 +102,31 @@ const typedContent = formatContent({
     wet_holysilt_brick: 'wet_holysilt_brick',
     dry_holysilt_brick: 'dry_holysilt_brick',
     holysilt_brick: 'holysilt_brick',
-    holysilt_bricks: simpleBlock('', 'STONE', 2, 6, ['mineable/pickaxe', 'needs_stone_tool']),
+    holysilt_bricks: typedId({id: '', sound: 'STONE', hardness: 2, resistance: 6, 
+        tags: ['mineable/pickaxe', 'needs_stone_tool']}, 'block'),
     holysilt_brick_stairs: unregistered('holysilt_brick_stairs'),
     holysilt_brick_slab: unregistered('holysilt_brick_slab'),
     holysilt_brick_wall: unregistered('holysilt_brick_wall'),
 
     mortar: 'primalstage:sandy_clay_compound',
-    packed_mortar: simpleBlock('', 'GRAVEL', 0.6, 0.6, ['mineable/shovel', 'needs_stone_tool']),
+    packed_mortar: typedId({id: '', sound: 'GRAVEL', hardness: 0.6, resistance: 0.6, 
+        tags: ['mineable/shovel', 'needs_stone_tool']}, 'block'),
     wet_mortar_brick: 'wet_mortar_brick',
     dry_mortar_brick: 'dry_mortar_brick',
 
     cement_compound: 'cement_mixture',
-    packed_cement: simpleBlock('', 'GRAVEL', 0.8, 0.8, ['mineable/shovel', 'needs_iron_tool']),
+    packed_cement: typedId({id: '', sound: 'GRAVEL', hardness: 0.8, resistance: 0.8, 
+        tags: ['mineable/shovel', 'needs_iron_tool']}, 'block'),
     wet_cement_brick: 'wet_cement_brick',
     dry_cement_brick: 'dry_cement_brick',
     fire_brick: '',
-    fire_brick_block: simpleBlock('fire_bricks', 'STONE', 1.5, 5, ['mineable/pickaxe', 'needs_iron_tool']),
+    fire_brick_block: typedId({id: 'fire_bricks', sound: 'STONE', hardness: 1.5, resistance: 1.5, 
+        tags: ['mineable/pickaxe', 'needs_iron_tool']}, 'block'),
 
-    corpstone: simpleBlock('', 'NETHERRACK', 0.4, 0.4, ['mineable/pickaxe', 'needs_stone_tool']),
-    decapitated_debris: simpleBlock('', 'SCULK', 0.5, 0.5, ['mineable/axe', 'needs_stone_tool'], [1, 0, 1, 15, 12, 15]),
+    corpstone: typedId({id: '', sound: 'NETHERRACK', hardness: 0.4, resistance: 0.4, 
+        tags: ['mineable/pickaxe', 'needs_stone_tool']}, 'block'),
+    decapitated_debris: typedId({id: '', sound: 'SCULK', hardness: 0.5, resistance: 0.5, 
+        tags: ['mineable/axe', 'needs_stone_tool'], hitbox: [1, 0, 1, 15, 12, 15]}, 'block'),
 
     glowstone_chipset: 'glowstone_chipset',
     infernal_chipset: 'infernal_chipset',
@@ -214,6 +227,7 @@ function isType(id) {
 }
 
 /**
+ * Extracts type from name 
  * @param {String} id 
  */
 function getType(id) {
@@ -227,7 +241,8 @@ function getType(id) {
 }
 
 /**
- * @param {String} entry 
+ * Provides an ID object.
+ * @param {String | TypedEntry} entry 
  * @param {String} type
  * @returns 
  */
@@ -238,10 +253,9 @@ function typedId(entry, type) {
     else {
         entry.type = type;
         entry.id = common.insure(entry.id, '');
-        entry.registerable = common.insure(entry.registerable, true);
+        entry.registerable = entry.registerable !== null ? true : Modpack2Gradle.areDependenciesEnabled(entry.dependencies);
         return entry;
     }
-        
 }
 
 /**
@@ -250,22 +264,6 @@ function typedId(entry, type) {
  */
 function block(id) {
     return typedId(id, 'block');
-}
-
-/**
- * @param {String} id 
- * @param {String} sound
- * @param {Number} hardness
- * @param {Number} resistance
- * @param {String} blockTags
- * @param {Number[]} [hitbox]
- * @returns 
- */
-function simpleBlock(id, sound, hardness, resistance, blockTags, hitbox) {
-    var value = typedId({id: id, sound: sound, hardness: hardness, resistance: resistance, tags: common.alwaysArray(blockTags)}, 'block');
-    if (hitbox)
-        value.hitbox = hitbox;
-    return value;
 }
 
 /**
@@ -299,20 +297,21 @@ function unregistered(id) {
  */
 function formatContent(entries) {
     for (var key in entries) {
-        var val = entries[key];
+        var value = entries[key];
         /** @type {TypedEntry} */ var entry;
 
-        if (typeof val === 'string')
-            entry = typedId(val, getType(val));
-        else if (typeof val === 'object' && val !== null && !val.type)
-            entry = typedId(val, getType(val.id));
-        else entry = val;
+        // Convert basic
+        if (typeof value === 'string')
+            entry = typedId(value, getType(value));
+        else if (typeof value === 'object' && value !== null && !value.type)
+            entry = typedId(value, getType(value.id));
+        else entry = value;
 
         if (entry['id'] == null || entry.id === '')
             entry.id = key
         if (entry.id.includes('{}'))
             entry.id = entry.id.replace('{}', key)
-        if (entry.id.includes(':'))
+        if (entry.id.includes(':') || !Modpack2Gradle.areDependenciesEnabled(entry.dependencies))
             entry.registerable = false;
         else entry.id = stacks.packId(entry.id);
         entries[key] = entry;

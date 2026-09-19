@@ -36,7 +36,10 @@
     "glitchcore"
   ],
   "[optional]:lifecycle": [
-    "epicsiegemod"
+    "cofh_core",
+
+    "epicsiegemod",
+    "thermal_foundation"
   ],
   "[optional]:primitive_technology_1": [
     "#libraries",

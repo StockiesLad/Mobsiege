@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class Mobsiege2Minecraft {
+public class Modpack2Minecraft {
     public static final RandomSource SAFE_CLIENT_RANDOM = RandomSource.create();
 
     public static Args onBreaksRandomly = null;

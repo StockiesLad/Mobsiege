@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
-import static com.stockieslad.mobsiege.api.Mobsiege2BuildCraft.CONVERSION_UPGRADES;
+import static com.stockieslad.mobsiege.api.Modpack2BuildCraft.CONVERSION_UPGRADES;
 
 @Restriction(require = @Condition("buildcraft"))
 @Mixin(TileEngineRF.class)

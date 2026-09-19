@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Collections;
 
-import static com.stockieslad.mobsiege.api.Mobsiege2BuildCraft.*;
+import static com.stockieslad.mobsiege.api.Modpack2BuildCraft.*;
 
 @Restriction(require = @Condition("buildcraft"))
 @Mixin(TileEngineBase_BC8.class)

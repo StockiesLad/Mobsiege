@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import toughasnails.api.potion.TANEffects;
 import toughasnails.temperature.TemperatureHandler;
 
-import static com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails.THERMOREGULATOR;
+import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.THERMOREGULATOR;
 
 @Mixin(TemperatureHandler.class)
 public class TemperatureHandlerMixin {

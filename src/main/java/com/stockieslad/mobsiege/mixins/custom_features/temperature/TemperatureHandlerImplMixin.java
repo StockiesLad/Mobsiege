@@ -1,6 +1,6 @@
 package com.stockieslad.mobsiege.mixins.custom_features.temperature;
 
-import com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails;
+import com.stockieslad.mobsiege.api.Modpack2ToughAsNails;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,15 +13,15 @@ import toughasnails.temperature.TemperatureHelperImpl;
 
 import java.util.Set;
 
-import static com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails.TEMP_CHECK_CTX;
-import static com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails.checkBlockTemp;
+import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.TEMP_CHECK_CTX;
+import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.checkBlockTemp;
 
 @Mixin(TemperatureHelperImpl.class)
 public class TemperatureHandlerImplMixin {
 
     @Inject(method = "addHeatingOrCooling", at = @At("HEAD"), remap = false)
     private static void mobsiege$cacheCtxOnHeatingOrCooling(Set<BlockPos> heating, Set<BlockPos> cooling, Level level, BlockPos pos, CallbackInfo ci) {
-        TEMP_CHECK_CTX.set(new Mobsiege2ToughAsNails.TanTempCheckContext(level, pos));
+        TEMP_CHECK_CTX.set(new Modpack2ToughAsNails.TanTempCheckContext(level, pos));
     }
 
     @Inject(

@@ -1,6 +1,6 @@
 StartupEvents.registry('block', (event) => {
-    Mobsiege2Fabric.fabricTagFlammability(stacks.packId('carbonize/extra_flammability'), 5, 5)
-    Mobsiege2Fabric.fabricTagFlammability(stacks.packId('carbonize/extra_flammability_leaves'), 30, 60)
+    Modpack2Fabric.fabricTagFlammability(stacks.packId('carbonize/extra_flammability'), 5, 5)
+    Modpack2Fabric.fabricTagFlammability(stacks.packId('carbonize/extra_flammability_leaves'), 30, 60)
 
     typedContent.filter(c => c.registerable && c.type === 'block').forEach(block => {
         var displayName = stacks.toLang(block.id)

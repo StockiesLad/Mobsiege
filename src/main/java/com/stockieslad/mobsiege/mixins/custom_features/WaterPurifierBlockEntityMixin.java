@@ -12,8 +12,8 @@ import toughasnails.block.entity.WaterPurifierBlockEntity;
 
 import java.util.HashMap;
 
-import static com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails.PURIFIER_FILTER_ADD_MAP;
-import static com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails.PURIFIER_FILTER_REMOVE_LIST;
+import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.PURIFIER_FILTER_ADD_MAP;
+import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.PURIFIER_FILTER_REMOVE_LIST;
 
 @Restriction(require = @Condition("tough_as_nails"))
 @Mixin(WaterPurifierBlockEntity.class)

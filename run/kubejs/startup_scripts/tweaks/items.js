@@ -1,5 +1,5 @@
 StartupEvents.registry('item', event => {
-     Mobsiege2ToughAsNails.addThermoregulators(stacks.packId('thermoregulators'))
+     Modpack2ToughAsNails.addThermoregulators(stacks.packId('thermoregulators'))
 
      typedContent.filter(c => c.registerable && c.type === 'item').forEach(item => {
           if (item.toolType) {

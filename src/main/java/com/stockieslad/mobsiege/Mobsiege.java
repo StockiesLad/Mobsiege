@@ -22,23 +22,23 @@ public class Mobsiege {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     static {
-        Mobsiege2GradleCategories.init();
+        Modpack2Gradle.init();
 
-        if (Mobsiege2GradleCategories.primitiveTechnology1Enabled()) {
+        if (Modpack2Gradle.primitiveTechnology1Enabled()) {
             PrimitiveTechnology1.init();
-            Mobsiege2ToughAsNails.init();
+            Modpack2ToughAsNails.init();
         }
 
-        if (Mobsiege2GradleCategories.lifecycleEnabled())
+        if (Modpack2Gradle.lifecycleEnabled())
             Lifecycle.init();
 
         if (ModList.get().isLoaded("buildcraftcore"))
-            Mobsiege2BuildCraft.init();
+            Modpack2BuildCraft.init();
 
         if (ModList.get().isLoaded("fabric_api"))
-            Mobsiege2Fabric.init();
+            Modpack2Fabric.init();
 
-        Mobsiege2Minecraft.init();
+        Modpack2Minecraft.init();
     }
 
     public Mobsiege(FMLJavaModLoadingContext context) {
