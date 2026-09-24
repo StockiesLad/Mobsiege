@@ -1,9 +1,9 @@
 import com.electronwill.nightconfig.core.file.FileConfig
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
 
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
-import groovy.json.JsonSlurper
-import groovy.json.JsonOutput
 
 buildscript {
     repositories {
@@ -125,8 +125,6 @@ dependencies {
             modRuntimeOnly(pack.curseforge.cb.multipart)
         if (isModEnabled(modCategories, "codechickenlib"))
             modRuntimeOnly(pack.curseforge.codechicken.lib.'1'.'8')
-        if (isModEnabled(modCategories, "kubejs"))
-            modRuntimeOnly(pack.curseforge.kubejs)
         if (isModEnabled(modCategories, "rhino"))
             modRuntimeOnly(pack.curseforge.rhino)
         if (isModEnabled(modCategories, "connectormod")) {
@@ -142,6 +140,24 @@ dependencies {
             modRuntimeOnly(pack.curseforge.glitchcore)
         if (isModEnabled(modCategories, "cofh_core"))
             modRuntimeOnly(pack.curseforge.cofh.core)
+        if (isModEnabled(modCategories, "geckolib"))
+            modRuntimeOnly(pack.curseforge.geckolib)
+    //Tweaks
+    if (isModEnabled(modCategories, "incontrol"))
+        modRuntimeOnly(pack.curseforge."in".control)
+    if (isModEnabled(modCategories, "kubejs"))
+        modRuntimeOnly(pack.curseforge.kubejs)
+    if (isModEnabled(modCategories, "lootjs"))
+        modRuntimeOnly(pack.curseforge.lootjs)
+    if (isModEnabled(modCategories, "entityjs"))
+        modRuntimeOnly(pack.curseforge.entityjs)
+    if (isModEnabled(modCategories, "probejs"))
+        modRuntimeOnly(pack.curseforge.probejs)
+    if (isModEnabled(modCategories, "kubejsadditions"))
+        modRuntimeOnly(pack.curseforge.kubejs.additions)
+    if (isModEnabled(modCategories, "kubejsoffline"))
+        modRuntimeOnly(pack.curseforge.kubejs.offline)
+
     // Lifecycle
     if (isModEnabled(modCategories, "epicsiegemod"))
         modRuntimeOnly(pack.curseforge.epic.siege.mod)
@@ -380,6 +396,26 @@ tasks.register('packwizExport') {
     dependsOn('migratePackwizBuildArtifact')
 }
 
+tasks.register("generateModCategorySettings") {
+    def outputDir = layout.buildDirectory.dir("resources/main/META-INF")
+    doLast {
+        def dir = outputDir.get().asFile
+        dir.mkdirs()
+
+        def modCategories = (Map<String, List<String>>) new JsonSlurper().parse(file("src/main/resources/META-INF/mod_categories.json"))
+        def modProperties = [:]
+        modCategories.entrySet().stream().forEach {entry ->
+            modProperties[entry.key] = providers.gradleProperty("enable_${getCategoryName entry.key}").getOrElse("false").toBoolean()
+        }
+
+        new File(dir, "mod_category_settings.json").text = JsonOutput.prettyPrint(JsonOutput.toJson(modProperties))
+    }
+}
+
+tasks.named("processResources") {
+    dependsOn("generateModCategorySettings")
+}
+
 void validateModCategories(Map<String, List<String>> modCategories) {
     // Check to see if mod category is in correct format
     modCategories.entrySet().stream().forEach {entry ->
@@ -440,6 +476,10 @@ static String getCategoryName(String rawCategoryName) {
 // Do not make this static
 // Function: Has no unfulfilled requirements & atleast one option
 boolean isModEnabled(Map<String, Set<String>> modCategories, String modid) {
+    //Check if modid exists
+    if (!modCategories.entrySet().stream().anyMatch {category -> {
+        category.value.stream().anyMatch {mod -> mod == modid}
+    }}) throw new RuntimeException("${modid} does not exist in mod_categories.json!")
     //Check required categories
     boolean allRequirementsSatisfied = modCategories.entrySet().stream()
             // Get requirements

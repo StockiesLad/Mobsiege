@@ -16,6 +16,7 @@ import java.util.*;
 public class Modpack2Gradle {
     // Optional Categories
     private static final Map<String, Set<String>> MOD_CATEGORIES;
+    private static final Map<String, Boolean> CATEGORY_SETTINGS;
     public static final Set<String>
             LIFECYCLE,
             PRIMITIVE_TECHNOLOGY_1;
@@ -35,6 +36,20 @@ public class Modpack2Gradle {
         }
 
         MOD_CATEGORIES = applySubCategories(modCategories);
+
+        Map<String, Boolean> categorySettings;
+        try (InputStream inputStream = Modpack2Gradle.class.getClassLoader().getResourceAsStream("META-INF/mod_category_settings.json")) {
+            assert inputStream != null;
+            try (Reader reader = new InputStreamReader(inputStream)) {
+                Gson gson = new Gson();
+                Type type = new TypeToken<Map<String, Boolean>>(){}.getType();
+                categorySettings = gson.fromJson(reader, type);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("[" + Mobsiege.MODID + "]: Error reading category settings. This must be resolved.");
+        }
+
+        CATEGORY_SETTINGS = categorySettings;
 
         LIFECYCLE = getCategory("lifecycle");
         PRIMITIVE_TECHNOLOGY_1 = getCategory("primitive_technology_1");
@@ -116,7 +131,10 @@ public class Modpack2Gradle {
      * @return Whether the given category is enabled
      */
     public static boolean isCategoryEnabled(Set<String> category) {
-        return category.stream().allMatch(mod -> ModList.get().isLoaded(mod));
+        return CATEGORY_SETTINGS.get(MOD_CATEGORIES.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(category))
+                .findFirst().orElseThrow().getKey()
+        );
     }
 
     public static boolean isModEnabled(String modid) {

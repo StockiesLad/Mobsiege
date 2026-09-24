@@ -1,0 +1,13 @@
+name = "KubeJS Offline Documentation"
+filename = "kubejsoffline-5.2.0.27.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "c6a843aea394297dad9130f1545c4f137a0b40d4"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 7430748
+project-id = 641627

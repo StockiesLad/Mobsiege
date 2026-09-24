@@ -666,6 +666,11 @@ hash = "02e3f47ff5a2fa074996387e14c81718e5c4df16dbe75ba1e1021157352f7815"
 metafile = true
 
 [[files]]
+file = "mods/entityjs.pw.toml"
+hash = "998986eff84ed344b4d6112be04cdc123770ec0e66d0c61799e1952c0013c768"
+metafile = true
+
+[[files]]
 file = "mods/epic-siege-mod.pw.toml"
 hash = "6a2dbbc2f810da20244a0d5edcc0690a682a665fc1e2ae85d6b48d620c08ade1"
 metafile = true
@@ -673,6 +678,11 @@ metafile = true
 [[files]]
 file = "mods/forgified-fabric-api.pw.toml"
 hash = "b5dfc1ed07de5e850c30f4277412ee8e85e9d21c17f168bd8adf2bfa95ae664c"
+metafile = true
+
+[[files]]
+file = "mods/geckolib.pw.toml"
+hash = "898fd2704dd260ae8f3dc20b4416439751f0a9e76367c4f0bbdac886b6987802"
 metafile = true
 
 [[files]]
@@ -686,8 +696,28 @@ hash = "37887fb6b83ab4ec1f6279b41703371797b6a57152c944a498504f644ecd0e55"
 metafile = true
 
 [[files]]
+file = "mods/in-control.pw.toml"
+hash = "b08bfae4586594efa0e1489220cd73e23665fd0198ac31f981bf55f9deb71ed3"
+metafile = true
+
+[[files]]
+file = "mods/kubejs-additions.pw.toml"
+hash = "748fd9bda115507dbe486c90886f449723c60b59529cc4c103489c2326c09528"
+metafile = true
+
+[[files]]
+file = "mods/kubejs-offline.pw.toml"
+hash = "039aca73391ce49bf961789c18f1cb0cfe677a8a5542dc61574320d526669d29"
+metafile = true
+
+[[files]]
 file = "mods/kubejs.pw.toml"
 hash = "ed086cdfde6ba4bb175468a76f3df3b9517aea3fe95b09bed0f1fa70f7caeb6a"
+metafile = true
+
+[[files]]
+file = "mods/lootjs.pw.toml"
+hash = "de2643b3bb36e6b5fd97540bd79619e0844293b43487ecce1613165a409ce8cc"
 metafile = true
 
 [[files]]
@@ -708,6 +738,11 @@ metafile = true
 [[files]]
 file = "mods/primal-stage.pw.toml"
 hash = "137d170eb659ea272bf28ab506d0521ee91360e347d57f678d568b3672e2984f"
+metafile = true
+
+[[files]]
+file = "mods/probejs.pw.toml"
+hash = "25f4863fba654a2b603a90f52ce5f0e17871c4249fd5c7bef3d40a6c8d9e36de"
 metafile = true
 
 [[files]]

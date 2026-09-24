@@ -15,7 +15,13 @@
     "#aether"
   ],
   "[required]:tweaks": [
-    "kubejs"
+    "incontrol",
+    "kubejs",
+    "entityjs",
+    "lootjs",
+    "probejs",
+    "kubejsadditions",
+    "kubejsoffline"
   ],
 
   "[optional]:aether": [
@@ -32,7 +38,8 @@
     "architectury",
     "rhino",
     "cloth-config",
-    "glitchcore"
+    "glitchcore",
+    "geckolib"
   ],
   "[optional]:lifecycle": [
     "#tweaks",
