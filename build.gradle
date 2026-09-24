@@ -130,13 +130,13 @@ dependencies {
         if (isModEnabled(modCategories, "rhino"))
             modRuntimeOnly(pack.curseforge.rhino)
         if (isModEnabled(modCategories, "connectormod")) {
-            runtimeOnly("org.sinytra.connector:Connector-1.0.0-beta.50+1.20.1")
+            modRuntimeOnly("org.sinytra.connector:Connector-1.0.0-beta.50+1.20.1")
             //modRuntimeOnly(pack.curseforge.sinytra.connector)
             //clientAdditionalRuntimeClasspath project(':mixin-bootstrap') // Do not remove me!
         }
         if (isModEnabled(modCategories, "owo"))
             modRuntimeOnly(pack.curseforge.owo.lib)
-        if (isModEnabled(modCategories, "cloth_config"))
+        if (isModEnabled(modCategories, "cloth-config"))
             modRuntimeOnly(pack.curseforge.cloth.config)
         if (isModEnabled(modCategories, "glitchcore"))
             modRuntimeOnly(pack.curseforge.glitchcore)

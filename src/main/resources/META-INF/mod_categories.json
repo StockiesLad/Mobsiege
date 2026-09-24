@@ -31,7 +31,7 @@
     "codechickenlib",
     "architectury",
     "rhino",
-    "cloth_config",
+    "cloth-config",
     "glitchcore"
   ],
   "[optional]:lifecycle": [
