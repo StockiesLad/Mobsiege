@@ -1,0 +1,24 @@
+{
+     "name": "Clay Age",
+     "sortnum": 3,
+     "icon": "minecraft:brick",
+     "category": "patchouli:primal_age",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "To progress from a grill to a campfire, you will need to make campfire rock, which requires brick. To get bricks, you first need to get yourself some clay. If you can't find any nearby, you can combine the bone meal you get from sand, and ash you get from charcoal pits. If you don't have enough ash, burn some wood in an open fire."
+          },
+          {
+               "type": "patchouli:text",
+               "text": "Make a couple of clay blocks, place them, then right-click it with a hammer. This will mold it in wet bricks. But you can't smelt it just yet! You need to dry it first with a drying rack. Once you have DRY clay bricks, then you can smelt it to get your bricks and hence your campfire rock."
+          },
+          {
+               "type": "patchouli:text",
+               "text": "When using a campfire, you first need to light it as you did with your torches. It also needs to be sustained with fuels (Use your poor and low grade charcoal for this) to keep going. Making another grill is ideal as you can power it with your campfire. Thus, giving you double the throughput with the same amount of fuel."
+          },
+          {
+               "type": "patchouli:text",
+               "text": "Campfires can also do other nice things like smelting useful clay items made by right-clicking clay blocks with a clay tool. While campfires can solve your temperature problems, you still need to quench your thirst. Smelt some sand in it to make glass shards, which can be used to make bottles for water. Since you cannot quite purify it yet, unfiltered will have to do for now."
+          }
+     ]
+}

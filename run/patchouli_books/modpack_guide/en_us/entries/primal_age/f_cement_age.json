@@ -1,0 +1,16 @@
+{
+     "name": "Cement Age",
+     "sortnum": 5,
+     "icon": "mobsiege:fire_brick",
+     "category": "patchouli:primal_age",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "Since you've been hard at work with unreliable machines, it's time to finally break free from it all with a furnace. Unlike the previous machines, a furnace can do anything and hasn't been modified at all. So the question now is how does one get a furnace?"
+          },
+          {
+               "type": "patchouli:text",
+               "text": "Cement is like it's clay and mortar predecessors, following the same brick-making process. It is made using mortar, RAW nickel and RAW iron. Since it requires even more heat to process, it will need to be smelted in a kiln. When done, it'll give you fire bricks, which you can craft along with a kiln to get a furnace. Since you can now self sustain, it's time for you to chose your own path to success. Enjoy!"
+          }
+     ]
+}

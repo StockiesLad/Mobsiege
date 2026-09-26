@@ -1,0 +1,11 @@
+{
+     "name": "Hordes",
+     "icon": "minecraft:zombie_head",
+     "category": "patchouli:world",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "Hordes are an event where your sky will turn blood red at night. There will be swarms and swarms of undead charging your position."
+          }
+     ]
+}

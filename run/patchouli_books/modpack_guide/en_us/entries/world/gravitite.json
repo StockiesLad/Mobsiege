@@ -1,0 +1,15 @@
+{
+     "name": "Gravitite",
+     "icon": "aether_redux:raw_gravitite",
+     "category": "patchouli:world",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "Gravitite is a crucial ingredient to the later stages as it is the main ingredient in the Gravitium Alloy. So grab as much as you can!"
+          },
+          {
+               "type": "patchouli:spotlight",
+               "item": "mobsiege:gravitium_alloy"
+          }
+     ]
+}

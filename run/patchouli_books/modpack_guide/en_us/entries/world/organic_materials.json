@@ -1,0 +1,11 @@
+{
+     "name": "Organic Materials",
+     "icon": "minecraft:grass",
+     "category": "patchouli:world",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "Things like grass, saplings and flowers will behave uniformly, dropping sticks and plant fiber when mined by hand or a knife. Consequently, it will drop itself with shears or silk touched tools."
+          }
+     ]
+}

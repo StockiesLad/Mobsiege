@@ -1,0 +1,32 @@
+{
+    "name": "Wood Age",
+    "sortnum": 1,
+    "icon": "primalstage:spruce_logs",
+    "category": "patchouli:primal_age",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "To chop a tree, you can continuously mine the trunk to chop it down. But, due your the weakness of flint-based tools, this may not be practical for big trees. Instead, you can sneak and mine to break each log individually. This way you can preserve your durability for crafting things."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "You can strip a log to chop it up by right-clicking it to get split logs, which are used for high-grade torches. For now, you can use your axe to craft logs into planks or sticks. Since you cannot get a saw yet, this process is extremely inefficient, so use your wood wisely, like crafting lattices as it's used for crafting tables and makes more blocks per log."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Since night approaches fast, you need to secure some torches to keep yourself warm during the night. Using resources you already have, craft yourself a fire bow. Place atleast 8 logs underground with 1 block exposed. Sneak and right-click with your fire bow to light it. Be sure to cover it up quickly as it will burn to ashes if you're not fast enough."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "If you have a lot of lots (somewhere around 20), you make some split logs to craft it into a log stack. This can be used in a fire pit to make higher quality charcoal."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "While your wood is charring, grab yourself some more plant fiber, charcoal and logs as you will always end up needing more anyways. After a couple of minutes your charcoal should be done. You can tell if smoke is no longer rising from your charcoal pit, it will also make an extinguishment sound when it's finished. From there you can mine your charcoal to create your torches and light them with a fire bow."
+        },
+        {
+            "type": "patchouli:empty",
+            "draw_filler": false
+        }
+    ]
+}

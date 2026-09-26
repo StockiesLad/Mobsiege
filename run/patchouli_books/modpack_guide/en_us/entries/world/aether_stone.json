@@ -1,0 +1,19 @@
+{
+     "name": "Aether Stone",
+     "icon": "aether:holystone",
+     "category": "patchouli:world",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "Aether stone can be crushed to yield any ore drops from the aether. Notably, holystone and icestone and be crafted using ingredients from other dimensions."
+          },
+          {
+               "type": "patchouli:spotlight",
+               "title": "Crushable Stones",
+               "text": "These are the aether stones that can be crushed to yield aether ore drops.",
+               "item": {
+                    "tag": "mobsiege:holystone"
+               }
+          }
+     ]
+}

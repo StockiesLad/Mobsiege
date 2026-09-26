@@ -1,0 +1,11 @@
+{
+     "name": "EMI",
+     "icon": "minecraft:crafting_table",
+     "category": "patchouli:utilities",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "EMI is a recipe viewer in your inventory. Some basic usages are pressing 'r' on an item to get it's recipe, and 'u' for it's usages in other recipes. There are other functions as well, so it's important to familiarise yourself with it."
+          }
+     ]
+}

@@ -1,0 +1,11 @@
+{
+     "name": "Hardcore Darkness",
+     "icon": "minecraft:torch",
+     "category": "patchouli:world",
+     "pages": [
+          {
+               "type": "patchouli:text",
+               "text": "The default darkness for the game is 0, This means it's completely pitch black. The menu in your settings has nothing to do with it. So no cheating!? Hahaha! :)"
+          }
+     ]
+}

@@ -1,0 +1,24 @@
+{
+    "name": "Flint Age",
+    "sortnum": 0,
+    "icon": "primalstage:flint_hatchet",
+    "category": "patchouli:primal_age",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "To start off, you will need to get yourself some basic flint tools. But, if you go to check, you will see that it requires processed string as opposed to raw, plant string. The only flint tools you can make right are a hatchet and knife. Luckily this is all you need to start."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "You will need three materials: Plant Fiber, Sticks & Flint. The first two will come from mining any organic material, such as grass, leaves and flowers. Keep in mind, using a knife makes them drop more. To get your flint, mine gravel, which will also sometimes drop pebbles. Keep these for later as it's used to make a grill."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Once you have gathered around 30 plant fiber, 10 sticks & 10 flint, follow EMI to turn that 30 plant fiber into 5 plant string. After that, knapp your flint by right-clicking on any stone-like material to break it into shards, then do it again for some pointed flint. Don't knapp all your flint, you will need a little bit of all 3 variants (Flint, Flint Shards & Pointed Flint)."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "You can now create your knife and hatchet. Try to limit your knife usage to instantly breakable blocks to preserve it's durability. As for your hatchet, create 2 of them as you will need it for crafting as well. Due to it's weak nature, flint tools damage randomly (inverse of unbreaking) and can break easily. This is what the 'Unreliable' tooltip means."
+        }
+    ]
+ }
