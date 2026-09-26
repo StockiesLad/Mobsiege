@@ -1,6 +1,7 @@
 package com.stockieslad.mobsiege.mod_category
 
-import groovy.json.JsonOutput
+
+import mod_category.ModCategoryParser
 
 import java.util.function.Function
 
@@ -23,20 +24,27 @@ class ModCategoryValidator {
         // Iterate through all categories
         rawModCategories.entrySet().stream().forEach {entry ->
             // Error if duplicate
-            if (scannedCategories.contains(getCategoryName(entry.key)))
-                throw new RuntimeException("There are two mod categories with the same name: '${getCategoryName entry.key}'")
+            if (scannedCategories.contains(ModCategoryParser.getCategoryName(entry.key)))
+                throw new RuntimeException("There are two mod categories with the same name: '${ModCategoryParser.getCategoryName entry.key}'")
             // Warn if empty category
             if (entry.value.size() == 0)
-                println("[WARN]: Mod category '${getCategoryName(entry.key)}' is empty.")
+                println("[WARN]: Mod category '${ModCategoryParser.getCategoryName(entry.key)}' is empty.")
             // Scan for correct category format
             var keyList = entry.key.split(':')
+            var type = keyList[0]
+            var id = keyList[1]
             if (    entry.key != entry.key.toLowerCase() ||
                     entry.key.contains(" ") ||
                     keyList.length != 2 ||
-                    !(      keyList[0] == "[optional]" ||
-                            keyList[0] == "[required]" ||
-                            keyList[0] == "[constraint]"
-                    )
+                    !(      type == "[optional]" ||
+                            type == "[required]" ||
+                            type == "[constraint]"
+                    ) ||
+                    id.contains("||") ||
+                    id.contains("{}") ||
+                    (id.contains("{") && !id.contains("}")) ||
+                    (!id.contains("{") && id.contains("}")) ||
+                    id.contains("()")
             ) throw new RuntimeException("Mod category '${entry.key}' is does not obey naming convention!")
             // Check for cyclic constraints
             entry.value.stream().forEach { dependencyModid -> {
@@ -47,11 +55,11 @@ class ModCategoryValidator {
             }}
             // Warn about missing gradle properties
             if (    gradlePropertyEnabled != null &&
-                    !gradlePropertyEnabled.apply("enable_${getCategoryName entry.key}") &&
+                    !gradlePropertyEnabled.apply("enable_${ModCategoryParser.getCategoryName entry.key}") &&
                     !entry.key.contains("[constraint]")
             ) println("Category '${entry.key}' has no gradle properties definition. This will be assumed to be false.")
             // Add as scanned category for checking duplicates
-            scannedCategories.add(getCategoryName(entry.key))
+            scannedCategories.add(ModCategoryParser.getCategoryName(entry.key))
         }
     }
 
@@ -59,7 +67,7 @@ class ModCategoryValidator {
         // Find category for dependency
         if (dependency.contains("#")) {
             // Get any category for name
-            dependency = findCategory(modCategories, dependency)
+            dependency = ModCategoryParser.findCategory(modCategories, dependency)
         } else {
             // Only search for constraints for regular mod
             dependency = "[constraint]:${dependency}"
@@ -78,26 +86,13 @@ class ModCategoryValidator {
         parents.remove(dependency)
     }
 
-    static String findCategory(Map<String, List<String>> modCategories, String rawCategory) {
-        rawCategory = rawCategory.replace("#", "")
-        String oldName = rawCategory
-
-        if (!rawCategory.contains(":")) {
-            for (var type : List.of("optional", "required", "constraint")) {
-                if (modCategories.containsKey("[${type}]:${rawCategory}".toString())) {
-                    rawCategory = "[${type}]:${oldName}"
-                    break
-                }
-            }
+    static boolean categoryExists(Map<String, ? extends Collection<String>> modCategories, String rawCategory) {
+        try {
+            ModCategoryParser.findCategory(modCategories, rawCategory)
+            return true
+        } catch (RuntimeException ignored) {
+            return false
         }
-
-        if (!oldName.contains(":") && oldName == rawCategory)
-            throw new RuntimeException("[ERROR]: Category \"${rawCategory}\" does not exist in ${JsonOutput.prettyPrint(JsonOutput.toJson(modCategories))}!")
-
-        return rawCategory
     }
 
-    static String getCategoryName(String rawCategoryName) {
-        return rawCategoryName.trim().split(":")[1]
-    }
 }

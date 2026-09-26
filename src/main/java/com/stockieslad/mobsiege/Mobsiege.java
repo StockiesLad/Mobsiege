@@ -24,6 +24,9 @@ public class Mobsiege {
     static {
         Modpack2Gradle.init();
 
+        // Commented out to show that this doesn't work unfortunately
+        //MODID = Modpack2Gradle.gradleProperty("mod_id");
+
         if (Modpack2Gradle.primitiveTechnology1Enabled()) {
             PrimitiveTechnology1.init();
             Modpack2ToughAsNails.init();

@@ -15,15 +15,15 @@
     "#aether"
   ],
   "[required]:tweaks": [
-    "incontrol",
+    "in|control",
     "almostunified",
-    "akashictome",
+    "akashic|tome",
     "kubejs",
     "entityjs",
     "lootjs",
     "probejs",
-    "kubejsadditions",
-    "kubejsoffline"
+    "kubejs|additions",
+    "kubejs|offline"
   ],
 
   "[optional]:aether": [
@@ -32,13 +32,13 @@
   ],
   "[optional]:libraries": [
     "connectormod",
-    "fabric_api",
-    "owo",
+    "{forgified}|fabric_api",
+    "owo|{lib}",
 
     "cb_multipart",
     "cofh_core",
-    "codechickenlib",
-    "architectury",
+    "codechicken|{lib}|{1}|{8}",
+    "architectury|{api}",
     "rhino",
     "cloth-config",
     "glitchcore",
@@ -49,7 +49,7 @@
     "#tweaks",
     "#libraries",
 
-    "epicsiegemod",
+    "epic|siege|mod",
     "thermal_foundation"
   ],
   "[optional]:primitive_technology_1": [
@@ -58,11 +58,11 @@
 
     "decorative_blocks",
     "carbonize",
-    "toughasnails",
-    "notreepunching",
+    "tough|as|nails",
+    "no|tree|punching",
     "treechop",
-    "primalstage",
-    "hardcore_torches"
+    "primal|stage",
+    "hardcore_torches|{forge}"
   ],
   "[optional]:primitive_technology_2": [
     "#libraries",
@@ -79,7 +79,7 @@
     "#tweaks",
 
     "#aether",
-    "actuallyadditions"
+    "actually|(additions){subtractions}"
   ],
   "[optional]:mechanical_technology_1": [
     "#libraries",
@@ -102,7 +102,7 @@
     "#tweaks",
 
     "#aether",
-    "actuallyadditions",
+    "actually|(additions){subtractions}",
     "thermal_foundation"
   ],
   "[optional]:mechanical_technology_3": [

@@ -1,12 +1,14 @@
 package com.stockieslad.mobsiege.mod_category
 
-import static com.stockieslad.mobsiege.mod_category.ModCategoryValidator.getCategoryName
+import mod_category.ModCategoryParser
 
-class ModChecker {
+import java.util.function.Consumer
+
+class ModHandler {
     private final ModCategoryProvider modCategories
     private final List<String> declaredMods
 
-    protected ModChecker(ModCategoryProvider modCategories) {
+    protected ModHandler(ModCategoryProvider modCategories) {
         this.modCategories = modCategories
         this.declaredMods = new ArrayList<>()
     }
@@ -25,7 +27,7 @@ class ModChecker {
         // Remove categories that are not a requirement of mod
                 .filter {entry -> entry.value.stream().anyMatch {categoryModId -> (modid == categoryModId) }}
         // Test all categories to see if they are all enabled
-                .allMatch { entry -> modCategories.gradlePropertyEnabled.apply("enable_${getCategoryName entry.key}")}
+                .allMatch { entry -> modCategories.gradlePropertyEnabled.apply("enable_${ModCategoryParser.getCategoryName entry.key}")}
         if (!allRequirementsSatisfied)
             return false
         // Check constraints
@@ -40,7 +42,7 @@ class ModChecker {
         // Get options
                 .filter{entry -> entry.key.contains("[optional]")}
         // Remove options that are disabled
-                .filter { entry -> modCategories.gradlePropertyEnabled.apply("enable_${getCategoryName entry.key}")}
+                .filter { entry -> modCategories.gradlePropertyEnabled.apply("enable_${ModCategoryParser.getCategoryName entry.key}")}
         // Combine all enabled options' modids
                 .flatMap{entry -> entry.value.stream()}
         // Test all categories to see if any are enabled
@@ -50,6 +52,18 @@ class ModChecker {
             println("Mod \"${modid}\" loaded: ${anyOptionsSatisfied}")
 
         return anyOptionsSatisfied
+    }
+
+    void addEnabledDependencies(Consumer<String> addDependency) {
+        modCategories.get().entrySet().stream()
+                .flatMap {it.value.stream()}
+                .toSet().forEach {modid -> {
+            if (isModEnabled(modid)) {
+                addDependency.accept(modid)
+            }
+        }}
+
+        printMissingDependencies()
     }
 
     void printMissingDependencies() {

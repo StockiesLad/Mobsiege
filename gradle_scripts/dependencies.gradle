@@ -1,6 +1,8 @@
 //file:noinspection DependencyNotationArgument
 //file:noinspection SpellCheckingInspection
-import com.stockieslad.mobsiege.mod_category.ModChecker
+
+
+import com.stockieslad.mobsiege.mod_category.ModHandler
 
 repositories {
     mavenCentral()
@@ -54,96 +56,37 @@ dependencies {
     modCompileOnly(pack.curseforge.decorative.blocks)
     modCompileOnly("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
 
-    var mods = modpack.modCategoryProvider().getModChecker() as ModChecker
+    var modidToFile = [
+            "connectormod": "org.sinytra.connector:Connector-1.0.0-beta.50+1.20.1",
+            "aether_genesis": "com.aetherteam.aether_genesis:aether_genesis:1.20.1-0.0.1-forge",
+            "carbonize": "net.jmb19905:carbonize:1.0.0+1.20.1",
+            "buildcraftcore": "buildcraft:buildcraft:7.99.24.9-1.20.1-2025-04-26-all",
+    ]
 
-    // Libraries
-    // Fabric
-    if (mods.isModEnabled("fabric_api"))
-        modRuntimeOnly(pack.curseforge.forgified.fabric.api)
-    // Forge
-    if (mods.isModEnabled("architectury"))
-        modRuntimeOnly(pack.curseforge.architectury.api)
-    if (mods.isModEnabled("cb_multipart"))
-        modRuntimeOnly(pack.curseforge.cb.multipart)
-    if (mods.isModEnabled("codechickenlib"))
-        modRuntimeOnly(pack.curseforge.codechicken.lib.'1'.'8')
-    if (mods.isModEnabled("rhino"))
-        modRuntimeOnly(pack.curseforge.rhino)
-    if (mods.isModEnabled("connectormod")) {
-        modRuntimeOnly("org.sinytra.connector:Connector-1.0.0-beta.50+1.20.1")
-        //modRuntimeOnly(pack.curseforge.sinytra.connector)
-        //clientAdditionalRuntimeClasspath project(':mixin-bootstrap') // Do not remove me!
-    }
-    if (mods.isModEnabled("owo"))
-        modRuntimeOnly(pack.curseforge.owo.lib)
-    if (mods.isModEnabled("cloth-config"))
-        modRuntimeOnly(pack.curseforge.cloth.config)
-    if (mods.isModEnabled("glitchcore"))
-        modRuntimeOnly(pack.curseforge.glitchcore)
-    if (mods.isModEnabled("cofh_core"))
-        modRuntimeOnly(pack.curseforge.cofh.core)
-    if (mods.isModEnabled("geckolib"))
-        modRuntimeOnly(pack.curseforge.geckolib)
-    if (mods.isModEnabled("gml"))
-        modRuntimeOnly(pack.curseforge.gml)
-    //Tweaks
-    if (mods.isModEnabled("incontrol"))
-        modRuntimeOnly(pack.curseforge."in".control)
-    if (mods.isModEnabled("kubejs"))
-        modRuntimeOnly(pack.curseforge.kubejs)
-    if (mods.isModEnabled("lootjs"))
-        modRuntimeOnly(pack.curseforge.lootjs)
-    if (mods.isModEnabled("entityjs"))
-        modRuntimeOnly(pack.curseforge.entityjs)
-    if (mods.isModEnabled("probejs"))
-        modRuntimeOnly(pack.curseforge.probejs)
-    if (mods.isModEnabled("kubejsadditions"))
-        modRuntimeOnly(pack.curseforge.kubejs.additions)
-    if (mods.isModEnabled("kubejsoffline"))
-        modRuntimeOnly(pack.curseforge.kubejs.offline)
-    if (mods.isModEnabled("akashictome"))
-        modRuntimeOnly(pack.curseforge.akashic.tome)
-    if (mods.isModEnabled("almostunified"))
-        modRuntimeOnly(pack.curseforge.almostunified)
+    var mods = modpack.modCategoryProvider().getModHandler() as ModHandler
 
-    // Lifecycle
-    if (mods.isModEnabled("epicsiegemod"))
-        modRuntimeOnly(pack.curseforge.epic.siege.mod)
-    // Building
-    if (mods.isModEnabled("decorative_blocks"))
-        modRuntimeOnly(pack.curseforge.decorative.blocks)
-    // Technology
-    if (mods.isModEnabled("carbonize"))
-        modRuntimeOnly("net.jmb19905:carbonize:1.0.0+1.20.1")
-    if (mods.isModEnabled("actuallyadditions"))
-        modRuntimeOnly(pack.curseforge.actually.subtractions)
-    if (mods.isModEnabled("buildcraftcore"))
-        modRuntimeOnly "buildcraft:buildcraft:7.99.24.9-1.20.1-2025-04-26-all"
-    // Primitive Technology 1
-    if (mods.isModEnabled("toughasnails"))
-        modRuntimeOnly(pack.curseforge.tough.as.nails)
-    if (mods.isModEnabled("notreepunching"))
-        modRuntimeOnly(pack.curseforge.no.tree.punching)
-    if (mods.isModEnabled("treechop"))
-        modRuntimeOnly(pack.curseforge.treechop)
-    if (mods.isModEnabled("primalstage"))
-        modRuntimeOnly(pack.curseforge.primal.stage)
-    if (mods.isModEnabled("hardcore_torches"))
-        modRuntimeOnly(pack.curseforge.hardcore.torches.forge)
-    // Electrical 2
-    if (mods.isModEnabled("thermal_foundation"))
-        modRuntimeOnly(pack.curseforge.thermal.foundation)
+    mods.addEnabledDependencies {modid -> {
+        if (modidToFile.containsKey(modid)) {
+            modRuntimeOnly(modidToFile[modid])
+            //  if (mod == 'connectormod')
+            //      modRuntimeOnly(pack.curseforge.sinytra.connector)
+            //      clientAdditionalRuntimeClasspath project(':mixin-bootstrap') // Do not remove me!
+        } else {
+            var dep = pack.curseforge
 
-    // World
-    if (mods.isModEnabled("aether"))
-        modRuntimeOnly(pack.curseforge.aether)
-    if (mods.isModEnabled("aether_genesis"))
-        modRuntimeOnly("com.aetherteam.aether_genesis:aether_genesis:1.20.1-0.0.1-forge")
+            try {
+                for (var modid_part in modid.split(/[-_|]/))
+                    dep = dep."${modid_part}"
+            } catch (RuntimeException exception) {
+                exception.print("[ERROR]: Mod ${modid} has no dependency definition in \"dependencies.gradle#modidToFile\" map!")
+                throw exception
+            }
+
+            modRuntimeOnly(dep)
+        }
+    }}
 
     configurations.configureEach {
         exclude(group: "net.minecraftforge", module: "srgutils")
     }
-
-    // Check missing dependencies
-    mods.printMissingDependencies()
 }

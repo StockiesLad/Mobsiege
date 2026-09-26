@@ -8,19 +8,25 @@ import java.util.function.Function
 class ModCategoryProvider {
     protected final Function<String, Boolean> gradlePropertyEnabled
     private final Map<String, Set<String>> modCategories
+    private final ModHandler modHandler
 
 
-    ModCategoryProvider(Function<String, Boolean> gradlePropertyEnabled, Object modCategoryLocation) {
+    ModCategoryProvider(Function<Object, Boolean> gradlePropertyEnabled, Object modCategoryLocation, boolean runtime) {
         this.gradlePropertyEnabled = gradlePropertyEnabled
 
+        //noinspection GroovyAssignabilityCheck
         var rawModCategories = new JsonSlurper().parse(modCategoryLocation) as Map<String, List<String>>
         rawModCategories = new HashMap<>(rawModCategories)
 
         var validator = new ModCategoryValidator(gradlePropertyEnabled)
-        var builder = new ModCategoryBuilder(rawModCategories)
+        var builder = new ModCategoryBuilder(rawModCategories, runtime)
         validator.validateModCategories(rawModCategories)
 
         this.modCategories = builder.applySubCategories()
+
+        if (gradlePropertyEnabled != null)
+            this.modHandler = new ModHandler(this)
+        else this.modHandler == null
 
         if (gradlePropertyEnabled != null && gradlePropertyEnabled.apply("dump_parsed_json"))
             println JsonOutput.prettyPrint(JsonOutput.toJson(modCategories))
@@ -30,9 +36,9 @@ class ModCategoryProvider {
         return modCategories
     }
 
-    ModChecker getModChecker() {
-        if (gradlePropertyEnabled != null)
-            return new ModChecker(this)
+    ModHandler getModHandler() {
+        if (modHandler != null)
+            return modHandler
         else throw new RuntimeException("[ERROR]: Mod checker called with no gradle property function! " +
                 "If this is being called from runtime, this is strictly forbidden!")
     }
