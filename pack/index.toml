@@ -628,6 +628,16 @@ hash = "6f87edf40bf0be7e7e266f9e2ff0bf7584c6bedff7975bad3259a21a60d1e598"
 metafile = true
 
 [[files]]
+file = "mods/akashic-tome.pw.toml"
+hash = "19f470521e7119c5fc1754e40e40b171eeef11335c54167cb482998c0737e979"
+metafile = true
+
+[[files]]
+file = "mods/almostunified.pw.toml"
+hash = "8e9376087852491eb52037279506fefc45e174303530630e8b8afa571b1bd697"
+metafile = true
+
+[[files]]
 file = "mods/architectury-api.pw.toml"
 hash = "5e9edd1fd2395f14a0c8a4acbdbdd61e1047be1f0033deb3140d2ce0d093e9d8"
 metafile = true

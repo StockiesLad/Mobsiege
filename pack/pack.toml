@@ -1,16 +1,16 @@
-pack-format = "packwiz:1.1.0"
-author = "StockiesLad"
 name = "Mobsiege"
+author = "StockiesLad"
 version = "0.1"
-
-[versions]
-	minecraft = "1.20.1"
-	forge = "47.4.23"
-
-[options]
-	acceptable-game-versions = ["fabric", "forge", "neoforge"]
+pack-format = "packwiz:1.1.0"
 
 [index]
-	hash-format = "sha256"
-	hash = "12af927648d006ed301bf8086edeb925c3d13d99b4e11b9cbd0b38841e85966c"
-	file = "index.toml"
+file = "index.toml"
+hash-format = "sha256"
+hash = "9cadf5effb64c4260279fcf571e4eeba04fe6a5019fe33942b5a300b2f389d09"
+
+[versions]
+forge = "47.4.23"
+minecraft = "1.20.1"
+
+[options]
+acceptable-game-versions = ["fabric", "forge", "neoforge"]

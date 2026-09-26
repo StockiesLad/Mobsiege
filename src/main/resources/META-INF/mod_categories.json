@@ -16,6 +16,8 @@
   ],
   "[required]:tweaks": [
     "incontrol",
+    "almostunified",
+    "akashictome",
     "kubejs",
     "entityjs",
     "lootjs",
@@ -25,7 +27,8 @@
   ],
 
   "[optional]:aether": [
-    "aether"
+    "aether",
+    "aether_genesis"
   ],
   "[optional]:libraries": [
     "connectormod",

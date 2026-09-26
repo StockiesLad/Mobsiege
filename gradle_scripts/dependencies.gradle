@@ -1,3 +1,5 @@
+//file:noinspection DependencyNotationArgument
+//file:noinspection SpellCheckingInspection
 import com.stockieslad.mobsiege.mod_category.ModChecker
 
 repositories {
@@ -52,12 +54,6 @@ dependencies {
     modCompileOnly(pack.curseforge.decorative.blocks)
     modCompileOnly("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
 
-    //def modCategories = (Map<String, List<String>>) new JsonSlurper().parse(file("src/main/resources/META-INF/mod_categories.json"))
-    //modCategories = new HashMap<String, List<String>>(modCategories)
-
-    //validateModCategories(modCategories)
-    //modCategories = applySubCategories(modCategories)
-
     var mods = modpack.modCategoryProvider().getModChecker() as ModChecker
 
     // Libraries
@@ -105,6 +101,10 @@ dependencies {
         modRuntimeOnly(pack.curseforge.kubejs.additions)
     if (mods.isModEnabled("kubejsoffline"))
         modRuntimeOnly(pack.curseforge.kubejs.offline)
+    if (mods.isModEnabled("akashictome"))
+        modRuntimeOnly(pack.curseforge.akashic.tome)
+    if (mods.isModEnabled("almostunified"))
+        modRuntimeOnly(pack.curseforge.almostunified)
 
     // Lifecycle
     if (mods.isModEnabled("epicsiegemod"))
@@ -137,6 +137,8 @@ dependencies {
     // World
     if (mods.isModEnabled("aether"))
         modRuntimeOnly(pack.curseforge.aether)
+    if (mods.isModEnabled("aether_genesis"))
+        modRuntimeOnly("com.aetherteam.aether_genesis:aether_genesis:1.20.1-0.0.1-forge")
 
     configurations.configureEach {
         exclude(group: "net.minecraftforge", module: "srgutils")
