@@ -1,33 +1,35 @@
-import com.electronwill.nightconfig.core.file.FileConfig
-import groovy.json.JsonOutput
-import groovy.json.JsonSlurper
+//file:noinspection DependencyNotationArgument
+//file:noinspection GroovyImplicitNullArgumentCall
+//file:noinspection SpellCheckingInspection
 
-import java.nio.file.Files
-import java.nio.file.StandardCopyOption
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.electronwill.night-config:toml:3.9.0'
-    }
-}
+import com.stockieslad.mobsiege.mod_category.ModChecker
 
 plugins {
     id 'eclipse'
     id 'idea'
     id 'java'
+    id 'groovy'
     id 'maven-publish'
     id 'net.neoforged.moddev.legacyforge' version '2.+'
+    id "modpack"
 }
 
 version = mod_version
 group = mod_group_id
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/generated/resources'
+        }
+        groovy {
+            //noinspection GroovyAssignabilityCheck
+            srcDir "$rootDir/buildSrc/src/main/groovy/com/stockieslad/$mod_id"
+        }
+    }
+}
 
 legacyForge {
     version = "${minecraft_version}-${forge_version}"
@@ -36,7 +38,7 @@ legacyForge {
 
     mods {
         "${mod_id}" {
-            //noinspection GroovyAssignabilityCheck
+            //noinspection GrUnresolvedAccess, GroovyAssignabilityCheck
             sourceSet sourceSets.main
         }
     }
@@ -93,6 +95,8 @@ dependencies {
     implementation(jarJar "me.fallenbreath:conditional-mixin-forge:${mixin_conditional}")
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}"))
+    implementation("org.apache.groovy:groovy:${groovy_version}")
+    implementation("org.apache.groovy:groovy-json:${groovy_version}")
 
     compileOnly "dev.su5ed.sinytra.fabric-api:fabric-api:${fabric_api_version}"
     modCompileOnly("curse.maven:epic-mob-siege-nightmare-957414:5003615")
@@ -106,89 +110,98 @@ dependencies {
     modCompileOnly(pack.curseforge.decorative.blocks)
     modCompileOnly("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
 
-    def modCategories = (Map<String, List<String>>) new JsonSlurper().parse(file("src/main/resources/META-INF/mod_categories.json"))
+    //def modCategories = (Map<String, List<String>>) new JsonSlurper().parse(file("src/main/resources/META-INF/mod_categories.json"))
+    //modCategories = new HashMap<String, List<String>>(modCategories)
 
-    validateModCategories(modCategories)
-    modCategories = applySubCategories(modCategories)
+    //validateModCategories(modCategories)
+    //modCategories = applySubCategories(modCategories)
 
-    if (providers.gradleProperty("dump_parsed_json").getOrElse("false").toBoolean())
-        println JsonOutput.prettyPrint(JsonOutput.toJson(modCategories))
+    var mods = modpack.modCategoryProvider().getModChecker() as ModChecker
 
     // Libraries
         // Fabric
-        if (isModEnabled(modCategories, "fabric_api"))
+        if (mods.isModEnabled("fabric_api"))
             modRuntimeOnly(pack.curseforge.forgified.fabric.api)
         // Forge
-        if (isModEnabled(modCategories, "architectury"))
+        if (mods.isModEnabled("architectury"))
             modRuntimeOnly(pack.curseforge.architectury.api)
-        if (isModEnabled(modCategories, "cb_multipart"))
+        if (mods.isModEnabled("cb_multipart"))
             modRuntimeOnly(pack.curseforge.cb.multipart)
-        if (isModEnabled(modCategories, "codechickenlib"))
+        if (mods.isModEnabled("codechickenlib"))
             modRuntimeOnly(pack.curseforge.codechicken.lib.'1'.'8')
-        if (isModEnabled(modCategories, "rhino"))
+        if (mods.isModEnabled("rhino"))
             modRuntimeOnly(pack.curseforge.rhino)
-        if (isModEnabled(modCategories, "connectormod")) {
+        if (mods.isModEnabled("connectormod")) {
             modRuntimeOnly("org.sinytra.connector:Connector-1.0.0-beta.50+1.20.1")
             //modRuntimeOnly(pack.curseforge.sinytra.connector)
             //clientAdditionalRuntimeClasspath project(':mixin-bootstrap') // Do not remove me!
         }
-        if (isModEnabled(modCategories, "owo"))
+        if (mods.isModEnabled("owo"))
             modRuntimeOnly(pack.curseforge.owo.lib)
-        if (isModEnabled(modCategories, "cloth-config"))
+        if (mods.isModEnabled("cloth-config"))
             modRuntimeOnly(pack.curseforge.cloth.config)
-        if (isModEnabled(modCategories, "glitchcore"))
+        if (mods.isModEnabled("glitchcore"))
             modRuntimeOnly(pack.curseforge.glitchcore)
-        if (isModEnabled(modCategories, "cofh_core"))
+        if (mods.isModEnabled("cofh_core"))
             modRuntimeOnly(pack.curseforge.cofh.core)
-        if (isModEnabled(modCategories, "geckolib"))
+        if (mods.isModEnabled("geckolib"))
             modRuntimeOnly(pack.curseforge.geckolib)
+        if (mods.isModEnabled("gml"))
+            modRuntimeOnly(pack.curseforge.gml)
     //Tweaks
-    if (isModEnabled(modCategories, "incontrol"))
+    if (mods.isModEnabled("incontrol"))
         modRuntimeOnly(pack.curseforge."in".control)
-    if (isModEnabled(modCategories, "kubejs"))
+    if (mods.isModEnabled("kubejs"))
         modRuntimeOnly(pack.curseforge.kubejs)
-    if (isModEnabled(modCategories, "lootjs"))
+    if (mods.isModEnabled("lootjs"))
         modRuntimeOnly(pack.curseforge.lootjs)
-    if (isModEnabled(modCategories, "entityjs"))
+    if (mods.isModEnabled("entityjs"))
         modRuntimeOnly(pack.curseforge.entityjs)
-    if (isModEnabled(modCategories, "probejs"))
+    if (mods.isModEnabled("probejs"))
         modRuntimeOnly(pack.curseforge.probejs)
-    if (isModEnabled(modCategories, "kubejsadditions"))
+    if (mods.isModEnabled("kubejsadditions"))
         modRuntimeOnly(pack.curseforge.kubejs.additions)
-    if (isModEnabled(modCategories, "kubejsoffline"))
+    if (mods.isModEnabled("kubejsoffline"))
         modRuntimeOnly(pack.curseforge.kubejs.offline)
 
     // Lifecycle
-    if (isModEnabled(modCategories, "epicsiegemod"))
+    if (mods.isModEnabled("epicsiegemod"))
         modRuntimeOnly(pack.curseforge.epic.siege.mod)
     // Building
-    if (isModEnabled(modCategories, "decorative_blocks"))
+    if (mods.isModEnabled("decorative_blocks"))
         modRuntimeOnly(pack.curseforge.decorative.blocks)
     // Technology
-    if (isModEnabled(modCategories, "carbonize"))
+    if (mods.isModEnabled("carbonize"))
         modRuntimeOnly("net.jmb19905:carbonize:1.0.0+1.20.1")
-    if (isModEnabled(modCategories, "actuallyadditions"))
+    if (mods.isModEnabled("actuallyadditions"))
         modRuntimeOnly(pack.curseforge.actually.subtractions)
-    if (isModEnabled(modCategories, "buildcraftcore"))
+    if (mods.isModEnabled("buildcraftcore"))
         modRuntimeOnly "buildcraft:buildcraft:7.99.24.9-1.20.1-2025-04-26-all"
         // Primitive Technology 1
-        if (isModEnabled(modCategories, "toughasnails"))
+        if (mods.isModEnabled("toughasnails"))
             modRuntimeOnly(pack.curseforge.tough.as.nails)
-        if (isModEnabled(modCategories, "notreepunching"))
+        if (mods.isModEnabled("notreepunching"))
             modRuntimeOnly(pack.curseforge.no.tree.punching)
-        if (isModEnabled(modCategories, "treechop"))
+        if (mods.isModEnabled("treechop"))
             modRuntimeOnly(pack.curseforge.treechop)
-        if (isModEnabled(modCategories, "primalstage"))
+        if (mods.isModEnabled("primalstage"))
             modRuntimeOnly(pack.curseforge.primal.stage)
-        if (isModEnabled(modCategories, "hardcore_torches"))
+        if (mods.isModEnabled("hardcore_torches"))
             modRuntimeOnly(pack.curseforge.hardcore.torches.forge)
         // Electrical 2
-        if (isModEnabled(modCategories, "thermal_foundation"))
+        if (mods.isModEnabled("thermal_foundation"))
             modRuntimeOnly(pack.curseforge.thermal.foundation)
 
     // World
-    if (isModEnabled(modCategories, "aether"))
+    if (mods.isModEnabled("aether"))
         modRuntimeOnly(pack.curseforge.aether)
+
+    configurations.configureEach {
+        exclude(group: "net.minecraftforge", module: "srgutils")
+    }
+
+    // Check missing dependencies
+    mods.printMissingDependencies()
 }
 
 mixin {
@@ -242,6 +255,18 @@ publishing {
         }
     }
 }
+
+tasks.named('compileGroovy') {
+    classpath = sourceSets.main.compileClasspath
+}
+
+tasks.named('compileJava') {
+    classpath += files(sourceSets.main.groovy.classesDirectory)
+}
+
+apply from: "$rootDir/gradle_scripts/packwiz.gradle"
+apply from: "$rootDir/gradle_scripts/category_settings.gradle"
+/*
 
 tasks.register('backupPack') {
     if (providers.gradleProperty("backupPack").getOrElse("false").toBoolean()) {
@@ -395,7 +420,8 @@ tasks.register('migratePackwizBuildArtifact') {
 tasks.register('packwizExport') {
     dependsOn('migratePackwizBuildArtifact')
 }
-
+*/
+/*
 tasks.register("generateModCategorySettings") {
     def outputDir = layout.buildDirectory.dir("resources/main/META-INF")
     doLast {
@@ -414,21 +440,74 @@ tasks.register("generateModCategorySettings") {
 
 tasks.named("processResources") {
     dependsOn("generateModCategorySettings")
-}
+} */
 
+
+
+/**
+ * <p> Category format:  [optional/required/constraint]:modid
+ * <p> Optionals - At least one option must be enabled for a given mod.
+ * <p> Requirements - All requirements must be enabled for a given mod
+ * <p> Constraint - Enables the dependents of a given mod
+ * @param modCategories The json object for mod_categories.json
+ */
+/*
 void validateModCategories(Map<String, List<String>> modCategories) {
-    // Check to see if mod category is in correct format
+    List<String> scannedCategories = new ArrayList<>()
+    // Iterate through all categories
     modCategories.entrySet().stream().forEach {entry ->
+        // Error if duplicate
+        if (scannedCategories.contains(getCategoryName(entry.key)))
+            throw new RuntimeException("There are two mod categories with the same name: '${getCategoryName entry.key}'")
+        // Warn if empty category
+        if (entry.value.size() == 0)
+            println("[WARN]: Mod category '${getCategoryName(entry.key)}' is empty.")
+        // Scan for correct category format
         var keylist = entry.key.split(':')
         if (    entry.key != entry.key.toLowerCase() ||
                 entry.key.contains(" ") ||
                 keylist.length != 2 ||
-                !(keylist[0] == "[optional]" || keylist[0] == "[required]")
-        )
-            throw new RuntimeException("Mod category '${entry.key}' is does not obey naming convention!")
-        if (!providers.gradleProperty("enable_${getCategoryName entry.key}").present)
+                !(      keylist[0] == "[optional]" ||
+                        keylist[0] == "[required]" ||
+                        keylist[0] == "[constraint]"
+                )
+        ) throw new RuntimeException("Mod category '${entry.key}' is does not obey naming convention!")
+        // Check for cyclic constraints
+        entry.value.stream().forEach { dependencyModid -> {
+            List<String> parents = new ArrayList<>();
+            if (entry.key.contains("[constraint]"))
+                parents.add(entry.key.split(":")[1]);
+            hasCyclicDependencies(modCategories, parents, dependencyModid)
+        }}
+        // Warn about missing gradle properties
+        if (!providers.gradleProperty("enable_${getCategoryName entry.key}").present && !entry.key.contains("[constraint]"))
             println("Category '${entry.key}' has no gradle properties definition. This will be assumed to be false.")
+        // Add as scanned category for checking duplicates
+        scannedCategories.add(getCategoryName(entry.key))
     }
+}
+
+static void hasCyclicDependencies(Map<String, List<String>> modCategories, List<String> parents, String dependency) {
+    // Find category for dependency
+    if (dependency.contains("#")) {
+        // Get any category for name
+        dependency = findCategory(modCategories, dependency);
+    } else {
+        // Only search for constraints for regular mod
+        dependency = "[constraint]:${dependency}"
+    }
+    // Throw error if there is a cycle
+    if (parents.contains(dependency))
+        throw new RuntimeException("Cyclic dependency '${dependency}' found in tree: ${parents}");
+    // Skip if such dependency is not existent
+    if (!modCategories.containsKey(dependency))
+        return
+    // Iterate for sub-dependencies
+    parents.add(dependency);
+    modCategories.get(dependency).stream().forEach {subDependency -> {
+        hasCyclicDependencies(modCategories, parents, subDependency)
+    }}
+    parents.remove(dependency)
 }
 
 Map<String, Set<String>> applySubCategories(Map<String, List<String>> modCategories) {
@@ -439,17 +518,8 @@ Map<String, Set<String>> applySubCategories(Map<String, List<String>> modCategor
 }
 
 Set<String> applySubCategory(Map<String, List<String>> modCategories, String workingCategory, List<String> iteratedCategories) {
-    // Check if there are cyclic dependencies on mod categories
-    if (iteratedCategories.stream().anyMatch {category -> (category == workingCategory) })
-        throw new RuntimeException("[ERROR]: Cyclic category dependencies:  ${iteratedCategories}!")
-    // Check that the working category actually exists
-    if (modCategories.containsKey("[optional]:" + workingCategory))
-        workingCategory = "[optional]:" + workingCategory
-    else if (modCategories.containsKey("[required]:" + workingCategory))
-        workingCategory = "[required]:" + workingCategory
-    else if (!(workingCategory.contains("[optional]:") && modCategories.containsKey(workingCategory)) &&
-            !(workingCategory.contains("[required]:") && modCategories.containsKey(workingCategory)))
-        throw new RuntimeException("[ERROR]: Category \"${workingCategory}\" does not exist in ${modCategories}!")
+    // Find the working category actually exists
+    workingCategory = findCategory(modCategories, workingCategory);
     // Add working category
     iteratedCategories.add(workingCategory)
     // Iterate for entries
@@ -462,11 +532,30 @@ Set<String> applySubCategory(Map<String, List<String>> modCategories, String wor
         if (!entry.contains("#"))
             filledEntries.add(entry)
         // Apply subcategories for entry
-        else filledEntries.addAll(applySubCategory(modCategories, entry.replace("#", ""), iteratedCategories))
+        else filledEntries.addAll(applySubCategory(modCategories, entry, iteratedCategories))
     }
     // Remove working category: Avoids sibling branches duplicating entries in iterated categories
     iteratedCategories.remove(workingCategory)
     return filledEntries
+}
+
+static String findCategory(Map<String, List<String>> modCategories, String rawCategory) {
+    rawCategory = rawCategory.replace("#", "")
+    String oldName = rawCategory
+
+    if (!rawCategory.contains(":")) {
+        for (var type : List.of("optional", "required", "constraint")) {
+            if (modCategories.containsKey("[${type}]:${rawCategory}".toString())) {
+                rawCategory = "[${type}]:${oldName}"
+                break
+            }
+        }
+    }
+
+    if (!oldName.contains(":") && oldName == rawCategory)
+        throw new RuntimeException("[ERROR]: Category \"${rawCategory}\" does not exist in ${JsonOutput.prettyPrint(JsonOutput.toJson(modCategories))}!")
+
+    return rawCategory;
 }
 
 static String getCategoryName(String rawCategoryName) {
@@ -475,12 +564,14 @@ static String getCategoryName(String rawCategoryName) {
 
 // Do not make this static
 // Function: Has no unfulfilled requirements & atleast one option
-boolean isModEnabled(Map<String, Set<String>> modCategories, String modid) {
+boolean isModEnabled(List<String> listedMods, Map<String, Set<String>> modCategories, String modid) {
+    // Save that mod is a dependency
+    listedMods.add(modid)
     //Check if modid exists
     if (!modCategories.entrySet().stream().anyMatch {category -> {
         category.value.stream().anyMatch {mod -> mod == modid}
     }}) throw new RuntimeException("${modid} does not exist in mod_categories.json!")
-    //Check required categories
+    //Check requirements
     boolean allRequirementsSatisfied = modCategories.entrySet().stream()
             // Get requirements
             .filter{entry -> entry.key.contains("[required]")}
@@ -490,8 +581,15 @@ boolean isModEnabled(Map<String, Set<String>> modCategories, String modid) {
             .allMatch { entry -> providers.gradleProperty("enable_${getCategoryName entry.key}").getOrElse("false").toBoolean()}
     if (!allRequirementsSatisfied)
         return false
-    //Check optional categories
-    return modCategories.entrySet().stream()
+    // Check constraints
+    boolean allConstraintsSatisfied = modCategories
+            .getOrDefault("[constraint]:" + modid, new HashSet<String>()).stream()
+            // Checks if all dependencies exist first
+            .allMatch {dependency -> isModEnabled(listedMods, modCategories, dependency)}
+    if (!allConstraintsSatisfied)
+        return false;
+    // Check options
+    boolean anyOptionsSatisfied = modCategories.entrySet().stream()
             // Get options
             .filter{entry -> entry.key.contains("[optional]")}
             // Remove options that are disabled
@@ -501,4 +599,10 @@ boolean isModEnabled(Map<String, Set<String>> modCategories, String modid) {
             .flatMap{entry -> entry.value.stream()}
             // Test all categories to see if any are enabled
             .anyMatch{modElement -> (modid == modElement) }
+    // Show when mod is loaded
+    if (anyOptionsSatisfied && providers.gradleProperty("debug_mod_list").getOrElse("false").toBoolean())
+        println("Mod \"${modid}\" loaded: ${anyOptionsSatisfied}")
+
+    return anyOptionsSatisfied
 }
+ */

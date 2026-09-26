@@ -1,2 +1,0 @@
-add configs, patchouli & kubejs.
-check mod categories to see if each mod actually works

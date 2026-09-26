@@ -39,7 +39,8 @@
     "rhino",
     "cloth-config",
     "glitchcore",
-    "geckolib"
+    "geckolib",
+    "gml"
   ],
   "[optional]:lifecycle": [
     "#tweaks",
@@ -106,5 +107,8 @@
     "#tweaks",
 
     "buildcraftcore"
+  ],
+  "[constraint]:kubejs": [
+    "rhino"
   ]
 }

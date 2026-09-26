@@ -20,6 +20,7 @@ eclipse
 # Gradle
 build
 .gradle
+/lib/
 
 # Unignore 'dynamicAssetFolders'
 run/*

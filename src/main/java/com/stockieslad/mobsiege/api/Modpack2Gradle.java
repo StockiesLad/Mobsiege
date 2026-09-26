@@ -1,16 +1,14 @@
 package com.stockieslad.mobsiege.api;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.stockieslad.mobsiege.Mobsiege;
+import com.stockieslad.mobsiege.mod_category.ModCategoryProvider;
+import groovy.json.JsonSlurper;
 import net.minecraftforge.fml.ModList;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.lang.reflect.Type;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 
 // Required categories are not implemented as KubeJS doesn't need them.
 public class Modpack2Gradle {
@@ -23,78 +21,18 @@ public class Modpack2Gradle {
     //...[insert other categories]
 
     static  {
-        Map<String, List<String>> modCategories;
-        try (InputStream inputStream = Modpack2Gradle.class.getClassLoader().getResourceAsStream("META-INF/mod_categories.json")) {
-            assert inputStream != null;
-            try (Reader reader = new InputStreamReader(inputStream)) {
-                    Gson gson = new Gson();
-                    Type type = new TypeToken<Map<String, List<String>>>(){}.getType();
-                    modCategories = gson.fromJson(reader, type);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("[" + Mobsiege.MODID + "]: Error reading mod categories. This must be resolved.");
-        }
+        var categories = Modpack2Gradle.class.getClassLoader().getResourceAsStream("META-INF/mod_categories.json");
+        MOD_CATEGORIES = new ModCategoryProvider(null, categories).get();
 
-        MOD_CATEGORIES = applySubCategories(modCategories);
-
-        Map<String, Boolean> categorySettings;
-        try (InputStream inputStream = Modpack2Gradle.class.getClassLoader().getResourceAsStream("META-INF/mod_category_settings.json")) {
-            assert inputStream != null;
-            try (Reader reader = new InputStreamReader(inputStream)) {
-                Gson gson = new Gson();
-                Type type = new TypeToken<Map<String, Boolean>>(){}.getType();
-                categorySettings = gson.fromJson(reader, type);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("[" + Mobsiege.MODID + "]: Error reading category settings. This must be resolved.");
-        }
-
-        CATEGORY_SETTINGS = categorySettings;
+        var settings = Modpack2Gradle.class.getClassLoader().getResourceAsStream("META-INF/mod_category_settings.json");
+        //noinspection unchecked
+        CATEGORY_SETTINGS = (Map<String, Boolean>) new JsonSlurper().parse(settings);
 
         LIFECYCLE = getCategory("lifecycle");
         PRIMITIVE_TECHNOLOGY_1 = getCategory("primitive_technology_1");
     }
 
     public static void init() {}
-
-    private static Map<String, Set<String>> applySubCategories(Map<String, List<String>> modCategories) {
-        Map<String, Set<String>> newModCategories = new HashMap<>();
-        modCategories.forEach((category, entries) ->
-                newModCategories.put(category, applySubCategory(modCategories, category, new ArrayList<>())));
-        return newModCategories;
-    }
-
-    private static Set<String> applySubCategory(Map<String, List<String>> modCategories, String workingCategory, List<String> iteratedCategories) {
-        // Check if there are cyclic dependencies on mod categories
-        var lWorkingCategory = workingCategory;
-        if (iteratedCategories.stream().anyMatch(category -> (category.equals(lWorkingCategory))))
-            throw new RuntimeException("[ERROR]: Cyclic category dependencies:  ${iteratedCategories}!");
-        // Check that the working category actually exists
-        if (modCategories.containsKey("[optional]:" + workingCategory))
-            workingCategory = "[optional]:" + workingCategory;
-        else if (modCategories.containsKey("[required]:" + workingCategory))
-            workingCategory = "[required]:" + workingCategory;
-        else if (!(workingCategory.contains("[optional]:") && modCategories.containsKey(workingCategory)) &&
-                !(workingCategory.contains("[required]:") && modCategories.containsKey(workingCategory)))
-            throw new RuntimeException("[ERROR]: Category \"${workingCategory}\" does not exist in ${modCategories}!");
-        // Add working category
-        iteratedCategories.add(workingCategory);
-        // Iterate for entries
-        Set<String> filledEntries = new HashSet<>();
-        modCategories.get(workingCategory).forEach(entry -> {
-            // If entry is non-existent, remove
-            if (entry == null || entry.isEmpty())
-                return;
-            // Add normally if it's a regular modid entry
-            if (!entry.contains("#"))
-                filledEntries.add(entry);
-                // Apply subcategories for entry
-            else filledEntries.addAll(applySubCategory(modCategories, entry.replace("#", ""), iteratedCategories));
-        });
-        // Remove working category: Avoids sibling branches duplicating entries in iterated categories
-        iteratedCategories.remove(workingCategory);
-        return filledEntries;
-    }
 
     private static Set<String> getCategory(String category) {
         category = "[optional]:" + category;

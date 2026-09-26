@@ -691,6 +691,11 @@ hash = "c46659c3e873e0ca121f5215991ae8bc989132a3fea0c2da9eed0f22a947b2b9"
 metafile = true
 
 [[files]]
+file = "mods/gml.pw.toml"
+hash = "961fafdef363b7306dcf437d0a2d4a025a8b17bae688130a88de6dce5b0db099"
+metafile = true
+
+[[files]]
 file = "mods/hardcore-torches-forge.pw.toml"
 hash = "37887fb6b83ab4ec1f6279b41703371797b6a57152c944a498504f644ecd0e55"
 metafile = true

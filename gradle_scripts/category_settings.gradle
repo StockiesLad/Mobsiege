@@ -1,0 +1,24 @@
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
+import static com.stockieslad.mobsiege.mod_category.ModCategoryValidator.getCategoryName
+
+tasks.register("generateModCategorySettings") {
+    def outputDir = layout.buildDirectory.dir("resources/main/META-INF")
+    doLast {
+        def dir = outputDir.get().asFile
+        dir.mkdirs()
+
+        def modCategories = (Map<String, List<String>>) new JsonSlurper().parse(file("src/main/resources/META-INF/mod_categories.json"))
+        def modProperties = [:]
+        modCategories.entrySet().stream().forEach {entry ->
+            modProperties[entry.key] = providers.gradleProperty("enable_${getCategoryName entry.key}").getOrElse("false").toBoolean()
+        }
+
+        new File(dir, "mod_category_settings.json").text = JsonOutput.prettyPrint(JsonOutput.toJson(modProperties))
+    }
+}
+
+tasks.named("processResources") {
+    dependsOn("generateModCategorySettings")
+}

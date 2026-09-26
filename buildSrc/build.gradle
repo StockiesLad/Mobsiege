@@ -1,0 +1,24 @@
+plugins {
+    id 'groovy-gradle-plugin'
+}
+
+sourceSets {
+    main {
+        groovy {
+            //This is already included in compilation by default. This is just for intellij indexing
+            //noinspection GroovyAssignabilityCheck
+            srcDir "$rootDir/src/main/groovy/com/stockieslad/mobsiege"
+        }
+    }
+}
+
+
+repositories {
+    gradlePluginPortal()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
