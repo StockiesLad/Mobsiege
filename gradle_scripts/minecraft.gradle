@@ -1,0 +1,26 @@
+legacyForge {
+    version = "${minecraft_version}-${forge_version}"
+
+    validateAccessTransformers = true
+
+    mods {
+        "${mod_id}" {
+            //noinspection GrUnresolvedAccess, GroovyAssignabilityCheck
+            sourceSet sourceSets.main
+        }
+    }
+
+    runs {
+        client {
+            client()
+        }
+
+        server {
+            server()
+        }
+
+        data {
+            data()
+        }
+    }
+}

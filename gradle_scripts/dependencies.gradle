@@ -1,0 +1,147 @@
+import com.stockieslad.mobsiege.mod_category.ModChecker
+
+repositories {
+    mavenCentral()
+    flatDir {dir 'libs'}
+    flatDir {dir 'pack/mods'}
+
+    maven { url 'https://maven.fallenbreath.me/releases' }
+
+    maven {
+        url = 'https://api.modrinth.com/maven'
+        content { includeGroup 'maven.modrinth' }
+    }
+
+    maven {
+        url = 'https://curse.cleanroommc.com'
+        content { includeGroup 'curse.maven' }
+    }
+
+    maven {
+        url = "https://maven.su5ed.dev/releases/"
+    }
+
+    maven {
+        url "https://cursemaven.com"
+    }
+
+    maven {
+        url = 'https://maven.fabricmc.net/'
+    }
+}
+
+dependencies {
+    annotationProcessor("org.sinytra:sponge-mixin:${mixin_version}")
+    compileOnly("org.sinytra:sponge-mixin:${mixin_version}")
+    //clientAdditionalRuntimeClasspath project(':mixin-bootstrap') // Do not remove me!
+    implementation(jarJar "me.fallenbreath:conditional-mixin-forge:${mixin_conditional}")
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}"))
+    implementation("org.apache.groovy:groovy:${groovy_version}")
+    implementation("org.apache.groovy:groovy-json:${groovy_version}")
+
+    compileOnly "dev.su5ed.sinytra.fabric-api:fabric-api:${fabric_api_version}"
+    modCompileOnly("curse.maven:epic-mob-siege-nightmare-957414:5003615")
+    modCompileOnly "net.jmb19905:carbonize:1.0.0+1.20.1"
+    modCompileOnly(pack.curseforge.cb.multipart)
+    modCompileOnly(pack.curseforge.no.tree.punching)
+    modCompileOnly(pack.curseforge.tough.as.nails)
+    modCompileOnly "buildcraft:buildcraft:7.99.24.9-1.20.1-2025-04-26-all"
+    modCompileOnly(pack.curseforge.cofh.core)
+    modCompileOnly(pack.curseforge.actually.subtractions)
+    modCompileOnly(pack.curseforge.decorative.blocks)
+    modCompileOnly("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
+
+    //def modCategories = (Map<String, List<String>>) new JsonSlurper().parse(file("src/main/resources/META-INF/mod_categories.json"))
+    //modCategories = new HashMap<String, List<String>>(modCategories)
+
+    //validateModCategories(modCategories)
+    //modCategories = applySubCategories(modCategories)
+
+    var mods = modpack.modCategoryProvider().getModChecker() as ModChecker
+
+    // Libraries
+    // Fabric
+    if (mods.isModEnabled("fabric_api"))
+        modRuntimeOnly(pack.curseforge.forgified.fabric.api)
+    // Forge
+    if (mods.isModEnabled("architectury"))
+        modRuntimeOnly(pack.curseforge.architectury.api)
+    if (mods.isModEnabled("cb_multipart"))
+        modRuntimeOnly(pack.curseforge.cb.multipart)
+    if (mods.isModEnabled("codechickenlib"))
+        modRuntimeOnly(pack.curseforge.codechicken.lib.'1'.'8')
+    if (mods.isModEnabled("rhino"))
+        modRuntimeOnly(pack.curseforge.rhino)
+    if (mods.isModEnabled("connectormod")) {
+        modRuntimeOnly("org.sinytra.connector:Connector-1.0.0-beta.50+1.20.1")
+        //modRuntimeOnly(pack.curseforge.sinytra.connector)
+        //clientAdditionalRuntimeClasspath project(':mixin-bootstrap') // Do not remove me!
+    }
+    if (mods.isModEnabled("owo"))
+        modRuntimeOnly(pack.curseforge.owo.lib)
+    if (mods.isModEnabled("cloth-config"))
+        modRuntimeOnly(pack.curseforge.cloth.config)
+    if (mods.isModEnabled("glitchcore"))
+        modRuntimeOnly(pack.curseforge.glitchcore)
+    if (mods.isModEnabled("cofh_core"))
+        modRuntimeOnly(pack.curseforge.cofh.core)
+    if (mods.isModEnabled("geckolib"))
+        modRuntimeOnly(pack.curseforge.geckolib)
+    if (mods.isModEnabled("gml"))
+        modRuntimeOnly(pack.curseforge.gml)
+    //Tweaks
+    if (mods.isModEnabled("incontrol"))
+        modRuntimeOnly(pack.curseforge."in".control)
+    if (mods.isModEnabled("kubejs"))
+        modRuntimeOnly(pack.curseforge.kubejs)
+    if (mods.isModEnabled("lootjs"))
+        modRuntimeOnly(pack.curseforge.lootjs)
+    if (mods.isModEnabled("entityjs"))
+        modRuntimeOnly(pack.curseforge.entityjs)
+    if (mods.isModEnabled("probejs"))
+        modRuntimeOnly(pack.curseforge.probejs)
+    if (mods.isModEnabled("kubejsadditions"))
+        modRuntimeOnly(pack.curseforge.kubejs.additions)
+    if (mods.isModEnabled("kubejsoffline"))
+        modRuntimeOnly(pack.curseforge.kubejs.offline)
+
+    // Lifecycle
+    if (mods.isModEnabled("epicsiegemod"))
+        modRuntimeOnly(pack.curseforge.epic.siege.mod)
+    // Building
+    if (mods.isModEnabled("decorative_blocks"))
+        modRuntimeOnly(pack.curseforge.decorative.blocks)
+    // Technology
+    if (mods.isModEnabled("carbonize"))
+        modRuntimeOnly("net.jmb19905:carbonize:1.0.0+1.20.1")
+    if (mods.isModEnabled("actuallyadditions"))
+        modRuntimeOnly(pack.curseforge.actually.subtractions)
+    if (mods.isModEnabled("buildcraftcore"))
+        modRuntimeOnly "buildcraft:buildcraft:7.99.24.9-1.20.1-2025-04-26-all"
+    // Primitive Technology 1
+    if (mods.isModEnabled("toughasnails"))
+        modRuntimeOnly(pack.curseforge.tough.as.nails)
+    if (mods.isModEnabled("notreepunching"))
+        modRuntimeOnly(pack.curseforge.no.tree.punching)
+    if (mods.isModEnabled("treechop"))
+        modRuntimeOnly(pack.curseforge.treechop)
+    if (mods.isModEnabled("primalstage"))
+        modRuntimeOnly(pack.curseforge.primal.stage)
+    if (mods.isModEnabled("hardcore_torches"))
+        modRuntimeOnly(pack.curseforge.hardcore.torches.forge)
+    // Electrical 2
+    if (mods.isModEnabled("thermal_foundation"))
+        modRuntimeOnly(pack.curseforge.thermal.foundation)
+
+    // World
+    if (mods.isModEnabled("aether"))
+        modRuntimeOnly(pack.curseforge.aether)
+
+    configurations.configureEach {
+        exclude(group: "net.minecraftforge", module: "srgutils")
+    }
+
+    // Check missing dependencies
+    mods.printMissingDependencies()
+}

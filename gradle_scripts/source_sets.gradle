@@ -1,0 +1,24 @@
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/generated/resources'
+        }
+        groovy {
+            //noinspection GroovyAssignabilityCheck
+            srcDir "$rootDir/buildSrc/src/main/groovy/com/stockieslad/$mod_id"
+        }
+    }
+}
+
+mixin {
+    add sourceSets.main, "mixins.${mod_id}.refmap.json"
+    config "mixins.${mod_id}.json"
+}
+
+tasks.named('compileGroovy') {
+    classpath = sourceSets.main.compileClasspath
+}
+
+tasks.named('compileJava') {
+    classpath += files(sourceSets.main.groovy.classesDirectory)
+}
