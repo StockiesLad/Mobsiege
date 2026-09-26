@@ -22,7 +22,7 @@ public class Modpack2Gradle {
     //...[insert other categories]
 
     static  {
-        var settings = Modpack2Gradle.class.getClassLoader().getResourceAsStream("META-INF/gradle_settings.json");
+        var settings = Modpack2Gradle.class.getClassLoader().getResourceAsStream("META-INF/build_configuration.json");
         //noinspection unchecked
         GRADLE_SETTINGS = (Map<String, String>) new JsonSlurper().parse(settings);
 

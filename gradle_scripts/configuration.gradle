@@ -1,6 +1,6 @@
 import groovy.json.JsonOutput
 
-tasks.register("generateModCategorySettings") {
+tasks.register("generateBuildConfigurations") {
     def outputDir = layout.buildDirectory.dir("resources/main/META-INF")
     doLast {
         def dir = outputDir.get().asFile
@@ -8,10 +8,10 @@ tasks.register("generateModCategorySettings") {
 
         def modProperties = providers.gradlePropertiesPrefixedBy("").get()
 
-        new File(dir, "gradle_settings.json").text = JsonOutput.prettyPrint(JsonOutput.toJson(modProperties))
+        new File(dir, "build_configuration.json").text = JsonOutput.prettyPrint(JsonOutput.toJson(modProperties))
     }
 }
 
 tasks.named("processResources") {
-    dependsOn("generateModCategorySettings")
+    dependsOn("generateBuildConfigurations")
 }
