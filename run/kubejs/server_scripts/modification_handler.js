@@ -1,3 +1,12 @@
+const modpackId = global.modpackId;
+const maths = global.mathHelper;
+const common = global.commonHelper;
+const stacks = global.stackHelper;
+const content = global.content;
+const data = global.data_namespace + ':';
+const dataTag = tag(data);
+const main = global.data_namespace //Copy-use `${main}:`
+
 //Java
 const WrapperBoolean = Java.loadClass('java.lang.Boolean')
 const HashMap = Java.loadClass('java.util.HashMap')
@@ -31,21 +40,12 @@ const TileEngineBase_BC8 = Java.loadClass('buildcraft.lib.engine.TileEngineBase_
 const BlazeBurnerBlock = Java.loadClass('com.simibubi.create.content.processing.burner.BlazeBurnerBlock')
 const TanTags = Java.loadClass('toughasnails.init.ModTags')
 //Mobsiege
-const Mobsiege2BuildCraft = Java.loadClass('com.stockieslad.mobsiege.api.Mobsiege2BuildCraft')
-const Mobsiege2Minecraft = Java.loadClass('com.stockieslad.mobsiege.api.Mobsiege2Minecraft')
-const Mobsiege2ToughAsNails = Java.loadClass('com.stockieslad.mobsiege.api.Mobsiege2ToughAsNails')
-
-const modpackId = global.modpackId;
-const maths = global.mathHelper;
-const common = global.commonHelper;
-const stacks = global.stackHelper;
-const content = global.content;
-const data = global.data_namespace + ':';
-const dataTag = tag(data);
-const main = global.data_namespace //Copy-use `${main}:`
+const Modpack2Gradle = common.loadLocal('Modpack2Gradle')
+const Mobsiege2BuildCraft = Java.loadClass('com.stockieslad.mobsiege.api.Modpack2BuildCraft')
+const Mobsiege2Minecraft = Java.loadClass('com.stockieslad.mobsiege.api.Modpack2Minecraft')
+const Mobsiege2ToughAsNails = Java.loadClass('com.stockieslad.mobsiege.api.Modpack2ToughAsNails')
 
 /** @type {Array<String|Internal.ItemStack>} */ global.hiddenItems = []
-
 //It's very important that we always cache the event extensions. This is more performant
 
 //Tags

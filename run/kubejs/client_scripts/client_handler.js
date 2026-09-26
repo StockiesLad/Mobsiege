@@ -1,6 +1,6 @@
 const common = global.commonHelper
 const content = global.content
 
-const Mobsiege = Java.loadClass('com.stockieslad.mobsiege.Mobsiege')
+const Lifecycle = Java.loadClass('com.stockieslad.mobsiege.content.Lifecycle')
 
 const printHiddenItems = false

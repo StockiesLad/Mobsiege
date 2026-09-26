@@ -19,6 +19,6 @@ ClientEvents.tick(event => {
           if (random.nextInt(25) != 0) return
 
           console.info('playing sound')
-          level.playLocalSound(pos, Mobsiege.NETHER_SCREAMS, 'ambient', random.nextFloat() * 0.1 , 0.75 + random.nextFloat()/4, true)
+          level.playLocalSound(pos, Lifecycle.NETHER_SCREAMS, 'ambient', random.nextFloat() * 0.1 , 0.75 + random.nextFloat()/4, true)
      })
 })

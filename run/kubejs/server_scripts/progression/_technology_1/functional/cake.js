@@ -1,3 +1,6 @@
+if (!Modpack2Gradle.isCategoryEnabled(Modpack2Gradle.PRIMITIVE_TECHNOLOGY_1))
+     return
+
 commonTags(event => {
      event.add(`${main}:cake`, [
           'minecraft:cake', 
