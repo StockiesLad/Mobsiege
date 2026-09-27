@@ -12,22 +12,22 @@ import static com.stockieslad.mobsiege.mod_category.ModCategoryValidator.categor
 @CompileStatic
 @Singleton(strict = false)
 class IGradle {
-    private final ModCategoryProvider MOD_CATEGORIES
-    private final Map<String, String> GRADLE_SETTINGS
-    public final String LIFECYCLE = "lifecycle"
-    public final String PRIMITIVE_TECHNOLOGY_1 = "primitive_technology_1";
+    private final ModCategoryProvider modCategories
+    private final Map<String, String> gradleSettings
+    public final String lifecycle = "lifecycle"
+    public final String primitiveTechnology1 = "primitive_technology_1";
 
     private IGradle() {
         var settings = IGradle.class.getClassLoader().getResourceAsStream("META-INF/build_configuration.json")
-        GRADLE_SETTINGS = (Map<String, String>) new JsonSlurper().parse(settings)
+        gradleSettings = (Map<String, String>) new JsonSlurper().parse(settings)
 
         var categories = IGradle.class.getClassLoader().getResourceAsStream("META-INF/mod_categories.json")
-        MOD_CATEGORIES = new ModCategoryProvider((property) -> Boolean.parseBoolean(gradleProperty(property.toString())),
+        modCategories = new ModCategoryProvider((property) -> Boolean.parseBoolean(gradleProperty(property.toString())),
                 categories, true)
     }
 
     String gradleProperty(String property) {
-        return GRADLE_SETTINGS.get(property)
+        return gradleSettings.get(property)
     }
 
     boolean areDependenciesEnabled(List<String> dependencies) {
@@ -54,12 +54,12 @@ class IGradle {
 
     boolean isCategoryEnabled(String category) {
         category = "enable_" + category
-        if (!GRADLE_SETTINGS.containsKey(category)) {
-            if (categoryExists(MOD_CATEGORIES.get(), category))
+        if (!gradleSettings.containsKey(category)) {
+            if (categoryExists(modCategories.get(), category))
                 return false
-            else LOGGER.error("[ERROR]: Category ${category} not a valid category in: ${GRADLE_SETTINGS.keySet()}")
+            else LOGGER.error("[ERROR]: Category ${category} not a valid category in: ${gradleSettings.keySet()}")
         }
-        return Boolean.parseBoolean(GRADLE_SETTINGS.getOrDefault(category, "false"))
+        return Boolean.parseBoolean(gradleSettings.getOrDefault(category, "false"))
     }
 
     boolean isModEnabled(String modid) {
@@ -67,10 +67,10 @@ class IGradle {
     }
 
     boolean lifecycleEnabled() {
-        return isCategoryEnabled(LIFECYCLE)
+        return isCategoryEnabled(lifecycle)
     }
 
     boolean primitiveTechnology1Enabled() {
-        return isCategoryEnabled(PRIMITIVE_TECHNOLOGY_1)
+        return isCategoryEnabled(primitiveTechnology1)
     }
 }

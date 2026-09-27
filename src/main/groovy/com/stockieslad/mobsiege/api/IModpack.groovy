@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Nullable
 @CompileStatic
 @Singleton
 class IModpack {
-    // TODO: Check what the hell this is supposed to do
     public Args onBreaksRandomly = null
 
     void damageItem(ItemStack itemStack, int damageAmount, LivingEntity entity, @Nullable InteractionHand hand) {
