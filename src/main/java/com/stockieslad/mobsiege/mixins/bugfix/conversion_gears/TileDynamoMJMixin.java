@@ -2,6 +2,7 @@ package com.stockieslad.mobsiege.mixins.bugfix.conversion_gears;
 
 import buildcraft.energy.tile.TileDynamoMJ;
 import com.llamalad7.mixinextras.sugar.Local;
+import com.stockieslad.mobsiege.ModpackApi;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.item.ItemStack;
@@ -15,20 +16,18 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
-import static com.stockieslad.mobsiege.api.Modpack2BuildCraft.CONVERSION_UPGRADES;
-
-@Restriction(require = @Condition("buildcraft"))
+@Restriction(require = @Condition("buildcraftcore"))
 @Mixin(TileDynamoMJ.class)
 public class TileDynamoMJMixin {
     @Inject(method = "isValidUpgrade", at = @At("HEAD"), cancellable = true, remap = false)
     private void mobsiege$validateWithTags(int slot, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(CONVERSION_UPGRADES.keySet().stream().anyMatch(stack::is));
+        cir.setReturnValue(ModpackApi.buildCraft().CONVERSION_UPGRADES.keySet().stream().anyMatch(stack::is));
     }
 
     @Redirect(method = "getMjPerTick", at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;findFirst()Ljava/util/Optional;"), remap = false)
     private Optional<Long> mobsiege$replaceEnergy(Stream<Long> stream, @Local ItemStack stack) {
         AtomicReference<Long> ref = new AtomicReference<>();
-        CONVERSION_UPGRADES.forEach((tag, longInteger) -> {
+        ModpackApi.buildCraft().CONVERSION_UPGRADES.forEach((tag, longInteger) -> {
             if (stack.is(tag)) ref.set(longInteger);
         });
         return Optional.ofNullable(ref.get());

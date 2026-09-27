@@ -21,7 +21,7 @@ import java.util.function.Function;
 
 import static com.stockieslad.mobsiege.Mobsiege.LOGGER;
 
-@Restriction(require = @Condition("buildcraft"))
+@Restriction(require = @Condition("buildcraftcore"))
 @Mixin(BlockEngineBase_BC8.class)
 public class BlockEngineBaseMixin {
     @Shadow(remap = false) @Final public static Map<IEngineType, ModelHolderVariable> engineModels;

@@ -2,6 +2,7 @@ package com.stockieslad.mobsiege.mixins.custom_features;
 
 import buildcraft.core.tile.TileEngineCreative;
 import buildcraft.lib.engine.TileEngineBase_BC8;
+import com.stockieslad.mobsiege.ModpackApi;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -22,9 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Collections;
 
-import static com.stockieslad.mobsiege.api.Modpack2BuildCraft.*;
-
-@Restriction(require = @Condition("buildcraft"))
+@Restriction(require = @Condition("buildcraftcore"))
 @Mixin(TileEngineBase_BC8.class)
 public abstract class TileEngineBaseMixin {
 
@@ -53,9 +52,10 @@ public abstract class TileEngineBaseMixin {
         var level = self.getLevel();
         var random = level.getRandom();
         var pos = self.getBlockPos();
+        var bc = ModpackApi.buildCraft();
 
         if (stage.ordinal() <= 1) {
-            if (level instanceof ServerLevel serverLevel && mobsiege$ticksOverheated > ENGINE_RELIEF_TIME_TICKS && random.nextFloat() < ENGINE_RELIEF_CHANCE) {
+            if (level instanceof ServerLevel serverLevel && mobsiege$ticksOverheated > bc.ENGINE_RELIEF_TIME_TICKS && random.nextFloat() < bc.ENGINE_RELIEF_CHANCE) {
                 level.playSound(
                         null,
                         pos,
@@ -79,7 +79,8 @@ public abstract class TileEngineBaseMixin {
             mobsiege$ticksOverheated = 0;
         } else {
             if (level.isClientSide) {
-                float flameStrength = (float) (2.0F + 2.5F * Math.log(ENGINE_EXPLOSION_DECAY_FACTOR * mobsiege$ticksOverheated + 1.0F));
+                float flameStrength =
+                        (float) (2.0F + 2.5F * Math.log(bc.ENGINE_EXPLOSION_DECAY_FACTOR * mobsiege$ticksOverheated + 1.0F));
                 int flameCount = Mth.floor(flameStrength);
 
                 for (int i = 0; i < flameCount; i++) {
@@ -99,10 +100,10 @@ public abstract class TileEngineBaseMixin {
                 if (mobsiege$ticksOverheated % 20 != 0) return;
 
                 if (level instanceof ServerLevel serverLevel) {
-                    if (random.nextDouble() < Math.pow(Math.min(mobsiege$ticksOverheated / ENGINE_EXPLOSION_CHANCE_RECIPROCAL, 1.0F), 2)) {
+                    if (random.nextDouble() < Math.pow(Math.min(mobsiege$ticksOverheated / bc.ENGINE_EXPLOSION_CHANCE_RECIPROCAL, 1.0F), 2)) {
                         float explosionStrength = Math.min(
-                                ENGINE_BASE_EXPLOSION + ENGINE_EXPLOSION_GROWTH * (float) Math.log(ENGINE_EXPLOSION_DECAY_FACTOR * mobsiege$ticksOverheated + 1.0F),
-                                ENGINE_BASE_EXPLOSION + ENGINE_EXPLOSION_GROWTH
+                                bc.ENGINE_BASE_EXPLOSION + bc.ENGINE_EXPLOSION_GROWTH * (float) Math.log(bc.ENGINE_EXPLOSION_DECAY_FACTOR * mobsiege$ticksOverheated + 1.0F),
+                                bc.ENGINE_BASE_EXPLOSION + bc.ENGINE_EXPLOSION_GROWTH
                         );
 
 

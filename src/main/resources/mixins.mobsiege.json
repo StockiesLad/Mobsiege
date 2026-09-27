@@ -13,7 +13,7 @@
     "bugfix.conversion_gears.TileDynamoMJMixin",
     "bugfix.conversion_gears.TileEngineRFMixin",
     "custom_features.IPropertiesMixin",
-    "custom_features.ItemStackMixin",
+    "custom_features.durability.ItemStackMixin",
     "custom_features.LatticeBlockMixin",
     "custom_features.TileEngineBaseMixin",
     "custom_features.WaterPurifierBlockEntityMixin",

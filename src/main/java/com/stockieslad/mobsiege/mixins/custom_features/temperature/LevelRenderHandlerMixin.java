@@ -1,6 +1,9 @@
 package com.stockieslad.mobsiege.mixins.custom_features.temperature;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import com.stockieslad.mobsiege.ModpackApi;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -16,9 +19,9 @@ import toughasnails.temperature.AreaFill;
 
 import java.util.Set;
 
-import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.TEMP_CHECK_CTX;
-import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.TanTempCheckContext;
+import static com.stockieslad.mobsiege.api.IToughAsNails.TanTempCheckContext;
 
+@Restriction(require = @Condition("toughasnails"))
 @Mixin(LevelRenderHandler.class)
 public class LevelRenderHandlerMixin {
 
@@ -45,7 +48,7 @@ public class LevelRenderHandlerMixin {
             public void onSolid(Level level, AreaFill.FillPos pos) {
                 var newPos = pos.pos();
                 BlockState state = level.getBlockState(newPos);
-                TEMP_CHECK_CTX.set(new TanTempCheckContext(level, newPos));
+                ModpackApi.toughAsNails().TEMP_CHECK_CTX.set(new TanTempCheckContext(level, newPos));
                 if (TemperatureHelper.isHeatingBlock(state)) {
                     heatingPositions.add(pos.pos());
                 } else if (TemperatureHelper.isCoolingBlock(state)) {
@@ -62,7 +65,7 @@ public class LevelRenderHandlerMixin {
             //}
 
             public void onPassable(Level level, AreaFill.FillPos pos) {
-                TEMP_CHECK_CTX.set(new TanTempCheckContext(level, pos.pos()));
+                ModpackApi.toughAsNails().TEMP_CHECK_CTX.set(new TanTempCheckContext(level, pos.pos()));
                 passablePositions.add(pos.pos());
             }
         });

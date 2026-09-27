@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Restriction(require = @Condition("epicsiege_nightmare"))
+@Restriction(require = @Condition("epicsiegemod"))
 @Mixin(value = NightmareMain.class, remap = false)
 public abstract class NightmareMainMixin {
     @Shadow abstract boolean ShouldDuplicate();

@@ -1,6 +1,9 @@
 package com.stockieslad.mobsiege.mixins.custom_features.temperature;
 
-import com.stockieslad.mobsiege.api.Modpack2ToughAsNails;
+import com.stockieslad.mobsiege.ModpackApi;
+import com.stockieslad.mobsiege.api.IToughAsNails;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,15 +16,13 @@ import toughasnails.temperature.TemperatureHelperImpl;
 
 import java.util.Set;
 
-import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.TEMP_CHECK_CTX;
-import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.checkBlockTemp;
-
+@Restriction(require = @Condition("toughasnails"))
 @Mixin(TemperatureHelperImpl.class)
 public class TemperatureHandlerImplMixin {
 
     @Inject(method = "addHeatingOrCooling", at = @At("HEAD"), remap = false)
     private static void mobsiege$cacheCtxOnHeatingOrCooling(Set<BlockPos> heating, Set<BlockPos> cooling, Level level, BlockPos pos, CallbackInfo ci) {
-        TEMP_CHECK_CTX.set(new Modpack2ToughAsNails.TanTempCheckContext(level, pos));
+        ModpackApi.toughAsNails().TEMP_CHECK_CTX.set(new IToughAsNails.TanTempCheckContext(level, pos));
     }
 
     @Inject(
@@ -34,8 +35,8 @@ public class TemperatureHandlerImplMixin {
             cancellable = true
     )
     private void injectIntoHeatingTagCheck(BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        var ctx = TEMP_CHECK_CTX.get();
-        var result = checkBlockTemp.checkBlockTemperature(ctx.level(), ctx.pos(), state);
+        var ctx = ModpackApi.toughAsNails().TEMP_CHECK_CTX.get();
+        var result = ModpackApi.toughAsNails().checkBlockTemp.checkBlockTemperature(ctx.getLevel(), ctx.getPos(), state);
         if (result != null)
             cir.setReturnValue(result);
     }

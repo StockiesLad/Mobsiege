@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 
 //Fixes bug where a fire block does not perform the AbstractFireBlock#canPlace Check
-@Restriction(require = @Condition("no_tree_punching"))
+@Restriction(require = @Condition("notreepunching"))
 @Mixin(FireStarterItem.class)
 public class FireStarterItemMixin {
     @Redirect(method = "finishUsingItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"))

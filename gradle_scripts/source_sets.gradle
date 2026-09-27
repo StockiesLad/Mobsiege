@@ -4,8 +4,14 @@ sourceSets {
             srcDir 'src/generated/resources'
         }
         groovy {
-            //noinspection GroovyAssignabilityCheck
-            srcDir "$rootDir/buildSrc/src/main/groovy/com/stockieslad/$mod_id"
+            srcDirs = ['src/main/groovy', 'src/main/java', "$rootDir/buildSrc/src/main/groovy/com/stockieslad/$mod_id"]
+
+            exclude '**/*Mixin*.java'
+            exclude '**/mixin/**'
+        }
+
+        java {
+            srcDirs = ['src/main/java']
         }
     }
 }
@@ -19,6 +25,8 @@ tasks.named('compileGroovy') {
     classpath = sourceSets.main.compileClasspath
 }
 
+// Java task can rely on the unified output if anything falls back to it
 tasks.named('compileJava') {
-    classpath += files(sourceSets.main.groovy.classesDirectory)
+    dependsOn tasks.named('compileGroovy')
+    classpath = sourceSets.main.compileClasspath + files(sourceSets.main.groovy.classesDirectory)
 }

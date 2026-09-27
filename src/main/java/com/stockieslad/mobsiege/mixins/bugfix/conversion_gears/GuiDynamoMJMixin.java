@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Restriction(require = {
-        @Condition("thermal"),
-        @Condition("buildcraft")
+        @Condition("thermal_foundation"),
+        @Condition("buildcraftcore")
 })
 @Mixin(GuiDynamoMJ.class)
 public class GuiDynamoMJMixin {

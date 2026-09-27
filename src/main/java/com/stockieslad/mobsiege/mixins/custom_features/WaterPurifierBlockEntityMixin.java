@@ -1,6 +1,7 @@
 package com.stockieslad.mobsiege.mixins.custom_features;
 
 import com.google.common.collect.ImmutableMap;
+import com.stockieslad.mobsiege.ModpackApi;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.item.Item;
@@ -12,18 +13,15 @@ import toughasnails.block.entity.WaterPurifierBlockEntity;
 
 import java.util.HashMap;
 
-import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.PURIFIER_FILTER_ADD_MAP;
-import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.PURIFIER_FILTER_REMOVE_LIST;
-
-@Restriction(require = @Condition("tough_as_nails"))
+@Restriction(require = @Condition("toughasnails"))
 @Mixin(WaterPurifierBlockEntity.class)
 public class WaterPurifierBlockEntityMixin {
 
     @Inject(method = "getFilterDurations", at = @At("RETURN"), remap = false, cancellable = true)
     private static void mobsiege$appendFilters(CallbackInfoReturnable<ImmutableMap<Item, Integer>> cir) {
         var map = new HashMap<>(cir.getReturnValue());
-        PURIFIER_FILTER_REMOVE_LIST.forEach(map::remove);
-        map.putAll(PURIFIER_FILTER_ADD_MAP);
+        ModpackApi.toughAsNails().purifierRemoveList.forEach(map::remove);
+        map.putAll(ModpackApi.toughAsNails().purifierFilterAddMap);
         cir.setReturnValue(ImmutableMap.<Item, Integer>builder().putAll(map).build());
     }
 }

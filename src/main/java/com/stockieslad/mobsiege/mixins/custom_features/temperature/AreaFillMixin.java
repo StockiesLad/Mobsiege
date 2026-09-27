@@ -1,6 +1,9 @@
 package com.stockieslad.mobsiege.mixins.custom_features.temperature;
 
-import com.stockieslad.mobsiege.api.Modpack2ToughAsNails;
+import com.stockieslad.mobsiege.ModpackApi;
+import com.stockieslad.mobsiege.api.IToughAsNails;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -8,12 +11,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import toughasnails.temperature.AreaFill;
 
-import static com.stockieslad.mobsiege.api.Modpack2ToughAsNails.TEMP_CHECK_CTX;
-
+@Restriction(require = @Condition("toughasnails"))
 @Mixin(AreaFill.class)
 public class AreaFillMixin {
     @Inject(method = "checkPassable", at = @At("HEAD"), remap = false)
     private static void mobsiege$cacheCtxOnCheckPassable(AreaFill.PositionChecker checker, Level level, AreaFill.FillPos pos, CallbackInfoReturnable<Boolean> cir) {
-        TEMP_CHECK_CTX.set(new Modpack2ToughAsNails.TanTempCheckContext(level, pos.pos()));
+        ModpackApi.toughAsNails().TEMP_CHECK_CTX.set(new IToughAsNails.TanTempCheckContext(level, pos.pos()));
     }
 }

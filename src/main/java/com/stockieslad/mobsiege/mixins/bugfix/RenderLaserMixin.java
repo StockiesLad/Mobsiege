@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Restriction(require = @Condition("buildcraft"))
+@Restriction(require = @Condition("buildcraftcore"))
 @Mixin(RenderLaser.class)
 public abstract class RenderLaserMixin {
     @Inject(
