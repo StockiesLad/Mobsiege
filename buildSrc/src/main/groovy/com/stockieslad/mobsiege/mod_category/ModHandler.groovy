@@ -14,7 +14,7 @@ class ModHandler {
     }
 
     boolean isModEnabled(String modid) {
-        // Save that mod is a dependency
+        // Declare (and store) that the mod is a dependency
         declaredMods.add(modid)
         //Check if modid exists
         if (!modCategories.get().entrySet().stream().anyMatch { category -> {
@@ -24,7 +24,7 @@ class ModHandler {
         boolean allRequirementsSatisfied = modCategories.get().entrySet().stream()
         // Get requirements
                 .filter{entry -> entry.key.contains("[required]")}
-        // Remove categories that are not a requirement of mod
+        // Remove categories that are not a requirement of the mod
                 .filter {entry -> entry.value.stream().anyMatch {categoryModId -> (modid == categoryModId) }}
         // Test all categories to see if they are all enabled
                 .allMatch { entry -> modCategories.gradlePropertyEnabled.apply("enable_${ModCategoryParser.getCategoryName entry.key}")}
@@ -48,7 +48,7 @@ class ModHandler {
         // Test all categories to see if any are enabled
                 .anyMatch{modElement -> (modid == modElement) }
         // Show when mod is loaded
-        if (anyOptionsSatisfied && modCategories.gradlePropertyEnabled.apply("debug_mod_list"))
+        if (anyOptionsSatisfied && modCategories != null && modCategories.gradlePropertyEnabled.apply("debug_mod_list"))
             println("Mod \"${modid}\" loaded: ${anyOptionsSatisfied}")
 
         return anyOptionsSatisfied

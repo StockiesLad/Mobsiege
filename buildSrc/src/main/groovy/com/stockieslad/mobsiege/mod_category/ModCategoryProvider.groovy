@@ -20,6 +20,7 @@ class ModCategoryProvider {
 
         var validator = new ModCategoryValidator(gradlePropertyEnabled)
         var builder = new ModCategoryBuilder(rawModCategories, runtime)
+
         validator.validateModCategories(rawModCategories)
 
         this.modCategories = builder.applySubCategories()
@@ -39,8 +40,7 @@ class ModCategoryProvider {
     ModHandler getModHandler() {
         if (modHandler != null)
             return modHandler
-        else throw new RuntimeException("[ERROR]: Mod checker called with no gradle property function! " +
-                "If this is being called from runtime, this is strictly forbidden!")
+        else throw new RuntimeException("[ERROR]: Mod checker called with no gradle property function!")
     }
 
     @Override
