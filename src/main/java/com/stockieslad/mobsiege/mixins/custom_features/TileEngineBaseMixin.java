@@ -55,7 +55,7 @@ public abstract class TileEngineBaseMixin {
         var bc = ModpackApi.buildCraft();
 
         if (stage.ordinal() <= 1) {
-            if (level instanceof ServerLevel serverLevel && mobsiege$ticksOverheated > bc.ENGINE_RELIEF_TIME_TICKS && random.nextFloat() < bc.ENGINE_RELIEF_CHANCE) {
+            if (level instanceof ServerLevel serverLevel && mobsiege$ticksOverheated > bc.engineReliefTimeTicks && random.nextFloat() < bc.engineReliefChance) {
                 level.playSound(
                         null,
                         pos,
@@ -80,7 +80,7 @@ public abstract class TileEngineBaseMixin {
         } else {
             if (level.isClientSide) {
                 float flameStrength =
-                        (float) (2.0F + 2.5F * Math.log(bc.ENGINE_EXPLOSION_DECAY_FACTOR * mobsiege$ticksOverheated + 1.0F));
+                        (float) (2.0F + 2.5F * Math.log(bc.engineExplosionDecayFactor * mobsiege$ticksOverheated + 1.0F));
                 int flameCount = Mth.floor(flameStrength);
 
                 for (int i = 0; i < flameCount; i++) {
@@ -100,10 +100,10 @@ public abstract class TileEngineBaseMixin {
                 if (mobsiege$ticksOverheated % 20 != 0) return;
 
                 if (level instanceof ServerLevel serverLevel) {
-                    if (random.nextDouble() < Math.pow(Math.min(mobsiege$ticksOverheated / bc.ENGINE_EXPLOSION_CHANCE_RECIPROCAL, 1.0F), 2)) {
+                    if (random.nextDouble() < Math.pow(Math.min(mobsiege$ticksOverheated / bc.engineExplosionChanceReciprocal, 1.0F), 2)) {
                         float explosionStrength = Math.min(
-                                bc.ENGINE_BASE_EXPLOSION + bc.ENGINE_EXPLOSION_GROWTH * (float) Math.log(bc.ENGINE_EXPLOSION_DECAY_FACTOR * mobsiege$ticksOverheated + 1.0F),
-                                bc.ENGINE_BASE_EXPLOSION + bc.ENGINE_EXPLOSION_GROWTH
+                                bc.engineBaseExplosion + bc.engineExplosionGrowth * (float) Math.log(bc.engineExplosionDecayFactor * mobsiege$ticksOverheated + 1.0F),
+                                bc.engineBaseExplosion + bc.engineExplosionGrowth
                         );
 
 
