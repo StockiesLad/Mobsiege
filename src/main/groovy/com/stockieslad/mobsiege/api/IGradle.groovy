@@ -63,7 +63,10 @@ class IGradle {
     }
 
     boolean isModEnabled(String modid) {
-        return ModList.get().isLoaded(modid)
+        var forge = ModList.get().isLoaded(modid)
+        var fabric = ModList.get().isLoaded("connectormod") &&
+                IFabricLoader.instance.isModLoaded(modid)
+        return forge || fabric
     }
 
     boolean lifecycleEnabled() {
