@@ -23,10 +23,18 @@ mixin {
 
 tasks.named('compileGroovy') {
     classpath = sourceSets.main.compileClasspath
+
+    doLast {
+        sourceSets.main.java.classesDirectory.get().asFile.deleteDir()
+    }
 }
 
 // Java task can rely on the unified output if anything falls back to it
 tasks.named('compileJava') {
     dependsOn tasks.named('compileGroovy')
     classpath = sourceSets.main.compileClasspath + files(sourceSets.main.groovy.classesDirectory)
+}
+
+tasks.named('jar') { // Replace with 'remapJar' if required by your toolchain
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

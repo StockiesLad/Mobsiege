@@ -628,6 +628,10 @@ hash = "6f87edf40bf0be7e7e266f9e2ff0bf7584c6bedff7975bad3259a21a60d1e598"
 metafile = true
 
 [[files]]
+file = "mods/aether_genesis-1.20.1-0.0.1-forge.jar"
+hash = "f4371d86d4ff3751b636e20589ad4c18cb4c5134a05053175ee6dd96c89e353f"
+
+[[files]]
 file = "mods/akashic-tome.pw.toml"
 hash = "19f470521e7119c5fc1754e40e40b171eeef11335c54167cb482998c0737e979"
 metafile = true
