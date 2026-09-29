@@ -24,3 +24,17 @@ legacyForge {
         }
     }
 }
+['runClient', 'runServer'].forEach { name -> {
+        tasks.named(name, JavaExec) {
+            dependsOn tasks.named("installHotswapAgent")
+
+            getJavaLauncher().set(hotswapJvm)
+
+            jvmArgs(
+                    '-XX:+AllowEnhancedClassRedefinition',
+                    '-XX:HotswapAgent=core',
+                    '-Dhotswapagent.pluginPackages=com.stockieslad.mobsiege.dev'
+            )
+        }
+    }
+}

@@ -11,10 +11,10 @@ plugins {
 version = mod_version
 group = mod_group_id
 
-apply from: "$rootDir/gradle_scripts/java.gradle"
 apply from: "$rootDir/gradle_scripts/source_sets.gradle"
-apply from: "$rootDir/gradle_scripts/minecraft.gradle"
 apply from: "$rootDir/gradle_scripts/dependencies.gradle"
+apply from: "$rootDir/gradle_scripts/java.gradle"
+apply from: "$rootDir/gradle_scripts/minecraft.gradle"
 apply from: "$rootDir/gradle_scripts/metadata.gradle"
 apply from: "$rootDir/gradle_scripts/packwiz.gradle"
 apply from: "$rootDir/gradle_scripts/configuration.gradle"

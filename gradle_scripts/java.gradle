@@ -3,3 +3,41 @@ java {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
+
+ext {
+    hotswapJvm = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.JETBRAINS
+    }
+}
+
+
+
+tasks.register('testHotswapJvm', JavaExec) {
+    dependsOn compileGroovy
+
+    getJavaLauncher().set(hotswapJvm)
+    mainClass = 'com.stockieslad.mobsiege.dev.HotswapJvmTest'
+    classpath = sourceSets.main.runtimeClasspath
+
+    jvmArgs(
+            '-XX:+AllowEnhancedClassRedefinition',
+            "-XX:HotswapAgent=core",
+            '-Dhotswapagent.pluginPackages=com.stockieslad.mobsiege.dev'
+    )
+}
+
+tasks.register('installHotswapAgent') {
+    doLast {
+        def jbr = hotswapJvm.get().metadata.installationPath.asFile
+        def hotswapDir = new File(jbr, 'lib/hotswap')
+
+        hotswapDir.mkdirs()
+
+        copy {
+            from configurations.hotswapAgent
+            into hotswapDir
+            rename { 'hotswap-agent-core.jar' }
+        }
+    }
+}

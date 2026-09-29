@@ -34,7 +34,16 @@ repositories {
     }
 }
 
+configurations {
+    hotswapAgent {
+        transitive = false
+    }
+}
+
 dependencies {
+    hotswapAgent "org.hotswapagent:hotswap-agent-core:${hotswap_agent_version}"
+    compileOnly "org.hotswapagent:hotswap-agent-core:${hotswap_agent_version}"
+
     annotationProcessor("org.sinytra:sponge-mixin:${mixin_version}")
     compileOnly("org.sinytra:sponge-mixin:${mixin_version}")
     //clientAdditionalRuntimeClasspath project(':mixin-bootstrap') // Do not remove me!
