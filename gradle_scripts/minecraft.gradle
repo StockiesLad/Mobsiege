@@ -33,7 +33,8 @@ legacyForge {
             jvmArgs(
                     '-XX:+AllowEnhancedClassRedefinition',
                     '-XX:HotswapAgent=core',
-                    '-Dhotswapagent.pluginPackages=com.stockieslad.mobsiege.dev'
+                    '-Dhotswapagent.pluginPackages=com.stockieslad.mobsiege.dev',
+                    "-Dconnector.clean.path=${System.getProperty("user.home")}\\.gradle\\caches\\neoformruntime\\artifacts\\minecraft_${minecraft_version}_client.jar"
             )
         }
     }
