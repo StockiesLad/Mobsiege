@@ -27,3 +27,5 @@ packwiz {
 rootProject.name = 'mobsiege'
 
 include 'mixin-bootstrap'
+include 'hotswap-agent-reload-plugin'
+

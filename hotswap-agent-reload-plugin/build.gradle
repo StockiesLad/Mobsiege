@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'net.neoforged.moddev.legacyforge' version "${legacy_forge}"
+}
+
+legacyForge {
+    version = "${minecraft_version}-${forge_version}"
+
+    validateAccessTransformers = true
+
+    mods {
+        "${mod_id}" {
+            //noinspection GrUnresolvedAccess, GroovyAssignabilityCheck
+            sourceSet sourceSets.main
+        }
+    }
+
+    runs {
+        client {
+            client()
+        }
+
+        server {
+            server()
+        }
+
+        data {
+            data()
+        }
+    }
+}
+
+tasks.matching {
+    it.name in ["runClient", "runServer", "runData"]
+}.configureEach {
+    enabled = false
+}
+
+dependencies {
+    compileOnly "org.hotswapagent:hotswap-agent-core:${hotswap_agent_version}"
+    compileOnly("org.apache.groovy:groovy:${groovy_version}")
+    compileOnly("org.apache.groovy:groovy-json:${groovy_version}")
+}

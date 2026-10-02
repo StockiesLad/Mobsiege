@@ -1,8 +1,9 @@
 sourceSets {
     main {
         resources {
-            srcDir 'src/generated/resources'
+            srcDirs += 'src/generated/resources'
         }
+
         groovy {
             srcDirs = ['src/main/groovy', 'src/main/java', "$rootDir/buildSrc/src/main/groovy/com/stockieslad/$mod_id"]
 

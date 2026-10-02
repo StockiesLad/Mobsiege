@@ -63,12 +63,6 @@ tasks.register('processStaticAssets', Copy) {
     }
 }
 
-['runClient', 'runServer', 'runData'].each { name ->
-    tasks.named(name) {
-        dependsOn('processStaticAssets')
-    }
-}
-
 tasks.register('processDynamicAssets') {
     dependsOn('backupPack')
     dependsOn('backupRun')

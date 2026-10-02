@@ -1,0 +1,11 @@
+rootProject.name = 'Hotswap Agent Reload Plugin'
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven {
+            name = 'Minecraft Forge'
+            url = 'https://maven.minecraftforge.net/'
+        }
+    }
+}

@@ -1,36 +1,47 @@
 //file:noinspection DependencyNotationArgument
 //file:noinspection SpellCheckingInspection
 
-
 import com.stockieslad.mobsiege.mod_category.ModHandler
 
-repositories {
-    mavenCentral()
-    flatDir {dir 'libs'}
-    flatDir {dir 'pack/mods'}
+allprojects {
+    repositories {
+        mavenCentral()
+        flatDir {dir 'libs'}
+        flatDir {dir 'pack/mods'}
 
-    maven { url 'https://maven.fallenbreath.me/releases' }
+        maven { url 'https://maven.fallenbreath.me/releases' }
 
-    maven {
-        url = 'https://api.modrinth.com/maven'
-        content { includeGroup 'maven.modrinth' }
-    }
+        maven {
+            url = 'https://api.modrinth.com/maven'
+            content { includeGroup 'maven.modrinth' }
+        }
 
-    maven {
-        url = 'https://curse.cleanroommc.com'
-        content { includeGroup 'curse.maven' }
-    }
+        maven {
+            url = 'https://curse.cleanroommc.com'
+            content { includeGroup 'curse.maven' }
+        }
 
-    maven {
-        url = "https://maven.su5ed.dev/releases/"
-    }
+        maven {
+            url = "https://maven.su5ed.dev/releases/"
+        }
 
-    maven {
-        url "https://cursemaven.com"
-    }
+        maven {
+            url "https://cursemaven.com"
+        }
 
-    maven {
-        url = 'https://maven.fabricmc.net/'
+        maven {
+            url = 'https://maven.fabricmc.net/'
+        }
+
+        maven {
+            name = 'MinecraftForge'
+            url = 'https://maven.minecraftforge.net/'
+        }
+
+        maven {
+            name = 'sponge'
+            url = 'https://repo.spongepowered.org/maven'
+        }
     }
 }
 
@@ -42,15 +53,16 @@ configurations {
 
 dependencies {
     hotswapAgent "org.hotswapagent:hotswap-agent-core:${hotswap_agent_version}"
-    compileOnly "org.hotswapagent:hotswap-agent-core:${hotswap_agent_version}"
+    additionalRuntimeClasspath(project(':hotswap-agent-reload-plugin'))
 
     annotationProcessor("org.sinytra:sponge-mixin:${mixin_version}")
     compileOnly("org.sinytra:sponge-mixin:${mixin_version}")
-    //clientAdditionalRuntimeClasspath project(':mixin-bootstrap') // Do not remove me!
+    additionalRuntimeClasspath project(':mixin-bootstrap') // Do not remove me!
     implementation(jarJar "me.fallenbreath:conditional-mixin-forge:${mixin_conditional}")
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}"))
-    implementation("org.apache.groovy:groovy:${groovy_version}")
+
+    implementation("org.apache.groovy:groovy:${groovy_version}") // Was "implementation"
     implementation("org.apache.groovy:groovy-json:${groovy_version}")
 
     compileOnly "dev.su5ed.sinytra.fabric-api:fabric-api:${fabric_api_version}"

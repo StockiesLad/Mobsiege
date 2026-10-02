@@ -4,18 +4,19 @@ plugins {
     id 'java'
     id 'groovy'
     id 'maven-publish'
-    id 'net.neoforged.moddev.legacyforge' version '2.+'
+    id 'net.neoforged.moddev.legacyforge' version "${legacy_forge}"
     id "modpack"
 }
 
 version = mod_version
 group = mod_group_id
 
-apply from: "$rootDir/gradle_scripts/source_sets.gradle"
-apply from: "$rootDir/gradle_scripts/dependencies.gradle"
 apply from: "$rootDir/gradle_scripts/java.gradle"
 apply from: "$rootDir/gradle_scripts/minecraft.gradle"
+apply from: "$rootDir/gradle_scripts/dependencies.gradle"
+apply from: "$rootDir/gradle_scripts/source_sets.gradle"
 apply from: "$rootDir/gradle_scripts/metadata.gradle"
 apply from: "$rootDir/gradle_scripts/packwiz.gradle"
 apply from: "$rootDir/gradle_scripts/configuration.gradle"
 apply from: "$rootDir/gradle_scripts/publishing.gradle"
+apply from: "$rootDir/gradle_scripts/bootstrap.gradle"

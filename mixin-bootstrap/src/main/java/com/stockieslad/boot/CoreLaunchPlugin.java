@@ -1,4 +1,5 @@
 package com.stockieslad.boot;
+import cpw.mods.modlauncher.api.NamedPath;
 import cpw.mods.modlauncher.serviceapi.ILaunchPluginService;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.ClassNode;
@@ -14,11 +15,11 @@ public final class CoreLaunchPlugin implements ILaunchPluginService {
     }
 
     @Override
-    public void initializeLaunch(ITransformerLoader transformerLoader,
-                                 cpw.mods.modlauncher.api.NamedPath[] specialPaths) {
-
-        System.out.println("[Mobsiege Development]: Performing hacky boot for mixin config...");
-
+    public void initializeLaunch(
+        ITransformerLoader transformerLoader,
+        NamedPath[] specialPaths
+    ) {
+        System.out.println("[Modpack Development]: Performing hacky boot for mixin config...");
         Mixins.addConfiguration(
                 "mixins.mobsiege.json"
         );
