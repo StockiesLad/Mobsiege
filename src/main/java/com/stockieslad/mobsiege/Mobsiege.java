@@ -1,8 +1,6 @@
 package com.stockieslad.mobsiege;
 
 import com.mojang.logging.LogUtils;
-import com.stockieslad.mobsiege.runtime.client.ModpackClientEntrypoint;
-import com.stockieslad.mobsiege.runtime.server.ModpackServerEntrypoint;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,9 +18,6 @@ public class Mobsiege {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     static {
-        //TODO: DO NOT INIT HERE. THIS IS FOR TESTING
-        ModpackClientEntrypoint.init();
-        ModpackServerEntrypoint.init();
         ModpackApi.init();
 
         // Commented out to show that this doesn't work unfortunately

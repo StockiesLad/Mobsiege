@@ -76,6 +76,8 @@ dependencies {
     modCompileOnly(pack.curseforge.actually.subtractions)
     modCompileOnly(pack.curseforge.decorative.blocks)
     modCompileOnly("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
+    modCompileOnly(pack.curseforge.kubejs)
+    modCompileOnly(pack.curseforge.rhino)
 
     var modidToFile = [
             "connectormod": "org.sinytra.connector:Connector-1.0.0-beta.50+1.20.1",
