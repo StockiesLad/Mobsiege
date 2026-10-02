@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 public class MinecraftReloadHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(MinecraftReloadHelper.class);
@@ -19,28 +20,34 @@ public class MinecraftReloadHelper {
     public static void reload(Set<String> classes) {
         Minecraft minecraft = Minecraft.getInstance();
 
-        LOGGER.info("classes {}", Arrays.toString(classes.toArray()));
+        LOGGER.info("[Modpack Development]: Seen class changes - {}", Arrays.toString(classes.toArray()));
 
         if (!minecraft.isRunning())
             LOGGER.warn("[Modpack Development]: Minecraft resource reload was scheduled before " +
-                    "Minecraft is ready!\n " +
-                    "There may be discontinuities between your current scripts " +
-                    "and what is loaded");
+                    "Minecraft is ready! There may be discontinuities between your current " +
+                    "scripts and what is loaded.");
 
-        CLIENT_RELOAD = reloadPlatform(CLIENT_RELOAD, classes);
-        SERVER_RELOAD = reloadPlatform(SERVER_RELOAD, classes);
+        CLIENT_RELOAD = reloadPlatform(CLIENT_RELOAD, classes, minecraft::reloadResourcePacks);
+        SERVER_RELOAD = reloadPlatform(SERVER_RELOAD, classes, () -> {
+            if (minecraft.isSingleplayer()) {
+                var server = minecraft.getSingleplayerServer();
+                if (server != null)
+                    return server.reloadResources(server.getResourceManager().getNamespaces());
+            }
+
+            return SERVER_RELOAD;
+        });
 
     }
 
     private static CompletableFuture<Void> reloadPlatform(
             CompletableFuture<Void> task,
-            Collection<String> classes
+            Collection<String> classes,
+            Supplier<CompletableFuture<Void>> reloadTask
     ) {
         Minecraft minecraft = Minecraft.getInstance();
         var module = task == CLIENT_RELOAD ? ".client." : ".server.";
-
-        LOGGER.info(module);
-        LOGGER.info("any match {}", classes.stream().anyMatch(clazz -> clazz.contains(module)));
+        var moduleStr = module.replace(".", "");
 
         if (classes.stream().anyMatch(clazz -> clazz.contains(module))) {
             if (!task.isDone())
@@ -49,10 +56,13 @@ public class MinecraftReloadHelper {
                         module
                 );
             else {
-                LOGGER.info("[Modpack Development]: Reloading {}} groovy scripts", module);
-                return minecraft.reloadResourcePacks();
+                var future = reloadTask.get();
+                if (future != task)
+                    LOGGER.info("[Modpack Development]: Reloading {} scripts", moduleStr);
+                else LOGGER.info("[Modpack Development]: Unable to reload {} scripts", moduleStr);
+                return reloadTask.get();
             }
-        }
+        } else LOGGER.info("[Modpack Development]: Skipping {} scripts", moduleStr);
 
         return task;
     }

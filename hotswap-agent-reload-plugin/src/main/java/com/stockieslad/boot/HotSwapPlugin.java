@@ -10,8 +10,6 @@ import org.hotswap.agent.javassist.CtClass;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-//TODO: Add hotswap class caching to scan which files have been changed
-//TODO: Commit current state then add the above functionality
 @Plugin(
         name = "Modpack Hotswapper",
         description = "Modpack development auto minecraft asset reloader.",
@@ -24,13 +22,16 @@ public class HotSwapPlugin {
     private static final AtomicBoolean LOADED_COMMAND = new AtomicBoolean(false);
 
     @OnClassLoadEvent(
-            classNameRegexp = ".*",
-            events = LoadEvent.REDEFINE
+            // Dynamic package search? Later
+            classNameRegexp = "com[./]stockieslad[./].*",
+            events = {LoadEvent.REDEFINE, LoadEvent.DEFINE}
     )
     public void onClassLoad(
+            byte[] classBytes,
             ClassLoader transformingClassLoader,
             ClassPool classPool,
-            CtClass clazz
+            CtClass clazz,
+            LoadEvent event
     )  {
         try {
             synchronized (this) {
@@ -40,8 +41,16 @@ public class HotSwapPlugin {
                     LOADED_COMMAND.compareAndSet(false, true);
                 }
             }
+            var command = new HotswapReloadCommand(
+                    classBytes,
+                    transformingClassLoader,
+                    classPool,
+                    clazz,
+                    event
+            );
 
-            scheduler.scheduleCommand(new HotswapReloadCommand(transformingClassLoader, classPool, clazz), 100);
+            if (event == LoadEvent.REDEFINE)
+                scheduler.scheduleCommand(command, 100);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
