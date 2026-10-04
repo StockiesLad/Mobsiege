@@ -6,6 +6,8 @@ import groovy.json.JsonSlurper
 import groovy.transform.CompileStatic
 import net.minecraftforge.fml.ModList
 
+import java.util.function.Supplier
+
 import static com.stockieslad.mobsiege.Mobsiege.LOGGER
 import static com.stockieslad.mobsiege.mod_category.ModCategoryValidator.categoryExists
 
@@ -14,23 +16,23 @@ import static com.stockieslad.mobsiege.mod_category.ModCategoryValidator.categor
 class IGradle {
     private final ModCategoryProvider modCategories
     private final Map<String, String> gradleSettings
-    public final String lifecycle = "lifecycle"
-    public final String primitiveTechnology1 = "primitive_technology_1";
 
     private IGradle() {
         var settings = IGradle.class.getClassLoader().getResourceAsStream("META-INF/build_configuration.json")
         gradleSettings = (Map<String, String>) new JsonSlurper().parse(settings)
 
         var categories = IGradle.class.getClassLoader().getResourceAsStream("META-INF/mod_categories.json")
-        modCategories = new ModCategoryProvider((property) -> Boolean.parseBoolean(gradleProperty(property.toString())),
-                categories, true)
+        modCategories = new ModCategoryProvider((property) -> {
+            var gradleProperty = gradleProperty(property.toString())
+            return gradleProperty == null ? null : Boolean.parseBoolean(gradleProperty)
+        }, categories, true)
     }
 
     String gradleProperty(String property) {
         return gradleSettings.get(property)
     }
 
-    boolean areDependenciesEnabled(List<String> dependencies) {
+    boolean areDependenciesEnabled(Collection<String> dependencies) {
         if (dependencies != null) {
             dependencies.forEach(dependency -> {
             if (!(dependency.contains("[ModList]:") || dependency.contains("[ModCategory]:")) || dependency.split(":").length != 2)
@@ -69,11 +71,40 @@ class IGradle {
         return forge || fabric
     }
 
+    <T> T ifModEnabled(String modid, Supplier<T> getter) {
+        if (isModEnabled(modid))
+            getter.get()
+        else return null
+    }
+
+    <T> T ifCategoryEnabled(String category, Supplier<T> getter) {
+        if (isCategoryEnabled(category))
+            getter.get()
+        else return null
+    }
+
+    <T> T ifDependenciesEnabled(Collection<String> dependencies, Supplier<T> getter) {
+        if (areDependenciesEnabled(dependencies))
+            getter.get()
+        else return null
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////
+
+    public final String lifecycle = "lifecycle"
+    public final String primitiveTechnology1 = "primitive_technology_1"
+    public final String primitiveTechnology2 = "primitive_technology_2"
+
+
     boolean lifecycleEnabled() {
         return isCategoryEnabled(lifecycle)
     }
 
     boolean primitiveTechnology1Enabled() {
         return isCategoryEnabled(primitiveTechnology1)
+    }
+
+    boolean primitiveTechnology2Enabled() {
+        return isCategoryEnabled(primitiveTechnology2)
     }
 }

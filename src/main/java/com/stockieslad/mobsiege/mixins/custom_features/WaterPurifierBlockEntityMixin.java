@@ -20,7 +20,7 @@ public class WaterPurifierBlockEntityMixin {
     @Inject(method = "getFilterDurations", at = @At("RETURN"), remap = false, cancellable = true)
     private static void mobsiege$appendFilters(CallbackInfoReturnable<ImmutableMap<Item, Integer>> cir) {
         var map = new HashMap<>(cir.getReturnValue());
-        ModpackApi.toughAsNails().purifierRemoveList.forEach(map::remove);
+        ModpackApi.toughAsNails().purifierFilterRemoveList.forEach(map::remove);
         map.putAll(ModpackApi.toughAsNails().purifierFilterAddMap);
         cir.setReturnValue(ImmutableMap.<Item, Integer>builder().putAll(map).build());
     }

@@ -18,7 +18,7 @@ class IToughAsNails {
 
     public TagKey<Item> thermoregulator = null
     public HashMap<Item, Integer> purifierFilterAddMap = new HashMap<>()
-    public List<Item> purifierRemoveList = new LinkedList<>()
+    public List<Item> purifierFilterRemoveList = new LinkedList<>()
 
     public BlockTempChecker checkBlockTemp = (level, pos, state) -> {
         /*
@@ -38,8 +38,8 @@ class IToughAsNails {
                 return true;
         }
         */
-        return false;
-    };
+        return false
+    }
 
     void addThermoregulators(String id) {
         thermoregulator = TagKey.create(Registries.ITEM, ModpackApi.minecraft().identifier(id))
@@ -54,7 +54,7 @@ class IToughAsNails {
     }
 
     void removePurifyingFilter(Item item) {
-        purifierRemoveList.add(item)
+        purifierFilterRemoveList.add(item)
     }
 
     void removePurifyingFilterStack(ItemStack stack) {

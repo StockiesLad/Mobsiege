@@ -1,15 +1,12 @@
 package com.stockieslad.mobsiege.mod_category
 
-
 import mod_category.ModCategoryParser
 
-import java.util.function.Function
-
 class ModCategoryValidator {
-    Function<String, Boolean> gradlePropertyEnabled
+    private final ModCategoryProvider modCategoryProvider
 
-    ModCategoryValidator(Function<String, Boolean> gradlePropertyEnabled) {
-        this.gradlePropertyEnabled = gradlePropertyEnabled
+    ModCategoryValidator(ModCategoryProvider modCategoryProvider) {
+        this.modCategoryProvider = modCategoryProvider
     }
 
     /**
@@ -54,8 +51,7 @@ class ModCategoryValidator {
                 hasCyclicDependencies(rawModCategories, parents, dependencyModid)
             }}
             // Warn about missing gradle properties
-            if (    gradlePropertyEnabled != null &&
-                    !gradlePropertyEnabled.apply("enable_${ModCategoryParser.getCategoryName entry.key}") &&
+            if (    modCategoryProvider.isGradlePropertyEnabledUnsafe("enable_${ModCategoryParser.getCategoryName entry.key}") == null &&
                     !entry.key.contains("[constraint]")
             ) println("Category '${entry.key}' has no gradle properties definition. This will be assumed to be false.")
             // Add as scanned category for checking duplicates

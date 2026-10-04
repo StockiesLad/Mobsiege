@@ -16,7 +16,10 @@ class ModCategoriesExtension {
 
     ModCategoryProvider modCategoryProvider() {
         return new ModCategoryProvider(
-                (property -> project.providers.gradleProperty(property).getOrElse("false").toBoolean()),
+                (property -> {
+                    var gradleProperty = project.providers.gradleProperty(property).getOrNull()
+                    return gradleProperty == null ? null : gradleProperty.toBoolean()
+                }),
                 project.file("src/main/resources/META-INF/mod_categories.json"),
                 false
         )
