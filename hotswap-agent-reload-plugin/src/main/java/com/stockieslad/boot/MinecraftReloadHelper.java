@@ -17,6 +17,7 @@ public class MinecraftReloadHelper {
             CLIENT_RELOAD = CompletableFuture.completedFuture(null),
             SERVER_RELOAD = CompletableFuture.completedFuture(null);
 
+    // TODO: Add in-game chat msg for server resource reload completion
     public static void reload(Set<String> classes) {
         Minecraft minecraft = Minecraft.getInstance();
 
@@ -45,7 +46,6 @@ public class MinecraftReloadHelper {
             Collection<String> classes,
             Supplier<CompletableFuture<Void>> reloadTask
     ) {
-        Minecraft minecraft = Minecraft.getInstance();
         var module = task == CLIENT_RELOAD ? ".client." : ".server.";
         var moduleStr = module.replace(".", "");
 
@@ -58,9 +58,9 @@ public class MinecraftReloadHelper {
             else {
                 var future = reloadTask.get();
                 if (future != task)
-                    LOGGER.info("[Modpack Development]: Reloading {} scripts", moduleStr);
+                    LOGGER.info("[Modpack Development]: Reloaded {} scripts", moduleStr);
                 else LOGGER.info("[Modpack Development]: Unable to reload {} scripts", moduleStr);
-                return reloadTask.get();
+                return future;
             }
         } else LOGGER.info("[Modpack Development]: Skipping {} scripts", moduleStr);
 

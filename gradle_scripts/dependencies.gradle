@@ -42,6 +42,21 @@ allprojects {
             name = 'sponge'
             url = 'https://repo.spongepowered.org/maven'
         }
+
+        maven {
+            url "https://maven.latvian.dev/releases"
+            content {
+                includeGroup "dev.latvian.mods"
+                includeGroup "dev.latvian.apps"
+            }
+        }
+
+        maven {
+            url 'https://jitpack.io'
+            content {
+                includeGroup "com.github.rtyley"
+            }
+        }
     }
 }
 
@@ -76,8 +91,10 @@ dependencies {
     modCompileOnly(pack.curseforge.actually.subtractions)
     modCompileOnly(pack.curseforge.decorative.blocks)
     modCompileOnly("cofh.thermal.foundation:thermal_core:1.20.1-11.0.6.24")
-    modCompileOnly(pack.curseforge.kubejs)
-    modCompileOnly(pack.curseforge.rhino)
+    compileOnly("dev.latvian.mods:kubejs-forge:$kubejs_version") {
+        exclude (module: "architectury-forge", group: "dev.architectury")
+    }
+    modCompileOnly(pack.curseforge.architectury.api)
 
     var modidToFile = [
             "connectormod": "org.sinytra.connector:Connector-1.0.0-beta.50+1.20.1",
