@@ -13,11 +13,4 @@ class Lifecycle {
     public static final SoundEvent NETHER_SCREAMS = RegistryHelper.registerSoundEvent("ambient.nether.screams")
 
     static run() {}
-
-    {
-        ServerEvents.RECIPES.listenJava(ScriptType.SERVER, null) {recipes ->
-            recipes = recipes as RecipesEventJS
-            recipes.shapeless.createRecipe("minecraft:dirt", "minecraft:dirt")
-        }
-    }
 }

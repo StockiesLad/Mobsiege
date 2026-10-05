@@ -17,6 +17,6 @@ public class MinecraftMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void announceExistence(CallbackInfo ci) {
-        LOGGER.info("[Mobsiege]: Mixin is definitely working. Regex: MIXIN_WORKING");
+        LOGGER.info("[Modpack Development]: Mixin is definitely working. Regex: MIXIN_WORKING");
     }
 }

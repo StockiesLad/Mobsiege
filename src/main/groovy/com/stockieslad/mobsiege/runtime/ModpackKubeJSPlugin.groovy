@@ -1,6 +1,5 @@
 package com.stockieslad.mobsiege.runtime
 
-
 import com.stockieslad.mobsiege.runtime.client.ModpackClientEntrypoint
 import com.stockieslad.mobsiege.runtime.server.ModpackServerEntrypoint
 import com.stockieslad.mobsiege.runtime.startup.ModpackStartupEntrypoint
