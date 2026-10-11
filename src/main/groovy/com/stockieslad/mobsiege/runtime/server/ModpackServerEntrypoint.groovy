@@ -5,6 +5,7 @@ import com.google.gson.JsonObject
 import dev.latvian.mods.kubejs.bindings.event.ServerEvents
 import dev.latvian.mods.kubejs.core.RecipeKJS
 import dev.latvian.mods.kubejs.recipe.OutputReplacement
+import dev.latvian.mods.kubejs.recipe.RecipeTypeFunction
 import dev.latvian.mods.kubejs.recipe.RecipesEventJS
 import dev.latvian.mods.kubejs.recipe.ReplacementMatch
 import dev.latvian.mods.kubejs.recipe.filter.RecipeFilter
@@ -26,6 +27,13 @@ class ModpackServerEntrypoint {
                     ]
             ]).asJsonObject;
             def tRecipe = event.custom(json);
+
+            def rec = (RecipeTypeFunction) event.getRecipes().get("kubejs:shapeless")
+
+            // This mimics how javascript does it
+            def re = rec.createRecipe("minecraft:redstone", ["2x minecraft:redstone", "minecraft:stone"])
+
+            event.addRecipe(re, true)
 
             // This is how you change them.
             def stick = ReplacementMatch.of("minecraft:crafting_table")
