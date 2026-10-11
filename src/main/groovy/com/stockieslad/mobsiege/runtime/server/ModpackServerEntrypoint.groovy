@@ -5,10 +5,12 @@ import com.google.gson.JsonObject
 import dev.latvian.mods.kubejs.bindings.event.ServerEvents
 import dev.latvian.mods.kubejs.core.RecipeKJS
 import dev.latvian.mods.kubejs.recipe.OutputReplacement
+import dev.latvian.mods.kubejs.recipe.RecipeKey
 import dev.latvian.mods.kubejs.recipe.RecipeTypeFunction
 import dev.latvian.mods.kubejs.recipe.RecipesEventJS
 import dev.latvian.mods.kubejs.recipe.ReplacementMatch
 import dev.latvian.mods.kubejs.recipe.filter.RecipeFilter
+import dev.latvian.mods.kubejs.recipe.ingredientaction.IngredientActionFilter
 import dev.latvian.mods.kubejs.script.ScriptType
 
 class ModpackServerEntrypoint {
@@ -25,8 +27,8 @@ class ModpackServerEntrypoint {
                             item: 'minecraft:dirt',
                             count: 1
                     ]
-            ]).asJsonObject;
-            def tRecipe = event.custom(json);
+            ]).asJsonObject
+            def tRecipe = event.custom(json)
 
             def rec = (RecipeTypeFunction) event.getRecipes().get("kubejs:shapeless")
 
@@ -34,6 +36,16 @@ class ModpackServerEntrypoint {
             def re = rec.createRecipe("minecraft:redstone", ["2x minecraft:redstone", "minecraft:stone"])
 
             event.addRecipe(re, true)
+
+            // Extra fields that implicitly get called by js
+
+            def ca = (RecipeTypeFunction) event.getRecipes().get("minecraft:smelting")
+
+            def cam =  ca.createRecipe("minecraft:stick", "minecraft:stick")
+
+            cam.set("xp", 10)
+
+            event.addRecipe(cam, true)
 
             // This is how you change them.
             def stick = ReplacementMatch.of("minecraft:crafting_table")
